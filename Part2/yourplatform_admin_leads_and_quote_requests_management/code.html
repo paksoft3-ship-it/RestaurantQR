@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leads and Quote Requests - QR Platform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-warm": "#FFF1EB",
+                        "secondary-fixed": "#dce2f7",
+                        "primary-dark": "#C9341A",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "text-secondary": "#667085",
+                        "on-primary-fixed": "#3e0400",
+                        "error-container": "#ffdad6",
+                        "canvas": "#F8FAFC",
+                        "text-primary": "#111827",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "secondary": "#575e70",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-low": "#f2f4f6",
+                        "border": "#E5E7EB",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "success": "#16A34A",
+                        "on-error-container": "#93000a",
+                        "outline": "#906f69",
+                        "on-secondary-fixed-variant": "#404758",
+                        "background": "#F8FAFC",
+                        "primary": "#F04424",
+                        "surface-tint": "#b91e00",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#946f00",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary-container": "#d9dff5",
+                        "outline-variant": "#e5beb6",
+                        "on-secondary-container": "#5c6274",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#db3516",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-surface-variant": "#5c403a",
+                        "inverse-primary": "#ffb4a5",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-error": "#ffffff",
+                        "danger": "#DC2626"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "mobile-shell-max-width": "640px",
+                        "lg": "24px",
+                        "container-max-width": "1280px",
+                        "xs": "8px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "small": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-canvas text-text-primary font-body antialiased min-h-screen flex">
+<!-- Global Sidebar (Left) -->
+<nav class="fixed left-0 top-0 h-screen w-60 flex flex-col z-50 bg-on-secondary-fixed dark:bg-on-secondary-fixed-variant shadow-md">
+<div class="p-lg flex flex-col items-center border-b border-on-secondary-fixed-variant/20">
+<img alt="Platform Logo" class="w-16 h-16 rounded-lg mb-sm object-cover" data-alt="A modern, minimalist logo for a SaaS platform, featuring abstract geometric shapes in bright red and crisp white, set against a dark navy background. Professional, tech-forward, high-resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3TamB980Z5iNlcxKK9DspRrHHuirEUDnYkWnBVeH5ZYaIFSrBSAK32nbWeo_fxvDmy4-roP3Q0K0OTeKK9WvmItfErjYcaCYOypPBMdZbCsAJnlENSd2vdebQgf579bfPQSpeSI-9vx7GE5xp0MxYBniiFX1w-NMFiP9eJbcFPbGEDNhTVqlcgGuK1KdlqO3QPSjjU1ntKcBC-yNLMlLAA5x8YhK65vgO30PU5qQswkyVANpAt9olwBKcTYfVDzyI35GG7MdIZ1E"/>
+<h2 class="font-h3 text-h3 text-canvas text-center">QR Platform</h2>
+<p class="font-small text-small text-secondary-fixed-dim text-center">Restaurant Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-md">
+<ul class="space-y-sm">
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary-fixed-dim hover:text-canvas hover:bg-secondary dark:hover:bg-secondary-container transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm bg-primary text-on-primary border-l-4 border-primary-fixed-dim font-body-bold text-body-bold scale-95 transition-all" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+                        Leads
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary-fixed-dim hover:text-canvas hover:bg-secondary dark:hover:bg-secondary-container transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">group</span>
+                        Customers
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary-fixed-dim hover:text-canvas hover:bg-secondary dark:hover:bg-secondary-container transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+                        Menu Builder
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary-fixed-dim hover:text-canvas hover:bg-secondary dark:hover:bg-secondary-container transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                        Analytics
+                    </a>
+</li>
+</ul>
+</div>
+<div class="p-md border-t border-on-secondary-fixed-variant/20">
+<a class="flex items-center gap-sm px-md py-sm text-secondary-fixed-dim hover:text-canvas hover:bg-secondary dark:hover:bg-secondary-container transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-60 flex flex-col min-h-screen">
+<!-- Top Header -->
+<header class="sticky top-0 w-full z-40 flex justify-between items-center px-lg h-16 bg-canvas border-b border-border dark:border-outline-variant flat no shadows">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="w-full pl-xl pr-sm py-sm border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none font-body text-body" placeholder="Search platform..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary font-button text-button px-md py-sm rounded-lg hover:bg-primary-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Quick Create
+                </button>
+<div class="flex items-center gap-sm border-l border-border pl-md ml-sm">
+<button class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low p-xs rounded-full"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low p-xs rounded-full"><span class="material-symbols-outlined">help</span></button>
+<button class="text-secondary hover:text-primary transition-colors hover:bg-surface-container-low p-xs rounded-full"><span class="material-symbols-outlined">settings</span></button>
+<img alt="Administrator Avatar" class="w-10 h-10 rounded-full border border-border ml-sm object-cover" data-alt="A professional headshot of an administrator in a modern office setting. Clear, bright lighting, high quality, suitable for a profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTtu-v68A0RQ17mjm_SDtOlfNfWdvztHrRVSEHLRmV2wANAjh3f5D71g01HAEqDGrdaSWUHKiP8l8djOpiyAG_FDPrXoWy-Ry8AEh1LZPbxgqdFQbXNBrIYKSDR3_I7qXbgJ0B7COy7gDQRpAdEIN5JNJwnEdEGC1C3aG0IZrpgmrGlazy3_tpzgqMs3ksTPSJOpTkt4crsOF_zsyL-EtC-wWCFb-ZJmHNaEOYYZn-X2S-y6exUy3eoO7ylbFor2UFDEPVUOjBvt8"/>
+</div>
+</div>
+</header>
+<!-- CMS Navigation (Sub-header) -->
+<div class="bg-surface-container-lowest border-b border-border px-lg pt-sm flex overflow-x-auto">
+<button class="text-primary font-body-bold text-body-bold border-b-2 border-primary px-md py-sm whitespace-nowrap">All Enquiries</button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors">Assigned to Me</button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors">Unassigned</button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors flex items-center gap-xs">Follow-Ups <span class="bg-surface-variant text-text-secondary text-[12px] px-2 rounded-full">9</span></button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors">Qualified</button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors">Ready to Convert</button>
+<button class="text-text-secondary font-body text-body hover:text-text-primary px-md py-sm whitespace-nowrap transition-colors">Archived</button>
+</div>
+<!-- Main Workspace Flex Container -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Canvas (Enquiries List) -->
+<div class="flex-1 flex flex-col min-w-0 overflow-y-auto p-lg bg-canvas">
+<!-- Context Header -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h1 class="font-h1 text-h1 text-text-primary mb-xs">Leads and Quote Requests</h1>
+<p class="font-body text-body text-text-secondary flex items-center gap-md">
+<span>Open: <strong class="text-text-primary">48</strong></span>
+<span class="w-1 h-1 rounded-full bg-border"></span>
+<span>New: <strong class="text-text-primary">12</strong></span>
+<span class="w-1 h-1 rounded-full bg-border"></span>
+<span>Unassigned: <strong class="text-text-primary">5</strong></span>
+<span class="w-1 h-1 rounded-full bg-border"></span>
+<span class="text-tertiary">Follow-Up Due: <strong>9</strong></span>
+</p>
+</div>
+</div>
+<!-- Summary Metrics Cards (Bento style grid) -->
+<div class="grid grid-cols-4 gap-md mb-lg">
+<div class="bg-surface-container-lowest border border-border rounded-xl p-md shadow-sm">
+<div class="flex items-center gap-sm mb-sm text-text-secondary">
+<span class="material-symbols-outlined icon-fill text-surface-tint">fiber_new</span>
+<span class="font-body-bold text-body-bold">New Enquiries</span>
+</div>
+<div class="font-display text-display text-text-primary">12</div>
+</div>
+<div class="bg-surface-container-lowest border border-border rounded-xl p-md shadow-sm">
+<div class="flex items-center gap-sm mb-sm text-text-secondary">
+<span class="material-symbols-outlined text-tertiary">contact_phone</span>
+<span class="font-body-bold text-body-bold">Contact Required</span>
+</div>
+<div class="font-display text-display text-text-primary">9</div>
+</div>
+<div class="bg-surface-container-lowest border border-border rounded-xl p-md shadow-sm">
+<div class="flex items-center gap-sm mb-sm text-text-secondary">
+<span class="material-symbols-outlined text-info">verified</span>
+<span class="font-body-bold text-body-bold">Qualified</span>
+</div>
+<div class="font-display text-display text-text-primary">11</div>
+</div>
+<div class="bg-surface-container-lowest border border-border rounded-xl p-md shadow-sm bg-success/5 border-success/20">
+<div class="flex items-center gap-sm mb-sm text-success">
+<span class="material-symbols-outlined text-success">rocket_launch</span>
+<span class="font-body-bold text-body-bold">Ready to Convert</span>
+</div>
+<div class="font-display text-display text-success">3</div>
+</div>
+</div>
+<!-- Alert Area -->
+<div class="bg-tertiary-fixed-dim/10 border border-tertiary-fixed-dim/30 rounded-xl p-md mb-lg flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed-dim/20 flex items-center justify-center text-tertiary-fixed-dim">
+<span class="material-symbols-outlined icon-fill">warning</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-tertiary">Follow-Up Overdue</h3>
+<p class="font-small text-small text-text-secondary">3 enquiries require immediate attention.</p>
+</div>
+</div>
+<button class="bg-tertiary text-on-tertiary font-button text-button px-md py-sm rounded-lg hover:opacity-90 transition-opacity">View Overdue</button>
+</div>
+<!-- Toolbar -->
+<div class="flex flex-col xl:flex-row gap-md mb-md items-start xl:items-center justify-between">
+<div class="relative w-full xl:w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary text-[20px]">search</span>
+<input class="w-full pl-xl pr-sm py-[8px] border border-border rounded-lg bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary outline-none font-small text-small" placeholder="Search restaurant, contact, email..." type="text"/>
+</div>
+<div class="flex items-center gap-sm flex-wrap">
+<button class="flex items-center gap-xs px-sm py-[6px] border border-border rounded-full bg-surface-container-lowest text-text-secondary font-small text-small hover:bg-surface-variant transition-colors">
+                            Stage <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="flex items-center gap-xs px-sm py-[6px] border border-border rounded-full bg-surface-container-lowest text-text-secondary font-small text-small hover:bg-surface-variant transition-colors">
+                            Priority <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="flex items-center gap-xs px-sm py-[6px] border border-border rounded-full bg-surface-container-lowest text-text-secondary font-small text-small hover:bg-surface-variant transition-colors">
+                            Assigned To <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="flex items-center gap-xs px-sm py-[6px] text-primary font-small text-small hover:underline">
+                            Clear Filters
+                        </button>
+</div>
+</div>
+<!-- Enquiry Table (High-density) -->
+<div class="bg-surface-container-lowest border border-border rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-border">
+<th class="p-sm w-12 text-center"><input class="rounded text-primary focus:ring-primary" type="checkbox"/></th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Enquiry</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Requested Services</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Stage</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Priority</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Assigned To</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold">Next Follow-Up</th>
+<th class="p-sm font-small text-small text-text-secondary font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-small text-small">
+<!-- Row 1 (Selected State) -->
+<tr class="hover:bg-surface-variant/50 transition-colors bg-primary/5 border-l-4 border-l-primary cursor-pointer">
+<td class="p-sm text-center"><input class="rounded text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-sm">
+<div class="font-body-bold text-text-primary">Pizza Garden Istanbul</div>
+<div class="text-text-secondary">Ali Yilmaz</div>
+</td>
+<td class="p-sm">
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">Digital Menu</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">QR</span>
+</div>
+</td>
+<td class="p-sm">
+<span class="px-2 py-1 bg-surface-container-high text-text-primary rounded-full flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-info"></span> Qualified
+                                    </span>
+</td>
+<td class="p-sm"><span class="text-text-secondary">Normal</span></td>
+<td class="p-sm">
+<div class="flex items-center gap-xs">
+<img alt="Agent Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="Small circular avatar of a professional sales agent, well-lit, smiling slightly, modern office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLEK-AP-eTdjmMLJhN37Ctxo6Zf05kzNqk2FuR8zYd3Jm7adS3zmzUESEN9dblGn1EOf9ROlJlB3lCjk1_10Wr4j7k3jd9tf2x1LSMa1HaowXmAiYvq9Zo19Jq_2eQ1N6ava-E3tW73SQOkPIlUrUC_RaNOa7Imwij1WXIlPUulaDJ87k8OiGGQdiXyqeGgyN0EvSwd1XzkIZgvNRm7EzTTqYcL1NTwZEkbDfOdKyllmED5k04GNd0yDxaMxj6gKaFab723uIefoQ"/>
+<span>Sarah J.</span>
+</div>
+</td>
+<td class="p-sm text-text-secondary">Today, 2:00 PM</td>
+<td class="p-sm text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-variant/50 transition-colors cursor-pointer border-l-4 border-l-transparent">
+<td class="p-sm text-center"><input class="rounded text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-sm">
+<div class="font-body-bold text-text-primary">Burger Joint 99</div>
+<div class="text-text-secondary">Mike Chen</div>
+</td>
+<td class="p-sm">
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">QR</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">NFC</span>
+</div>
+</td>
+<td class="p-sm">
+<span class="px-2 py-1 bg-surface-container-high text-text-primary rounded-full flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span> New
+                                    </span>
+</td>
+<td class="p-sm"><span class="text-danger font-semibold flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">priority_high</span> High</span></td>
+<td class="p-sm"><span class="text-text-secondary italic">Unassigned</span></td>
+<td class="p-sm text-text-secondary">--</td>
+<td class="p-sm text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-variant/50 transition-colors cursor-pointer border-l-4 border-l-transparent">
+<td class="p-sm text-center"><input class="rounded text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-sm">
+<div class="font-body-bold text-text-primary">Cafe Luna</div>
+<div class="text-text-secondary">Elena Rossi</div>
+</td>
+<td class="p-sm">
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">Digital Menu</span>
+</div>
+</td>
+<td class="p-sm">
+<span class="px-2 py-1 bg-surface-container-high text-text-primary rounded-full flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Follow-Up
+                                    </span>
+</td>
+<td class="p-sm"><span class="text-text-secondary">Normal</span></td>
+<td class="p-sm">
+<div class="flex items-center gap-xs">
+<img alt="Agent Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="Small circular avatar of a professional sales agent, well-lit, smiling slightly, modern office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZkbgbJVE9pPj5fkOI_k7bAF8473JfG5nLwrVtmHJ96-I3RxZpLCPIUr_I4_XkP8juaDuWHWAo1s4LQ3g6EwemZM723HMB_5Exi087AhWlMmbHpIymbc-TkbpPyF8wmjQ4Xd0xvgOLiEQFeIlpo7kAyPso76KSl_zjRoYzRqYDiJXpSRuxhBuMEaDy1Rq7apZPYnF4lrMexXgKCXjPRCOAKIAvh9vDCaAQ-dMrjUTxc1ccr8M1ruVVUzcyHHScNIg7UdVFs-4MY0s"/>
+<span>David K.</span>
+</div>
+</td>
+<td class="p-sm text-tertiary font-semibold">Yesterday</td>
+<td class="p-sm text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-variant/50 transition-colors cursor-pointer border-l-4 border-l-transparent">
+<td class="p-sm text-center"><input class="rounded text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-sm">
+<div class="font-body-bold text-text-primary">Sushi Master</div>
+<div class="text-text-secondary">Kenji Tanaka</div>
+</td>
+<td class="p-sm">
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">Digital Menu</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[12px]">NFC</span>
+</div>
+</td>
+<td class="p-sm">
+<span class="px-2 py-1 bg-success/10 text-success border border-success/20 rounded-full flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-success"></span> Ready to Convert
+                                    </span>
+</td>
+<td class="p-sm"><span class="text-text-secondary">Normal</span></td>
+<td class="p-sm">
+<div class="flex items-center gap-xs">
+<img alt="Agent Avatar" class="w-6 h-6 rounded-full object-cover" data-alt="Small circular avatar of a professional sales agent, well-lit, smiling slightly, modern office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnXtY49471jE0OZiL560EWrEEspzJqIEOSNaWMCN4jcNKSo5v-VtH62rSLWkn7feG2xQG__BU2v1ibWgrT4zUqyXHi3SIHqHKLH-5WV9VazGywjyXtb8DCOcZ4ywqyO7wsdIF88Y_D_FjDMo2tyYNQ3MLzCh8dlIfW6fww8Pg69wS6PDhmvvrsuO-EIeWacCFLtgRYIK6W8FHJXTrILrQW2mTmj0Se0iP39uOVsef_MGx0bSinxc6qx3tD5A22id6ngBGYQ6kF4A0"/>
+<span>Sarah J.</span>
+</div>
+</td>
+<td class="p-sm text-text-secondary">Tomorrow, 10:00 AM</td>
+<td class="p-sm text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-sm border-t border-border flex justify-between items-center bg-surface-container text-text-secondary font-small text-small">
+<span>Showing 1 to 4 of 48 entries</span>
+<div class="flex items-center gap-sm">
+<button class="px-2 py-1 rounded hover:bg-surface-variant disabled:opacity-50" disabled=""><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<span>1 of 5</span>
+<button class="px-2 py-1 rounded hover:bg-surface-variant"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+<div class="mt-xl text-center text-text-secondary font-small text-small">
+                    Illustrative Admin Data
+                </div>
+</div>
+<!-- Right Panel (Detail View) -->
+<aside class="w-[400px] border-l border-border bg-surface-container-lowest flex flex-col shadow-[-4px_0_15px_-3px_rgba(0,0,0,0.05)] z-10">
+<!-- Lead Header -->
+<div class="p-lg border-b border-border bg-surface-bright">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="text-text-secondary font-small text-small">ENQ-00284</span>
+<h2 class="font-h2 text-h2 text-text-primary mt-1">Pizza Garden Istanbul</h2>
+</div>
+<button class="text-text-secondary hover:text-primary p-1 rounded-full hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="flex items-center gap-md mt-md">
+<span class="px-3 py-1 bg-surface-container-high text-text-primary rounded-full flex items-center gap-xs font-small text-small w-max">
+<span class="w-2 h-2 rounded-full bg-info"></span> Stage: Qualified
+                        </span>
+<span class="text-text-secondary font-small text-small flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 2 days in stage
+                        </span>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg space-y-lg bg-surface-container-lowest">
+<!-- Quick Actions -->
+<div class="grid grid-cols-3 gap-sm">
+<button class="flex flex-col items-center justify-center p-sm border border-border rounded-lg hover:border-primary hover:bg-primary/5 transition-colors text-primary group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">person_add</span>
+<span class="font-small text-[12px] font-semibold text-center leading-tight">Assign Lead</span>
+</button>
+<button class="flex flex-col items-center justify-center p-sm border border-border rounded-lg hover:border-primary hover:bg-primary/5 transition-colors text-primary group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">call</span>
+<span class="font-small text-[12px] font-semibold text-center leading-tight">Record Contact</span>
+</button>
+<button class="flex flex-col items-center justify-center p-sm border border-border rounded-lg hover:border-success hover:bg-success/5 transition-colors text-success group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">rocket_launch</span>
+<span class="font-small text-[12px] font-semibold text-center leading-tight">Convert Project</span>
+</button>
+</div>
+<!-- Contact Info -->
+<section>
+<h3 class="font-body-bold text-body-bold text-text-primary border-b border-border pb-xs mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary">contact_mail</span> Contact Info
+                        </h3>
+<div class="space-y-sm font-small text-small">
+<div class="flex items-center">
+<span class="w-24 text-text-secondary">Name:</span>
+<span class="text-text-primary font-medium">Ali Yilmaz</span>
+</div>
+<div class="flex items-center">
+<span class="w-24 text-text-secondary">Email:</span>
+<a class="text-primary hover:underline" href="mailto:ali@pizzagarden.ist">ali@pizzagarden.ist</a>
+</div>
+<div class="flex items-center">
+<span class="w-24 text-text-secondary">Phone:</span>
+<a class="text-text-primary hover:text-primary" href="tel:+905551234567">+90 555 123 4567</a>
+</div>
+<div class="flex items-center">
+<span class="w-24 text-text-secondary">Role:</span>
+<span class="text-text-primary">Owner / Manager</span>
+</div>
+</div>
+</section>
+<!-- Restaurant Info -->
+<section>
+<h3 class="font-body-bold text-body-bold text-text-primary border-b border-border pb-xs mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary">storefront</span> Restaurant Info
+                        </h3>
+<div class="bg-surface-container rounded-lg p-sm font-small text-small space-y-2">
+<div class="flex justify-between">
+<span class="text-text-secondary">Type:</span>
+<span class="text-text-primary font-medium">Fast Food / Pizzeria</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">Locations:</span>
+<span class="text-text-primary font-medium">1</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">Est. Tables:</span>
+<span class="text-text-primary">20-30</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">Current POS:</span>
+<span class="text-text-primary">Square</span>
+</div>
+</div>
+</section>
+<!-- Requested Services -->
+<section>
+<h3 class="font-body-bold text-body-bold text-text-primary border-b border-border pb-xs mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary">shopping_cart</span> Requested Services
+                        </h3>
+<div class="space-y-2">
+<label class="flex items-center gap-sm p-2 rounded hover:bg-surface-variant cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-small text-small text-text-primary">Digital Menu Generation</span>
+</label>
+<label class="flex items-center gap-sm p-2 rounded hover:bg-surface-variant cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-small text-small text-text-primary">Table QR Codes</span>
+</label>
+<label class="flex items-center gap-sm p-2 rounded hover:bg-surface-variant cursor-pointer">
+<input class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-small text-small text-text-primary">NFC Table Tags</span>
+</label>
+<label class="flex items-center gap-sm p-2 rounded hover:bg-surface-variant cursor-pointer">
+<input class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-small text-small text-text-primary">Online Ordering Integration</span>
+</label>
+</div>
+</section>
+<!-- Internal Summary & Checklist -->
+<section>
+<h3 class="font-body-bold text-body-bold text-text-primary border-b border-border pb-xs mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary">assignment</span> Readiness Checklist
+                        </h3>
+<div class="mb-sm">
+<div class="flex justify-between font-small text-small mb-1">
+<span class="text-text-secondary">Completion</span>
+<span class="text-primary font-medium">12 of 16</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="bg-surface-warm border border-outline-variant/30 rounded-lg p-sm font-small text-small mt-md">
+<strong class="text-on-surface-variant block mb-1">Internal Note (Sarah J.):</strong>
+<p class="text-on-surface-variant/80">Client is very eager to launch before the summer rush. Menu PDF received, needs transcription. Follow up scheduled for today at 2PM to finalize pricing for QR + Basic Menu package.</p>
+</div>
+</section>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

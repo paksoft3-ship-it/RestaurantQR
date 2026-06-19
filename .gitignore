@@ -1,0 +1,58 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (never commit real secrets); keep the template
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# large design exports (kept as folders; zips are redundant)
+Part1.zip
+Part2.zip
+
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# python worker caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

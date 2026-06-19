@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YourPlatform - Turn Every QR Scan Into a Better Restaurant Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f7f9fb",
+                      "on-surface": "#191c1e",
+                      "surface-tint": "#b91e00",
+                      "on-primary-container": "#fffbff",
+                      "tertiary-container": "#946f00",
+                      "on-secondary-fixed": "#141b2b",
+                      "error": "#ba1a1a",
+                      "border": "#E5E7EB",
+                      "on-primary-fixed": "#3e0400",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "secondary-fixed": "#dce2f7",
+                      "primary": "#b51d00",
+                      "text-primary": "#111827",
+                      "surface-container-high": "#e6e8ea",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#fffbff",
+                      "surface-container": "#eceef0",
+                      "text-secondary": "#667085",
+                      "on-secondary-container": "#5c6274",
+                      "on-background": "#191c1e",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "tertiary-fixed": "#ffdf9e",
+                      "success": "#16A34A",
+                      "on-surface-variant": "#5c403a",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "primary-dark": "#C9341A",
+                      "on-secondary": "#ffffff",
+                      "surface-warm": "#FFF1EB",
+                      "surface-container-low": "#f2f4f6",
+                      "outline-variant": "#e5beb6",
+                      "surface-variant": "#e0e3e5",
+                      "inverse-on-surface": "#eff1f3",
+                      "secondary": "#575e70",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "background": "#f7f9fb",
+                      "primary-container": "#db3516",
+                      "surface": "#f7f9fb",
+                      "on-secondary-fixed-variant": "#404758",
+                      "primary-fixed": "#ffdad3",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#261a00",
+                      "canvas": "#FFFFFF",
+                      "secondary-container": "#d9dff5",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "inverse-primary": "#ffb4a5",
+                      "surface-dim": "#d8dadc",
+                      "danger": "#DC2626",
+                      "tertiary": "#765700",
+                      "outline": "#906f69",
+                      "inverse-surface": "#2d3133"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "2xl": "1rem"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "mobile-shell-max-width": "640px",
+                      "md": "16px",
+                      "margin-mobile": "20px",
+                      "xs": "8px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "container-max-width": "1280px",
+                      "base": "4px",
+                      "gutter": "16px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "h1": ["Manrope"],
+                      "body": ["Inter"],
+                      "h2": ["Manrope"],
+                      "display": ["Manrope"],
+                      "h3": ["Manrope"],
+                      "body-bold": ["Inter"],
+                      "small": ["Inter"],
+                      "button": ["Inter"],
+                      "h1-mobile": ["Manrope"]
+              },
+              "fontSize": {
+                      "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                      "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .shadow-lift {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-text-primary antialiased selection:bg-primary selection:text-white">
+<!-- Header (TopNavBar) -->
+<header class="fixed top-0 w-full z-50 bg-surface-bright border-b border-border shadow-sm">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center px-lg py-sm">
+<div class="flex items-center gap-xl">
+<a class="font-display text-h2 text-primary-dark" href="#">YourPlatform</a>
+<nav class="hidden lg:flex items-center gap-lg">
+<a class="text-text-secondary hover:text-primary transition-colors font-body-bold" href="#how-it-works">How It Works</a>
+<a class="text-text-secondary hover:text-primary transition-colors font-body-bold" href="#features">Features</a>
+<a class="text-text-secondary hover:text-primary transition-colors font-body-bold" href="#packages">Packages</a>
+</nav>
+</div>
+<div class="hidden md:flex items-center gap-md">
+<a class="font-button text-button text-text-primary hover:text-primary transition-colors" href="#">View Demo</a>
+<a class="bg-primary text-white font-button text-button px-lg py-sm rounded-lg hover:bg-primary-dark transition-colors active:scale-95 duration-200" href="#quote">Request a Quote</a>
+</div>
+<button class="lg:hidden text-text-primary focus:outline-none">
+<span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="pt-32 pb-24 md:pt-40 md:pb-32 px-lg overflow-hidden relative">
+<div class="absolute inset-0 z-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle at 80% 20%, var(--tw-colors-surface-tint) 0%, transparent 40%);"></div>
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xxl items-center relative z-10">
+<div class="flex flex-col items-start gap-lg max-w-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-warm text-primary border border-outline-variant font-small text-small">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                    Managed Digital Experience
+                </div>
+<h1 class="font-display text-[48px] leading-[1.1] md:text-[64px] font-extrabold tracking-tight text-text-primary">
+                    Turn Every QR Scan and NFC Tap Into a <span class="text-primary">Better Restaurant Experience</span>
+</h1>
+<p class="font-body text-h3 text-text-secondary font-normal max-w-lg">
+                    We manage the technology so you can manage the food. A fully branded, high-speed digital menu and ordering platform built for modern fast food.
+                </p>
+<div class="flex flex-col sm:flex-row gap-md w-full mt-xs">
+<a class="bg-primary text-white font-button text-button px-xl py-4 rounded-xl text-center hover:bg-primary-dark transition-all hover:-translate-y-1 hover:shadow-lift w-full sm:w-auto flex items-center justify-center gap-2" href="#quote">
+                        Request Your QR/NFC Package
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+<a class="bg-surface-container text-text-primary font-button text-button px-xl py-4 rounded-xl text-center hover:bg-surface-container-high transition-colors w-full sm:w-auto border border-border" href="#">
+                        View Demo Restaurant
+                    </a>
+</div>
+<div class="flex items-center gap-sm mt-sm text-text-secondary font-small text-small">
+<span class="material-symbols-outlined text-success">check_circle</span> No fixed setup fees
+                    <span class="material-symbols-outlined text-success ml-4">check_circle</span> Cancel anytime
+                </div>
+</div>
+<div class="relative h-[600px] w-full hidden lg:block perspective-1000">
+<!-- Abstract floating devices composition -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-[320px] h-[650px] rounded-[2rem] border-8 border-text-primary bg-white shadow-2xl overflow-hidden z-20 transform rotate-y-[-10deg] rotate-x-[5deg] transition-transform duration-700 hover:rotate-0">
+<div class="absolute top-0 w-full h-8 bg-text-primary flex justify-center items-center z-30 rounded-t-[1.5rem]"><div class="w-1/3 h-4 bg-black rounded-b-xl"></div></div>
+<img class="w-full h-full object-cover" data-alt="A bright, modern mobile UI screen showing a high-contrast restaurant menu with a large, appetizing photo of a burger, bold red 'Order Now' button, and clear pricing typography, styled for a fast-casual dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPhBijPVFqia2sPxdi-DuY6py2GnFnujryFAyqJxACo78VRMxFqs-NuGTCUq6hokWYieIInxBQ-eJJfDcs-bZYJepeIduPghO_zINswD6sV8bWhql3mtgR5s6rJsdMdXCS0TuuBRojm_z7QZT27d2apP-Qz_SLtpl9fP_qDzW9KIKIqVS7UzfZGNFBB5Q5MJfROH17Mk82hOL2jrrOn-ZYxKtOBkDilBafyjQ6jGZ-aD3BZPjiiphTS0iBqezWUNoKN3hcO344Xus"/>
+</div>
+<div class="absolute right-[220px] top-1/2 -translate-y-[45%] w-[280px] h-[580px] rounded-[1.8rem] border-[6px] border-surface-container-highest bg-white shadow-xl overflow-hidden z-10 transform rotate-y-[15deg] rotate-x-[-5deg] opacity-90 transition-transform duration-700 hover:rotate-0 hover:z-30 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist mobile UI screen displaying a restaurant profile or location details, featuring a map snippet, operating hours, and a prominent 'Call Us' action button in a professional corporate-fast-food hybrid style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQi37qzupv4khIOT8GWhWfUiHmaxLZPJmAgqeQGRJVrxRPcfQc9GPDVWIt5Dj_ummGCmaDFr-_x2Xa5eSSA16AsExhiVu_uQ_AOPOUDPd8E1_ELgVRlQeI_nyAu-tD9jpwzMMUPPvm_bTJIA-Vzw1jQSFwehdSJWihDuz3fla6CN-J5T7kBR4RvqArPhTp_4HGxbJcCJuPEP0Ivq_WM5AtDmGjt1FyGa_pFBIV_1hyLrMEgBp0mgl0dsHsFwEHBixMUWvEUYoaJps"/>
+</div>
+<!-- Floating NFC Card -->
+<div class="absolute bottom-10 right-[350px] z-40 bg-on-surface text-white p-6 rounded-2xl shadow-lift transform rotate-[-12deg] w-48 border border-on-secondary-fixed">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">contactless</span>
+<div class="w-8 h-8 bg-white p-1 rounded"><img class="w-full h-full object-contain" data-alt="A small, crisp QR code graphic used as an icon or badge on a dark background, representing digital connectivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWLh2aaC7YrZC1JfK6eQpAwWBc7dm_4UARUx8XQwtm0mj28vvmjxvQLUijPg6KYIith-PavgppUKKlp0KzFzUfPkKnkAx79DbwudXbY4KZfKoNb9u1KXX2pu0zNQito-P7k6K-00GF84W7EsLjg8s1rny3Ughvvr_mvjFYQlBr1cQ6uljYt5hcxG6GSEEG6i9zTpLbRyCaf7OA8ggloasVbxJv5_sbbs4c-iicWr5EGsN8r8ld1hAjuxqYXcHV8ralwMlMU0sppw"/></div>
+</div>
+<div class="font-body-bold text-h3 mb-1">Tap to Order</div>
+<div class="font-small text-small text-surface-dim">Your Brand Here</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="border-y border-border bg-surface-container-lowest py-8">
+<div class="max-w-container-max-width mx-auto px-lg">
+<div class="flex flex-wrap justify-center md:justify-between items-center gap-6 md:gap-4 text-text-secondary font-body-bold text-body-bold">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">storefront</span> Branded Page</div>
+<div class="hidden md:block w-1 h-1 rounded-full bg-border"></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">restaurant_menu</span> Digital Menu</div>
+<div class="hidden md:block w-1 h-1 rounded-full bg-border"></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">qr_code_scanner</span> Custom QR Codes</div>
+<div class="hidden md:block w-1 h-1 rounded-full bg-border"></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">nfc</span> NFC Ready Table Tents</div>
+<div class="hidden lg:block w-1 h-1 rounded-full bg-border"></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">support_agent</span> Fully Managed</div>
+</div>
+</div>
+</section>
+<!-- Four Essential Actions (Bento Grid) -->
+<section class="py-xxl px-lg bg-surface" id="features">
+<div class="max-w-container-max-width mx-auto">
+<div class="text-center mb-16 max-w-2xl mx-auto">
+<h2 class="font-display text-h1 text-text-primary mb-4">Everything Your Customer Needs, Instantly.</h2>
+<p class="font-body text-body text-text-secondary">A streamlined 4-action interface designed for maximum conversion speed from the moment they sit down.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[240px]">
+<!-- Action 1: Call Order (Primary) -->
+<div class="bg-primary rounded-2xl p-6 flex flex-col justify-between items-start relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all shadow-sm hover:shadow-lift col-span-1 md:col-span-2 lg:col-span-1">
+<div class="absolute -right-4 -top-4 opacity-10 transform group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined" style="font-size: 140px;">call</span>
+</div>
+<div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm z-10">
+<span class="material-symbols-outlined text-white text-3xl">phone_in_talk</span>
+</div>
+<div class="z-10 mt-auto">
+<h3 class="font-display text-h2 text-white mb-2">Call Order</h3>
+<p class="font-body text-small text-white/80">Direct line to your front desk. 1-tap dial.</p>
+</div>
+</div>
+<!-- Action 2: Pick Your Meal (Dark) -->
+<div class="bg-on-surface rounded-2xl p-6 flex flex-col justify-between items-start relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all shadow-sm hover:shadow-lift col-span-1 md:col-span-2 lg:col-span-2">
+<div class="absolute right-0 top-0 w-1/2 h-full">
+<img class="w-full h-full object-cover opacity-60 mix-blend-overlay group-hover:scale-105 transition-transform duration-700" data-alt="A close-up, highly appetizing shot of a gourmet burger on a wooden board, featuring crispy onion rings, melting cheddar cheese, and a glossy brioche bun, set against a dark, moody restaurant background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOPDzoiuDHza51_YAk1CTvxgm7MSKuw-ft2cIzOc3bhPVumA5VT-GBqxnBN0ymr3TedCyXo-e2Zcd5nqrtjpkeENxqdPaYaL2SlQTc6VnFCTBCopuptCYz_SPb1IAXd7-3Vqbz-dWUYAFQawi_Uizeg9wheTR4xYsLIuoHhUvqrP4lMku4_ojpfy0kJYdBQyZiexC3MhBLFTrIO6vbQqyH6fSYGldztEZUAAnmkjH6OwkKlYyKlxSqDFLMViSQkBcg-HjQRTEfOmg"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface to-transparent"></div>
+</div>
+<div class="w-14 h-14 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center backdrop-blur-md z-10">
+<span class="material-symbols-outlined text-white text-3xl">menu_book</span>
+</div>
+<div class="z-10 mt-auto max-w-[60%]">
+<h3 class="font-display text-h2 text-white mb-2">Digital Menu</h3>
+<p class="font-body text-small text-surface-dim">High-resolution, appetizing digital menus that load instantly without app downloads.</p>
+</div>
+</div>
+<!-- Action 3: Online Order (Light) -->
+<div class="bg-surface-bright border border-border rounded-2xl p-6 flex flex-col justify-between items-start relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all shadow-sm hover:shadow-lift">
+<div class="w-14 h-14 bg-surface-container rounded-xl flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-text-primary text-3xl">shopping_bag</span>
+</div>
+<div class="z-10 mt-auto">
+<h3 class="font-display text-h3 text-text-primary mb-2">Online Order</h3>
+<p class="font-body text-small text-text-secondary">Link directly to your existing delivery platforms.</p>
+</div>
+</div>
+<!-- Action 4: Visit Us (Warm) -->
+<div class="bg-surface-warm border border-outline-variant rounded-2xl p-6 flex flex-col justify-between items-start relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all shadow-sm hover:shadow-lift lg:col-start-4 lg:row-start-1">
+<div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center z-10 shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+</div>
+<div class="z-10 mt-auto">
+<h3 class="font-display text-h3 text-text-primary mb-2">Visit Us</h3>
+<p class="font-body text-small text-text-secondary">Integrated maps and operating hours.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-xxl bg-on-surface">
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl px-lg">
+<div class="col-span-1 md:col-span-2">
+<div class="font-display text-h3 text-white mb-4">YourPlatform</div>
+<p class="font-body text-small text-secondary-fixed-dim max-w-xs mb-6">
+                    Professional, fully managed digital menus and QR/NFC infrastructure for modern restaurants.
+                </p>
+<div class="font-body text-small text-secondary-fixed-dim">
+                    © 2024 YourPlatform. All rights reserved.
+                </div>
+</div>
+<div>
+<h4 class="font-body-bold text-white mb-4">Platform</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">Features</a></li>
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">Packages</a></li>
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">Demo</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-white mb-4">Company</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">About Us</a></li>
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">Contact</a></li>
+<li><a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,43 @@
+# Local development for YourPlatform + the menu-extraction worker.
+# The Next.js app runs the deterministic in-app extractor by default; set
+# MENU_IMPORT_WORKER_URL on the web service to route extraction to the worker.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_MENU_PDF_IMPORT=true
+      - MENU_IMPORT_WORKER_URL=http://menu-extraction-worker:8000
+      - MENU_IMPORT_WORKER_SECRET=dev-worker-secret-change-me
+    depends_on:
+      - menu-extraction-worker
+
+  menu-extraction-worker:
+    build:
+      context: ./services/menu-extraction-worker
+      dockerfile: Dockerfile
+    # Not published to the host by default — internal service-to-service only.
+    expose:
+      - "8000"
+    environment:
+      - MENU_IMPORT_WORKER_SECRET=dev-worker-secret-change-me
+      - MENU_IMPORT_OCR_LANGUAGES=tur,eng,ara
+      - MENU_IMPORT_AI_ENABLED=false
+    # Resource guidance (uncomment to enforce on supported runtimes):
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "1.5"
+    #       memory: 2g
+    tmpfs:
+      - /tmp/menu-imports
+    read_only: true
+
+# Note: this repo has no Dockerfile.web yet (the app deploys to Vercel). The
+# `web` service is illustrative for a fully self-hosted setup; for local dev,
+# run `pnpm dev` for the app and only `docker compose up menu-extraction-worker`.

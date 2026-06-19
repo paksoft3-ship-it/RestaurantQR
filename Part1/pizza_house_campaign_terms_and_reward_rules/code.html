@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza House - Campaign Terms &amp; Rules</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#fffbff",
+                        "text-primary": "#111827",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "surface-tint": "#b91e00",
+                        "primary": "#b51d00",
+                        "on-surface-variant": "#5c403a",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "primary-dark": "#C9341A",
+                        "text-secondary": "#667085",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#5c6274",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-primary": "#ffb4a5",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "success": "#16A34A",
+                        "danger": "#DC2626",
+                        "canvas": "#FFFFFF",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "outline-variant": "#e5beb6",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-dim": "#d8dadc",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed": "#ffdad3",
+                        "border": "#E5E7EB",
+                        "primary-container": "#db3516",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "outline": "#906f69",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-warm": "#FFF1EB",
+                        "on-secondary-fixed-variant": "#404758",
+                        "secondary-container": "#d9dff5",
+                        "on-secondary-fixed": "#141b2b",
+                        "tertiary-container": "#946f00",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#fffbff",
+                        "secondary": "#575e70",
+                        "secondary-fixed": "#dce2f7",
+                        "on-primary-fixed": "#3e0400",
+                        "surface": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "mobile-shell-max-width": "640px",
+                        "xxl": "48px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "display": ["Manrope"],
+                        "body": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "small": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "button": ["Inter"],
+                        "h2": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface-container-lowest dark:bg-inverse-surface border-b border-border dark:border-outline-variant shadow-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">arrow_back</span>
+<div class="font-display text-h3 font-extrabold text-primary dark:text-primary-fixed-dim">Pizza House</div>
+</div>
+<div class="hidden md:flex gap-md items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary-dark transition-colors" href="#">Campaigns</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary-dark transition-colors" href="#">Rewards</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Support</a>
+</div>
+<div class="flex items-center gap-xs">
+<button class="hidden md:flex items-center justify-center gap-xs px-md py-sm bg-primary text-on-primary font-button rounded-lg hover:bg-primary-dark transition-colors active:scale-95">
+                Scan QR
+            </button>
+<span class="material-symbols-outlined text-secondary cursor-pointer active:opacity-80 p-xs" data-icon="info">info</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer active:opacity-80 p-xs" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="pt-24 pb-xxl px-gutter max-w-container-max-width mx-auto">
+<!-- Hero Section -->
+<section class="mb-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest mb-4">
+<span class="material-symbols-outlined text-sm text-secondary" data-weight="fill">gavel</span>
+<span class="font-button text-small text-secondary tracking-wide uppercase">CAMPAIGN TERMS AND CONDITIONS</span>
+</div>
+<h1 class="font-display text-display text-text-primary mb-lg">Scan &amp; Win <span class="text-primary block md:inline">Rules &amp; Details</span></h1>
+<!-- Status Banner -->
+<div class="bg-surface-container-low border border-border rounded-xl p-md flex flex-col md:flex-row items-start md:items-center gap-md mb-lg">
+<div class="flex items-center gap-sm px-sm py-xs bg-success/10 rounded-lg">
+<span class="material-symbols-outlined text-success" data-weight="fill">check_circle</span>
+<span class="font-body-bold text-success">Campaign Active</span>
+</div>
+<p class="text-text-secondary font-body">This campaign is currently active. You can participate by visiting participating Pizza House locations during the campaign period.</p>
+</div>
+<!-- At a Glance Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm">
+<div class="bg-surface-container-lowest p-md rounded-xl border border-border flex flex-col gap-xs">
+<span class="text-text-secondary font-small">Organizer</span>
+<span class="font-body-bold text-text-primary">Pizza House</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl border border-border flex flex-col gap-xs">
+<span class="text-text-secondary font-small">Campaign Period</span>
+<span class="font-body-bold text-text-primary">Oct 1 - Dec 31, 2024</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl border border-border flex flex-col gap-xs">
+<span class="text-text-secondary font-small">Method</span>
+<span class="font-body-bold text-text-primary">Scan QR / NFC</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl border border-border flex flex-col gap-xs">
+<span class="text-text-secondary font-small">Limit</span>
+<span class="font-body-bold text-text-primary">1 attempt per day</span>
+</div>
+</div>
+</section>
+<!-- Two Column Layout -->
+<div class="flex flex-col lg:flex-row gap-xl">
+<!-- Sticky Navigation (Left) -->
+<aside class="w-full lg:w-1/4 hidden lg:block">
+<div class="sticky top-24 bg-surface-container-lowest rounded-xl border border-border p-md shadow-sm">
+<h3 class="font-h3 text-text-primary mb-md">Contents</h3>
+<nav class="flex flex-col gap-sm">
+<a class="text-primary font-body-bold hover:text-primary-dark transition-colors flex items-center justify-between" href="#organizer">
+                            1. Campaign Organizer
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+<a class="text-text-secondary font-body hover:text-text-primary transition-colors flex items-center justify-between" href="#period">
+                            2. Campaign Period
+                        </a>
+<a class="text-text-secondary font-body hover:text-text-primary transition-colors flex items-center justify-between" href="#eligibility">
+                            3. Eligibility
+                        </a>
+<a class="text-text-secondary font-body hover:text-text-primary transition-colors flex items-center justify-between" href="#participate">
+                            4. How to Participate
+                        </a>
+<a class="text-text-secondary font-body hover:text-text-primary transition-colors flex items-center justify-between" href="#rewards">
+                            6. Available Rewards
+                        </a>
+<a class="text-text-secondary font-body hover:text-text-primary transition-colors flex items-center justify-between mt-sm pt-sm border-t border-border" href="#contact">
+                            Contact Us
+                        </a>
+</nav>
+</div>
+</aside>
+<!-- Legal Content (Right) -->
+<div class="w-full lg:w-3/4 space-y-xl">
+<section class="bg-surface-container-lowest rounded-xl border border-border p-lg" id="organizer">
+<h2 class="font-h2 text-text-primary mb-md border-b border-border pb-sm">1. Campaign Organizer</h2>
+<p class="font-body text-text-secondary mb-sm">This promotional campaign ("Campaign") is organized and operated by Pizza House Inc. ("Organizer").</p>
+<ul class="list-disc list-inside font-body text-text-secondary space-y-xs ml-sm">
+<li><strong>Company Name:</strong> Pizza House Inc.</li>
+<li><strong>Registered Address:</strong> [Editable Placeholder - Address]</li>
+<li><strong>Contact Email:</strong> [Editable Placeholder - Email]</li>
+</ul>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-border p-lg" id="period">
+<h2 class="font-h2 text-text-primary mb-md border-b border-border pb-sm">2. Campaign Period</h2>
+<p class="font-body text-text-secondary">The Campaign begins on <strong>October 1, 2024 at 00:01 local time</strong> and ends on <strong>December 31, 2024 at 23:59 local time</strong> ("Campaign Period"). Attempts made outside this period will not be eligible.</p>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-border p-lg" id="eligibility">
+<h2 class="font-h2 text-text-primary mb-md border-b border-border pb-sm">3. Eligibility</h2>
+<p class="font-body text-text-secondary mb-sm">To be eligible to participate in the Campaign, individuals must:</p>
+<ul class="list-disc list-inside font-body text-text-secondary space-y-xs ml-sm">
+<li>Be at least 16 years of age (or the minimum age of majority in their jurisdiction).</li>
+<li>Be physically present at a participating Pizza House location.</li>
+<li>Have a compatible smartphone capable of scanning QR codes or reading NFC tags.</li>
+</ul>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-border p-lg" id="participate">
+<h2 class="font-h2 text-text-primary mb-md border-b border-border pb-sm">4. How to Participate</h2>
+<div class="space-y-md">
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-button text-text-primary shrink-0">1</div>
+<p class="font-body text-text-secondary pt-1">Visit a participating Pizza House location during the Campaign Period.</p>
+</div>
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-button text-text-primary shrink-0">2</div>
+<p class="font-body text-text-secondary pt-1">Locate the official Campaign QR code or NFC terminal near the register or on your receipt.</p>
+</div>
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-button text-text-primary shrink-0">3</div>
+<p class="font-body text-text-secondary pt-1">Scan the QR code using your smartphone camera or tap your NFC-enabled device.</p>
+</div>
+</div>
+</section>
+<!-- Contact Form Section -->
+<section class="bg-surface-container-lowest rounded-xl border border-border p-lg mt-xxl" id="contact">
+<div class="flex items-center gap-sm mb-md border-b border-border pb-sm">
+<span class="material-symbols-outlined text-primary" data-weight="fill">help</span>
+<h2 class="font-h2 text-text-primary">Ask About This Campaign</h2>
+</div>
+<form class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-text-primary mb-xs">Name</label>
+<input class="w-full bg-surface-container-lowest border border-border rounded-lg px-md py-sm font-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Jane Doe" type="text"/>
+</div>
+<div>
+<label class="block font-body-bold text-text-primary mb-xs">Email</label>
+<input class="w-full bg-surface-container-lowest border border-border rounded-lg px-md py-sm font-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="jane@example.com" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-text-primary mb-xs">Question Category</label>
+<select class="w-full bg-surface-container-lowest border border-border rounded-lg px-md py-sm font-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-text-secondary">
+<option>Reward Redemption Issue</option>
+<option>Technical Problem</option>
+<option>General Inquiry</option>
+</select>
+</div>
+<div>
+<label class="block font-body-bold text-text-primary mb-xs">Message</label>
+<textarea class="w-full bg-surface-container-lowest border border-border rounded-lg px-md py-sm font-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all h-32 resize-none" placeholder="How can we help?"></textarea>
+</div>
+<button class="w-full md:w-auto px-xl py-sm bg-primary text-on-primary font-button rounded-lg hover:bg-primary-dark transition-colors active:scale-95 flex items-center justify-center gap-xs" type="button">
+                            Submit Inquiry
+                            <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-gutter flex flex-col items-center gap-md bg-surface-dim dark:bg-on-background border-t border-border dark:border-outline-variant flat no shadows mt-xxl">
+<div class="font-display text-h2 text-text-primary dark:text-surface-container-lowest">Pizza House</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-text-secondary dark:text-secondary-fixed-dim hover:text-text-primary transition-colors cursor-pointer font-body text-small" href="#">Privacy Policy</a>
+<a class="text-text-secondary dark:text-secondary-fixed-dim hover:text-text-primary transition-colors cursor-pointer font-body text-small" href="#">Terms of Service</a>
+<a class="text-text-secondary dark:text-secondary-fixed-dim hover:text-text-primary transition-colors cursor-pointer font-body text-small" href="#">Cookie Policy</a>
+<a class="text-primary underline hover:text-text-primary transition-colors cursor-pointer font-body text-small" href="#">Campaign Rules</a>
+</div>
+<p class="font-body text-small text-text-secondary dark:text-secondary-fixed-dim text-center">© 2024 YourPlatform. All legal rights reserved. Pizza House is a registered trademark.</p>
+</footer>
+<!-- Bottom Mobile Nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 max-w-mobile-shell-max-width mx-auto bg-surface-container-lowest dark:bg-inverse-surface border-t border-border dark:border-outline-variant shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high transition-all active:scale-95 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body text-small mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high transition-all active:scale-95 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-body text-small mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high transition-all active:scale-95 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="stars">stars</span>
+<span class="font-body text-small mt-1">Win</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 hover:bg-surface-container-high transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-body text-small mt-1">Support</span>
+</a>
+</nav>
+</body></html>

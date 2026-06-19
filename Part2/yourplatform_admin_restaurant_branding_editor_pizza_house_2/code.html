@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Branding Editor - YourPlatform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#fffbff",
+                        "canvas": "#FFFFFF",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-dark": "#C9341A",
+                        "secondary-fixed": "#dce2f7",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-secondary-container": "#5c6274",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-error-container": "#93000a",
+                        "secondary": "#575e70",
+                        "primary": "#b51d00",
+                        "surface-warm": "#FFF1EB",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#3e0400",
+                        "text-primary": "#111827",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-container": "#eceef0",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e0e3e5",
+                        "background": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "outline-variant": "#e5beb6",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "surface-tint": "#b91e00",
+                        "outline": "#906f69",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "primary-container": "#db3516",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-surface-variant": "#5c403a",
+                        "border": "#E5E7EB",
+                        "on-secondary-fixed-variant": "#404758",
+                        "tertiary-container": "#946f00",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary-container": "#d9dff5",
+                        "inverse-primary": "#ffb4a5",
+                        "tertiary": "#765700",
+                        "danger": "#DC2626",
+                        "success": "#16A34A",
+                        "text-secondary": "#667085",
+                        "primary-fixed": "#ffdad3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "mobile-shell-max-width": "640px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "button": ["Inter"],
+                        "small": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-body text-on-surface flex min-h-screen">
+<!-- SideNavBar (from JSON) -->
+<nav class="fixed left-0 top-0 h-full w-60 flex flex-col p-md z-40 bg-secondary-fixed-dim dark:bg-on-secondary-fixed-variant shadow-md">
+<div class="mb-lg">
+<div class="flex items-center gap-sm mb-lg">
+<img alt="YourPlatform Logo" class="w-10 h-10 rounded-lg bg-white p-1" data-alt="A highly detailed illustration of a modern platform icon, featuring bold geometric shapes in a vibrant, high-contrast light mode setting. The mood is professional and energetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Bp_UqSro2EcPqlVxzBoUf3zRkWW3fOfuproyIS0eXg5N8SQY2trUZkdS-gTmRH-0SeF6HyNiFJy-VDpf3nfVZ4HphOLnfLNNjuLFsqk98fReo67E1gECkuDnRuXJAC_x7qsw7m3WoGQQSNdGBHdPiuYl-NmFwpwkW2Lj6lWEiTprAQzDlzUCC84sZB_hGFEtmjAjqR8lDyk44vjKQznoLaxIk3fccFO9yZMCBYCuW3faE705yjUivQOOU9TYZZg9JLx-mpiXFNQ"/>
+<div>
+<h2 class="font-h3 text-h3 font-bold text-on-secondary-fixed">YourPlatform</h2>
+<p class="font-small text-small text-on-secondary-fixed-variant">Admin Console</p>
+</div>
+</div>
+<button class="w-full bg-canvas text-primary font-button text-button py-sm rounded-lg shadow-sm border border-border flex items-center justify-center gap-xs mb-lg hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Restaurant
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-xs">
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm bg-primary dark:bg-primary-container text-on-primary rounded-lg border-l-4 border-primary-fixed translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span>Restaurants</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>User Management</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span>Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span>Audit Logs</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Platform Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-md border-t border-secondary-container">
+<ul class="space-y-xs">
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-60 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar (from JSON) -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-xl py-md bg-canvas dark:bg-inverse-surface border-b border-border dark:border-outline">
+<div class="flex items-center gap-sm">
+<!-- Breadcrumb acting as title/logo space here -->
+<nav class="flex text-text-secondary font-small text-small items-center">
+<a class="hover:text-primary transition-colors" href="#">Admin</a>
+<span class="material-symbols-outlined text-[16px] mx-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Restaurants</a>
+<span class="material-symbols-outlined text-[16px] mx-xs">chevron_right</span>
+<a class="text-text-primary font-body-bold" href="#">Pizza House (RST-00024)</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-button text-button text-text-secondary hover:text-primary border border-border px-sm py-xs rounded-lg transition-colors">
+                    Save Branding Draft
+                </button>
+<button class="font-button text-button bg-primary text-on-primary px-sm py-xs rounded-lg hover:bg-primary-container transition-colors shadow-sm">
+                    Submit for Review
+                </button>
+<div class="flex gap-xs text-text-secondary ml-sm border-l border-border pl-sm">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<img alt="Admin user avatar" class="w-8 h-8 rounded-full ml-xs border border-border" data-alt="A close-up portrait of an admin user in a bright, modern office space. High key lighting, sharp focus, professional yet welcoming expression. Light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiANuSi7OoyJ1HeouDm5BiveWxlg5znxru2ZarvhjcK_NMCAkQ9v1XgCGa8EbI5iasiGPUNJkAUZPJosZFG233wYahyFjZ63gAXkBliSJonAVzq6vmtnfZNDLNM2VDKBOi_Qy0L50feoTfEsyhX2xAiBna4ZqWdl5ybj3QdpmscXhM6zn329gHv5SNitwYAbW0apXI0tUgJ9yAkr_HzjryH1YAjwsK3_U-gyGTtyLIIMZQg3ok6eT_BogU_XO6eRpSrx2H6VHQNnE"/>
+</div>
+</div>
+</header>
+<!-- Restaurant Workspace Navigation -->
+<div class="bg-canvas border-b border-border px-xl pt-sm overflow-x-auto whitespace-nowrap sticky top-[73px] z-40">
+<nav class="flex gap-lg">
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Overview</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">General Information</a>
+<a class="font-body-bold text-body-bold text-primary border-b-2 border-primary pb-sm" href="#">Branding</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Contact and Location</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Page Builder</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Menu</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Customer Actions</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">QR Codes</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">NFC Products</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Campaigns</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Analytics</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary pb-sm transition-colors border-b-2 border-transparent hover:border-primary" href="#">Activity</a>
+</nav>
+</div>
+<!-- Branding Status Bar -->
+<div class="bg-surface-warm px-xl py-sm border-b border-primary-fixed-dim flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-dark text-[20px]">edit_note</span>
+<p class="font-small text-small text-on-surface-variant">
+<span class="font-bold">Draft Changes:</span> Branding changes have not been published. Last saved 12 mins ago.
+            </p>
+</div>
+<!-- Main Workspace -->
+<div class="p-xl flex gap-xl flex-1 items-start">
+<!-- Main Editor Column (8 cols equivalent in flex layout) -->
+<div class="flex-grow max-w-[800px] flex flex-col gap-xl">
+<!-- Visual Direction Section -->
+<section class="bg-canvas rounded-xl border border-border p-lg shadow-sm">
+<div class="mb-md">
+<h3 class="font-h3 text-h3 text-text-primary">Visual Direction</h3>
+<p class="font-small text-small text-text-secondary mt-1">Select a core theme to base your styling on.</p>
+</div>
+<div class="grid grid-cols-3 gap-md">
+<!-- Selected -->
+<div class="border-2 border-primary rounded-lg overflow-hidden cursor-pointer relative">
+<div class="absolute top-2 right-2 bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="h-24 bg-surface-variant p-2 flex items-end" data-alt="A vibrant, fast-paced food photography style image showing an energetic burger meal setup, saturated colors, modern lighting. Light mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDhjOnUMyjuF-Cfu_oB2ffUDxnyodQUOP_24p4AdyGJYTwND68d-RGpAjKAl6DmHN8Ef7voakGmj6VL25lXgISIGfmgPQ0Fzx2DJ4_4tTzkFVMyk1dOpCK_qkB0OeFl1L0HtADbuKgiUiCevXvm10WomMUzWPlQ54j0ZUgpjxczoNIsDwLAu5qKkp8QiB864-K_xRKSLymFzP8_T-PavZBmFb0Lc1Ib6DORjcKG50ijFij4oQ1zinC7bnJGjtVrcZl00jg6JvV5Gds'); background-size: cover;">
+<div class="flex gap-1">
+<div class="w-4 h-4 rounded-full bg-[#F04424] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#111827] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#F3F4F6] border border-white"></div>
+</div>
+</div>
+<div class="p-sm bg-canvas">
+<p class="font-body-bold text-small text-text-primary">Modern Fast Food</p>
+</div>
+</div>
+<div class="border border-border rounded-lg overflow-hidden cursor-pointer hover:border-primary transition-colors opacity-70">
+<div class="h-24 bg-surface-variant p-2 flex items-end" data-alt="A warm, inviting mediterranean food spread, rustic textures, olive oils, warm sunlight casting soft shadows. Light mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCF5YULh3b_jDaQaBQwylaGglcDBf_O88ebC_7LG3da9tpuYZjThsHFsgjQhRLPdi-EbHKI_lubyNuktsVFEJy_jzzpYGzf74jnsiijhBW3to0s2gLKAJVNr1966Y3Ps6b7ZlQzhvQnsIK3duP9iXD6OR3NxBCUNbc5UbRTidF3BNwoJXfwE26K1ib7-RP0e-a-LqPEYf9fB9qW4vsJrOzBtZwMrxC4uQDi9HudRGfLbddPSYMZE_8vsiq_zCyPsRCpq2U-bVXRw3M'); background-size: cover;">
+<div class="flex gap-1">
+<div class="w-4 h-4 rounded-full bg-[#D97706] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#1F2937] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#FEF3C7] border border-white"></div>
+</div>
+</div>
+<div class="p-sm bg-canvas">
+<p class="font-body-bold text-small text-text-primary">Warm Mediterranean</p>
+</div>
+</div>
+<div class="border border-border rounded-lg overflow-hidden cursor-pointer hover:border-primary transition-colors opacity-70">
+<div class="h-24 bg-surface-variant p-2 flex items-end" data-alt="A sophisticated fine dining plate setup, dark moody background, spotlight on the food, minimalist plating. High contrast, elegant." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdJNcWwMZytEi6_xRNh5jHQHcOnZ_EceriCm3gQh60Dgq-8bePlFgLrsHoXiw5_HEFtaNa-SNcWirCN3O7fWxwtx1mwvdU318iFbwZyKpN6x3_2hjOOt0giM5ipd60DjoZND8T9OFkh_e6Pu6fbEjQAvVjsNqf17Bg5cWKfhzkkdq0Mb7MeQytDj-ZjJj-Nep6GH5VvmYRhQYmvgVqRnZnZ84HoiScctDV33TGTuUHzXZFosRr0_7C2MJ0RfH79GGJToXrAK7ZOhI'); background-size: cover;">
+<div class="flex gap-1">
+<div class="w-4 h-4 rounded-full bg-[#9CA3AF] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#030712] border border-white"></div>
+<div class="w-4 h-4 rounded-full bg-[#111827] border border-white"></div>
+</div>
+</div>
+<div class="p-sm bg-canvas">
+<p class="font-body-bold text-small text-text-primary">Premium Dining</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Brand Assets -->
+<section class="bg-canvas rounded-xl border border-border p-lg shadow-sm">
+<div class="mb-md flex justify-between items-center">
+<div>
+<h3 class="font-h3 text-h3 text-text-primary">Core Brand Assets</h3>
+<p class="font-small text-small text-text-secondary mt-1">Upload logos in SVG or high-res PNG format.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Primary Logo -->
+<div class="border border-border rounded-lg p-md">
+<p class="font-body-bold text-small mb-sm text-text-primary">Primary Logo</p>
+<div class="bg-surface rounded-lg border-2 border-dashed border-border flex flex-col items-center justify-center p-md h-40 relative group cursor-pointer hover:bg-surface-bright hover:border-primary transition-all">
+<img alt="Pizza House Primary Logo" class="h-20 w-auto object-contain mb-sm" src="https://lh3.googleusercontent.com/aida/AP1WRLsK5VQsjFEVtQNlXq34ssjOw3VrSoXtgP0LdHw09mZAHG6ZJA9fmeolqsFBohHmaywcWYYHT9IYGaaNeCn0Q-jhsCMfotL39Xc_pI34wwZ3tIkeqs3jmKlbdgvEtz9XfPLcnhMFm250qk0V1A4FGoeXcqeyaM8q1rlhsZtRqUjcvgR6DB_08wR334uibsHQnQxXtRwUNL0DvrfoeuxTL9qqwg1X-dAesU6A5k7UOITqGk0XAivrdzulEYw"/>
+<button class="absolute inset-0 bg-canvas/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-button text-small text-primary">Replace Image</span>
+</button>
+</div>
+</div>
+<!-- Logo for Dark -->
+<div class="border border-border rounded-lg p-md">
+<p class="font-body-bold text-small mb-sm text-text-primary flex items-center gap-xs">
+                                Logo for Dark Backgrounds
+                                <span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" title="Missing required asset">warning</span>
+</p>
+<div class="bg-inverse-surface rounded-lg border-2 border-dashed border-outline flex flex-col items-center justify-center p-md h-40 cursor-pointer hover:bg-on-background transition-colors group">
+<span class="material-symbols-outlined text-outline text-[32px] mb-xs group-hover:text-white transition-colors">cloud_upload</span>
+<span class="font-button text-small text-outline group-hover:text-white transition-colors">Upload Dark Logo</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Typography Section -->
+<section class="bg-canvas rounded-xl border border-border p-lg shadow-sm">
+<div class="mb-md">
+<h3 class="font-h3 text-h3 text-text-primary">Typography</h3>
+<p class="font-small text-small text-text-secondary mt-1">Select the font families for your digital menu.</p>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Headings Font</label>
+<select class="w-full border-border rounded-lg shadow-sm focus:border-primary focus:ring-primary text-body font-body py-sm">
+<option selected="">Manrope (Sans-Serif, Geometric)</option>
+<option>Inter (Sans-Serif, Neutral)</option>
+<option>Playfair Display (Serif)</option>
+</select>
+<div class="mt-sm p-sm bg-surface rounded-md">
+<p class="font-h2 text-h2 text-text-primary">Pizza House Menu</p>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Body Font</label>
+<select class="w-full border-border rounded-lg shadow-sm focus:border-primary focus:ring-primary text-body font-body py-sm">
+<option>Manrope (Sans-Serif, Geometric)</option>
+<option selected="">Inter (Sans-Serif, Neutral)</option>
+<option>Roboto (Sans-Serif)</option>
+</select>
+<div class="mt-sm p-sm bg-surface rounded-md">
+<p class="font-body text-body text-text-secondary">Authentic wood-fired pizzas made with fresh, locally sourced ingredients.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Preview Column (4 cols, Sticky) -->
+<aside class="w-[380px] flex-shrink-0 flex flex-col gap-lg sticky top-[160px]">
+<!-- Action Card -->
+<div class="bg-canvas rounded-xl border border-border p-md shadow-sm flex flex-col gap-sm">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg shadow-sm hover:bg-primary-container transition-colors">
+                        Save Branding Draft
+                    </button>
+<div class="flex gap-sm">
+<button class="flex-1 border border-border text-text-primary font-button text-button py-xs rounded-lg hover:bg-surface transition-colors">
+                            Preview
+                        </button>
+<button class="flex-1 border border-border text-text-primary font-button text-button py-xs rounded-lg hover:bg-surface transition-colors">
+                            Discard
+                        </button>
+</div>
+</div>
+<!-- Brand Readiness Checklist -->
+<div class="bg-canvas rounded-xl border border-border p-md shadow-sm">
+<div class="flex justify-between items-center mb-sm">
+<h4 class="font-body-bold text-body-bold text-text-primary">Brand Readiness</h4>
+<span class="font-small text-small text-text-secondary bg-surface px-2 py-1 rounded">10/13</span>
+</div>
+<ul class="space-y-xs font-small text-small">
+<li class="flex items-center gap-xs text-text-primary">
+<span class="material-symbols-outlined text-success text-[18px]">check_circle</span>
+                            Primary Logo
+                        </li>
+<li class="flex items-center gap-xs text-text-primary">
+<span class="material-symbols-outlined text-success text-[18px]">check_circle</span>
+                            Brand Colors
+                        </li>
+<li class="flex items-center gap-xs text-tertiary-fixed-dim font-bold">
+<span class="material-symbols-outlined text-[18px]">error</span>
+                            Logo for Dark Backgrounds
+                        </li>
+<li class="flex items-center gap-xs text-text-secondary pl-6">
+                            + 2 more missing items
+                        </li>
+</ul>
+</div>
+<!-- Changes in This Draft -->
+<div class="bg-canvas rounded-xl border border-border p-md shadow-sm">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-sm">Changes in This Draft</h4>
+<ul class="list-disc list-inside space-y-xs font-small text-small text-text-secondary">
+<li>Primary Color updated to <span class="font-mono bg-surface px-1 rounded">#F04424</span></li>
+<li>Typography changed to Manrope/Inter</li>
+<li>Cover Image replaced</li>
+</ul>
+</div>
+<!-- Preview Mobile Frame Placeholder -->
+<div class="bg-surface rounded-xl border border-border p-md flex flex-col items-center justify-center min-h-[300px] text-center">
+<span class="material-symbols-outlined text-outline text-[48px] mb-sm">smartphone</span>
+<p class="font-body-bold text-small text-text-primary">Live Preview</p>
+<p class="font-small text-small text-text-secondary">Preview functionality available after initial save.</p>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

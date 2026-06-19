@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Restaurant - Platform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#191c1e",
+                      "surface-container": "#eceef0",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "surface": "#f7f9fb",
+                      "error-container": "#ffdad6",
+                      "text-secondary": "#667085",
+                      "surface-container-low": "#f2f4f6",
+                      "primary": "#b51d00",
+                      "tertiary-fixed": "#ffdf9e",
+                      "border": "#E5E7EB",
+                      "primary-dark": "#C9341A",
+                      "tertiary-container": "#946f00",
+                      "on-surface-variant": "#5c403a",
+                      "on-tertiary-fixed": "#261a00",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "success": "#16A34A",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-warm": "#FFF1EB",
+                      "on-primary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#fffbff",
+                      "surface-dim": "#d8dadc",
+                      "on-secondary-fixed": "#141b2b",
+                      "inverse-surface": "#2d3133",
+                      "surface-variant": "#e0e3e5",
+                      "inverse-primary": "#ffb4a5",
+                      "background": "#f7f9fb",
+                      "tertiary": "#765700",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "danger": "#DC2626",
+                      "outline": "#906f69",
+                      "secondary": "#575e70",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-tertiary-container": "#fffbff",
+                      "text-primary": "#111827",
+                      "secondary-fixed": "#dce2f7",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "primary-container": "#db3516",
+                      "surface-tint": "#b91e00",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-bright": "#f7f9fb",
+                      "on-primary-fixed": "#3e0400",
+                      "primary-fixed": "#ffdad3",
+                      "on-secondary-container": "#5c6274",
+                      "outline-variant": "#e5beb6",
+                      "canvas": "#FFFFFF",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#191c1e",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "secondary-container": "#d9dff5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xxl": "48px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "margin-mobile": "20px",
+                      "container-max-width": "1280px",
+                      "xs": "8px",
+                      "base": "4px",
+                      "mobile-shell-max-width": "640px"
+              },
+              "fontFamily": {
+                      "button": [
+                              "Inter"
+                      ],
+                      "small": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "body": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body text-body text-on-surface flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-secondary-fixed-dim dark:bg-on-secondary-fixed font-body text-body-bold fixed left-0 top-0 h-screen w-60 border-r border-outline-variant flex flex-col h-full w-60 z-50">
+<div class="px-6 py-8 border-b border-outline-variant">
+<h1 class="font-h2 text-h2 text-on-primary-fixed dark:text-primary-fixed">Admin Panel</h1>
+<p class="text-secondary font-small text-small mt-1">Managed Platform</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary border-l-4 border-primary-dark transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">store</span>
+<span>Restaurants</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">restaurant_menu</span>
+<span>Menu Manager</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">qr_code</span>
+<span>NFC/QR Setup</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+<span>Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bar_chart</span>
+<span>Analytics</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary font-button text-button py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Add New Store
+            </button>
+<ul class="mt-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary-fixed-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-60 flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-dim font-body text-body sticky top-0 right-0 z-40 border-b border-outline-variant shadow-sm flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-6">
+<span class="font-h3 text-h3 text-primary">Restaurant Platform</span>
+<div class="relative hidden md:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-surface-container-lowest text-small focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Global search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary transition-opacity scale-95 active:scale-90">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary transition-opacity scale-95 active:scale-90">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed overflow-hidden border border-border">
+<img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a business administrator in a modern office setting. The lighting is bright and clear, reflecting a light-mode corporate software interface aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_6XPuaYUHHaINnZ2uf8usXokA-uBOTUwHhbP27oSW5W15pO_Pn4Jr9AGcplY8yHTSe7GVfNZpBwUa2s6KUa722XBPcmv4TvjAvbkgPiiVUYYmTrptQDmk_bGdowQHeoRs3YlhvdfPxPdOy6ExqCvjy0GEF-xpPmSzsHZgqLjlakfOuycXFr43e5NPGPQsCZRGCoSAqNVf2C2DGGccc8r-XJ8WYeL9UCRsh-sJg3QO9Jqr4W6EHsktv5PCapM_o_2gSz4j50L-zdM"/>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-button text-button hover:bg-primary hover:text-on-primary transition-colors scale-95 active:scale-90">
+                    Quick Action
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-xl grid grid-cols-1 lg:grid-cols-12 gap-xl items-start max-w-container-max-width mx-auto w-full">
+<!-- Form Header & Actions (Spans full width) -->
+<div class="lg:col-span-12 flex justify-between items-end mb-md">
+<div>
+<div class="flex items-center gap-2 text-small text-secondary mb-2">
+<a class="hover:text-primary transition-colors" href="#">Restaurants</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Add New</span>
+</div>
+<h2 class="font-h1 text-h1 text-on-surface">Add New Restaurant</h2>
+</div>
+<div class="flex gap-sm">
+<button class="px-4 py-2 border-2 border-secondary text-secondary rounded-lg font-button text-button hover:bg-surface-container-high transition-colors">Save Draft</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm">Create Restaurant</button>
+</div>
+</div>
+<!-- Left Navigation (Sticky) -->
+<div class="hidden lg:block lg:col-span-2 sticky top-[100px]">
+<nav class="flex flex-col space-y-2">
+<a class="text-primary font-body-bold text-body-bold py-2 border-l-2 border-primary pl-4 transition-colors" href="#basic-info">Basic Info</a>
+<a class="text-secondary font-body text-body py-2 border-l-2 border-transparent pl-4 hover:text-primary transition-colors" href="#classification">Classification</a>
+<a class="text-secondary font-body text-body py-2 border-l-2 border-transparent pl-4 hover:text-primary transition-colors" href="#branding">Branding</a>
+<a class="text-secondary font-body text-body py-2 border-l-2 border-transparent pl-4 hover:text-primary transition-colors" href="#contact">Contact</a>
+<a class="text-secondary font-body text-body py-2 border-l-2 border-transparent pl-4 hover:text-primary transition-colors" href="#actions">Actions</a>
+<a class="text-secondary font-body text-body py-2 border-l-2 border-transparent pl-4 hover:text-primary transition-colors" href="#setup">Setup</a>
+</nav>
+</div>
+<!-- Main Form Scroll Area -->
+<div class="lg:col-span-7 space-y-lg">
+<!-- Basic Information -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="basic-info">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Basic Information</h3>
+<div class="space-y-md">
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Restaurant Name <span class="text-danger">*</span></label>
+<input class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="e.g. Pizza House" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Internal ID</label>
+<input class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container text-secondary cursor-not-allowed" readonly="" type="text" value="RST-00025"/>
+</div>
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Public Slug</label>
+<div class="flex items-center">
+<span class="px-3 py-3 border border-r-0 border-border rounded-l-lg bg-surface-container text-secondary text-small">yourplatform.com/</span>
+<input class="w-full px-4 py-3 border border-border rounded-r-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="pizza-house" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Classification -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="classification">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Classification</h3>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Restaurant Type</label>
+<select class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors appearance-none">
+<option>Select a type...</option>
+<option>Pizza</option>
+<option>Burger</option>
+<option>Café</option>
+<option>Fine Dining</option>
+</select>
+</div>
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Service Model</label>
+<select class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors appearance-none">
+<option>Select a model...</option>
+<option>Dine-in &amp; Takeout</option>
+<option>Delivery Only</option>
+<option>Quick Service</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Branding -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="branding">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Branding</h3>
+<div class="space-y-lg">
+<!-- Uploads -->
+<div class="grid grid-cols-2 gap-md">
+<div class="border-2 border-dashed border-border rounded-lg p-md text-center hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-2">add_photo_alternate</span>
+<p class="font-body-bold text-body-bold text-on-surface">Upload Logo</p>
+<p class="text-small text-secondary mt-1">PNG, JPG up to 5MB (1:1)</p>
+</div>
+<div class="border-2 border-dashed border-border rounded-lg p-md text-center hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-2">wallpaper</span>
+<p class="font-body-bold text-body-bold text-on-surface">Cover Image</p>
+<p class="text-small text-secondary mt-1">Wide format, up to 10MB</p>
+</div>
+</div>
+<!-- Visual Direction -->
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-sm">Visual Direction</label>
+<div class="grid grid-cols-3 gap-sm">
+<div class="border-2 border-primary rounded-lg p-sm cursor-pointer relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 opacity-100 transition-opacity"></div>
+<div class="w-full h-24 bg-surface-container-high rounded-md mb-2 flex items-center justify-center">
+<span class="text-primary font-h3">Modern</span>
+</div>
+<p class="font-body-bold text-small text-center">Fast Food</p>
+</div>
+<div class="border border-border rounded-lg p-sm cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-full h-24 bg-surface-warm rounded-md mb-2 flex items-center justify-center">
+<span class="text-tertiary font-h3">Warm</span>
+</div>
+<p class="font-body-bold text-small text-center">Mediterranean</p>
+</div>
+<div class="border border-border rounded-lg p-sm cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-full h-24 bg-surface-dim rounded-md mb-2 flex items-center justify-center">
+<span class="text-inverse-surface font-h3">Dark</span>
+</div>
+<p class="font-body-bold text-small text-center">Premium</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact & Location -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="contact">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Contact &amp; Location</h3>
+<div class="space-y-lg">
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Public Phone</label>
+<input class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="tel"/>
+</div>
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Public Email</label>
+<input class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-body-bold text-on-surface mb-xs">Full Address</label>
+<textarea class="w-full px-4 py-3 border border-border rounded-lg bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none" rows="2"></textarea>
+</div>
+</div>
+</section>
+<!-- Customer Actions -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="actions">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Customer Actions (Primary Menu)</h3>
+<p class="text-small text-secondary mb-md">Configure the four main buttons shown on the customer landing page.</p>
+<div class="grid grid-cols-2 gap-sm">
+<div class="flex items-center justify-between p-sm border border-border rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">phone_in_talk</span>
+<span class="font-body-bold text-body-bold">Call Order</span>
+</div>
+<input checked="" class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-sm border border-border rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">restaurant_menu</span>
+<span class="font-body-bold text-body-bold">Pick Your Meal</span>
+</div>
+<input checked="" class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-sm border border-border rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary bg-surface-container p-2 rounded-full">shopping_cart</span>
+<span class="font-body-bold text-body-bold text-secondary">Online Order</span>
+</div>
+<input class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-sm border border-border rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary bg-surface-container p-2 rounded-full">map</span>
+<span class="font-body-bold text-body-bold text-secondary">Visit Us</span>
+</div>
+<input class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+</section>
+<!-- Project Setup -->
+<section class="bg-canvas border border-border rounded-xl p-lg shadow-sm" id="setup">
+<h3 class="font-h3 text-h3 text-on-surface mb-md pb-sm border-b border-border">Project Setup</h3>
+<div class="grid grid-cols-2 gap-lg">
+<div>
+<h4 class="font-body-bold text-body-bold text-on-surface mb-sm">Scope</h4>
+<div class="space-y-2">
+<label class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+<span class="text-body text-on-surface">Menu Digitization</span>
+</label>
+<label class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+<span class="text-body text-on-surface">QR/NFC Deployment</span>
+</label>
+<label class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+<span class="text-body text-on-surface">Marketing Campaigns</span>
+</label>
+</div>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-on-surface mb-sm">Assignments</h4>
+<div class="space-y-2">
+<label class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+<span class="text-body text-on-surface">Content Team</span>
+</label>
+<label class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary rounded border-border focus:ring-primary" type="checkbox"/>
+<span class="text-body text-on-surface">QR Ops</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Summary Panel (Sticky) -->
+<div class="hidden lg:block lg:col-span-3 sticky top-[100px]">
+<div class="bg-canvas border border-border rounded-xl p-lg shadow-sm flex flex-col gap-md">
+<div class="text-center pb-md border-b border-border">
+<div class="w-20 h-20 bg-surface-container rounded-xl mx-auto mb-3 flex items-center justify-center border border-dashed border-border">
+<span class="material-symbols-outlined text-secondary">image</span>
+</div>
+<h3 class="font-h2 text-h2 text-on-surface truncate">New Restaurant</h3>
+<p class="text-small text-secondary">ID: RST-00025</p>
+</div>
+<div>
+<div class="flex justify-between text-small mb-1">
+<span class="font-body-bold text-on-surface">Profile Completion</span>
+<span class="text-primary font-body-bold">15%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+<div class="space-y-2 mt-2">
+<div class="flex items-center gap-2 text-small">
+<span class="material-symbols-outlined text-success text-[18px]">check_circle</span>
+<span class="text-on-surface">ID Generated</span>
+</div>
+<div class="flex items-center gap-2 text-small">
+<span class="material-symbols-outlined text-secondary text-[18px]">radio_button_unchecked</span>
+<span class="text-secondary">Basic Info Required</span>
+</div>
+<div class="flex items-center gap-2 text-small">
+<span class="material-symbols-outlined text-secondary text-[18px]">radio_button_unchecked</span>
+<span class="text-secondary">Assets Required</span>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-border">
+<p class="text-small text-secondary text-center mb-3">Status: <span class="font-body-bold text-on-surface">Draft</span></p>
+<button class="w-full px-4 py-2 bg-primary text-on-primary rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm">Create Restaurant</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

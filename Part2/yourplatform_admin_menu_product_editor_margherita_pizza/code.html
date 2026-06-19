@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menu Product Editor - Platform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-secondary-fixed-variant": "#404758",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#261a00",
+                        "primary-container": "#db3516",
+                        "primary-dark": "#C9341A",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "error": "#ba1a1a",
+                        "primary": "#b51d00",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "secondary-fixed": "#dce2f7",
+                        "on-error": "#ffffff",
+                        "success": "#16A34A",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#906f69",
+                        "primary-fixed": "#ffdad3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "border": "#E5E7EB",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8ea",
+                        "text-secondary": "#667085",
+                        "on-tertiary-container": "#fffbff",
+                        "outline-variant": "#e5beb6",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-container": "#946f00",
+                        "surface-container": "#eceef0",
+                        "text-primary": "#111827",
+                        "on-surface-variant": "#5c403a",
+                        "background": "#f7f9fb",
+                        "on-secondary-container": "#5c6274",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-container": "#fffbff",
+                        "secondary": "#575e70",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "tertiary": "#765700",
+                        "inverse-primary": "#ffb4a5",
+                        "surface-tint": "#b91e00",
+                        "secondary-container": "#d9dff5",
+                        "on-secondary-fixed": "#141b2b",
+                        "on-primary-fixed": "#3e0400",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1e",
+                        "tertiary-fixed": "#ffdf9e",
+                        "canvas": "#FFFFFF",
+                        "surface-warm": "#FFF1EB",
+                        "surface-bright": "#f7f9fb",
+                        "danger": "#DC2626"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "xxl": "48px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "mobile-shell-max-width": "640px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "small": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "display": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for sleek admin feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (Predicted Component) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 h-full w-60 bg-inverse-surface border-r border-outline-variant z-50">
+<div class="p-lg">
+<h2 class="font-h2 text-h2 text-on-primary-container">Admin Console</h2>
+<p class="font-small text-small text-surface-variant mt-1">Operational Control</p>
+</div>
+<div class="px-md mb-lg">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm px-md rounded-lg flex items-center justify-center gap-2 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined">add</span>
+                Add New Restaurant
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<ul class="flex flex-col">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary transition-all opacity-90" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-body text-body">Restaurants</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">nfc</span>
+<span class="font-body text-body">QR/NFC Tools</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-body text-body">Publishing Queue</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="font-body text-body">Reviews</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body text-body">User Management</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto border-t border-surface-variant/20 py-4">
+<ul class="flex flex-col">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body text-body">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body text-body">Support</span>
+</a>
+</li>
+</ul>
+<div class="px-4 py-3 flex items-center gap-3 mt-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img alt="Platform Admin Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an administrative user, neutral lighting, corporate feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBorp1vWpEl99PRzH6qUN3reE3fIuppfEjfGrZJkMlTiSytucTGPxSHBzGxTg5Df3X64wd-hCTwwSe_yylILIGJyjhFLiZa4jd1CjNu_mZjks4Vw9jLn2zGjaQgtNavVp3g7HC--E_IUYPmfjbEU245AcgmPsPOc3oKVmnoE0Qj5IMDvb_ABKFioCbHcRmahlZA2X_UViZcZA4JjZ9Bn6wewrylf0zT41BJlt-WcNKoyRER5Rf0VxLCLMUZnqfkI4QthfwZbEiWh4Y"/>
+</div>
+<div class="flex-1">
+<p class="font-small text-small text-surface-variant truncate">admin@platform.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-60 h-screen overflow-hidden bg-background">
+<!-- TopNavBar (Predicted Component) -->
+<header class="sticky top-0 w-full z-40 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center px-lg py-sm">
+<div class="flex items-center gap-4">
+<h1 class="font-h3 text-h3 text-primary hidden md:block">QR Platform Admin</h1>
+<div class="relative w-64 md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">search</span>
+<input class="w-full bg-surface-container-low border border-border rounded-lg pl-10 pr-4 py-2 font-body text-body text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="Search menus, products, IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="bg-primary text-on-primary font-button text-button py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors hidden sm:block">
+                    Quick Create
+                </button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer border border-border">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="Admin User Profile picture, small avatar size, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsNZOkyIZDeMKKZbTMv2VXd4pvo07jENk7i9BG8qy9Qs9MVUEk192m0y_zKoaQX3V33pAQ2b87YQvfcTivVRM53peDLJokArYpcUuvCRrfcaRZc4ePN0d-YoSJFAyRmF2EYebdLyvWXhpfx8tyRunKvY-ZnQWMnXNd9jN_aiqzMbbRy57IOc-iTLQEgYYxZW2sZ2ml0uuOzA_iYybpSRK4SSzIGtEWRyG1xyR3jzGiLUGVOu36qK1Vlsj6nnviSRBLm09ksVUzgXg"/>
+</div>
+</div>
+</header>
+<!-- Restaurant Context Header -->
+<div class="bg-surface border-b border-border px-lg py-4 flex flex-col gap-4">
+<div class="flex items-center gap-2 text-sm text-secondary font-small">
+<a class="hover:text-primary transition-colors" href="#">Restaurants</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Pizza House</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Menus</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+<h2 class="font-h2 text-h2 text-text-primary">Pizza House Workspace</h2>
+<span class="bg-surface-container-highest text-text-secondary font-small text-small px-2 py-1 rounded-md border border-border">ID: REST-0089</span>
+</div>
+<!-- Workspace Tabs -->
+<div class="flex gap-6 mt-2 border-b border-border">
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold pb-2 px-1" href="#">Overview</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-2 px-1 flex items-center gap-2" href="#">
+                    Menus
+                    <span class="bg-primary-container text-on-primary-container text-[11px] px-2 py-0.5 rounded-full font-bold">3 changes</span>
+</a>
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold pb-2 px-1" href="#">Orders</a>
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold pb-2 px-1" href="#">Settings</a>
+</div>
+</div>
+<!-- Scrollable Work Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-lg">
+<!-- Product Status Bar -->
+<div class="bg-surface border border-border rounded-xl p-4 mb-lg flex flex-wrap items-center justify-between gap-4 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-success"></span>
+<span class="font-body-bold text-body-bold text-text-primary">Published</span>
+</div>
+<div class="h-6 w-px bg-border"></div>
+<span class="text-secondary font-small text-small">v12.4</span>
+<div class="h-6 w-px bg-border"></div>
+<span class="text-primary font-small-bold text-small bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-md">3 Unpublished Changes</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="font-small text-small text-secondary">Product Readiness</p>
+<p class="font-body-bold text-body-bold text-text-primary">15 of 20 items complete</p>
+</div>
+<div class="w-32 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border text-text-primary font-button rounded-lg hover:bg-surface-container transition-colors">Discard Draft</button>
+<button class="px-4 py-2 bg-primary text-on-primary font-button rounded-lg hover:bg-primary-dark transition-colors shadow-sm">Save &amp; Publish</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left/Center Column: Editor -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Basic Info Card -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">info</span>
+                            Product Identity
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div>
+<label class="block font-small text-small text-secondary mb-2">Internal Name</label>
+<input class="w-full border border-border rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary" type="text" value="Margherita Pizza"/>
+</div>
+<div class="flex gap-4">
+<div class="flex-1">
+<label class="block font-small text-small text-secondary mb-2">Product ID</label>
+<input class="w-full bg-surface-container-low border border-border rounded-lg p-3 font-body text-body text-secondary cursor-not-allowed" disabled="" type="text" value="PRD-00142"/>
+</div>
+<div class="flex-1">
+<label class="block font-small text-small text-secondary mb-2">Product Type</label>
+<select class="w-full border border-border rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary bg-white">
+<option>Standard Product</option>
+<option>Combo/Meal</option>
+<option>Add-on Only</option>
+</select>
+</div>
+</div>
+</div>
+<div class="mb-6">
+<label class="block font-small text-small text-secondary mb-2">Category Assignment</label>
+<div class="flex items-center gap-2">
+<select class="flex-1 border border-border rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary bg-white">
+<option>Pizzas</option>
+<option>Starters</option>
+<option>Drinks</option>
+</select>
+<button class="p-3 border border-border rounded-lg hover:bg-surface-container text-secondary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div>
+<label class="block font-small text-small text-secondary mb-2">Public Product URL</label>
+<div class="flex items-center gap-2">
+<input class="flex-1 bg-surface-container-low border border-border rounded-lg p-3 font-small text-small text-secondary truncate" readonly="" type="text" value="yourplatform.com/restaurants/pizza-house/menu/margherita-pizza"/>
+<button class="p-3 border border-border rounded-lg hover:bg-surface-container text-secondary transition-colors" title="Copy URL">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Localization Card -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">translate</span>
+                                Content &amp; Localization
+                            </h3>
+<div class="flex bg-surface-container-low rounded-lg p-1 border border-border">
+<button class="px-4 py-1.5 rounded-md font-small text-small text-secondary hover:text-primary transition-colors">TR</button>
+<button class="px-4 py-1.5 rounded-md font-small text-small bg-white shadow-sm text-primary font-bold">EN</button>
+<button class="px-4 py-1.5 rounded-md font-small text-small text-secondary hover:text-primary transition-colors">AR</button>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block font-small text-small text-secondary mb-2">Display Name (EN)</label>
+<input class="w-full border border-border rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary" type="text" value="Margherita Pizza"/>
+</div>
+<div class="relative">
+<label class="block font-small text-small text-secondary mb-2">Short Description (EN)</label>
+<textarea class="w-full border border-primary rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary" rows="2">Classic tomato sauce, mozzarella and fresh basil</textarea>
+<div class="absolute right-3 top-10 text-primary-dark">
+<span class="material-symbols-outlined text-[16px]" title="Edited in this draft">edit_note</span>
+</div>
+<p class="text-right text-[12px] text-secondary mt-1">48/120 characters</p>
+</div>
+<div>
+<label class="block font-small text-small text-secondary mb-2">Ingredients List (EN)</label>
+<div class="border border-border rounded-lg p-3 flex flex-wrap gap-2 min-h-[48px] items-center bg-white">
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-small text-text-primary flex items-center gap-1">Tomato <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-danger">close</span></span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-small text-text-primary flex items-center gap-1">Mozzarella <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-danger">close</span></span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-small text-text-primary flex items-center gap-1">Basil <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-danger">close</span></span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-small text-text-primary flex items-center gap-1">Olive Oil <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-danger">close</span></span>
+<input class="border-none focus:ring-0 text-small p-1 flex-1 min-w-[120px]" placeholder="Add ingredient..." type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Pricing & Variants Card -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">payments</span>
+                            Pricing &amp; Variants
+                        </h3>
+<div class="mb-6 flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary border-border" name="price_model" type="radio"/>
+<span class="text-body font-body text-text-primary">Single Price</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary border-border" name="price_model" type="radio"/>
+<span class="text-body font-body text-secondary">Multiple Sizes/Variants</span>
+</label>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border mb-6">
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<label class="block font-small text-small text-secondary mb-2">Base Price (₺)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-secondary">₺</span>
+<input class="w-full border border-primary rounded-lg pl-8 p-3 font-body-bold text-body-bold text-text-primary focus:ring-2 focus:ring-primary focus:border-primary" type="number" value="280"/>
+</div>
+</div>
+<div class="flex-1">
+<label class="block font-small text-small text-secondary mb-2">Tax Rate</label>
+<select class="w-full border border-border rounded-lg p-3 font-body text-body text-text-primary focus:ring-2 focus:ring-primary focus:border-primary bg-white">
+<option>Standard (10%)</option>
+<option>Reduced (1%)</option>
+</select>
+</div>
+</div>
+<p class="text-[12px] text-primary-dark mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                                Price updated from ₺250 in this draft.
+                            </p>
+</div>
+<div>
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-body-bold text-body-bold text-text-primary">Variant Groups</h4>
+<button class="text-primary font-small text-small hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Group
+                                </button>
+</div>
+<div class="border border-border rounded-lg overflow-hidden">
+<div class="bg-surface-container px-4 py-2 border-b border-border flex justify-between items-center">
+<span class="font-body-bold text-small text-text-primary">Size</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] cursor-pointer hover:text-text-primary">edit</span>
+<span class="material-symbols-outlined text-secondary text-[18px] cursor-pointer hover:text-danger">delete</span>
+</div>
+</div>
+<div class="p-4 space-y-3 bg-white">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px] cursor-grab">drag_indicator</span>
+<span class="font-body text-body text-text-primary">Medium</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 rounded text-secondary uppercase font-bold">Default</span>
+</div>
+<span class="font-body text-body text-secondary">₺280</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px] cursor-grab">drag_indicator</span>
+<span class="font-body text-body text-text-primary">Large</span>
+</div>
+<span class="font-body text-body text-text-primary">+₺80</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Media Card -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">image</span>
+                            Media &amp; Presentation
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-border group">
+<img alt="Margherita Pizza" class="w-full h-full object-cover" data-alt="A high quality, appetizing photo of a Margherita Pizza on a wooden peel, shot from slightly above with warm, inviting lighting. The crust is perfectly blistered, cheese melted and bubbly, with fresh bright green basil leaves. Professional food photography style, shallow depth of field focusing on the center." src="https://lh3.googleusercontent.com/aida/AP1WRLuVvouHddK8OsArkHvrx4azDyZtqugGLhZLjYxY61w8ZwXMaom7oNrhpgfP2G1JXSrVcFIpmAG8-9LOfwY4seuiGOf3QbmG0AQsQHdChAbl2sNr6bsoq7f3NH-MOwmsIhvJ7-JnGC1ZDjD4o0ROlPpCbYKG_AGwzxC_W7M9_KIHa9NwMIaVPMxK6P2kfyFPIJHbAOceWPkmNXuwISYO8rCTxfievdyGv5X5PZ4klOY4SlzWRH6-GVW3nQ"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+<button class="bg-white text-text-primary px-4 py-2 rounded-lg font-button text-small flex items-center gap-2 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">crop</span> Crop
+                                    </button>
+<button class="bg-white text-text-primary px-4 py-2 rounded-lg font-button text-small flex items-center gap-2 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">upload</span> Replace
+                                    </button>
+</div>
+<div class="absolute top-2 left-2 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-text-primary uppercase border border-border/50">Primary Image</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center text-center h-32 hover:bg-surface-container-low hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary mb-2 text-[24px]">add_photo_alternate</span>
+<p class="font-small text-small text-secondary">Click to add gallery image<br/>or drag and drop</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border mt-auto">
+<h4 class="font-body-bold text-small text-text-primary mb-2">Image Guidelines</h4>
+<ul class="text-[12px] text-secondary space-y-1 list-disc list-inside">
+<li>High resolution (min 1080x1080px)</li>
+<li>Aspect ratio 4:3 or 1:1 recommended</li>
+<li>Max file size 5MB (JPG, PNG, WebP)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Settings & Labels Card -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">settings</span>
+                            Settings &amp; Labels
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+<div>
+<h4 class="font-body-bold text-small text-text-primary mb-4">Availability</h4>
+<div class="flex flex-col gap-3">
+<label class="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-surface-container-low cursor-pointer">
+<div>
+<span class="block font-body text-body text-text-primary">Available for Order</span>
+<span class="block text-[12px] text-secondary">Customers can add to cart</span>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-primary appearance-none cursor-pointer translate-x-5" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary cursor-pointer" for="toggle1"></label>
+</div>
+</label>
+<label class="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-surface-container-low cursor-pointer">
+<div>
+<span class="block font-body text-body text-text-primary">Visible on Menu</span>
+<span class="block text-[12px] text-secondary">Show in digital catalog</span>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-primary appearance-none cursor-pointer translate-x-5" id="toggle2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary cursor-pointer" for="toggle2"></label>
+</div>
+</label>
+</div>
+</div>
+<div>
+<h4 class="font-body-bold text-small text-text-primary mb-4">Dietary Labels</h4>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full border-2 border-success bg-success/10 text-success font-small text-small flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span> Vegetarian
+                                    </button>
+<button class="px-3 py-1.5 rounded-full border border-border text-secondary font-small text-small hover:bg-surface-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Vegan
+                                    </button>
+<button class="px-3 py-1.5 rounded-full border border-border text-secondary font-small text-small hover:bg-surface-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Gluten-Free
+                                    </button>
+<button class="px-3 py-1.5 rounded-full border border-border bg-surface-container-high text-surface-variant font-small text-small cursor-not-allowed flex items-center gap-1 opacity-50" title="Not Applicable">
+<span class="material-symbols-outlined text-[16px]">block</span> Spicy
+                                    </button>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-4">
+<h4 class="font-body-bold text-small text-text-primary">Allergen Information</h4>
+<span class="bg-error/10 text-error text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wide border border-error/20">Incomplete</span>
+</div>
+<div class="border border-border rounded-lg p-4 bg-surface-container-low flex items-start gap-3">
+<span class="material-symbols-outlined text-warning text-[20px] text-tertiary">warning</span>
+<div>
+<p class="font-small text-small text-text-primary mb-1">Please specify allergens before final publishing to comply with local regulations.</p>
+<button class="text-primary font-small text-small hover:underline mt-1 font-bold">Manage Allergens</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Preview -->
+<div class="flex flex-col gap-lg">
+<!-- Sticky Summary Container -->
+<div class="sticky top-4 flex flex-col gap-lg">
+<!-- Changes Summary Card -->
+<div class="bg-surface border border-border rounded-xl overflow-hidden shadow-sm">
+<div class="bg-primary-container p-4 border-b border-primary-container/20">
+<h3 class="font-h3 text-h3 text-on-primary-container flex items-center gap-2">
+<span class="material-symbols-outlined">edit_document</span>
+                                    Changes in This Draft
+                                </h3>
+</div>
+<div class="p-4 bg-white">
+<ul class="space-y-3">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">payments</span>
+<div>
+<p class="font-small text-small text-text-primary font-bold">Price Update</p>
+<p class="text-[12px] text-secondary">Base price changed from ₺250 to ₺280</p>
+</div>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">text_fields</span>
+<div>
+<p class="font-small text-small text-text-primary font-bold">Content Update</p>
+<p class="text-[12px] text-secondary">Short description modified (EN)</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Product Preview (Mobile Frame) -->
+<div class="bg-surface border border-border rounded-xl p-4 shadow-sm hidden md:block">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-body-bold text-small text-text-primary">Live Preview</h3>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-primary bg-primary/10"><span class="material-symbols-outlined text-[16px]">smartphone</span></button>
+<button class="p-1 rounded hover:bg-surface-container text-secondary"><span class="material-symbols-outlined text-[16px]">desktop_mac</span></button>
+</div>
+</div>
+<!-- Phone Mockup -->
+<div class="w-full max-w-[280px] mx-auto border-[6px] border-inverse-surface rounded-[2rem] overflow-hidden bg-white shadow-inner relative aspect-[9/19]">
+<!-- Top Bar -->
+<div class="absolute top-0 w-full h-6 bg-white/80 backdrop-blur z-10 flex justify-center pt-1">
+<div class="w-16 h-4 bg-inverse-surface rounded-b-xl"></div>
+</div>
+<!-- Content -->
+<div class="h-full overflow-y-auto pb-6">
+<img class="w-full aspect-square object-cover" data-alt="Margherita Pizza placeholder for mobile preview" src="https://lh3.googleusercontent.com/aida/AP1WRLuVvouHddK8OsArkHvrx4azDyZtqugGLhZLjYxY61w8ZwXMaom7oNrhpgfP2G1JXSrVcFIpmAG8-9LOfwY4seuiGOf3QbmG0AQsQHdChAbl2sNr6bsoq7f3NH-MOwmsIhvJ7-JnGC1ZDjD4o0ROlPpCbYKG_AGwzxC_W7M9_KIHa9NwMIaVPMxK6P2kfyFPIJHbAOceWPkmNXuwISYO8rCTxfievdyGv5X5PZ4klOY4SlzWRH6-GVW3nQ"/>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-h3 text-[18px] font-bold text-text-primary leading-tight">Margherita Pizza</h4>
+<span class="font-body-bold text-[16px] text-primary whitespace-nowrap ml-2">₺280</span>
+</div>
+<p class="text-[12px] text-secondary mb-3 leading-snug">Classic tomato sauce, mozzarella and fresh basil</p>
+<div class="flex gap-2 mb-4">
+<span class="bg-surface-container-highest px-2 py-0.5 rounded text-[10px] text-text-primary font-bold">VEGETARIAN</span>
+</div>
+<div class="border-t border-border pt-3">
+<p class="font-body-bold text-[14px] text-text-primary mb-2">Size</p>
+<div class="border border-primary bg-primary/5 rounded-lg p-2 mb-2 flex justify-between items-center">
+<span class="text-[12px] text-primary font-bold">Medium</span>
+</div>
+<div class="border border-border rounded-lg p-2 flex justify-between items-center">
+<span class="text-[12px] text-secondary">Large</span>
+<span class="text-[12px] text-secondary">+₺80</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action -->
+<div class="absolute bottom-0 w-full bg-white border-t border-border p-3">
+<button class="w-full bg-primary text-white text-[14px] font-bold py-2 rounded-lg">Add to Order</button>
+</div>
+</div>
+</div>
+<!-- Disclaimer -->
+<p class="text-center text-[11px] text-secondary">Illustrative Admin Data</p>
+</div>
+</div>
+</div>
+<div class="h-20"></div> <!-- Bottom padding -->
+</div>
+</main>
+<style>
+        /* Simple toggle switch CSS for standard HTML checkbox */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--color-primary, #b51d00);
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--color-primary, #b51d00);
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 1;
+            border-color: #E5E7EB;
+            transition: all 0.3s;
+        }
+        .toggle-label {
+            width: 2.5rem;
+            background-color: #E5E7EB;
+            transition: all 0.3s;
+        }
+    </style>
+</body></html>

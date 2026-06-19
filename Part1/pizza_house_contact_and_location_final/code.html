@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Visit Pizza House - Restaurant Contact and Location</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fb",
+                        "surface-warm": "#FFF1EB",
+                        "primary-dark": "#C9341A",
+                        "on-primary": "#ffffff",
+                        "text-secondary": "#667085",
+                        "surface-tint": "#b91e00",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "secondary": "#575e70",
+                        "outline-variant": "#e5beb6",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "on-primary-fixed": "#3e0400",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary-container": "#5c6274",
+                        "background": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-surface": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "primary": "#b51d00",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "success": "#16A34A",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#946f00",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-container": "#db3516",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "text-primary": "#111827",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "canvas": "#FFFFFF",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-fixed": "#dce2f7",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-fixed": "#ffdf9e",
+                        "inverse-primary": "#ffb4a5",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary": "#ffffff",
+                        "danger": "#DC2626",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#906f69",
+                        "on-secondary-fixed-variant": "#404758",
+                        "border": "#E5E7EB",
+                        "on-secondary-fixed": "#141b2b",
+                        "secondary-container": "#d9dff5",
+                        "on-surface-variant": "#5c403a",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#261a00",
+                        "tertiary": "#765700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-shell-max-width": "640px",
+                        "xl": "32px",
+                        "container-max-width": "1280px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "xxl": "48px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-bold": ["Inter"],
+                        "button": ["Inter"],
+                        "small": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-text-primary font-body antialiased min-h-screen pb-safe">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky z-50 shadow-sm bg-surface dark:bg-on-secondary-fixed border-b border-border dark:border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full max-w-mobile-shell-max-width mx-auto">
+<button aria-label="Go back" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors text-text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-h2-mobile text-h2-mobile font-extrabold text-primary dark:text-primary-fixed-dim">Sizzling Slices</h1>
+<div class="flex items-center gap-xs">
+<button aria-label="Language selector" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
+</button>
+<button aria-label="Cart" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="w-full max-w-mobile-shell-max-width mx-auto px-margin-mobile pt-lg pb-xxl flex flex-col gap-xl">
+<!-- Hero Section -->
+<section class="flex flex-col gap-md">
+<div class="flex items-start justify-between gap-md">
+<div class="flex flex-col gap-base">
+<h2 class="font-h1-mobile text-h1-mobile text-text-primary">Pizza House</h2>
+<div class="flex items-center gap-sm">
+<span class="inline-flex items-center gap-base text-success font-body-bold text-small">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+                            Open Now
+                        </span>
+<span class="text-text-secondary text-small">• Closes 23:30</span>
+</div>
+<p class="text-text-secondary text-small font-small">Kadıköy, Istanbul, Türkiye</p>
+</div>
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border border-border">
+<img alt="Restaurant Exterior" class="w-full h-full object-cover" data-alt="A modern pizza restaurant exterior with vibrant red neon signs and a clean, inviting glass storefront during the daytime. The lighting is bright and cheerful, highlighting a fast-food environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrvnEwu7huntlwws_-4wQPbOOZ3cFbbk0nbXSPQd7y-Qg7vqs_9oox2ppT5vPn7zr_qbyrZvh1nRr834nk5SpijcA0pLCwpqTgDX4XUhR0oL2KM9j_Iu9BFN7g7HyVE09wIh0kgl3aat6LlT4kzOLqgwPf8khoZhzd1VRfZY0T3pycx0txjeP7onMeJwspn68PxLPJVSJheuvVcwThYy-emo6DFV2YM4D6vhYWr2CPA_ZMnFqD_BrtIeT5RmgrNNPOdIaGkaZ8LEc"/>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="flex flex-col gap-md">
+<div class="w-full h-[240px] rounded-xl overflow-hidden relative border border-border shadow-sm">
+<img alt="Map Location" class="w-full h-full object-cover" data-alt="A detailed, bright map view showing city streets in Istanbul with a prominent red-orange map pin indicating the location of Pizza House in Kadikoy." data-location="Istanbul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_P6UCdaOk9zDNJq3kSPij69P_ZeXdQcPsE-H0uNXKGS5pbz9loR8UBy46se7c8jQDsOr7fttii0VTvffYm3K-JnHYKz1RS2xZZwzZ3aSRm1GJdpGpFBJs90d-80RuhfgiGecFtTK_sP_5ziDQz5VWuXMZIMnXScXhPnEvAoEA8c2AEppvVEjmWlR7F4Fo0gRlaGyxaj99iGysMAvAQDgKg0xJ_zVZF9XS2E0ehHEPGqurGTITdp48TvrACZsqgenJJun4EWqL2Ho"/>
+<!-- Info Card Overlay -->
+<div class="absolute bottom-sm left-sm right-sm bg-canvas rounded-lg p-sm shadow-md flex items-center justify-between border border-border">
+<div class="flex flex-col">
+<span class="font-body-bold text-body-bold text-text-primary">Pizza House</span>
+<span class="font-small text-small text-text-secondary">Kadıköy, Istanbul</span>
+</div>
+<button aria-label="Directions" class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions</span>
+</button>
+</div>
+</div>
+<!-- Primary Actions Row -->
+<div class="flex flex-col gap-sm mt-xs">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg flex items-center justify-center gap-xs shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">map</span>
+                    Open in Maps
+                </button>
+<div class="grid grid-cols-2 gap-sm">
+<button class="w-full bg-text-primary text-canvas font-button text-button py-sm rounded-lg flex items-center justify-center gap-xs hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">call</span>
+                        Call
+                    </button>
+<button class="w-full bg-canvas text-text-primary border border-border font-button text-button py-sm rounded-lg flex items-center justify-center gap-xs hover:bg-surface transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">forum</span>
+                        WhatsApp
+                    </button>
+</div>
+</div>
+</section>
+<!-- Address Detail Card -->
+<section class="bg-canvas border border-border rounded-xl p-md flex flex-col gap-sm shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                Address
+            </h3>
+<p class="font-body text-body text-text-secondary">
+                Osmanağa, Muvakkithane Cd. No: 12<br/>
+                34714 Kadıköy/İstanbul<br/>
+                Türkiye
+            </p>
+<div class="flex items-center gap-sm mt-xs pt-sm border-t border-border">
+<button class="flex items-center gap-xs text-primary font-button text-small hover:underline">
+<span class="material-symbols-outlined text-[18px]">content_copy</span> Copy
+                </button>
+<span class="text-border">|</span>
+<button class="flex items-center gap-xs text-primary font-button text-small hover:underline">
+<span class="material-symbols-outlined text-[18px]">share</span> Share
+                </button>
+</div>
+</section>
+<!-- Opening Hours -->
+<section class="bg-canvas border border-border rounded-xl p-md flex flex-col gap-sm shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">schedule</span>
+                Opening Hours
+            </h3>
+<div class="flex flex-col">
+<div class="flex justify-between items-center py-xs border-l-4 border-primary pl-sm bg-surface-warm rounded-r-lg mb-xs">
+<div class="flex items-center gap-xs">
+<span class="font-body-bold text-body text-text-primary">Sunday</span>
+<span class="px-2 py-0.5 bg-primary text-on-primary rounded text-[10px] font-bold uppercase tracking-wider">Today</span>
+</div>
+<span class="font-body-bold text-body text-text-primary">12:00 - 23:00</span>
+</div>
+<div class="flex justify-between items-center py-xs pl-md border-b border-border">
+<span class="font-body text-body text-text-secondary">Mon - Thu</span>
+<span class="font-body text-body text-text-secondary">11:00 - 23:30</span>
+</div>
+<div class="flex justify-between items-center py-xs pl-md pt-sm">
+<span class="font-body text-body text-text-secondary">Fri - Sat</span>
+<span class="font-body text-body text-text-secondary">11:00 - 00:30</span>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="flex flex-col gap-sm">
+<h3 class="font-h3 text-h3 text-text-primary">Services</h3>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-canvas border border-border rounded-lg p-sm flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-small text-text-primary">Dine-in</span>
+<span class="text-[12px] text-success font-medium">Available</span>
+</div>
+</div>
+<div class="bg-canvas border border-border rounded-lg p-sm flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[20px]">takeout_dining</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-small text-text-primary">Takeaway</span>
+<span class="text-[12px] text-success font-medium">Available</span>
+</div>
+</div>
+<div class="bg-canvas border border-border rounded-lg p-sm flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-small text-text-primary">Online Order</span>
+<span class="text-[12px] text-success font-medium">Available</span>
+</div>
+</div>
+<div class="bg-canvas border border-border rounded-lg p-sm flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[20px]">two_wheeler</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-small text-text-primary">Delivery</span>
+<span class="text-[12px] text-text-secondary font-medium">Check Online</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-mobile-shell-max-width flex justify-around items-center h-20 bg-surface dark:bg-on-secondary-fixed px-4 pb-safe z-50 border-t border-border dark:border-outline-variant shadow-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-secondary-fixed-dim hover:bg-surface-container-low transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-small text-small mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-secondary-fixed-dim hover:bg-surface-container-low transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">restaurant_menu</span>
+<span class="font-small text-small mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-secondary-fixed-dim hover:bg-surface-container-low transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">call</span>
+<span class="font-small text-small mt-1">Call</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold hover:bg-surface-container-low transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-small text-small mt-1">Map</span>
+</a>
+</nav>
+<!-- Desktop Nav (Hidden on mobile) -->
+<nav class="hidden md:flex fixed top-0 w-full h-16 bg-surface border-b border-border z-50 justify-center items-center gap-xl">
+<a class="text-text-secondary hover:text-primary transition-colors font-button text-button" href="#">Home</a>
+<a class="text-text-secondary hover:text-primary transition-colors font-button text-button" href="#">Menu</a>
+<a class="text-text-secondary hover:text-primary transition-colors font-button text-button" href="#">Call</a>
+<a class="text-primary font-bold transition-colors font-button text-button border-b-2 border-primary" href="#">Map</a>
+</nav>
+</body></html>

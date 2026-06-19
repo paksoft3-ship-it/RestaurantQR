@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant General Information Editor - DineFlow Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-fixed": "#141b2b",
+                        "outline-variant": "#e5beb6",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#ffb4a5",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "canvas": "#FFFFFF",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "secondary": "#575e70",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#404758",
+                        "secondary-container": "#d9dff5",
+                        "surface-variant": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "danger": "#DC2626",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#906f69",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "border": "#E5E7EB",
+                        "tertiary": "#765700",
+                        "success": "#16A34A",
+                        "text-primary": "#111827",
+                        "on-primary-fixed": "#3e0400",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#5c6274",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "error-container": "#ffdad6",
+                        "surface-warm": "#FFF1EB",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#db3516",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "primary-dark": "#C9341A",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#dce2f7",
+                        "on-surface-variant": "#5c403a",
+                        "surface-container": "#eceef0",
+                        "on-error-container": "#93000a",
+                        "primary": "#b51d00",
+                        "surface-tint": "#b91e00",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#946f00",
+                        "text-secondary": "#667085"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "mobile-shell-max-width": "640px"
+                    },
+                    "fontFamily": {
+                        "body-bold": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "small": ["Inter"],
+                        "body": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "button": ["Inter"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for better appearance */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d8dadc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c0c6db;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased flex h-screen overflow-hidden">
+<!-- JSON Component: SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[280px] bg-[#111827] text-white flex flex-col h-screen py-6 shadow-md z-50 border-r border-outline-variant/20 transition-all duration-200 ease-in-out">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">D</div>
+<div>
+<h1 class="font-h3 text-h3 font-medium text-white tracking-tight">DineFlow</h1>
+<p class="font-small text-small text-gray-400">Admin Portal</p>
+</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-button text-button py-2.5 rounded-lg flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Restaurant
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-bold text-body-bold text-[14px]">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#F04424]/10 text-[#F04424] rounded-lg mx-2" href="#">
+<span class="material-symbols-outlined fill text-[#F04424]">restaurant</span>
+<span class="font-body-bold text-body-bold text-[14px]">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-body-bold text-body-bold text-[14px]">Menus</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-body-bold text-body-bold text-[14px]">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-bold text-body-bold text-[14px]">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-bold text-body-bold text-[14px]">Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-4 px-2 space-y-1 border-t border-gray-800">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-bold text-body-bold text-[14px]">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors mx-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-bold text-body-bold text-[14px]">Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="ml-[280px] flex-1 flex flex-col h-screen overflow-hidden">
+<!-- JSON Component: TopNavBar -->
+<header class="sticky top-0 z-40 w-full bg-surface border-b border-border flex items-center justify-between px-8 h-16 shrink-0">
+<div class="flex-1 flex items-center">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg font-small text-small text-text-primary placeholder-text-secondary" placeholder="Search restaurants, menus, users..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden border border-border cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an administrative user, clean bright lighting, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm1KvoGmUSapmexkCqUKy_pQy_LXXdzBOjaGNGt-bPsrr0eX124YoqXoCW_W1fHrNNrkTuP34m9elvtLpMZ38lFsdQbOw7DpY3pdKuuRkG6gd9_jqahUh_Y2umGlu-hXF6C9ZMhyeyKhaUwXTupd_WO6Vcr63H21ituA2GXDeBsFCyIR_uN8Ah1H-teZRQVQZsnAfvLu83qRZxByrMNqQIKt6VEE4NjQKDgXA1JrnA8rRJWvNlosCsILbaY0RAkrKaFBgr8R55_vg"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto bg-[#F8FAFC]">
+<!-- Context Header -->
+<div class="bg-canvas border-b border-border px-8 py-6 sticky top-0 z-30">
+<div class="flex items-start justify-between max-w-container-max-width mx-auto">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-xl border border-border bg-surface-container-low flex items-center justify-center overflow-hidden shadow-sm">
+<span class="material-symbols-outlined text-[32px] text-primary">local_pizza</span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="font-h2 text-h2 text-text-primary">Pizza House</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-success/10 text-success font-body-bold text-[12px] border border-success/20">Published</span>
+<span class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed-dim/20 text-tertiary font-body-bold text-[12px] border border-tertiary-fixed-dim/40">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+                                    Unsaved Changes
+                                </span>
+</div>
+<p class="font-small text-small text-text-secondary">ID: RST-00024 • Last updated 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg font-button text-button text-text-secondary border border-border hover:bg-surface-container-low transition-colors bg-canvas">
+                            Cancel
+                        </button>
+<button class="px-4 py-2 rounded-lg font-button text-button text-primary border-2 border-primary hover:bg-primary/5 transition-colors bg-canvas flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                            Preview Changes
+                        </button>
+<button class="px-5 py-2 rounded-lg font-button text-button text-white bg-[#F04424] hover:bg-primary-dark transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                            Save Changes
+                        </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="max-w-container-max-width mx-auto mt-6">
+<div class="flex space-x-1 overflow-x-auto no-scrollbar border-b border-border pb-[1px]">
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Overview</button>
+<button class="px-4 py-2 font-body-bold text-small text-[#F04424] border-b-2 border-[#F04424] whitespace-nowrap">General Information</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Branding</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Contact &amp; Location</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Page Builder</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Menu</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Customer Actions</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">QR Codes</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">NFC Products</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Campaigns</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Analytics</button>
+<button class="px-4 py-2 font-body-bold text-small text-text-secondary hover:text-text-primary whitespace-nowrap">Activity</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max-width mx-auto px-8 py-8 flex gap-8">
+<!-- Center Column: Editor Forms -->
+<div class="flex-1 space-y-6">
+<!-- Section 1: Restaurant Identity -->
+<section class="bg-canvas border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-5 border-b border-border pb-3">Restaurant Identity</h3>
+<div class="grid grid-cols-2 gap-5 mb-5">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Restaurant Name <span class="text-danger">*</span></label>
+<input class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body text-body text-text-primary" type="text" value="Pizza House"/>
+<p class="font-small text-[12px] text-text-secondary mt-1">Main name used across the platform.</p>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Display Name</label>
+<input class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body text-body text-text-primary" type="text" value="Pizza House Downtown"/>
+<p class="font-small text-[12px] text-text-secondary mt-1">Optional override for customer-facing views.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-5 mb-5">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Legal Business Name</label>
+<input class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body text-body text-text-primary" type="text" value="Pizza House LLC"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-secondary mb-1.5">Internal ID (Read-only)</label>
+<input class="w-full p-3 border border-surface-variant bg-surface-container-low rounded-lg font-body-bold text-body text-text-secondary cursor-not-allowed" disabled="" type="text" value="RST-00024"/>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Tagline / Slogan</label>
+<input class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body text-body text-text-primary" type="text" value="Authentic Neapolitan Pizza since 2010"/>
+</div>
+</section>
+<!-- Section 2: Restaurant Description -->
+<section class="bg-canvas border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-5 border-b border-border pb-3">Restaurant Description</h3>
+<div class="mb-5">
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Short Description</label>
+<textarea class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body text-body text-text-primary resize-none" rows="2">Wood-fired artisanal pizzas made with imported Italian ingredients.</textarea>
+<p class="font-small text-[12px] text-text-secondary mt-1 text-right">72 / 150 characters</p>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">Full Description</label>
+<div class="border border-border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary">
+<div class="bg-surface-container-low border-b border-border p-2 flex gap-2">
+<button class="p-1 rounded hover:bg-surface text-text-secondary"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1 rounded hover:bg-surface text-text-secondary"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<div class="w-px bg-border my-1 mx-1"></div>
+<button class="p-1 rounded hover:bg-surface text-text-secondary"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+<button class="p-1 rounded hover:bg-surface text-text-secondary"><span class="material-symbols-outlined text-[18px]">link</span></button>
+</div>
+<textarea class="w-full p-3 border-none focus:ring-0 font-body text-body text-text-primary resize-y" rows="5">Welcome to Pizza House, where we bring the authentic taste of Naples right to your neighborhood. Our dough is fermented for 48 hours and cooked in our custom-built wood-fired oven at 900 degrees. We source our tomatoes directly from San Marzano and use fresh, locally produced mozzarella.</textarea>
+</div>
+</div>
+</section>
+<!-- Section 3: Public URL -->
+<section class="bg-canvas border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-5 border-b border-border pb-3">Public URL</h3>
+<div class="bg-tertiary-fixed-dim/10 border border-tertiary-fixed-dim/30 rounded-lg p-4 mb-5 flex gap-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5">warning</span>
+<div>
+<h4 class="font-body-bold text-small text-on-surface">Changing URL impacts QR Codes</h4>
+<p class="font-small text-[13px] text-text-secondary mt-1">This restaurant is currently Published. Changing the URL slug will break any existing physical QR codes pointing to the old address. A redirect will not be automatically created.</p>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-1.5">URL Slug</label>
+<div class="flex items-center">
+<span class="bg-surface-container-low border border-r-0 border-border rounded-l-lg p-3 text-text-secondary font-small text-small whitespace-nowrap">dineflow.com/restaurants/</span>
+<input class="w-full p-3 border border-border rounded-r-lg focus:ring-2 focus:ring-primary/20 focus:border-primary font-body-bold text-body text-text-primary" type="text" value="pizza-house"/>
+</div>
+<div class="flex justify-between items-center mt-2">
+<a class="font-small text-[13px] text-primary hover:underline flex items-center gap-1" href="#">
+                                    Preview Current URL <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<span class="font-small text-[12px] text-success flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> URL is available
+                                </span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Context Panels -->
+<div class="w-[340px] shrink-0 space-y-6">
+<div class="sticky top-[104px] space-y-6">
+<!-- Summary Card -->
+<div class="bg-canvas border border-border rounded-xl p-5 shadow-sm">
+<h3 class="font-h3 text-[16px] text-text-primary mb-4 border-b border-border pb-2">Restaurant Summary</h3>
+<ul class="space-y-3 font-small text-small">
+<li class="flex justify-between">
+<span class="text-text-secondary">Status</span>
+<span class="font-body-bold text-success flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Published
+                                    </span>
+</li>
+<li class="flex justify-between">
+<span class="text-text-secondary">Created</span>
+<span class="text-text-primary">Oct 12, 2023</span>
+</li>
+<li class="flex justify-between">
+<span class="text-text-secondary">Last Modified</span>
+<span class="text-text-primary">Today, 10:42 AM</span>
+</li>
+<li class="flex justify-between">
+<span class="text-text-secondary">Owner</span>
+<span class="text-text-primary">m.rossi@pizzahouse.com</span>
+</li>
+<li class="flex justify-between">
+<span class="text-text-secondary">Plan Level</span>
+<span class="text-text-primary font-body-bold text-primary">Pro Tier</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MenuJet - QR &amp; NFC Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#fffbff",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#fffbff",
+                      "border": "#E5E7EB",
+                      "surface-container-high": "#e6e8ea",
+                      "inverse-primary": "#ffb4a5",
+                      "on-tertiary-fixed": "#261a00",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#b91e00",
+                      "primary-fixed": "#ffdad3",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-warm": "#FFF1EB",
+                      "surface-dim": "#d8dadc",
+                      "outline-variant": "#e5beb6",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-surface-variant": "#5c403a",
+                      "text-secondary": "#667085",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#2d3133",
+                      "primary": "#b51d00",
+                      "on-background": "#191c1e",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#dce2f7",
+                      "on-secondary-fixed": "#141b2b",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "surface": "#f7f9fb",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "secondary": "#575e70",
+                      "success": "#16A34A",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "secondary-container": "#d9dff5",
+                      "surface-variant": "#e0e3e5",
+                      "canvas": "#FFFFFF",
+                      "tertiary-container": "#946f00",
+                      "error-container": "#ffdad6",
+                      "danger": "#DC2626",
+                      "tertiary-fixed": "#ffdf9e",
+                      "background": "#f7f9fb",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary": "#765700",
+                      "on-surface": "#191c1e",
+                      "surface-container": "#eceef0",
+                      "on-primary-fixed": "#3e0400",
+                      "primary-container": "#db3516",
+                      "outline": "#906f69",
+                      "on-secondary-container": "#5c6274",
+                      "text-primary": "#111827",
+                      "surface-bright": "#f7f9fb",
+                      "primary-dark": "#C9341A"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "xs": "8px",
+                      "container-max-width": "1280px",
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "mobile-shell-max-width": "640px"
+              },
+              "fontFamily": {
+                      "button": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "small": [
+                              "Inter"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-body text-text-primary antialiased selection:bg-primary/20 selection:text-primary">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-canvas/90 dark:bg-inverse-surface/90 backdrop-blur-md text-primary dark:text-primary-fixed font-button text-button fixed top-0 w-full z-50 border-b border-border dark:border-outline-variant shadow-sm transition-transform active:scale-95">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center px-lg h-20">
+<!-- Brand -->
+<a class="font-h2 text-h2 font-extrabold text-primary dark:text-primary-fixed flex items-center gap-xs" href="/">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" data-weight="fill">restaurant_menu</span>
+                MenuJet
+            </a>
+<!-- Nav Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-xl">
+<a class="text-text-secondary dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">How It Works</a>
+<a class="text-text-secondary dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Features</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Products</a>
+<a class="text-text-secondary dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Examples</a>
+<a class="text-text-secondary dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Packages</a>
+<a class="text-text-secondary dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">FAQ</a>
+</nav>
+<!-- Actions -->
+<div class="hidden md:flex items-center gap-md">
+<a class="text-text-secondary hover:text-primary font-button text-button transition-colors" href="#demo">View Demo</a>
+<a class="bg-primary text-on-primary px-lg py-xs rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm" href="#quote">Request a Quote</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button aria-label="Toggle Menu" class="md:hidden text-text-primary p-xs">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative bg-canvas overflow-hidden py-xxl border-b border-border">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg grid grid-cols-1 lg:grid-cols-2 gap-xxl items-center">
+<div class="z-10">
+<div class="inline-flex items-center gap-xs px-md py-base bg-surface-container rounded-full mb-lg border border-border">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="nfc">nfc</span>
+<span class="font-body-bold text-small text-text-primary">QR &amp; NFC Hardware</span>
+</div>
+<h1 class="font-display text-display text-text-primary mb-md">
+                        Put Your Restaurant Page on Every Table, Counter and Customer Touchpoint
+                    </h1>
+<p class="font-body text-body text-text-secondary mb-xl max-w-xl">
+                        Seamlessly bridge the physical and digital dining experience. High-quality, brandable NFC and QR products that connect your hungry customers instantly to your MenuJet page.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-md">
+<a class="bg-primary text-on-primary px-xl py-sm rounded-lg font-button text-button text-center hover:bg-primary-dark transition-colors shadow-sm inline-flex items-center justify-center gap-xs" href="#quote">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+                            Request a Hardware Quote
+                        </a>
+<a class="bg-surface text-text-primary px-xl py-sm rounded-lg font-button text-button text-center border-2 border-border hover:border-primary hover:text-primary transition-colors inline-flex items-center justify-center gap-xs" href="#products">
+                            Explore Products
+                        </a>
+</div>
+</div>
+<div class="relative h-[400px] lg:h-[600px] w-full rounded-2xl overflow-hidden shadow-lg border border-border">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A high-quality, professional product photography composition showing a modern restaurant setting. The scene features a sleek wooden dining table with a beautifully designed QR code table tent and an NFC acrylic table stand. In the foreground, a branded NFC business card for 'Pizza House' rests next to a fresh cup of coffee. The lighting is bright, natural, and inviting, creating a clean, high-contrast, modern light-mode aesthetic with sharp focus on the tech hardware. The brand colors highlight crisp whites, deep blacks, and subtle warm red accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUqAukWZfJiT5hsaeNnMLXfGjPTaxX-X7pdZqqaZJgb74vSXabpPLRYdaR6n12Wz8ju__onGvaTK7-nQORRaTFRd9nclqf8lzgYo5IGR2TtoibZAnflUTwGfCNtrP7ImIkPwZzmP4ESNB3LK6oqwVJutQvfMyixVilDD4bs0rlQx0o3djRaI-2lFNcnrfYn32uecmSMSulE-IoSVi0fyYc7GoXdVOUZZIKNfLns4hgw1lacikxqZFfmorpOuTmSv52tu7bc2X9MOs"/>
+<!-- Gradient overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-text-primary/60 to-transparent flex items-end p-xl">
+<div class="glass-panel p-md rounded-xl inline-flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="tap_and_play">tap_and_play</span>
+</div>
+<div>
+<p class="font-body-bold text-body text-text-primary">Instant Access</p>
+<p class="font-small text-small text-text-secondary">No app required.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Nav (Sticky under header) -->
+<div class="sticky top-20 z-40 bg-canvas/90 backdrop-blur-md border-b border-border py-md" id="products">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg overflow-x-auto hide-scrollbar">
+<div class="flex items-center gap-sm min-w-max">
+<button class="px-md py-xs rounded-full bg-primary text-on-primary font-body-bold text-small shadow-sm transition-colors">All Products</button>
+<button class="px-md py-xs rounded-full bg-surface text-text-secondary border border-border hover:border-primary hover:text-primary font-body-bold text-small transition-colors">Table Products</button>
+<button class="px-md py-xs rounded-full bg-surface text-text-secondary border border-border hover:border-primary hover:text-primary font-body-bold text-small transition-colors">Cards &amp; Badges</button>
+<button class="px-md py-xs rounded-full bg-surface text-text-secondary border border-border hover:border-primary hover:text-primary font-body-bold text-small transition-colors">Stickers &amp; Decals</button>
+<button class="px-md py-xs rounded-full bg-surface text-text-secondary border border-border hover:border-primary hover:text-primary font-body-bold text-small transition-colors">Counter Displays</button>
+</div>
+</div>
+</div>
+<!-- Featured Product Rows -->
+<section class="py-xxl bg-surface">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg space-y-xxl">
+<!-- Row 1: Table Tent -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center bg-canvas rounded-2xl border border-border overflow-hidden shadow-sm">
+<div class="h-[300px] lg:h-[500px] w-full relative">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A close-up, high-resolution product shot of a premium, double-sided acrylic table tent sitting on a polished restaurant table. The table tent features a scannable QR code and bold 'Scan for Menu' text branded in a modern red and dark navy color scheme. The background is softly blurred showing a busy, well-lit modern cafe interior. The lighting highlights the glossy finish of the acrylic material, emphasizing a professional, high-end restaurant tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-V1fiFKnUXcYf8BBLNmvYpTvrHaoskYXEM2p4WblQAuRr5No0kpVIevRKCTmK7KsxGsMYeGwcjQHBiCyrp6vD3Sxys9OJmTiSlJbsPX1122b9badYdhwN8MVRgJsteatN_Jdz24-fdc7p7nedbktT5TBwbm_u_6yQnPtznVqHInIig0RtNNp__TUMTX3gAbeNRSyfYrVTXYOJNxzC1iavi9W76DkMVFh4ebb0-o-TGxztj0kKxDcqqpb2KM1q5f49LYHgrao2ib0"/>
+</div>
+<div class="p-xl lg:p-xxl">
+<div class="inline-flex items-center gap-xs text-primary mb-md">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner" data-weight="fill">qr_code_scanner</span>
+<span class="font-body-bold text-small uppercase tracking-wider">Most Popular</span>
+</div>
+<h2 class="font-h2 text-h2 text-text-primary mb-md">Premium QR Table Tents</h2>
+<p class="font-body text-body text-text-secondary mb-xl">
+                            Durable, easy-to-clean acrylic table tents that sit perfectly alongside condiments. Designed for high visibility, encouraging customers to scan immediately upon seating.
+                        </p>
+<ul class="space-y-sm mb-xl">
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-success mt-1" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Double-sided high-contrast print</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-success mt-1" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Spill-resistant and shatterproof</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-success mt-1" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Custom branded with your logo</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-inverse-surface dark:bg-surface-dim text-on-primary dark:text-on-surface font-body text-body w-full flat no shadows max-w-container-max-width mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xxl">
+<div class="col-span-1 md:col-span-1">
+<h3 class="font-h3 text-h3 font-bold text-on-primary dark:text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" data-weight="fill">restaurant_menu</span>
+                MenuJet
+            </h3>
+<p class="text-surface-variant dark:text-on-surface-variant text-small opacity-80 mb-lg">
+                The fastest way to get your restaurant online, taking orders, and managing menus.
+            </p>
+<p class="text-surface-variant dark:text-on-surface-variant text-small opacity-80">
+                © 2024 MenuJet Systems. All rights reserved.
+            </p>
+</div>
+<div>
+<h4 class="font-body-bold text-body text-on-primary mb-md">Platform</h4>
+<ul class="space-y-sm">
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Features</a></li>
+<li><a class="text-primary dark:text-primary-container font-body-bold" href="#">Products</a></li>
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-body text-on-primary mb-md">Company</h4>
+<ul class="space-y-sm">
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">About</a></li>
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Contact</a></li>
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-body text-on-primary mb-md">Legal</h4>
+<ul class="space-y-sm">
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a></li>
+<li><a class="text-surface-variant dark:text-on-surface-variant hover:text-white dark:hover:text-black underline opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</footer>
+</body></html>

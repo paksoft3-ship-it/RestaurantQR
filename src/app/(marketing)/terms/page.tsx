@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+import { getLegalPage } from "@/content/legal";
+import { LegalPageLayout } from "@/components/legal/legal-page-layout";
+import { appConfig } from "@/lib/config/app-config";
+
+export const metadata: Metadata = {
+  title: `Terms of Service · ${appConfig.appName}`,
+  description:
+    "The rules and guidelines for using the YourPlatform website, a fully managed QR/NFC restaurant service.",
+};
+
+export default function TermsPage() {
+  const page = getLegalPage("terms");
+  return (
+    <LegalPageLayout
+      page={page}
+      intro="These terms govern use of the YourPlatform website. YourPlatform is a fully managed service — restaurant owners do not register, log in, or manage content themselves."
+    />
+  );
+}

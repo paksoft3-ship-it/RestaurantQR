@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Actions Editor - Pizza House | QR Platform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#5c403a",
+                        "text-secondary": "#667085",
+                        "inverse-primary": "#ffb4a5",
+                        "canvas": "#FFFFFF",
+                        "surface-warm": "#FFF1EB",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "primary": "#b51d00",
+                        "primary-container": "#db3516",
+                        "success": "#16A34A",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed": "#141b2b",
+                        "outline-variant": "#e5beb6",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary": "#575e70",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "secondary-container": "#d9dff5",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "border": "#E5E7EB",
+                        "primary-fixed": "#ffdad3",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "surface-tint": "#b91e00",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface-dim": "#d8dadc",
+                        "primary-dark": "#C9341A",
+                        "tertiary": "#765700",
+                        "surface": "#f7f9fb",
+                        "danger": "#DC2626",
+                        "outline": "#906f69",
+                        "on-secondary-container": "#5c6274",
+                        "on-primary-fixed": "#3e0400",
+                        "inverse-on-surface": "#eff1f3",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dce2f7",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eceef0",
+                        "text-primary": "#111827",
+                        "tertiary-container": "#946f00",
+                        "surface-bright": "#f7f9fb",
+                        "pizza-red": "#F04424"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "margin-mobile": "20px",
+                        "mobile-shell-max-width": "640px",
+                        "sm": "12px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "h2": ["Manrope"],
+                        "small": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-full flex overflow-hidden font-body text-body">
+<!-- SideNavBar (from JSON) -->
+<nav class="fixed left-0 top-0 h-full w-60 bg-inverse-surface dark:bg-inverse-surface border-r border-outline-variant flex flex-col z-50">
+<div class="p-lg">
+<h2 class="font-h2 text-h2 text-on-primary-container">Admin Console</h2>
+<p class="font-small text-small text-secondary-fixed-dim">Operational Control</p>
+</div>
+<div class="px-md pb-md">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:bg-primary-dark transition-colors duration-200 flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined">add</span> Add New Restaurant
+            </button>
+</div>
+<ul class="flex-1 overflow-y-auto mt-xs">
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary transition-colors duration-200" href="#"><span class="material-symbols-outlined">storefront</span> Restaurants</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">nfc</span> QR/NFC Tools</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">auto_stories</span> Publishing Queue</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">rate_review</span> Reviews</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">group</span> User Management</a></li>
+</ul>
+<ul class="mt-auto border-t border-outline-variant py-sm">
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">settings</span> Settings</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#"><span class="material-symbols-outlined">help</span> Support</a></li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-60 h-full overflow-hidden">
+<!-- TopNavBar (from JSON) -->
+<header class="sticky top-0 w-full z-40 bg-surface dark:bg-surface-container-low border-b border-outline-variant shadow-sm flex justify-between items-center px-lg py-sm">
+<div class="flex items-center gap-md">
+<span class="font-h2 text-h2 text-primary dark:text-primary-fixed-dim">QR Platform Admin</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="pl-10 pr-4 py-2 border border-border rounded-lg bg-canvas text-text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Search..." type="text"/>
+</div>
+<button class="text-secondary hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-secondary hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined">help_outline</span></button>
+<button class="bg-primary text-on-primary font-button text-button px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors duration-200">Quick Create</button>
+<img alt="Admin User" class="w-10 h-10 rounded-full border border-border object-cover" data-alt="A small, professional avatar headshot of an administrative user, simple neutral background, modern corporate style, well-lit, confident expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW7NeMGBFJUf9_lD_fHBo_A7RWQiPxOc5XKGnMPpBm9qmL6YYI4myaURAaRKm1_YLVz_NhF0TrD2r8Nr7PWMub8Kki1TFthg4tZ097Aq3-ltv8x2Ka8vbobo00CLOTxPsYFOu6CFZp6Xew7uRVKdZFluhkJRfT6iqiLn-Edy_iQRtKpn5G-XSIVA_pTRNSUflsDkOJZUAxOeiSO_CWKPsBeDZAxz7084CQd7trwN7hj7Cbn8Yuf1AEUAoBIgTUGh_7867qYt1d3Xk"/>
+</div>
+</header>
+<!-- Workspace Nav (Pizza House Context) -->
+<div class="bg-canvas border-b border-border px-lg py-sm flex items-center justify-between">
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm">
+<img alt="Pizza House" class="w-8 h-8 rounded" data-alt="A stylized logo icon for a pizza restaurant named 'Pizza House', featuring a minimalist pizza slice graphic, warm red and orange tones, modern vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgNAx6wp5Z2du057rUxZZx8sYc2pGlbQtmusN53SS4baQjeI4rZU1N0gPDUxyMrz9PdAHeR2ptxjeJztBXPp4191ShKjLUjhTzs_BB9Y3AlTYLgk0ZcXgfZ7RsvY2EADosEQz6ikHwp7H4kAQX1eKc9fw51_eDMDBV79WLzK-q5DHBz7Vleu9AuncoCuw5S3PxoYRjHyqCzswLpNJnlkKIfXGySOPX_iB-pUTXo_Z0jA6d4_YNgn1snvIi8KNqeq21DI97tn6INow"/>
+<h1 class="font-h3 text-h3 text-text-primary">Pizza House</h1>
+</div>
+<div class="flex gap-md border-l border-border pl-lg">
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold transition-colors" href="#">Location Details</a>
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold transition-colors" href="#">Menu Manager</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 flex items-center gap-xs" href="#">
+                        Customer Actions
+                        <span class="bg-danger text-on-error font-small text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">error</span> 1 issue
+                        </span>
+</a>
+<a class="text-secondary hover:text-primary font-body-bold text-body-bold transition-colors" href="#">Media Library</a>
+</div>
+</div>
+<button class="bg-pizza-red text-on-primary font-button text-button px-lg py-2 rounded-lg shadow hover:bg-primary-dark transition-all flex items-center gap-xs">
+<span class="material-symbols-outlined">save</span> Save Draft
+            </button>
+</div>
+<!-- Three Panel Layout -->
+<div class="flex-1 flex overflow-hidden bg-background">
+<!-- Panel 1: Action Structure (Left Rail) -->
+<div class="w-80 bg-canvas border-r border-border flex flex-col h-full overflow-y-auto">
+<div class="p-md border-b border-border sticky top-0 bg-canvas z-10 flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-text-primary">Action Layout</h3>
+<button class="text-secondary hover:text-primary"><span class="material-symbols-outlined">add_circle</span></button>
+</div>
+<div class="p-md flex flex-col gap-md">
+<!-- Primary Actions -->
+<div>
+<div class="text-small font-body-bold text-secondary mb-xs uppercase tracking-wider">Primary Actions (Max 2)</div>
+<div class="flex flex-col gap-xs">
+<div class="bg-primary-fixed border border-primary text-on-primary-fixed-variant p-sm rounded-lg flex items-center justify-between cursor-pointer shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<span class="font-body-bold text-body-bold">Online Order with Pay</span>
+</div>
+<span class="material-symbols-outlined text-secondary cursor-grab">drag_indicator</span>
+</div>
+<div class="bg-surface border border-border p-sm rounded-lg flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">restaurant_menu</span>
+<span class="font-body text-body text-text-primary">Digital Menu</span>
+</div>
+<span class="material-symbols-outlined text-secondary cursor-grab">drag_indicator</span>
+</div>
+</div>
+</div>
+<!-- Supporting Actions -->
+<div>
+<div class="text-small font-body-bold text-secondary mb-xs uppercase tracking-wider mt-sm">Supporting Actions</div>
+<div class="flex flex-col gap-xs">
+<div class="bg-surface border border-error p-sm rounded-lg flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-colors relative">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">map</span>
+<span class="font-body text-body text-text-primary">Directions</span>
+<span class="material-symbols-outlined text-danger text-[18px]" title="Destination Review Required">error</span>
+</div>
+<span class="material-symbols-outlined text-secondary cursor-grab">drag_indicator</span>
+</div>
+<div class="bg-surface border border-border p-sm rounded-lg flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="font-body text-body text-text-primary">Call Waiter</span>
+</div>
+<span class="material-symbols-outlined text-secondary cursor-grab">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Detailed Configuration (Center) -->
+<div class="flex-1 bg-background flex flex-col h-full overflow-y-auto">
+<div class="p-lg max-w-3xl mx-auto w-full flex flex-col gap-lg">
+<div class="flex items-center justify-between">
+<h2 class="font-display text-display text-text-primary">Edit: Online Order with Pay</h2>
+<span class="bg-success/10 text-success font-body-bold text-small px-3 py-1 rounded-full border border-success/20">Active</span>
+</div>
+<!-- Action Identity -->
+<div class="bg-canvas border border-border rounded-xl p-lg shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-md border-b border-border pb-sm">Action Identity</h3>
+<div class="grid grid-cols-2 gap-lg mb-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Icon</label>
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 bg-surface-container-low border border-border rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">shopping_bag</span>
+</div>
+<button class="text-secondary hover:text-primary text-small font-button border border-border px-3 py-1.5 rounded-lg bg-surface">Change Icon</button>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Action Type</label>
+<select class="w-full p-2.5 border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-transparent font-body text-body">
+<option>External Link</option>
+<option>Internal Module</option>
+<option>Contact/Intent</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Language & Labels -->
+<div class="bg-canvas border border-border rounded-xl p-lg shadow-sm">
+<div class="flex justify-between items-center mb-md border-b border-border pb-sm">
+<h3 class="font-h3 text-h3 text-text-primary">Label Localization</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-small font-button bg-surface-container-high text-text-primary rounded-lg">EN</button>
+<button class="px-3 py-1 text-small font-button text-secondary hover:bg-surface rounded-lg">TR</button>
+<button class="px-3 py-1 text-small font-button text-secondary hover:bg-surface rounded-lg">AR</button>
+</div>
+</div>
+<div class="space-y-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">English Label (Primary)</label>
+<input class="w-full p-3 border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-transparent font-body text-body" type="text" value="Order Online"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Subtext (Optional)</label>
+<input class="w-full p-3 border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-transparent font-body text-body text-secondary" type="text" value="Powered by DeliveryHero"/>
+</div>
+</div>
+</div>
+<!-- Destination Settings -->
+<div class="bg-canvas border border-border rounded-xl p-lg shadow-sm">
+<div class="flex justify-between items-center mb-md border-b border-border pb-sm">
+<h3 class="font-h3 text-h3 text-text-primary">Destination Settings</h3>
+<span class="bg-surface-container-high text-secondary font-small text-xs px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_tree</span> Custom Overridden
+                            </span>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Target URL</label>
+<div class="flex gap-sm">
+<input class="flex-1 p-3 border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-transparent font-body text-body font-mono text-small" type="url" value="https://order.deliveryhero.com/pizzahouse-123"/>
+<button class="border border-border bg-surface text-secondary hover:text-primary px-4 rounded-lg flex items-center justify-center" title="Test Link">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+<p class="text-small text-secondary mt-xs flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-success">check_circle</span> URL reachable (Checked 2 mins ago)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel 3: Live Preview & Health (Sticky Right) -->
+<div class="w-96 bg-surface-container-low border-l border-border flex flex-col h-full overflow-y-auto">
+<!-- Destination Health -->
+<div class="p-md border-b border-border bg-canvas">
+<h3 class="font-h3 text-h3 text-text-primary mb-sm">Destination Health</h3>
+<div class="flex gap-sm">
+<div class="flex-1 bg-success/10 border border-success/20 rounded-lg p-sm flex items-center justify-between">
+<span class="text-success font-body-bold text-small">Valid</span>
+<span class="text-success font-h3 text-h3">5</span>
+</div>
+<div class="flex-1 bg-error-container border border-error/30 rounded-lg p-sm flex items-center justify-between">
+<span class="text-error font-body-bold text-small">Review</span>
+<span class="text-error font-h3 text-h3">1</span>
+</div>
+</div>
+</div>
+<!-- Live Preview Shell -->
+<div class="flex-1 p-lg flex flex-col items-center">
+<h3 class="font-body-bold text-small text-secondary uppercase tracking-wider mb-md self-start">Customer Preview</h3>
+<!-- Simulated Mobile Device -->
+<div class="w-[320px] h-[600px] bg-canvas border-[8px] border-surface-container-highest rounded-[32px] shadow-lg relative overflow-hidden flex flex-col">
+<!-- Top Notch -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-surface-container-highest rounded-b-xl z-20"></div>
+<!-- Header Graphic -->
+<div class="bg-cover bg-center w-full h-32 relative" data-alt="A stylized, modern geometric pattern in warm red and orange tones, suitable for a pizza restaurant header background, clean flat design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYeirSZYHAoT-F9p0O2ydFNHYTA5ZejfOkcx96aEH8Vi8mRA6U13bcg4HJEe77xAfiYANYDgbIXI0qk71nN1GsEXuaNL1zY_MHNgatTA6ZK2yn86kTG5Ns5LqaBbiQz5Xao0V73aGxsrNjs3aPAj74VRiISLcKHjxcojn9TifAHBiOlvQI85pGzG0IawIJGQyqE5sAesfL20pJMzkivxfZPjWeqBe-zCq3X9Ls3Z8KK9Urg2s-eTfacOj8AjwgIBTsHrRl6LzMRis')">
+<div class="absolute inset-0 bg-gradient-to-t from-canvas to-transparent"></div>
+<div class="absolute bottom-sm left-sm flex items-center gap-sm">
+<div class="w-12 h-12 bg-canvas rounded-full shadow flex items-center justify-center p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Small minimalist pizza house logo icon, flat design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6LzyQ6GmZ-r2JRyc2gWxn8AOHKrNm1ofdpVFv2hNzijNC-02KUrnB8FuMMum9oiGNt8psNZz1rlqiRAzqQNHks4nBOyXBPMsFEgVDhI3Q7ftFeCRDLBt3hC0y3_xwBxSBQhZewKXji-Dxpeaw6P7Ym5R9Wu48mbVBKj0sss9yDEjKYMXkpBRQvvHRN6kIZ_PVyi6bXvccb6kuUgeRkgE-McgOwAV4ErTPmGThRDghNQf9hJvym1EbrKU_ku4TFDKpiO2L8YGrK74"/>
+</div>
+<h2 class="font-h2 text-h2 text-text-primary leading-tight">Pizza House</h2>
+</div>
+</div>
+<!-- Preview Canvas -->
+<div class="flex-1 p-md flex flex-col gap-sm overflow-y-auto pb-lg">
+<!-- Primary Action (Active Editing) -->
+<div class="bg-primary text-on-primary rounded-xl p-md flex flex-col items-center justify-center shadow-sm relative ring-2 ring-primary ring-offset-2">
+<span class="material-symbols-outlined text-[32px] mb-xs">shopping_bag</span>
+<span class="font-h3 text-h3 text-center">Order Online</span>
+<span class="font-small text-xs opacity-80 mt-1">Powered by DeliveryHero</span>
+</div>
+<!-- Primary Action 2 -->
+<div class="bg-surface border-2 border-primary text-primary rounded-xl p-md flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-[32px] mb-xs">restaurant_menu</span>
+<span class="font-h3 text-h3 text-center">Digital Menu</span>
+</div>
+<div class="grid grid-cols-2 gap-sm mt-xs">
+<!-- Supporting 1 (Error State visible in preview logically?) -->
+<div class="bg-surface border border-border rounded-lg p-sm flex flex-col items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-secondary">map</span>
+<span class="font-body-bold text-small text-text-primary text-center">Directions</span>
+</div>
+<!-- Supporting 2 -->
+<div class="bg-surface border border-border rounded-lg p-sm flex flex-col items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span class="font-body-bold text-small text-text-primary text-center">Call Waiter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

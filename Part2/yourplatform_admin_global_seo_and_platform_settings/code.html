@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global SEO and Platform Settings - YourPlatform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffdad3",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary-fixed": "#dce2f7",
+                        "primary-dark": "#C9341A",
+                        "surface-warm": "#FFF1EB",
+                        "text-secondary": "#667085",
+                        "on-primary-fixed": "#3e0400",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "canvas": "#FFFFFF",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#fffbff",
+                        "border": "#E5E7EB",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "secondary": "#575e70",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "on-secondary-fixed": "#141b2b",
+                        "text-primary": "#111827",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-tint": "#b91e00",
+                        "primary": "#b51d00",
+                        "on-secondary-fixed-variant": "#404758",
+                        "background": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "success": "#16A34A",
+                        "on-error-container": "#93000a",
+                        "outline": "#906f69",
+                        "surface": "#f7f9fb",
+                        "secondary-container": "#d9dff5",
+                        "outline-variant": "#e5beb6",
+                        "on-secondary-container": "#5c6274",
+                        "tertiary-container": "#946f00",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "tertiary": "#765700",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-error": "#ffffff",
+                        "danger": "#DC2626",
+                        "on-surface-variant": "#5c403a",
+                        "inverse-primary": "#ffb4a5",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-container": "#db3516",
+                        "tertiary-fixed": "#ffdf9e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "mobile-shell-max-width": "640px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "container-max-width": "1280px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "h1": ["Manrope"],
+                        "small": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Scrollbar for inner nav */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E5E7EB;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-secondary dark:bg-on-secondary-fixed text-primary dark:text-primary-fixed font-body text-body fixed left-0 top-0 h-full w-[240px] border-r border-border flat no shadows flex flex-col z-50 transition-all duration-300">
+<div class="p-lg flex items-center space-x-sm border-b border-on-secondary-fixed-variant border-opacity-20">
+<img alt="YourPlatform Admin Logo" class="w-10 h-10 rounded bg-white shadow-sm object-cover" data-alt="A clean, minimalist vector logo design consisting of a stylized letter Y enclosed in a polished metallic circle. The lighting highlights sharp, modern corporate aesthetics against a stark white background. Focus is sharp with crisp vector-like edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB59QqU1SuBT0E4lvP_IW9COekuCBKr6rZ3JWSHDiTYw7OGFUSxQ7STY3OKCEZhipGcsVTuu_YnvVBKO8jvkyVLpTeqtLr98RK52Dfu7HFReyqqF292EqwD15APCRk7IpiWMDjidW14X02rBJAQSM8R_zUwoeyI2oPgyKZD2efA_QeDZm7DqXykLfu3WJACLYTPe0tbhVG3YDOaL2iWRnwOe67z5Ya7sZv9SfidP9jx6fGVnwh8cEaU4ivmu3qH_pIOUQ1bjGnE_YE"/>
+<div>
+<h1 class="font-h2 text-h2 font-extrabold text-on-primary-fixed truncate">YourPlatform</h1>
+<p class="text-small text-secondary-fixed-dim">Admin CMS</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-sm custom-scrollbar">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">storefront</span>
+                        Restaurants
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">restaurant_menu</span>
+                        Menus
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">qr_code</span>
+                        QR Codes
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">nfc</span>
+                        NFC Products
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">campaign</span>
+                        Campaigns
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">analytics</span>
+                        Analytics
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">contact_support</span>
+                        Enquiries
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">perm_media</span>
+                        Media Library
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm">web</span>
+                        Website CMS
+                    </a>
+</li>
+<li>
+<a class="flex items-center px-lg py-sm text-on-primary bg-primary border-l-4 border-primary-fixed Active: scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined mr-sm">settings</span>
+                        Platform Settings
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[240px] flex flex-col h-screen">
+<!-- TopNavBar -->
+<header class="bg-canvas dark:bg-background text-primary font-h3 text-h3 sticky top-0 w-full z-40 border-b border-border shadow-sm flex justify-between items-center px-lg py-sm">
+<div class="flex items-center">
+<!-- Search bar on left -->
+<div class="relative w-64 hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary text-sm">search</span>
+<input class="w-full pl-xl pr-sm py-2 bg-surface-container-low border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-small transition-all" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-md">
+<button class="text-text-secondary hover:text-primary-dark transition-all p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-primary-dark transition-all p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-6 w-px bg-border mx-2"></div>
+<button class="bg-primary text-on-primary font-button text-button px-md py-2 rounded-lg hover:bg-primary-dark transition-colors shadow-sm flex items-center">
+<span class="material-symbols-outlined mr-xs text-sm">add</span>
+                    Quick Create
+                </button>
+<div class="relative ml-sm cursor-pointer ml-lg">
+<img alt="Admin User Avatar" class="w-10 h-10 rounded-full border border-border object-cover" data-alt="A professional headshot of an administrative user, brightly lit, isolated on a clean minimal background. High quality photography suitable for a modern SaaS dashboard profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzci5tKh4HqbaIzRRwxKJKwF2Q2OOei3p8h6C6GYh04cKhiFBMHS8AqLXMYBiOyDURURaSSGHtbmgXpRZpJIq9alL6BkBSnRM8ydIGpPqowRX4vEHOIvebiqsl7c5ABELGW_PW44tpNWFLHq9gIqk941Xak6v2wRAb1a-9x4cTAxBc_lvF0FPIWLIbEfyNVFgv3e2omky86MX8HrrOgRTm6LQ0RVjMT7ra88XMWsZW7NPnzoza0iVuZ1DKC8BnW6UDfr3PUeLYksg"/>
+</div>
+</div>
+</header>
+<!-- Page Content Scrollable Area -->
+<main class="flex-1 overflow-y-auto bg-background p-lg lg:p-xl flex flex-col space-y-lg">
+<!-- Context Header & Status Bar -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm p-lg">
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-md gap-4">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-surface-container-low text-text-secondary px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Global Settings</span>
+<span class="text-text-secondary">•</span>
+<a class="text-primary hover:underline text-small" href="#">www.yourplatform.com <span class="material-symbols-outlined text-[14px] align-middle">open_in_new</span></a>
+</div>
+<h2 class="font-h1 text-h1 text-text-primary">Platform Configuration</h2>
+</div>
+<div class="flex flex-wrap items-center gap-sm">
+<div class="bg-surface-container-low border border-border rounded-lg px-sm py-2 flex flex-col items-end">
+<span class="text-xs text-text-secondary uppercase font-bold tracking-wider">Applied Version</span>
+<span class="font-body-bold text-text-primary">v12.4</span>
+</div>
+<div class="bg-surface-warm border border-outline-variant rounded-lg px-sm py-2 flex flex-col items-end">
+<span class="text-xs text-primary-dark uppercase font-bold tracking-wider">Draft Version</span>
+<span class="font-body-bold text-primary">v13.0 (Editing)</span>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-lg py-3 rounded-lg hover:bg-primary-dark transition-colors shadow-sm ml-sm flex items-center">
+                            Review &amp; Apply
+                            <span class="material-symbols-outlined ml-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Status Bar -->
+<div class="bg-surface-warm border border-outline-variant rounded-lg p-sm flex items-center gap-sm">
+<div class="bg-primary-container text-on-primary-container p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined">edit_document</span>
+</div>
+<div class="flex-1">
+<p class="font-body-bold text-primary-dark">Draft Changes in Progress</p>
+<p class="text-small text-on-surface-variant">8 platform settings contain unapplied changes. 3 settings require attention.</p>
+</div>
+<button class="text-primary hover:text-primary-dark text-small font-bold px-sm py-2">View Changes</button>
+</div>
+</div>
+<!-- Workspace Grid Layout -->
+<div class="flex flex-col xl:flex-row gap-lg flex-1 min-h-0">
+<!-- Left Settings Nav -->
+<div class="w-full xl:w-64 bg-canvas border border-border rounded-xl shadow-sm flex-shrink-0 overflow-hidden flex flex-col">
+<div class="p-sm bg-surface-container-low border-b border-border font-body-bold text-small text-text-secondary uppercase tracking-wider">
+                        Settings Categories
+                    </div>
+<div class="overflow-y-auto custom-scrollbar p-xs">
+<ul class="space-y-1">
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg bg-surface-warm text-primary font-body-bold text-left">
+<span class="material-symbols-outlined mr-sm text-[20px]">tune</span>
+                                    General
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">palette</span>
+                                    Branding
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">language</span>
+                                    Domains
+                                    <span class="ml-auto w-2 h-2 rounded-full bg-danger"></span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">translate</span>
+                                    Languages
+                                    <span class="ml-auto w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+</button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">search_insights</span>
+                                    SEO Defaults
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">share</span>
+                                    Social Sharing
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">contacts</span>
+                                    Contact
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">monitoring</span>
+                                    Analytics
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">gavel</span>
+                                    Legal
+                                </button>
+</li>
+<li class="pt-sm mt-sm border-t border-border">
+<span class="px-sm text-[11px] font-bold text-text-secondary uppercase tracking-wider mb-xs block">Default Configurations</span>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">storefront</span>
+                                    Restaurant Defaults
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">campaign</span>
+                                    Campaign Defaults
+                                </button>
+</li>
+<li>
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">qr_code_scanner</span>
+                                    QR/NFC Defaults
+                                </button>
+</li>
+<li class="pt-sm mt-sm border-t border-border">
+<button class="w-full flex items-center px-sm py-2 rounded-lg text-text-secondary hover:bg-surface-container-low hover:text-text-primary text-left transition-colors text-small">
+<span class="material-symbols-outlined mr-sm text-[20px]">integration_instructions</span>
+                                    Integrations
+                                </button>
+</li>
+</ul>
+</div>
+</div>
+<!-- Main Form Area (General) -->
+<div class="flex-1 flex flex-col gap-lg min-w-0">
+<!-- General Settings Block -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm overflow-hidden">
+<div class="border-b border-border p-md flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h2 text-h2 text-text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">tune</span>
+                                General Platform Identity
+                            </h3>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</div>
+<div class="p-lg grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Platform Name <span class="text-danger">*</span></label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="YourPlatform"/>
+<p class="text-xs text-text-secondary">The public facing name of the platform.</p>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Legal Name <span class="text-danger">*</span></label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="YourPlatform Inc."/>
+<p class="text-xs text-text-secondary">Used for billing, legal docs, and footer.</p>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Short Name</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="YP"/>
+<p class="text-xs text-text-secondary">Used in tight spaces (e.g., SMS, App Icon).</p>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Public Launch Status</label>
+<div class="relative">
+<select class="w-full border-border rounded-lg p-3 text-body appearance-none focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm bg-surface-container-lowest">
+<option value="private">Private Beta</option>
+<option selected="" value="public">Public (Live)</option>
+<option value="maintenance">Maintenance Mode</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary">expand_more</span>
+</div>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="block font-body-bold text-small text-text-primary">Tagline</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="The modern operating system for street food culture."/>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="block font-body-bold text-small text-text-primary">Description</label>
+<textarea class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm resize-y" rows="3">YourPlatform connects hungry customers with the best street food, bridging the gap between high-speed service and robust SaaS reliability.</textarea>
+<p class="text-xs text-text-secondary flex justify-between">
+<span>Used for default meta descriptions if none specified.</span>
+<span>145/160 chars</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Contact Identity Block -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm overflow-hidden">
+<div class="border-b border-border p-md flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h2 text-h2 text-text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">contact_phone</span>
+                                Contact Identity
+                            </h3>
+</div>
+<div class="p-lg grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Public Support Name</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="YourPlatform Support Team"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Support Email</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="email" value="support@yourplatform.com"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Sales Contact Name</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="Partner Onboarding"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Sales Email</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="email" value="partners@yourplatform.com"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Public Phone Number</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="tel" value="+1 (800) 555-0199"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-bold text-small text-text-primary">Business Hours Display</label>
+<input class="w-full border-border rounded-lg p-3 text-body focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" type="text" value="Mon-Fri, 9AM-6PM EST"/>
+</div>
+</div>
+</div>
+<!-- SEO Defaults Preview Block -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm overflow-hidden opacity-90">
+<div class="border-b border-border p-md flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h2 text-h2 text-text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary">search_insights</span>
+                                SEO Defaults (Preview)
+                            </h3>
+<button class="text-primary hover:text-primary-dark text-small font-bold">Edit All SEO</button>
+</div>
+<div class="p-lg">
+<div class="space-y-sm bg-surface p-md rounded-lg border border-border border-dashed">
+<label class="block font-body-bold text-small text-text-primary">Default SEO Title Template</label>
+<div class="flex items-center gap-xs">
+<input class="w-full border-border bg-surface-container-low rounded-lg p-3 text-body text-text-secondary cursor-not-allowed" readonly="" type="text" value="{pageTitle} | YourPlatform"/>
+</div>
+<div class="flex flex-wrap gap-xs mt-2">
+<span class="text-xs text-text-secondary">Available variables:</span>
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs font-mono">{restaurantName}</span>
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs font-mono">{campaignTitle}</span>
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs font-mono">{cityName}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel (Sticky) -->
+<div class="w-full xl:w-80 flex-shrink-0 flex flex-col gap-lg">
+<!-- Readiness Checklist -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm p-md sticky top-0">
+<h4 class="font-body-bold text-text-primary mb-md flex items-center justify-between">
+                            Platform Readiness
+                            <span class="bg-success text-white text-xs px-2 py-1 rounded-full">Good</span>
+</h4>
+<div class="mb-sm">
+<div class="flex justify-between text-small mb-1">
+<span class="text-text-secondary">Completion Setup</span>
+<span class="font-bold text-text-primary">20 / 25</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<ul class="space-y-3 mt-md text-small">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-success text-[18px] mt-0.5">check_circle</span>
+<span class="text-text-secondary">General Identity configured</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-success text-[18px] mt-0.5">check_circle</span>
+<span class="text-text-secondary">Brand Assets uploaded</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-surface-dim text-[18px] mt-0.5">radio_button_unchecked</span>
+<span class="text-text-primary font-bold">Review Domain changes</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-surface-dim text-[18px] mt-0.5">radio_button_unchecked</span>
+<span class="text-text-primary font-bold">Set Default Language</span>
+</li>
+</ul>
+</div>
+<!-- High-Impact Changes & Public Impact -->
+<div class="bg-surface-warm border border-outline-variant rounded-xl shadow-sm p-md">
+<h4 class="font-body-bold text-primary-dark mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+                            High-Impact Changes
+                        </h4>
+<ul class="space-y-2 mb-md border-b border-outline-variant pb-md">
+<li class="bg-canvas border border-outline-variant rounded p-sm flex items-start gap-sm">
+<span class="material-symbols-outlined text-danger text-[18px] mt-0.5">public</span>
+<div>
+<span class="text-small font-bold text-text-primary block">Canonical Domain Changed</span>
+<span class="text-xs text-text-secondary">From app.yourplatform.com to www.yourplatform.com</span>
+</div>
+</li>
+<li class="bg-canvas border border-outline-variant rounded p-sm flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">translate</span>
+<div>
+<span class="text-small font-bold text-text-primary block">Default Language Changed</span>
+<span class="text-xs text-text-secondary">Added Spanish (es-ES) as fallback</span>
+</div>
+</li>
+</ul>
+<h4 class="font-body-bold text-text-primary mb-sm text-small uppercase tracking-wider">Public Impact Summary</h4>
+<ul class="space-y-3 text-small">
+<li class="flex justify-between items-center">
+<span class="text-text-secondary">Website</span>
+<span class="bg-surface-container-high text-text-primary text-xs px-2 py-1 rounded">Content Update</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-text-secondary">Restaurant Pages</span>
+<span class="bg-surface-container-high text-text-primary text-xs px-2 py-1 rounded">New Defaults Only</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-text-secondary">SEO Indexing</span>
+<span class="bg-error-container text-on-error-container font-bold text-xs px-2 py-1 rounded border border-error">Migration Required</span>
+</li>
+</ul>
+</div>
+<!-- Save Action Panel -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm p-md flex flex-col gap-sm">
+<p class="text-xs text-text-secondary text-center">Unsaved changes in General Settings</p>
+<button class="w-full bg-primary text-on-primary font-button text-button py-3 rounded-lg hover:bg-primary-dark transition-colors shadow-sm flex justify-center items-center">
+<span class="material-symbols-outlined mr-xs text-[20px]">save</span>
+                            Save Draft
+                        </button>
+<button class="w-full bg-surface text-text-primary font-button text-button py-3 border border-border rounded-lg hover:bg-surface-container-low transition-colors">
+                            Discard Changes
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

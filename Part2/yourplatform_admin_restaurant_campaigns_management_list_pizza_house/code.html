@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Campaigns Management - Pizza House</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b91e00",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#946f00",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-surface-variant": "#5c403a",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#dce2f7",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-error": "#ffffff",
+                        "primary-container": "#db3516",
+                        "on-secondary-fixed": "#141b2b",
+                        "border": "#E5E7EB",
+                        "primary": "#b51d00",
+                        "inverse-primary": "#ffb4a5",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d9dff5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "canvas": "#FFFFFF",
+                        "on-secondary": "#ffffff",
+                        "danger": "#DC2626",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-warm": "#FFF1EB",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary-container": "#5c6274",
+                        "on-primary-fixed": "#3e0400",
+                        "on-error-container": "#93000a",
+                        "outline": "#906f69",
+                        "text-primary": "#111827",
+                        "outline-variant": "#e5beb6",
+                        "background": "#f7f9fb",
+                        "primary-dark": "#C9341A",
+                        "success": "#16A34A",
+                        "text-secondary": "#667085",
+                        "surface-container-highest": "#e0e3e5",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface": "#f7f9fb",
+                        "secondary": "#575e70",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed": "#ffdad3",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "container-max-width": "1280px",
+                        "sm": "12px",
+                        "xxl": "48px",
+                        "margin-mobile": "20px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "mobile-shell-max-width": "640px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "h1-mobile": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body": ["Inter"],
+                        "small": ["Inter"],
+                        "h3": ["Manrope"],
+                        "button": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "display": ["Manrope"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Hide scrollbar for cleaner look in high-density panels */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-[240px] h-full fixed left-0 top-0 border-r border-border bg-secondary dark:bg-secondary-fixed-dim flex flex-col py-6 px-4 z-40 hidden md:flex">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary overflow-hidden shadow-sm border border-border">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+<div>
+<h2 class="font-h2 text-h2 font-bold text-on-secondary">QR-NFC Admin</h2>
+<p class="font-small text-small text-secondary-fixed">Platform Manager</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto hide-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">dashboard</span>
+<span class="font-body-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">restaurant</span>
+<span class="font-body-bold">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">menu_book</span>
+<span class="font-body-bold">Menu Manager</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary font-body-bold rounded-lg border-l-4 border-primary translate-x-1 duration-150 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="font-body-bold">Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">monitoring</span>
+<span class="font-body-bold">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">qr_code</span>
+<span class="font-body-bold">NFC/QR Tags</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary-fixed hover:text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-150">settings</span>
+<span class="font-body-bold">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-secondary-fixed-dim/30">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-on-secondary-fixed-variant text-on-secondary rounded-lg font-button text-button hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+                Support Center
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-[240px] flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 w-full md:w-[calc(100%-240px)] border-b border-border bg-surface dark:bg-surface-container shadow-sm flex justify-between items-center px-lg z-30">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-text-primary rounded-lg hover:bg-surface-container-low">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-2 border border-border w-64 md:w-96">
+<span class="material-symbols-outlined text-text-secondary mr-2">search</span>
+<input class="bg-transparent border-none outline-none w-full font-body text-body text-text-primary placeholder:text-text-secondary focus:ring-0 p-0 h-6" placeholder="Search campaigns, IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Campaign
+                </button>
+<div class="flex items-center gap-2 border-l border-border pl-4">
+<button class="p-2 text-text-secondary hover:bg-surface-container-low rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full"></span>
+</button>
+<button class="p-2 text-text-secondary hover:bg-surface-container-low rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-body-bold text-small ml-2 shadow-sm border border-border overflow-hidden cursor-pointer hover:scale-95 duration-75">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate platform administrator with a neutral expression. The individual is wearing modern, stylish business casual attire, standing against a clean, bright, white background. Soft, high-key lighting illuminates the subject evenly, creating a crisp, high-end SaaS professional aesthetic. Minimalist details with a focus on a trustworthy, confident demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB27Zh3AqK6RrxTD4SEW4kYxCMZABqHXo3ntQNWFtE7-eVdcTzi6RimSvbLHuDZtsVUmw6kFpFgWZN5rcoh-1EtojkjUe-gUCSwAGJQ2fuDsFzrAkY_b8Ql0akmaZGVqJgdblgnFpnFd1QscpquXiUzbljC_j5GiDYZES2rUlLcgB7AnBZEzC5nwzN9bwCAao11WfONoDRMcJlxiLWnQHAQVGajieHdSK-e23hqYYGgG2EdfmI6pez9MTI7DG45JTs3HduTjtIjWBw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Workspace -->
+<main class="flex-1 mt-16 overflow-y-auto bg-surface-bright flex flex-col p-lg lg:flex-row gap-lg">
+<!-- Left/Center Workspace -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- Sticky Restaurant Context Header -->
+<div class="bg-canvas border border-border rounded-xl p-md mb-lg flex items-center gap-md shadow-sm sticky top-0 z-20">
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest border border-border overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern, minimalist logo design for a fictional pizzeria called 'Pizza House'. The logo features a stylized, flat-vector illustration of a pizza slice combined with a subtle roof icon, rendered in bright, high-energy primary red and deep navy blue. The design is clean, corporate yet appetizing, suitable for a fast-casual dining brand interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2AVYHS7FcWV8H6SMcVK-mDyhT6dCDlIUpflDF9xtMs6zXczFUmzfn4hbbGVwOglyG60Hkc-0pxSRPt45RMQ094lrMBKy7ajh2IXEW7RLfUqmsZnJgEyVVGBVX__ts4EiPrkLEwmabaQ1L62VamuM4TuOhZeywZywP5VMqTetLIfqjLd9QZ8ZpwSithhz_0YURlD3xK-C0NmpHuJGnazpeGM0YPktFELc5lvwrh8XRZOSG4_ykLJmSj0MvwQV9KNmmt0XD_2-1M7s"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-3 mb-1">
+<h1 class="font-h3 text-h3 text-text-primary truncate">Pizza House</h1>
+<span class="px-2 py-0.5 rounded text-[12px] font-bold bg-surface-container-high text-on-surface-variant border border-border shrink-0">RST-00024</span>
+</div>
+<div class="flex items-center gap-4 text-small text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">location_on</span>Kadıköy, Istanbul</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">storefront</span>Fast Casual</span>
+</div>
+</div>
+<div class="hidden sm:flex flex-col items-end">
+<span class="font-small text-small text-text-secondary mb-1">Platform Status</span>
+<span class="flex items-center gap-1 text-success font-body-bold text-small"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>Online</span>
+</div>
+</div>
+<!-- Summary Metrics Grid -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-md mb-lg">
+<div class="bg-canvas border border-border rounded-xl p-md flex flex-col justify-between shadow-sm">
+<span class="font-small text-small text-text-secondary flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[16px]">campaign</span>Total</span>
+<span class="font-h2 text-h2 text-text-primary">8</span>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md flex flex-col justify-between shadow-sm border-b-4 border-b-success">
+<span class="font-small text-small text-text-secondary flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[16px] text-success">play_circle</span>Active</span>
+<span class="font-h2 text-h2 text-text-primary">1</span>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md flex flex-col justify-between shadow-sm">
+<span class="font-small text-small text-text-secondary flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[16px] text-blue-500">schedule</span>Scheduled</span>
+<span class="font-h2 text-h2 text-text-primary">2</span>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md flex flex-col justify-between shadow-sm">
+<span class="font-small text-small text-text-secondary flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[16px]">group</span>Participants</span>
+<span class="font-h2 text-h2 text-text-primary">1,248</span>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md flex flex-col justify-between shadow-sm border-b-4 border-b-tertiary-fixed-dim">
+<span class="font-small text-small text-text-secondary flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">redeem</span>Pending Claims</span>
+<span class="font-h2 text-h2 text-text-primary">17</span>
+</div>
+</div>
+<!-- Campaign Workspace Area -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm flex-1 flex flex-col min-h-[500px]">
+<!-- Toolbar -->
+<div class="p-md border-b border-border flex flex-col sm:flex-row gap-4 items-center justify-between bg-surface-bright/50 rounded-t-xl">
+<div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 hide-scrollbar">
+<span class="font-body-bold text-small text-text-primary whitespace-nowrap mr-2">Filter:</span>
+<button class="px-3 py-1.5 rounded-full border border-border bg-canvas text-small text-text-primary hover:bg-surface-container-low flex items-center gap-1 whitespace-nowrap">
+                                Status: All <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="px-3 py-1.5 rounded-full border border-border bg-canvas text-small text-text-primary hover:bg-surface-container-low flex items-center gap-1 whitespace-nowrap">
+                                Type <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<button class="p-2 border border-border rounded-lg text-text-secondary hover:bg-surface-container-low bg-canvas"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 border border-border rounded-lg text-text-secondary hover:bg-surface-container-low bg-canvas"><span class="material-symbols-outlined">download</span></button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-border bg-surface-container-lowest font-body-bold text-small text-text-secondary">
+<th class="p-md font-normal">Campaign Details</th>
+<th class="p-md font-normal">Status</th>
+<th class="p-md font-normal">Timeline</th>
+<th class="p-md font-normal">Reward</th>
+<th class="p-md font-normal text-right">Metrics</th>
+</tr>
+</thead>
+<tbody class="font-body text-small text-text-primary divide-y divide-border">
+<!-- Active Row (Selected) -->
+<tr class="bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer border-l-4 border-l-primary">
+<td class="p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container border border-border overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A stylized, flat graphic icon representing a 'Scan &amp; Win' promotional campaign. It features a simplified smartphone scanning a generic QR code, with a bright yellow star or confetti popping out, symbolizing a reward or win. Designed with flat colors, bold lines, and a high-contrast corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe_XNC5g66iiM9mUjzXRzzZPi7Fo6-h4Pgf4AZ4OXaymqjvry6Fr7sFBVEwaECAcl6VQb32_FKfbeVBUMSl67u8Nlw7zyOVQijeWEhZ4RBkEWPnUl-kwk5wwxMM3aZvZ1xZ_iasV1ucYviptxySekJXaJqCpWQs01_oFiCTJkd3HO0OLS2Wa0iRw_Hg00sLnhpBtIKpuE6knuafTBDy85Rz-Qp2UJKjKHONM2vuqDo4bEEQyQ3P5-6PYZcsDn6wvyousfBcpV-rmQ"/>
+</div>
+<div>
+<div class="font-body-bold text-text-primary">Scan &amp; Win</div>
+<div class="text-text-secondary text-[12px]">CMP-00018 • Scan &amp; Win</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-success/10 text-success text-[12px] font-bold border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Active
+                                        </span>
+</td>
+<td class="p-md text-text-secondary">
+                                        10–30 Jun 2026<br/><span class="text-[12px]">20 days left</span>
+</td>
+<td class="p-md">
+<div class="font-body-bold">Fresh Lemonade</div>
+</td>
+<td class="p-md text-right">
+<div class="font-body-bold">1,248</div>
+<div class="text-text-secondary text-[12px]">Participants</div>
+</td>
+</tr>
+<!-- Scheduled Row -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container border border-border flex items-center justify-center text-text-secondary group-hover:text-primary transition-colors shrink-0">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<div>
+<div class="font-body-bold text-text-primary">Summer Pizza Fest</div>
+<div class="text-text-secondary text-[12px]">CMP-00021 • Visit Milestone</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-700 text-[12px] font-bold border border-blue-500/20">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Scheduled
+                                        </span>
+</td>
+<td class="p-md text-text-secondary">
+                                        01–31 Jul 2026<br/><span class="text-[12px] text-blue-600">Starts in 11 days</span>
+</td>
+<td class="p-md">
+<div class="font-body-bold text-text-secondary">Free Margerita</div>
+</td>
+<td class="p-md text-right">
+<div class="font-body-bold text-text-secondary">-</div>
+</td>
+</tr>
+<!-- Draft Row (Issue) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="p-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container border border-border flex items-center justify-center text-text-secondary group-hover:text-primary transition-colors shrink-0">
+<span class="material-symbols-outlined">new_releases</span>
+</div>
+<div>
+<div class="font-body-bold text-text-primary">Launch: Hot BBQ</div>
+<div class="text-text-secondary text-[12px]">CMP-00024 • Product Promo</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-text-secondary text-[12px] font-bold border border-border">
+<span class="material-symbols-outlined text-[14px]">edit_document</span> Draft
+                                        </span>
+<div class="mt-1 flex items-center gap-1 text-danger text-[12px]">
+<span class="material-symbols-outlined text-[14px]">error</span> Missing Terms
+                                        </div>
+</td>
+<td class="p-md text-text-secondary">
+                                        TBD
+                                    </td>
+<td class="p-md">
+<div class="font-body-bold text-text-secondary">50% Off BBQ</div>
+</td>
+<td class="p-md text-right">
+<div class="font-body-bold text-text-secondary">-</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Side Panel: Campaign Summary (CMP-00018) -->
+<aside class="w-full lg:w-[360px] flex-shrink-0 flex flex-col gap-md">
+<div class="bg-canvas border border-border rounded-xl shadow-sm flex flex-col overflow-hidden sticky top-0">
+<!-- Image Header -->
+<div class="h-32 bg-surface-container-high relative border-b border-border">
+<img class="w-full h-full object-cover" data-alt="A vibrant, stylized abstract background graphic representing a refreshing summer lemonade promotion. The image features bright, zesty yellow and subtle orange geometric shapes or fluid gradients, with a crisp, modern aesthetic. Minimalist design, high resolution, suitable for a mobile app header or promotional banner background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMWGdwo7o9P4BpJZAPiU2UkFMoerXGlBx8Pr4TCKnmVlTbCgLilKFKL6O8O4UyE77O2K9u2E0QUHs9Qyjpqqo-Y74r_5_kGFxfOm6rAoHvFnQcRD8GjJIAuc6wtho-goojOerXOE1TPTyhQEhXzkk2G_mZDRnhfWwrF_Mo8wkEI2FjGmcbPEfxmIWvkZdvQEaITaBrEY9urvnhOYr3S1eA76i8fStppax0SeaD5E9ScEconwRocxXqjwlq6t0f6ZMJQtpcj-scIfk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-md">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-success text-on-primary text-[12px] font-bold shadow-sm">
+                                Active
+                            </span>
+</div>
+</div>
+<!-- Core Details -->
+<div class="p-md border-b border-border">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-h3 text-h3 text-text-primary">Scan &amp; Win</h3>
+<p class="font-small text-small text-text-secondary">CMP-00018</p>
+</div>
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined">edit</span></button>
+</div>
+<p class="font-small text-small text-text-secondary mt-2">
+                            Customers scan the table QR code to reveal a random prize. Focused on increasing beverage attachment rate during lunch hours.
+                        </p>
+</div>
+<!-- Progress Stepper -->
+<div class="p-md border-b border-border bg-surface-bright">
+<h4 class="font-body-bold text-small text-text-primary mb-3">Lifecycle Status</h4>
+<div class="flex items-center justify-between relative">
+<!-- Line -->
+<div class="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0.5 bg-border z-0"></div>
+<div class="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0.5 bg-success z-0" style="width: 100%;"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center gap-1 bg-surface-bright px-1">
+<div class="w-5 h-5 rounded-full bg-success text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">check</span></div>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-1 bg-surface-bright px-1">
+<div class="w-5 h-5 rounded-full bg-success text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">check</span></div>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-1 bg-surface-bright px-1">
+<div class="w-5 h-5 rounded-full bg-success text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">check</span></div>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-1 bg-surface-bright px-1">
+<div class="w-5 h-5 rounded-full bg-success text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">check</span></div>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-1 bg-surface-bright px-1">
+<div class="w-5 h-5 rounded-full bg-surface-container border-2 border-success text-success flex items-center justify-center"><span class="w-2 h-2 bg-success rounded-full"></span></div>
+</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-text-secondary mt-1 uppercase tracking-wider">
+<span>Draft</span>
+<span>Rev</span>
+<span>App</span>
+<span>Sch</span>
+<span class="text-success">Act</span>
+</div>
+</div>
+<!-- Details List -->
+<div class="p-md flex flex-col gap-3">
+<div class="flex justify-between items-center text-small">
+<span class="text-text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">redeem</span> Reward</span>
+<span class="font-body-bold text-text-primary">Fresh Lemonade (100% off)</span>
+</div>
+<div class="flex justify-between items-center text-small">
+<span class="text-text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">gavel</span> Terms</span>
+<span class="text-success flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">verified</span> Approved</span>
+</div>
+<div class="flex justify-between items-center text-small">
+<span class="text-text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">sensors</span> Entry Points</span>
+<div class="flex gap-1">
+<span class="bg-surface-container-high px-1.5 rounded text-[12px] font-bold border border-border">QR</span>
+<span class="bg-surface-container-high px-1.5 rounded text-[12px] font-bold border border-border">NFC</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="p-md bg-surface-container-lowest border-t border-border mt-auto flex flex-col gap-2">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-canvas border border-border text-text-primary rounded-lg font-button text-button hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+                            Pause Campaign
+                        </button>
+<button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-canvas border border-border text-text-primary rounded-lg font-button text-button hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+                            View Performance
+                        </button>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

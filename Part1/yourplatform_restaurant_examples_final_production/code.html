@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Examples - YourPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e0e3e5",
+                      "on-primary-fixed": "#3e0400",
+                      "text-secondary": "#667085",
+                      "surface": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "on-primary": "#ffffff",
+                      "primary": "#b51d00",
+                      "primary-dark": "#C9341A",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#191c1e",
+                      "background": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-warm": "#FFF1EB",
+                      "canvas": "#FFFFFF",
+                      "tertiary-container": "#946f00",
+                      "inverse-surface": "#2d3133",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "surface-container": "#eceef0",
+                      "border": "#E5E7EB",
+                      "surface-tint": "#b91e00",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-fixed-variant": "#404758",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-background": "#191c1e",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary": "#765700",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#ffdad3",
+                      "outline-variant": "#e5beb6",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-primary-container": "#fffbff",
+                      "secondary": "#575e70",
+                      "success": "#16A34A",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "tertiary-fixed": "#ffdf9e",
+                      "on-secondary-fixed": "#141b2b",
+                      "on-secondary-container": "#5c6274",
+                      "on-surface-variant": "#5c403a",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "on-tertiary-fixed": "#261a00",
+                      "secondary-fixed": "#dce2f7",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "danger": "#DC2626",
+                      "outline": "#906f69",
+                      "inverse-primary": "#ffb4a5",
+                      "text-primary": "#111827",
+                      "secondary-container": "#d9dff5",
+                      "primary-container": "#db3516",
+                      "on-tertiary-container": "#fffbff",
+                      "surface-dim": "#d8dadc",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "container-max-width": "1280px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "mobile-shell-max-width": "640px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "margin-mobile": "20px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "body": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "button": [
+                              "Inter"
+                      ],
+                      "small": [
+                              "Inter"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar -->
+<header class="bg-canvas/90 dark:bg-surface-dim/90 backdrop-blur-md fixed top-0 w-full border-b border-border dark:border-outline-variant shadow-sm z-50">
+<div class="flex justify-between items-center px-lg py-sm max-w-container-max-width mx-auto z-50">
+<div class="font-display text-h2 font-extrabold text-primary dark:text-primary-dark">
+                YourPlatform
+            </div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-3 py-2 rounded-md active:scale-95 transition-transform duration-150" href="#">How It Works</a>
+<a class="font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-3 py-2 rounded-md active:scale-95 transition-transform duration-150" href="#">Features</a>
+<a class="font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-3 py-2 rounded-md active:scale-95 transition-transform duration-150" href="#">Products</a>
+<a class="font-body text-body font-button text-button text-primary font-bold border-b-2 border-primary pb-1 active:scale-95 transition-transform duration-150" href="#">Examples</a>
+<a class="font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-3 py-2 rounded-md active:scale-95 transition-transform duration-150" href="#">Packages</a>
+<a class="font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-3 py-2 rounded-md active:scale-95 transition-transform duration-150" href="#">FAQ</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="hidden md:block font-body text-body font-button text-button text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container transition-all duration-200 px-4 py-2 rounded-lg border border-border">View Demo</button>
+<button class="font-body text-body font-button text-button bg-primary text-on-primary px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors">Request a Quote</button>
+</div>
+</div>
+</header>
+<main class="pt-[80px]">
+<!-- Hero Section -->
+<section class="py-xxl px-lg max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-surface-container-low text-primary font-body-bold text-small rounded-full mb-md uppercase tracking-wider">Demo Experiences</span>
+<h1 class="font-display text-h1-mobile lg:text-display font-extrabold text-text-primary mb-md">
+                        See How QR and NFC Can Work for Different Restaurant Styles
+                    </h1>
+<p class="font-body text-body text-text-secondary mb-xl">
+                        Explore our sample setups to see how YourPlatform adapts to various dining environments, from fast-paced pizza joints to premium dining experiences.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-sm">
+<button class="font-body text-button bg-primary text-on-primary px-xl py-sm rounded-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                            View All Examples
+                        </button>
+</div>
+</div>
+<div class="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-border shadow-sm">
+<img class="w-full h-full object-cover absolute inset-0" data-alt="A split-screen composition showing four distinct restaurant scenes. Top left: A vibrant, modern fast-food pizza setting with a sleek digital ordering kiosk. Top right: A warm, rustic Mediterranean grill with natural wood tables and ambient lighting. Bottom left: A bright, fresh salad bar with clean white surfaces and green plants. Bottom right: A cozy, sunlit cafe and bakery with artisanal pastries. The overall lighting is bright and inviting, reflecting a high-end, clean SaaS aesthetic with a focus on appetite appeal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3GBjFYl4enR8Ubm8VjEMqIzgLT8SUnIo6RXyv59r-s_wRpSb5gv9M7vt8fyDiF7HdoNY8LK6JHpqfpLNfmfQ-yIoM_EucNHoBEe7OQfUiZBcfPMBoy5z4nmfEE2T79O3rFStlViRXtD10B8PMc5srps_kiFBWOzaOndwiv7-ccfMzx9n2LgSGxwvl9lU78oUANj3_CaRLk5BHS5ayzdgwzISxUa2vrMAW6Bu-v2x_d0VdBOG8MYf5oIwz_qIC15sHOJToEHBD4wU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+<div class="text-white">
+<h3 class="font-display text-h2 font-bold mb-xs">4 Unique Themes</h3>
+<p class="font-body text-small opacity-90">Tailored digital experiences for every concept.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Example: Pizza House -->
+<section class="py-xxl bg-surface-container-low">
+<div class="max-w-container-max-width mx-auto px-lg">
+<div class="text-center mb-xl">
+<span class="inline-block px-3 py-1 bg-white text-primary font-body-bold text-small rounded-full border border-border mb-md">Featured Demo Experience</span>
+<h2 class="font-display text-h1 font-extrabold text-text-primary mb-sm">Pizza House</h2>
+<p class="font-body text-body text-text-secondary">Modern Fast Food Setup</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<div class="lg:col-span-4 flex flex-col gap-lg justify-center">
+<div class="bg-canvas p-lg rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+</div>
+<h3 class="font-display text-h3 font-bold text-text-primary mb-xs">QR Table Tent</h3>
+<p class="font-body text-small text-text-secondary">Instant access to the visual menu right from the table. Scan and order in seconds.</p>
+</div>
+<div class="bg-canvas p-lg rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">tap_and_play</span>
+</div>
+<h3 class="font-display text-h3 font-bold text-text-primary mb-xs">NFC Table Stand</h3>
+<p class="font-body text-small text-text-secondary">A frictionless tap-to-view experience for supported devices. High-tech and hygienic.</p>
+</div>
+</div>
+<div class="lg:col-span-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+<div class="relative rounded-2xl overflow-hidden border border-border shadow-sm group">
+<img alt="Pizza House Screen 1" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZRPVJnZa1FkoGX2Zxj00-jHfvQm9f6DcgBFiJmvWDMDCrkCUoTttb6JUxwuXefBd4ExM26ZSwvkA6zhCJ2Hzg_VzfGu-oJnxwJZ9iNUszHjN79tmKA961lQxnnq5Cf7KbEGgOUhEvB5RtvR2h2UwKBJ14HTCAVF-1IzHVnktD3ZWHXMn3AENZquSGEP5e4ViceDrZabt4v1NsVscaJTMmIr3xNCMYKM2J_rf67huHLHaNZyUmMwdqd_7vYkJZw1xjTOxIPRthqF4"/>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-border shadow-sm group">
+<img alt="Pizza House Screen 2" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFEoqNHcAaD7pugM-1uCxmdmhZg_Yz9mxUSzqoIK7xbAMHP3aCyZrxsE7hQAVeutE4thFCriP2gpEu99dyEGVbxzvUhkChPgP7MloTAkFzmP0jHKlPzTVkXfFY_IWXH6yepD0HDgxrUmC71jF72OEz5RUrBFAoJ2jM-JToMf5PCquF6NI-NmOjmIX-x8vZA0EpcXhmC6o5tqSd6GL7nqaNQ9wwsitZ0vw970tbr85vU3qKBal7s5dVhXrMOQWhP5xgACurZIPLEpw"/>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-border shadow-sm group">
+<img alt="Pizza House Screen 3" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjOUU7k-sfBhd0VybRYfAzwkYkPn3_7ec_uRiCxeiIhRBckSuOXSA4SNpdlLki_fyQEuQ_uYOx0dtTw3g55LJ_d-jU2w2aVrbyO-z1zcKNG__-ufYKMWX5vnDvoF0vroyJqzzb2mTi5XlRrVKnUXQGd2Kc1qSjP0O-LA2wjAZzfWweX-RC-olAIS7wBvxSagGUDnpnxSWYFzbAOCEOA-WAqpY2nJCtSgz-X_oCyK7cEKvQpsx22ZiiYjEle884yV29IRhOHDtYg2I"/>
+</div>
+<div class="relative rounded-2xl overflow-hidden border border-border shadow-sm group">
+<img alt="Pizza House Screen 4" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ6TEM-pW-OSsPbvyRkTTcEficg4heNjJaT8Ew8vCjTQd1Zb7KUsknzsLaz7LhBgTv2elea40MZmo_l0EUht-daZ54kuA-GtCge93L5AkoT5ktVuE59tpRbwVVmDTDtESPGacDfS3gHZ1v9rV1iZ5NgFCtgq0SbsC1SktzUCw0TQT3lQ0IXGZbnHGO72s6vzmEfGUcFX8kKzVoOQKeMw9TGkH09X_dA01Hqe6VAEMt_q7IiC2u1T9FJdlQVpxvIgfOe0D9Bp4eR0"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-secondary-fixed dark:bg-on-secondary-fixed-variant w-full bg-on-secondary-fixed">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-lg py-xxl max-w-container-max-width mx-auto">
+<div>
+<div class="font-display text-h3 font-bold text-on-secondary mb-md">YourPlatform</div>
+<p class="font-body text-small text-on-secondary opacity-80 mb-sm">© 2024 YourPlatform. All rights reserved.</p>
+</div>
+<div>
+<h4 class="font-body-bold text-on-secondary mb-md">Links</h4>
+<ul class="space-y-sm">
+<li><a class="font-body text-small text-on-secondary text-secondary-fixed hover:text-on-secondary transition-colors hover:text-primary transition-colors cursor-pointer" href="#">Platform</a></li>
+<li><a class="font-body text-small text-on-secondary text-secondary-fixed hover:text-on-secondary transition-colors hover:text-primary transition-colors cursor-pointer" href="#">Company</a></li>
+<li><a class="font-body text-small text-on-secondary text-secondary-fixed hover:text-on-secondary transition-colors hover:text-primary transition-colors cursor-pointer" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-on-secondary mb-md">Legal</h4>
+<ul class="space-y-sm">
+<li><a class="font-body text-small text-on-secondary text-secondary-fixed hover:text-on-secondary transition-colors hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a></li>
+<li><a class="font-body text-small text-on-secondary text-secondary-fixed hover:text-on-secondary transition-colors hover:text-primary transition-colors cursor-pointer" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Opening Hours Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#5c6274",
+                        "on-background": "#191c1e",
+                        "text-secondary": "#667085",
+                        "surface-container": "#eceef0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5c403a",
+                        "tertiary-fixed": "#ffdf9e",
+                        "success": "#16A34A",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-primary-fixed": "#3e0400",
+                        "error": "#ba1a1a",
+                        "border": "#E5E7EB",
+                        "on-secondary-fixed": "#141b2b",
+                        "tertiary-container": "#946f00",
+                        "on-primary-container": "#fffbff",
+                        "surface-tint": "#b91e00",
+                        "on-surface": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-container": "#fffbff",
+                        "on-error-container": "#93000a",
+                        "text-primary": "#111827",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#b51d00",
+                        "secondary-fixed": "#dce2f7",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface": "#f7f9fb",
+                        "primary-container": "#db3516",
+                        "outline": "#906f69",
+                        "inverse-surface": "#2d3133",
+                        "tertiary": "#765700",
+                        "surface-dim": "#d8dadc",
+                        "danger": "#DC2626",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "inverse-primary": "#ffb4a5",
+                        "secondary-container": "#d9dff5",
+                        "on-tertiary-fixed": "#261a00",
+                        "canvas": "#FFFFFF",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-warm": "#FFF1EB",
+                        "primary-dark": "#C9341A",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "background": "#f7f9fb",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error": "#ffffff",
+                        "secondary": "#575e70",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-variant": "#e0e3e5",
+                        "outline-variant": "#e5beb6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "mobile-shell-max-width": "640px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "h2": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body": ["Inter"],
+                        "button": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "small": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-60 bg-inverse-surface dark:bg-inverse-surface border-r border-outline-variant flex flex-col overflow-y-auto z-50">
+<div class="px-6 py-6 border-b border-outline-variant/20 flex flex-col gap-2">
+<h2 class="font-h2 text-h2 text-on-primary-container">Admin Console</h2>
+<p class="font-small text-small text-surface-variant opacity-80">Operational Control</p>
+</div>
+<div class="px-4 py-6">
+<button class="w-full bg-primary text-on-primary font-button text-button py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-dark transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                Add New Restaurant
+            </button>
+</div>
+<div class="flex-1 flex flex-col gap-1 py-4">
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined">storefront</span>
+                Restaurants
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">nfc</span>
+                QR/NFC Tools
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+                Publishing Queue
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">rate_review</span>
+                Reviews
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                User Management
+            </a>
+</div>
+<div class="border-t border-outline-variant/20 flex flex-col gap-1 py-4 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="ml-60 flex-1 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-40 bg-surface dark:bg-surface-container-low border-b border-outline-variant shadow-sm flex justify-between items-center px-lg py-sm">
+<div class="flex items-center gap-4">
+<h3 class="font-h3 text-h3 text-primary dark:text-primary-fixed">QR Platform Admin</h3>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-secondary">search</span>
+<input class="pl-10 pr-4 py-2 border border-border rounded-lg bg-surface-container focus:ring-2 focus:ring-primary focus:border-primary w-64 font-body text-body" placeholder="Search..." type="text"/>
+</div>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="bg-primary-container text-on-primary-container font-button text-button px-4 py-2 rounded-lg hover:bg-primary transition-colors">
+                    Quick Create
+                </button>
+<div class="w-10 h-10 rounded-full bg-surface-container border border-border overflow-hidden">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="A professional headshot of a platform administrator in a bright modern office setting, smiling confidently, well-lit with soft natural light, conveying trust and operational expertise in a high-tech corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbCUT6kVOS57WJOzLqnJqG7UamTly4FEAFZUAF5G0xng4wx_GSULZkoTOi1VcA8tevwcfDzbWLJ311-dBG6LUZT32mqfHSzAyNmp3rLrXZjtN7Uqr8l85DIwNpME9q5_osisdA1LvisOS315c-uTzhM4phOGH7Qoq7_6kEYYzXMSpOA-VH_r-YLTx7V1e8L9ARZGr7B5dal93ZNlQaPm-qS2MjNfU8pcnLBE2VppD-apcM0L75JFVXHpl606Ew6oPbjAGgL9izGXM"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-lg overflow-y-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-text-secondary font-small text-small mb-6">
+<a class="hover:text-primary" href="#">Admin</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Restaurants</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Pizza House</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-text-primary font-body-bold">Opening Hours</span>
+</nav>
+<!-- Context Header -->
+<div class="bg-canvas border border-border rounded-[20px] p-6 mb-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 shadow-sm">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-xl overflow-hidden border border-border shadow-sm flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clean, bold, modern pizza restaurant logo featuring a stylized geometric pizza slice in vibrant red and warm yellow colors, set against a pristine white background, suitable for a high-end fast casual dining brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHSo4xoQ_qXWzjIzDfULGYjFzwFwZKFdRfSTKr4SE7yuocVZW51R1NT1XHB-PYS2ImWY5mTD-tTVjk0VVZf2rbdCNkywjhPqTNQw52U2sR9eN0iG0lfDYaXinli09P0YgFibqXDLE0JB-216kxbiP6_zYoAKaJwGPnlEC-2K-E2-5myC3Bv8FMYFCAP3o2sw7tp_HdXPE-4mI0wqnFh2PFdDlVI6fS5ZR8BSzl_hpoG9XZ2b83owhmQz1L5h8XfQLQoeVQXgc100E"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="font-h2 text-h2 text-text-primary">Pizza House</h1>
+<span class="px-2 py-0.5 bg-surface-container text-text-secondary font-small text-small rounded-md border border-border">RST-00024</span>
+</div>
+<div class="flex items-center gap-4 text-text-secondary font-small text-small">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> Time Zone: Europe/Istanbul</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="text-on-surface-variant font-body-bold">Draft: Unsaved Changes</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-4 py-2 text-text-secondary border border-border rounded-lg font-button text-button hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span> Preview
+                    </button>
+<button class="px-4 py-2 text-secondary border border-border rounded-lg font-button text-button hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">fact_check</span> Validate Schedule
+                    </button>
+<button class="px-5 py-2 bg-[#F04424] text-white rounded-lg font-button text-button shadow-sm hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span> Save Opening Hours Draft
+                    </button>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="flex overflow-x-auto border-b border-border mb-8 pb-1 gap-6 hide-scrollbar">
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Overview</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">General Information</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Branding</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Contact and Location</a>
+<a class="font-body-bold text-body-bold text-primary border-b-2 border-primary whitespace-nowrap px-2 pb-2" href="#">Opening Hours</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Page Builder</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Menu</a>
+<a class="font-body-bold text-body-bold text-text-secondary hover:text-primary whitespace-nowrap px-2 pb-2" href="#">Customer Actions</a>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Main Editor Column (8 cols) -->
+<div class="xl:col-span-8 space-y-8">
+<!-- Location Settings -->
+<section class="bg-canvas border border-border rounded-[16px] p-6 shadow-sm">
+<h3 class="font-h3 text-h3 mb-6 pb-4 border-b border-border">Location &amp; Time Settings</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-2">Location Profile</label>
+<select class="w-full p-3 border border-border rounded-[8px] bg-surface-container-lowest focus:ring-2 focus:ring-[#F04424] focus:border-[#F04424] font-body text-body">
+<option>Pizza House Kadıköy</option>
+<option>Pizza House Beşiktaş</option>
+</select>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-2">Operational Time Zone</label>
+<select class="w-full p-3 border border-border rounded-[8px] bg-surface-container-lowest focus:ring-2 focus:ring-[#F04424] focus:border-[#F04424] font-body text-body">
+<option>Europe/Istanbul (UTC+3)</option>
+<option>Europe/London (UTC+0)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Regular Weekly Schedule -->
+<section class="bg-canvas border border-border rounded-[16px] p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-border">
+<h3 class="font-h3 text-h3 text-text-primary">Regular Weekly Schedule</h3>
+<button class="text-primary font-button text-small flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[16px]">content_copy</span> Copy Mon-Fri to All
+                            </button>
+</div>
+<div class="space-y-4">
+<!-- Monday -->
+<div class="flex flex-col md:flex-row md:items-center gap-4 p-4 border border-border rounded-[12px] bg-surface-bright">
+<div class="w-32 flex items-center gap-3">
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-primary appearance-none cursor-pointer translate-x-5" id="mon-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary cursor-pointer" for="mon-toggle"></label>
+</div>
+<span class="font-body-bold text-body text-text-primary">Monday</span>
+</div>
+<div class="flex-1 flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2">
+<input class="p-2 border border-border rounded-[8px] tabular-nums font-body text-body bg-canvas w-28 focus:ring-[#F04424] focus:border-[#F04424]" type="time" value="11:00"/>
+<span class="text-text-secondary">-</span>
+<input class="p-2 border border-border rounded-[8px] tabular-nums font-body text-body bg-canvas w-28 focus:ring-[#F04424] focus:border-[#F04424]" type="time" value="23:00"/>
+</div>
+<label class="flex items-center gap-2 font-small text-small text-text-secondary ml-4 cursor-pointer">
+<input class="rounded border-border text-[#F04424] focus:ring-[#F04424]" type="checkbox"/> Open 24h
+                                    </label>
+</div>
+<button class="text-text-secondary hover:text-primary transition-colors p-2" title="Add split period">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sticky Column (4 cols) -->
+<div class="xl:col-span-4 space-y-6">
+<!-- Preview Card -->
+<div class="sticky top-24 bg-canvas border border-border rounded-[20px] p-6 shadow-sm">
+<h3 class="font-h3 text-h3 mb-4 text-text-primary">Live Public Status</h3>
+<div class="bg-surface-container rounded-[16px] p-4 border border-outline-variant mb-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="w-3 h-3 rounded-full bg-success"></span>
+<span class="font-body-bold text-body text-success">Open Now</span>
+<span class="font-body text-small text-text-secondary ml-auto tabular-nums">Closes at 02:00</span>
+</div>
+<!-- Accordion Preview -->
+<div class="mt-4 bg-canvas rounded-[8px] border border-border overflow-hidden">
+<div class="p-3 bg-surface-bright border-b border-border flex justify-between items-center cursor-pointer">
+<span class="font-body-bold text-small text-text-primary">Weekly Hours</span>
+<span class="material-symbols-outlined text-text-secondary">expand_less</span>
+</div>
+<div class="p-3 font-small text-small space-y-2 tabular-nums">
+<div class="flex justify-between text-text-secondary"><span class="font-body-bold">Monday</span> <span>11:00 - 23:00</span></div>
+<div class="flex justify-between text-text-primary font-body-bold bg-surface-container-low p-1 -mx-1 px-1 rounded"><span class="flex items-center gap-1">Today</span> <span>11:00 - 02:00</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Inline basic toggle CSS for demo -->
+<style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #b51d00;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #b51d00;
+        }
+    </style>
+</body></html>

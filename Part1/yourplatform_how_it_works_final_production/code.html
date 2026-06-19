@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How It Works - YourPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-secondary": "#667085",
+                        "tertiary-container": "#946f00",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#b51d00",
+                        "surface-tint": "#b91e00",
+                        "on-surface-variant": "#5c403a",
+                        "surface-container": "#eceef0",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#dce2f7",
+                        "primary-dark": "#C9341A",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-container": "#db3516",
+                        "error-container": "#ffdad6",
+                        "surface-warm": "#FFF1EB",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#3e0400",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#5c6274",
+                        "success": "#16A34A",
+                        "text-primary": "#111827",
+                        "tertiary": "#765700",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "border": "#E5E7EB",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#906f69",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "danger": "#DC2626",
+                        "on-secondary-fixed-variant": "#404758",
+                        "secondary-container": "#d9dff5",
+                        "surface-variant": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "canvas": "#FFFFFF",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "secondary": "#575e70",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-primary": "#ffb4a5",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-fixed": "#141b2b",
+                        "outline-variant": "#e5beb6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "mobile-shell-max-width": "640px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "button": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "small": ["Inter"],
+                        "body-bold": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 bg-canvas/90 backdrop-blur-md border-b border-border shadow-sm">
+<div class="flex items-center justify-between px-md py-xs max-w-container-max-width mx-auto">
+<div class="flex items-center gap-sm">
+<img alt="YourPlatform Logo" class="h-10 w-10 rounded-md object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLv8571dM2V-yWqp8ltl7ckdx8RrKpXGNZJphD3shBOlDaYC-T9erfxMHsTRdcFQjf3Dr8UfAuS_DYu6eusoGOetltwu1-zRfs3VVmedJXIini-ELBVLvcOr16JSjQxgMWtKysWATMqX0zZ1mkpsE4jc78S68IZx-rIQFYZ3afQp_Kkiz7ZWpRXR7zSp8vI0MgsO-qhoAeX5FaZdtBBetJYHzqhLxd2_n3fgWcSFrjyN8a_LQhIiMvMoc_o"/>
+<span class="font-h2 text-h2 font-black text-text-primary">YourPlatform</span>
+</div>
+<nav class="hidden md:flex gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">How It Works</a>
+<a class="text-text-secondary hover:text-primary transition-colors duration-200" href="#">Features</a>
+<a class="text-text-secondary hover:text-primary transition-colors duration-200" href="#">Products</a>
+<a class="text-text-secondary hover:text-primary transition-colors duration-200" href="#">Examples</a>
+<a class="text-text-secondary hover:text-primary transition-colors duration-200" href="#">Packages</a>
+<a class="text-text-secondary hover:text-primary transition-colors duration-200" href="#">FAQ</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="hidden md:block font-button text-button text-text-secondary hover:text-primary transition-colors duration-200 active:scale-95 transition-transform">View Demo</button>
+<button class="bg-primary text-on-primary font-button text-button px-md py-xs rounded-lg active:scale-95 transition-transform shadow-md hover:bg-primary-dark transition-colors duration-200">Request a Quote</button>
+</div>
+</div>
+</header>
+<main class="pt-[80px]">
+<!-- Hero Section -->
+<section class="max-w-container-max-width mx-auto px-md md:px-xl py-xxl text-center">
+<h1 class="font-display text-display text-text-primary mb-md max-w-3xl mx-auto">You Focus on the Restaurant. We Handle the Complete Digital Setup.</h1>
+<p class="font-body text-body text-text-secondary mb-xl max-w-2xl mx-auto">Our fully managed service ensures your digital presence is built, deployed, and maintained by experts, so you can focus on what you do best—creating amazing food.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+<img class="w-full rounded-xl shadow-lg border border-border object-cover" data-alt="A mobile phone screen displaying a vibrant, high-energy modern fast food menu app interface. Bright red-orange accents, bold dark navy typography. The screen features appetizing pizza photography, large clear 'Order Now' buttons, and a clean, minimalist layout with high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAObuiyablWp4XdO0s3xcGZBeV8YAl4JEREKYg29Uyb6FmuGY8ItYPmPtTi-iwyekf6qiq8xsVOroN0yxnl-03EQXhlIGdWKQxU7gimrffy3lht8FO2sSDvPNxhO0jYgTDPMpR9CbpJGPhZLtbDeJWN4MMAk1uCBNFV5D4IzoiasP7AVPESn4Wsr7GteV41VFf7hGVmY44ZWDTzxj6FVxT8lkXJKuYGIC2NIL3sB7f0fmwlx2sqBn14TGWZfYEoWLFrSH2F1cPT2qo"/>
+<img class="w-full rounded-xl shadow-lg border border-border object-cover mt-lg" data-alt="A modern digital restaurant dashboard interface showing clear, bold analytics metrics. The design is energetic yet professional, featuring a bright red-orange primary color scheme against a clean white background with dark navy text. The interface displays clear data visualizations for order volume and popular items." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl998kMERCzLH5rOSyCPrkOCwMRMh5AOB7bmYNy-jvZdaUj15DQRMA1jtnntd9QJp2d7Aahfhtu6MoKB7itgJvge8bQdabqe61_2-cNExVP4FeG-y4ZMA_mg2_l1DVL6ExQ2DcQ7qCMhm66It8Sm0i2nrrAPJvPNe2hQPmlUsmCytYdErEckMY-e1Qt03Rvvya7jIaxR1hurvMW2J-Edndyfzz8foq0b1GnUCksZvaaPZTTXwV_n6lUbleVMutv41K_nE5ysxpj_s"/>
+<img class="w-full rounded-xl shadow-lg border border-border object-cover" data-alt="A clean, modern mobile web page design for a fast food restaurant. Features high-quality images of meals, a clear hierarchical structure, bold energetic red-orange buttons, and sharp, legible dark navy headings. The design is sleek, professional, and optimized for speed and conversion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClP0e9ozOmrkkuVi2m7IawsQqm6w_pS6zZLYmV2aAM_CLEqJQaX3eEKOHnUbqAy11HHNueEznyoxN8RMZAB4yzCrBc9LSN8GmVvSF6lLn8reWA3ebwUDMxQHcyrOr-jhLdo1bDS6jjPY7zTYkfMeArTbPAmXzxbaP5SjZjV6fhWtenrbTlGHLvHNFKXHGVjm_3OW-FFQFgVwuNKZ2wQwDKLI7BViIxkKygTQ8ulctP-NWGmXquU7Rk3i7GlTegZkXh7kIFNm-z5hg"/>
+<img class="w-full rounded-xl shadow-lg border border-border object-cover mt-lg" data-alt="A digital ordering screen on a mobile device for a fast food brand. The interface is highly appetizing with large images of food, clear pricing in bold text, and a prominent red-orange 'Add to Cart' button. The overall aesthetic balances modern minimalism with energetic food service branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLWUjb8sCY9eKJV0l3vciV7V2xyWsNZvIHxF7CS_enkPdRvONdi9dkbhZOD3P9iqzkx2K1zha2_76yynr-gXd7sV-9LkFQnDy1R11KftN-_UWMGVK6u1pCk59JKUiKQ9nwxh9CrbF5127_9l0iidLDR7XYHBK7Vn6Bl8mrh5a2VCWeU4qShIdXvcixKu7AVti3zhKttj61eU2XahooIjm9JrDa8P978Pa1CtObchM5ewx1JKJDhxkpEIVaWekyP5VYxLGtpvFPx3M"/>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-lg py-md rounded-lg active:scale-95 transition-transform shadow-md hover:bg-primary-dark transition-colors duration-200">Request Managed Setup</button>
+</section>
+<!-- Managed Setup CTA -->
+<section class="bg-primary py-xxl px-md md:px-xl text-center">
+<h2 class="font-h1 text-h1 text-on-primary mb-md max-w-2xl mx-auto">Ready to upgrade your restaurant's digital experience?</h2>
+<p class="font-body text-body text-on-primary/90 mb-xl max-w-xl mx-auto">Let our team handle the technical details while you run the floor.</p>
+<button class="bg-canvas text-primary font-button text-button px-xl py-md rounded-lg active:scale-95 transition-transform shadow-lg hover:bg-surface-bright transition-colors duration-200">Request Managed Setup</button>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full pt-xxl pb-xl bg-inverse-surface grid grid-cols-1 md:grid-cols-3 gap-lg max-w-container-max-width mx-auto px-margin-mobile md:px-xl mt-xxl">
+<div>
+<span class="font-h3 text-h3 font-bold text-surface-container-lowest block mb-md">YourPlatform</span>
+<p class="font-body text-body text-surface-variant">© 2024 YourPlatform. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-md col-span-1 md:col-span-2 md:justify-end">
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Platform</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Company</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Contact</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Privacy</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Terms</a>
+</div>
+</footer>
+</body></html>

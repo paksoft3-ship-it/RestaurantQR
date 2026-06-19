@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Branding Editor - Pizza House</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f7f9fb",
+                        "text-primary": "#111827",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#404758",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-dark": "#C9341A",
+                        "on-surface-variant": "#5c403a",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed": "#dce2f7",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "outline-variant": "#e5beb6",
+                        "on-surface": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-warm": "#FFF1EB",
+                        "primary": "#b51d00",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "surface-tint": "#b91e00",
+                        "secondary": "#575e70",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-container": "#5c6274",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "success": "#16A34A",
+                        "border": "#E5E7EB",
+                        "on-primary-fixed": "#3e0400",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed": "#141b2b",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-container": "#fffbff",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "outline": "#906f69",
+                        "inverse-primary": "#ffb4a5",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#db3516",
+                        "on-error-container": "#93000a",
+                        "text-secondary": "#667085",
+                        "secondary-container": "#d9dff5",
+                        "on-secondary": "#ffffff",
+                        "danger": "#DC2626",
+                        "tertiary-fixed": "#ffdf9e",
+                        "canvas": "#FFFFFF",
+                        "tertiary": "#765700",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "tertiary-container": "#946f00",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "md": "16px",
+                        "mobile-shell-max-width": "640px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "container-max-width": "1280px"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "small": ["Inter"],
+                        "h1-mobile": ["Manrope"],
+                        "button": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "h3": ["Manrope"]
+                    },
+                    fontSize: {
+                        "display": ["38px", { lineHeight: "42px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "h1": ["30px", { lineHeight: "35px", letterSpacing: "-0.01em", fontWeight: "800" }],
+                        "small": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "h1-mobile": ["26px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "800" }],
+                        "button": ["15px", { lineHeight: "20px", fontWeight: "700" }],
+                        "h2": ["24px", { lineHeight: "30px", letterSpacing: "-0.01em", fontWeight: "700" }],
+                        "body": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-bold": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+                        "h3": ["19px", { lineHeight: "25px", letterSpacing: "0em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-text-primary font-body antialiased flex">
+<!-- SideNavBar (Predicted Component) -->
+<nav class="fixed left-0 top-0 h-full w-60 flex flex-col p-md z-40 bg-secondary-fixed-dim shadow-md hidden md:flex">
+<div class="mb-lg">
+<h3 class="font-h3 text-h3 font-bold text-on-secondary-fixed">YourPlatform</h3>
+<p class="font-small text-small text-on-secondary-fixed-variant">Admin Console</p>
+</div>
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg mb-lg hover:opacity-90 transition-opacity">
+            New Restaurant
+        </button>
+<div class="flex-1 space-y-xs overflow-y-auto">
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm bg-primary text-on-primary rounded-lg border-l-4 border-primary-fixed transition-transform translate-x-1" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-body text-body">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body text-body">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-body text-body">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body text-body">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-body text-body">Platform Settings</span>
+</a>
+</div>
+<div class="mt-auto space-y-xs pt-md border-t border-secondary-fixed">
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body text-body">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-md py-sm text-on-secondary-fixed-variant hover:bg-secondary-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body text-body">Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-60 flex flex-col min-h-screen">
+<!-- TopAppBar (Predicted Component) -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-xl py-md bg-canvas border-b border-border flat no shadows">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-h2 text-h2 font-extrabold text-primary">YourPlatform Admin</h2>
+<!-- Search Bar -->
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-md py-xs ml-lg border border-border">
+<span class="material-symbols-outlined text-text-secondary mr-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body font-body text-text-primary placeholder-text-secondary w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-lg">
+<a class="text-text-secondary font-body-bold text-body-bold hover:text-primary transition-colors" href="#">Overview</a>
+<a class="text-text-secondary font-body-bold text-body-bold hover:text-primary transition-colors" href="#">General Info</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-body-bold text-body-bold opacity-80 transition-opacity" href="#">Branding</a>
+<a class="text-text-secondary font-body-bold text-body-bold hover:text-primary transition-colors" href="#">Menu</a>
+<a class="text-text-secondary font-body-bold text-body-bold hover:text-primary transition-colors" href="#">Orders</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hidden sm:block px-md py-sm border border-secondary text-text-primary font-button text-button rounded-lg hover:bg-surface-container transition-colors">
+                    Save Branding Draft
+                </button>
+<button class="px-md py-sm bg-primary text-on-primary font-button text-button rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+                    Submit for Review
+                </button>
+<img alt="Admin user avatar" class="w-10 h-10 rounded-full object-cover border border-border" data-alt="A professional headshot of an administrative user in a brightly lit modern office environment, high resolution, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCojNNG7q3amj_2eWynagX4JyTBH76PiAyuezrNDubpxbI2IiqlrtUzLgvt86CqoxKFZML75ksiv3Qrv_cH2V3wqYJelSivRGSVDhfdwMuoPkTatgu4JViHXm_cXrrpPnP3DkvXjjz9R-6UYU_8RB8_arkGZzamJrtrmTyiva8iF1epnJkKhtQ5JnNjdWLNysVHYYpSZBLA3zNqaeUy4oj16rMzhbbbnOksODhJn9-DsIVenPM_02ds-ebg98WyJakdkFDCiq8Kjp0"/>
+</div>
+</header>
+<!-- Restaurant Context Header & Tabs -->
+<div class="bg-canvas border-b border-border px-xl pt-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 bg-surface-container rounded-lg border border-border flex items-center justify-center p-sm">
+<img alt="Pizza House Logo" class="max-w-full max-h-full object-contain" data-alt="A bold, modern fast food logo featuring a stylized pizza slice in vibrant red and orange tones on a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7m6fWwA-ATWJDDo6DT_A95RmBPXibT5jcAIjtENjGZZRcxofl8PXyd1bb7ad7J1--8LcES4d-h_WwZS_vvteTYvulhasJBwnivwp_QQ0Zy6WaB_l3F_DCAB4gMfOAiQRs46r7B06nsZaLLbpWhZfTpmM4hDou2qWi8AkxjmArL8XQG1cFmcS433tlsoNricJkKNiF8cTXIsID-c3GI-yQr-SEihQ-N72D-w3Q2DwAGPzW_KMJffRwM59JxrETG38UW5um7rKJztk"/>
+</div>
+<div>
+<h1 class="font-h1 text-h1 text-text-primary flex items-center gap-sm">
+                            Pizza House 
+                            <span class="font-small text-small text-text-secondary bg-surface-container px-xs py-base rounded">RST-00024</span>
+</h1>
+<p class="font-body text-body text-text-secondary mt-base">Editing Brand Configuration</p>
+</div>
+</div>
+<div class="flex items-center gap-sm w-full md:w-auto">
+<button class="px-md py-sm border border-border text-text-secondary font-button text-button rounded-lg hover:bg-surface-container transition-colors flex-1 md:flex-none">
+                        Cancel
+                    </button>
+<button class="px-md py-sm border border-primary text-primary font-button text-button rounded-lg hover:bg-primary/5 transition-colors flex items-center justify-center gap-xs flex-1 md:flex-none">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                        Preview Branding
+                    </button>
+<button class="px-md py-sm bg-primary text-on-primary font-button text-button rounded-lg hover:opacity-90 transition-opacity shadow-sm flex items-center justify-center gap-xs flex-1 md:flex-none">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Save Branding Draft
+                    </button>
+</div>
+</div>
+<!-- Workspace Tabs -->
+<div class="flex overflow-x-auto hide-scrollbar gap-lg">
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Overview</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">General Information</a>
+<a class="font-body-bold text-body-bold text-primary border-b-2 border-primary pb-sm whitespace-nowrap" href="#">Branding</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Contact and Location</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Page Builder</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Menu</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Customer Actions</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">QR Codes</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">NFC Products</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Campaigns</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="font-body-bold text-body-bold text-text-secondary pb-sm whitespace-nowrap hover:text-primary transition-colors" href="#">Activity</a>
+</div>
+</div>
+<!-- Branding Status Bar -->
+<div class="bg-surface-warm px-xl py-sm border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-bold text-body-bold text-primary-dark">Draft Changes</span>
+<span class="font-small text-small text-text-secondary border-l border-border pl-sm ml-sm">Last saved 12 mins ago</span>
+</div>
+<span class="font-small text-small bg-canvas border border-border px-xs py-base rounded text-text-primary">2 changes</span>
+</div>
+<!-- Editor Content -->
+<div class="p-xl grid grid-cols-1 xl:grid-cols-12 gap-xl flex-1 items-start">
+<!-- Left Column: Main Editor (8 cols) -->
+<div class="xl:col-span-8 space-y-xl">
+<!-- Visual Direction -->
+<section class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<div class="mb-md">
+<h2 class="font-h2 text-h2 text-text-primary">Visual Direction</h2>
+<p class="font-body text-body text-text-secondary">Select the overarching aesthetic for this restaurant's digital presence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Selected Card -->
+<div class="border-2 border-primary rounded-xl p-md bg-primary/5 cursor-pointer relative">
+<div class="absolute top-sm right-sm bg-primary text-on-primary rounded-full p-base">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="h-24 bg-surface-container rounded-lg mb-sm border border-border/50 relative overflow-hidden">
+<img alt="Modern Fast Food Theme" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A stylized graphic showing abstract fast food shapes in vibrant, high-contrast reds and yellows on a clean white background, conveying speed and modern energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAizyPcvfyPX58FmrhFNQNhfInhd4Sl3ns-SH-bNtESERKmkKu-rWG0Z9LqOf1pmV0dzrAGDVn18Kbpq7t854VgMimITJVF3R9ORvVUhiXKsxz9pAMtD8eEM2mQdrvkZSiLTdNI1egdYsna3ofBiY1KbDH2DmMFx_MeYR1ZpagBUrYyN2crw5rToCNrksIXmTtG-An2nj1W3d_M8GL3X6_ZxznCRhodoKW4MUnyDfqPzqSjXPyi5V5ViTO--LxKXppKN_uouxumhTI"/>
+</div>
+<h3 class="font-h3 text-h3 text-text-primary mb-base">Modern Fast Food</h3>
+<p class="font-small text-small text-text-secondary">High contrast, bold typography, speed-focused layout.</p>
+</div>
+<!-- Unselected Card -->
+<div class="border border-border rounded-xl p-md hover:border-text-secondary transition-colors cursor-pointer bg-canvas">
+<div class="h-24 bg-surface-container rounded-lg mb-sm border border-border/50 relative overflow-hidden">
+<img alt="Warm Mediterranean Theme" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A soft, warm-toned graphic featuring abstract rustic textures and muted olive greens and terracotta, evoking a relaxed, artisanal mediterranean dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3OluItwoqTUfD5tfl3qX9hJaW9xIV7J3K4Orrck3mCgUNJopGweUhxCgshLf43kZ0kBfow_giyMdBBBTFGybXtifG1ZJvhK33t3Up15MQHEBVxlqm_G30UaoxBH9V0TR2zUg7TemcAI59sF_eQQ9wibNLWfsZzxw7MEiaoYaxJJwinIBEb4xfqVwARIAiLlPw2hD7yHjyl0HSigFyU4bDaUSVMuZ9fIprvnaDLfkMsGIss1erjqRfBrU84uD3F-CR9vCzKHX4fdk"/>
+</div>
+<h3 class="font-h3 text-h3 text-text-primary mb-base">Warm Mediterranean</h3>
+<p class="font-small text-small text-text-secondary">Earthy tones, soft edges, relaxed pacing.</p>
+</div>
+<!-- Unselected Card -->
+<div class="border border-border rounded-xl p-md hover:border-text-secondary transition-colors cursor-pointer bg-canvas">
+<div class="h-24 bg-surface-container rounded-lg mb-sm border border-border/50 relative overflow-hidden">
+<img alt="Premium Dining Theme" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A sleek, dark-themed abstract graphic with subtle gold accents and deep charcoal tones, conveying exclusivity and high-end premium dining." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1vyoypYwz6m-F9atQrDgbMNgC92MaotWR4gMdIw2Ow2R88A2KRBrF1U8kGDUeQR2NZizINbmYwP5ZU4tCB9aWAzuNdIzJESHv1JlkmrSWIbTPGNCRgHFzPsEV0z7134QzWBRDOeQz69ej1UCgMY5xAISa3-BMbxIzDnjucmvQfOrRaKsqCQo02Q81ESNHLGc_3SMRBKP8P1tCzUEORslxhIK1-3Rl1auf4lmrsM_994GZIZeOenCTJZFMY7CiOBuj7b49TL2_zFM"/>
+</div>
+<h3 class="font-h3 text-h3 text-text-primary mb-base">Premium Dining</h3>
+<p class="font-small text-small text-text-secondary">Dark mode default, elegant serifs, minimalist space.</p>
+</div>
+</div>
+</section>
+<!-- Core Brand Assets -->
+<section class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<div class="mb-md">
+<h2 class="font-h2 text-h2 text-text-primary">Core Brand Assets</h2>
+<p class="font-body text-body text-text-secondary">Upload high-resolution files. SVG or transparent PNG preferred.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Primary Logo -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary flex justify-between">
+                                Primary Logo
+                            </label>
+<div class="border border-border rounded-xl p-md flex items-center gap-md bg-surface-bright">
+<div class="w-16 h-16 bg-canvas border border-border rounded flex items-center justify-center p-sm">
+<img alt="Current Primary Logo" class="max-w-full max-h-full object-contain" data-alt="A bold, modern fast food logo featuring a stylized pizza slice in vibrant red and orange tones on a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW94SaNVU58OIXl-5riUurxtEFH4UVUFwXNLEnvgzdl8_kS-kkar8_ZrzBiqWoAqb-GVb39-1Ji3jljKCQpfKTfQJg606Fz70eUcn4Q4h1OFZht5jOmqFp-dd8yO5gzahnq1lnzHMyAhrxPbzKFwLiaiXZbJu2B3xAg8S78boIHOa6BVUaK8qXKNTVApHjRGi3GmepQdzNWTC9WOZwE3vCp9LVINtz4PXfOLP0p9K3ScadxWk880WOHfuiSr90ug3ncyzhrrXuWGU"/>
+</div>
+<div class="flex-1">
+<p class="font-small text-small text-text-primary mb-xs">pizza_house_primary_v2.png</p>
+<div class="flex gap-sm">
+<button class="font-small text-small text-primary hover:underline">Replace</button>
+<button class="font-small text-small text-danger hover:underline">Remove</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark Mode Logo -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary flex justify-between">
+                                Logo for Dark Backgrounds
+                                <span class="text-danger font-small text-small">*Required</span>
+</label>
+<div class="border border-dashed border-primary rounded-xl p-md flex flex-col items-center justify-center bg-primary/5 h-[114px] cursor-pointer hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary mb-xs">upload_file</span>
+<p class="font-small text-small text-primary font-body-bold">Click to upload or drag and drop</p>
+<p class="font-small text-small text-text-secondary mt-base">SVG, PNG up to 5MB</p>
+</div>
+</div>
+<!-- Brand Symbol -->
+<div class="space-y-sm md:col-span-2">
+<label class="font-body-bold text-body-bold text-text-primary flex justify-between">
+                                Brand Symbol / Favicon
+                            </label>
+<div class="border border-dashed border-border rounded-xl p-md flex flex-col items-center justify-center bg-surface-bright h-[114px] cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-text-secondary mb-xs">upload_file</span>
+<p class="font-small text-small text-text-primary font-body-bold">Click to upload or drag and drop</p>
+<p class="font-small text-small text-text-secondary mt-base">Square aspect ratio, 512x512px</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Typography -->
+<section class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<div class="mb-md">
+<h2 class="font-h2 text-h2 text-text-primary">Typography</h2>
+<p class="font-body text-body text-text-secondary">Define the font families for primary headings and body text.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-lg">
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">Headings Font</label>
+<select class="w-full border border-border rounded-lg p-sm bg-surface-bright text-text-primary font-body focus:ring-2 focus:ring-primary focus:border-primary">
+<option selected="">Manrope</option>
+<option>Inter</option>
+<option>Roboto</option>
+<option>Oswald</option>
+</select>
+</div>
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">Body Font</label>
+<select class="w-full border border-border rounded-lg p-sm bg-surface-bright text-text-primary font-body focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Manrope</option>
+<option selected="">Inter</option>
+<option>Roboto</option>
+<option>Open Sans</option>
+</select>
+</div>
+</div>
+<!-- Typography Preview -->
+<div class="border border-border rounded-xl p-lg bg-surface-container">
+<p class="font-small text-small text-text-secondary mb-md uppercase tracking-wider">Preview</p>
+<h1 class="font-h1 text-h1 text-text-primary mb-sm">Pizza House Menu</h1>
+<h3 class="font-h3 text-h3 text-text-primary mb-xs">Classic Pepperoni</h3>
+<p class="font-body text-body text-text-secondary mb-md">Our signature dough topped with rich tomato sauce, premium mozzarella, and double-layered pepperoni slices. Baked to crispy perfection.</p>
+<button class="px-md py-sm bg-primary text-on-primary font-button text-button rounded-lg">Order Now - $18.99</button>
+</div>
+</section>
+<!-- Brand Color System -->
+<section class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<div class="mb-md">
+<h2 class="font-h2 text-h2 text-text-primary">Brand Color System</h2>
+<p class="font-body text-body text-text-secondary">Set the foundational colors used across the digital menu and app.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Primary Color -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">Primary Action</label>
+<div class="flex items-center gap-sm border border-border rounded-lg p-xs bg-surface-bright focus-within:ring-2 focus-within:ring-primary">
+<div class="w-8 h-8 rounded border border-border" style="background-color: #F04424;"></div>
+<input class="w-full border-none bg-transparent p-0 focus:ring-0 font-body text-body text-text-primary uppercase" type="text" value="#F04424"/>
+</div>
+</div>
+<!-- Dark Color -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">Dark Text/Headings</label>
+<div class="flex items-center gap-sm border border-border rounded-lg p-xs bg-surface-bright focus-within:ring-2 focus-within:ring-primary">
+<div class="w-8 h-8 rounded border border-border" style="background-color: #111827;"></div>
+<input class="w-full border-none bg-transparent p-0 focus:ring-0 font-body text-body text-text-primary uppercase" type="text" value="#111827"/>
+</div>
+</div>
+<!-- Background -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">App Background</label>
+<div class="flex items-center gap-sm border border-border rounded-lg p-xs bg-surface-bright focus-within:ring-2 focus-within:ring-primary">
+<div class="w-8 h-8 rounded border border-border" style="background-color: #F9FAFB;"></div>
+<input class="w-full border-none bg-transparent p-0 focus:ring-0 font-body text-body text-text-primary uppercase" type="text" value="#F9FAFB"/>
+</div>
+</div>
+<!-- Surface -->
+<div class="space-y-sm">
+<label class="font-body-bold text-body-bold text-text-primary">Card Surface</label>
+<div class="flex items-center gap-sm border border-border rounded-lg p-xs bg-surface-bright focus-within:ring-2 focus-within:ring-primary">
+<div class="w-8 h-8 rounded border border-border" style="background-color: #FFFFFF;"></div>
+<input class="w-full border-none bg-transparent p-0 focus:ring-0 font-body text-body text-text-primary uppercase" type="text" value="#FFFFFF"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Preview & Readiness (4 cols) -->
+<div class="xl:col-span-4 space-y-xl sticky top-[100px]">
+<!-- Brand Readiness Checklist -->
+<div class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-xs">Brand Readiness</h3>
+<div class="flex items-center justify-between mb-md">
+<p class="font-body text-body text-text-secondary">10 of 13 items complete</p>
+<div class="w-24 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 76%;"></div>
+</div>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm text-text-primary font-body text-body">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                            Primary Logo Uploaded
+                        </li>
+<li class="flex items-center gap-sm text-text-primary font-body text-body">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+                            Brand Colors Defined
+                        </li>
+<li class="flex items-center gap-sm text-danger font-body-bold text-body-bold bg-error-container/30 p-xs rounded">
+<span class="material-symbols-outlined text-danger text-[20px]">error</span>
+                            Missing Dark Mode Logo
+                        </li>
+<li class="flex items-center gap-sm text-text-secondary font-body text-body">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">radio_button_unchecked</span>
+                            Mobile Preview Reviewed
+                        </li>
+</ul>
+</div>
+<!-- Changes in This Draft -->
+<div class="bg-canvas p-lg rounded-xl border border-border shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-md">Changes in This Draft</h3>
+<ul class="space-y-md relative before:absolute before:inset-y-0 before:left-[9px] before:w-[2px] before:bg-surface-container">
+<li class="relative pl-xl">
+<span class="absolute left-0 top-[6px] w-5 h-5 rounded-full bg-primary-container border-2 border-canvas z-10"></span>
+<p class="font-body-bold text-body-bold text-text-primary">Primary Color updated</p>
+<p class="font-small text-small text-text-secondary">Changed from #D32F2F to #F04424</p>
+</li>
+<li class="relative pl-xl">
+<span class="absolute left-0 top-[6px] w-5 h-5 rounded-full bg-surface-container border-2 border-canvas z-10"></span>
+<p class="font-body-bold text-body-bold text-text-primary">Typography changed</p>
+<p class="font-small text-small text-text-secondary">Headings set to Manrope</p>
+</li>
+</ul>
+</div>
+<!-- Branding Preview (Mobile Device Frame) -->
+<div class="bg-surface-container p-md rounded-xl border border-border flex flex-col items-center">
+<p class="font-body-bold text-body-bold text-text-secondary mb-md self-start w-full text-center">Live Preview</p>
+<!-- Phone Frame -->
+<div class="w-[300px] h-[600px] bg-canvas rounded-[32px] border-[8px] border-text-primary overflow-hidden relative shadow-lg">
+<!-- Top Bar (Mock) -->
+<div class="h-6 bg-canvas flex justify-between items-center px-lg pt-xs">
+<span class="font-small text-[10px] font-bold">9:41</span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[12px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[12px]">wifi</span>
+<span class="material-symbols-outlined text-[12px]">battery_full</span>
+</div>
+</div>
+<!-- App Content Mockup -->
+<div class="h-full flex flex-col bg-[#F9FAFB]">
+<!-- Header -->
+<div class="px-md py-sm bg-canvas flex items-center justify-between shadow-sm z-10 relative">
+<img alt="Pizza House Logo Preview" class="h-8 w-auto" data-alt="A bold, modern fast food logo featuring a stylized pizza slice in vibrant red and orange tones on a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWA5AJmeWMgc-0WKD4cZ8a-yuLw-soR1stctzG8YW9Fw16XnCqIU3qe8Wnow6Awfl_p0XOCrKvp_RtGBvIy89cxk-vBzBk_JAoPqV_mkSQWIqFCr85_HejmAY8kjxEqSKDuqr2TBMAEr--a4GFSJKUhcZNI0Unfj7c7vv7aayAkzgomcDOeRGepDq7wh6nrU_uvT0UHRUW17dur2VsWQH-fEtE9Rva8yZDJ_3LPmx48qortuyDL8vFTuxgiVNSKPkz541jGnSfxv4"/>
+<span class="material-symbols-outlined text-text-primary">menu</span>
+</div>
+<div class="flex-1 overflow-y-auto pb-20">
+<!-- Hero Image -->
+<div class="h-48 relative mb-md">
+<img alt="Hero Pizza Image" class="w-full h-full object-cover" data-alt="A highly appetizing, close-up shot of a freshly baked pepperoni pizza with melting cheese stretching, lit by warm, inviting light in a modern fast food setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAujWxVSwTlqPSidBaz09i9nE_n8wSDgVgPEWTs30Ls1l9c6ndV0zuFbvU9GI4_42uqCGd_0ojbtR8bPaNHxa2nSID4_VBELg8OgnkNMgZSjfKRbtptu5WtoOv4V4opGMBTiFTxA4A6zWLZhumYgjIgYrBzNtrmmmKv_KZlshYi0mEYoQu3Qhz1l1j0Kf4yJnbEP8YgdfLcbwev6RxR5gHJyJPGPw70PseHJkO-jiZfnMibRcZiNPSXxiAX6hMKyO-jMPwOHOM8WO0"/>
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+<h2 class="absolute bottom-md left-md font-display text-[24px] text-white leading-tight">Hot &amp; Ready.<br/>Order Now.</h2>
+</div>
+<!-- Four Primary Actions Grid -->
+<div class="px-md grid grid-cols-2 gap-sm mb-lg">
+<div class="bg-[#F04424] rounded-lg p-sm flex flex-col items-center justify-center h-20 shadow-sm">
+<span class="material-symbols-outlined text-white mb-1">restaurant_menu</span>
+<span class="font-button text-[12px] text-white">Menu</span>
+</div>
+<div class="bg-canvas border border-border rounded-lg p-sm flex flex-col items-center justify-center h-20 shadow-sm">
+<span class="material-symbols-outlined text-text-primary mb-1">local_shipping</span>
+<span class="font-button text-[12px] text-text-primary">Delivery</span>
+</div>
+</div>
+<!-- Menu Fragment -->
+<div class="px-md">
+<h3 class="font-h3 text-[18px] text-[#111827] mb-sm">Popular Items</h3>
+<div class="bg-canvas rounded-lg border border-border p-sm flex gap-sm mb-sm shadow-sm">
+<img alt="Item image" class="w-16 h-16 rounded object-cover" data-alt="A small, appetizing square photo of a classic pepperoni pizza slice on a clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtU3EwmyjygpYVItNyhdNpX24GCNgQPZ0QE2VYD8nGFEmOF_Uoud91SY0gIzEFvFbQS0jnA6kf_csiY74cO3CQFiMx4lG2t8CejalKYTEjl_2-Kbb7PsQeIGFYT3Arbj7wkysyW3FfmrEEMsNxUuR7_ckzDVq7a2XnW-3ETfOphXZlFo1egqiMC_pS8spRsX9IGsB7J5YOe4JeueYsLphbH1SUapGaiAmANtWHPtPP2t63Lk4cASs8CHqcBMCys-OUOIzZzwwuwQc"/>
+<div class="flex-1">
+<h4 class="font-body-bold text-[14px] text-text-primary">Classic Pepperoni</h4>
+<p class="font-body-bold text-[14px] text-[#F04424] mt-1">$18.99</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

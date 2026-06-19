@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza House | Freshly Baked, Made with Love</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "text-secondary": "#667085",
+                    "inverse-surface": "#2d3133",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-fixed-variant": "#8e1500",
+                    "on-primary-container": "#fffbff",
+                    "surface-tint": "#b91e00",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed-dim": "#f7be2b",
+                    "tertiary": "#765700",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#dce2f7",
+                    "on-tertiary-fixed-variant": "#5b4300",
+                    "canvas": "#FFFFFF",
+                    "primary-dark": "#C9341A",
+                    "surface-warm": "#FFF1EB",
+                    "surface-container": "#eceef0",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#575e70",
+                    "danger": "#DC2626",
+                    "background": "#f7f9fb",
+                    "success": "#16A34A",
+                    "secondary-fixed-dim": "#c0c6db",
+                    "outline-variant": "#e5beb6",
+                    "on-tertiary-fixed": "#261a00",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "text-primary": "#111827",
+                    "secondary-container": "#d9dff5",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface": "#191c1e",
+                    "on-secondary-fixed-variant": "#404758",
+                    "border": "#E5E7EB",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary-fixed": "#ffdf9e",
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-container": "#5c6274",
+                    "outline": "#906f69",
+                    "primary-container": "#db3516",
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#b51d00",
+                    "on-primary-fixed": "#3e0400",
+                    "inverse-primary": "#ffb4a5",
+                    "primary-fixed": "#ffdad3",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#946f00",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#5c403a",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary-fixed": "#141b2b",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "2xl": "16px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "margin-mobile": "20px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "container-max-width": "1280px",
+                    "base": "4px",
+                    "md": "16px",
+                    "xxl": "48px",
+                    "xs": "8px",
+                    "sm": "12px",
+                    "mobile-shell-max-width": "640px"
+            },
+            "fontFamily": {
+                    "h3": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "display": ["Manrope"],
+                    "small": ["Inter"],
+                    "body": ["Inter"],
+                    "h2": ["Manrope"],
+                    "button": ["Inter"],
+                    "h1-mobile": ["Manrope"],
+                    "body-bold": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                    "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container font-body text-on-surface">
+<!-- Mobile Shell Container -->
+<main class="relative mx-auto min-h-screen max-w-[mobile-shell-max-width] bg-background shadow-2xl overflow-hidden pb-20">
+<!-- 1. TopAppBar (Shared Component Logic) -->
+<header class="fixed top-0 w-full max-w-[640px] z-50 bg-surface flex justify-between items-center h-14 px-margin-mobile border-b border-border">
+<button class="w-10 h-10 flex items-center justify-start text-on-surface active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2-mobile text-primary tracking-tight">Pizza House</h1>
+<div class="flex items-center gap-1 text-sm font-button text-on-surface-variant hover:bg-surface-container transition-colors px-2 py-1 rounded-lg">
+<span>EN</span>
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span>
+</div>
+</header>
+<!-- Spacer for fixed header -->
+<div class="h-14"></div>
+<!-- 2. Strong Hero Section -->
+<section class="relative h-[440px] w-full overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A close-up, high-angle shot of a piping hot artisanal pepperoni pizza with melting mozzarella and fresh basil leaves, resting on a dark rustic wooden table. The lighting is dramatic and warm, emphasizing the crispy texture of the crust and the glistening oils of the toppings. Deep shadows and a moody atmosphere create a premium fast-food aesthetic, with rich reds and golden yellows dominating the color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD_oteYA22ZC8K8rhIj4bjYM_janmu6IpD29FQAXuQQh1KFuQmuiWrMZ7mGbGVntptaKvR6zwVxfLXobaHUfiPdfquWEQdNfhpbp01Ub7C78orp9GEK2wSAB9IwHgIC8N9yayNaFMjvMi_dyBuqa9Eb4OnNLAPdE5f3buyP8nF1gknsVgLAKUYVb5gJ0y43FE_NqzIehnDUeXtFRF0Xfx8jU9rYztjlewt3rW2NF9QXd3JzdV4aJzEN_AHClphEZrogWBs1KGame0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-text-primary via-text-primary/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-margin-mobile text-white">
+<div class="flex items-center gap-2 mb-3">
+<span class="flex items-center gap-1.5 px-3 py-1 bg-success/90 backdrop-blur-md rounded-full text-[12px] font-bold uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                        Open Now
+                    </span>
+</div>
+<h2 class="font-h1-mobile text-h1-mobile mb-1">Pizza House</h2>
+<p class="font-body text-surface-container mb-2 opacity-90 italic">Freshly Baked, Made with Love</p>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm opacity-80">
+<span class="font-body">Pizza · Burgers · Pasta</span>
+<span class="w-1 h-1 bg-white rounded-full"></span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[#FFC533] text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">4.8</span>
+<span class="text-xs">(260 reviews)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. 2x2 Primary Action Grid -->
+<section class="px-margin-mobile -mt-8 relative z-10 grid grid-cols-2 gap-3 mb-8">
+<button class="flex flex-col items-center justify-center gap-2 h-[120px] bg-primary text-white rounded-2xl shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]" data-icon="phone" style="font-variation-settings: 'FILL' 1;">phone</span>
+<span class="font-button text-button">Call Order</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 h-[120px] bg-text-primary text-white rounded-2xl shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]" data-icon="restaurant_menu" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-button text-button">Pick Your Meal</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 h-[120px] bg-white border border-border rounded-2xl shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-primary" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-button text-button text-text-primary">Online Order</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 h-[120px] bg-white border border-border rounded-2xl shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-primary" data-icon="location_on">location_on</span>
+<span class="font-button text-button text-text-primary">Visit Us</span>
+</button>
+</section>
+<!-- 4. Popular Choices -->
+<section class="mb-10">
+<div class="px-margin-mobile flex justify-between items-end mb-4">
+<h3 class="font-h3 text-h3 text-text-primary">Popular Choices</h3>
+<a class="text-sm font-button text-primary hover:underline transition-all" href="#">View Full Menu</a>
+</div>
+<div class="flex flex-col gap-3 px-margin-mobile">
+<!-- Card 1 -->
+<div class="flex gap-4 p-3 bg-white rounded-2xl border border-border shadow-sm active:bg-surface-container transition-colors">
+<div class="relative w-24 h-24 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-xl" data-alt="A top-down view of a classic Margherita pizza slice on a ceramic plate, showing vibrant red tomato sauce, melted pools of white mozzarella, and fresh green basil leaves. The lighting is clean and bright, emphasizing the fresh ingredients. The background is a clean white stone surface, fitting a modern high-contrast restaurant brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaWKduOflBAygZn-ICEV9vR1UQsQoYITUsk3RvF_hKe5ENBVjnGeuL_TYQisuuByOTjX1EW6GRC9Z-efPtyKWXOW2zq7mCj7AFpBC2IgguAYpIiQp_0TwMYgXRA3jwg4iQFNnGDTXVVPU1wDWt8sv7sUtRO7oxnTRZycfcmhPgiBb83WdM0I8ieJB7h7bMeC6hvRxq6F6MYCOtjFOZEsXTwXUwLMKUFcgJR7rnd05VwqcBRuXOV5hRHamr6OhMrnGyZxxLBXDAhd0"/>
+<span class="absolute top-1 left-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Popular</span>
+</div>
+<div class="flex flex-col justify-between flex-grow py-1">
+<div>
+<h4 class="font-h3 text-[17px] text-text-primary">Margherita Pizza</h4>
+<p class="text-xs text-text-secondary line-clamp-1">San Marzano tomatoes, fresh mozzarella, basil.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-bold text-primary">₺240</span>
+<span class="material-symbols-outlined text-text-secondary" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex gap-4 p-3 bg-white rounded-2xl border border-border shadow-sm active:bg-surface-container transition-colors">
+<div class="relative w-24 h-24 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-xl" data-alt="A gourmet BBQ chicken burger featuring a thick flame-grilled patty, melted cheddar cheese, crispy onion rings, and tangy BBQ sauce dripping down the sides. The bun is toasted to a golden brown and sprinkled with sesame seeds. The lighting is professional and high-key, creating an appetizing and energetic mood within a modern corporate-fast food design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA260xYrjqlNBQalGSrYlGDGkSLyHJYAuNJMAUSv_CpyTRB56Rrt27gG1AwYNhuGFFkzAuQO6R1kRXP4fo-LFOec0bur88nh9p3yFEtnifpRw8iDZYKrwa85QCqe8EKh6xVVHFEZzoFgTp4A81Ufb36nf_DATlojsnpBeDhrw5eKbRiL-6bw74S3IL4CoR4FqbCcCVXgk4QKd8vac_kgbSouyynz1t8J0_1XQV82ipoUEkv06klb2K4Z5-4O691TtwoNBFYqho_0Gc"/>
+<span class="absolute top-1 left-1 bg-tertiary-container text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Chef's Choice</span>
+</div>
+<div class="flex flex-col justify-between flex-grow py-1">
+<div>
+<h4 class="font-h3 text-[17px] text-text-primary">BBQ Chicken Burger</h4>
+<p class="text-xs text-text-secondary line-clamp-1">Grilled chicken, smoky bbq, cheddar, red onion.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-bold text-primary">₺285</span>
+<span class="material-symbols-outlined text-text-secondary" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex gap-4 p-3 bg-white rounded-2xl border border-border shadow-sm active:bg-surface-container transition-colors">
+<div class="relative w-24 h-24 flex-shrink-0">
+<img class="w-full h-full object-cover rounded-xl" data-alt="A beautiful bowl of creamy chicken fettuccine pasta, garnished with cracked black pepper and freshly shaved parmesan cheese. The creamy white sauce contrasts perfectly with the golden chicken pieces. Soft, natural lighting creates a warm and inviting feel, consistent with a premium and energetic food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7qf1sENp2ZSTfkarXBc-e25qNPp-7SUVgziruKb2dH_kFE6gA2EpvSC3EKPPm3niLPF2OPHuAbOaP25GbVJPaXgqhcYiZV7BN-wA0CkYkFKjUUM7WAErxZaWgtxjtXyrt2s93tSQP-8W_ONKFcs6ZSzUNdaDf9mWz9PWWFQRdlFoGbIi6ARqtBZ7oQdiD2smFtKyEbtfNIapBr1c4v04Ma35PtXXsVbAEGExx3bd5sOViV6l2I8NRHkllfMUx4cwI7hb2KA8YRSI"/>
+</div>
+<div class="flex flex-col justify-between flex-grow py-1">
+<div>
+<h4 class="font-h3 text-[17px] text-text-primary">Creamy Chicken Pasta</h4>
+<p class="text-xs text-text-secondary line-clamp-1">Fettuccine, tender chicken, mushrooms, cream.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-bold text-primary">₺260</span>
+<span class="material-symbols-outlined text-text-secondary" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Scan & Win -->
+<section class="px-margin-mobile mb-10">
+<div class="bg-primary-container p-6 rounded-2xl shadow-xl overflow-hidden relative group active:scale-[0.98] transition-transform">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-3">
+<div class="p-2 bg-tertiary-fixed rounded-xl border-4 border-white/20">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[32px]" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<h3 class="font-h2 text-h2-mobile text-white">Scan &amp; Win</h3>
+</div>
+<p class="text-white/90 text-sm mb-6 leading-relaxed max-w-[80%]">Scan, explore the menu and discover today’s special reward waiting just for you.</p>
+<button class="bg-white text-primary font-button px-6 py-3 rounded-xl shadow-md flex items-center gap-2 group-hover:gap-4 transition-all">
+                        View Today’s Reward
+                        <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10 scale-150 rotate-12">
+<span class="material-symbols-outlined text-[200px] text-white" data-icon="restaurant">restaurant</span>
+</div>
+</div>
+</section>
+<!-- 6. Value Statement -->
+<section class="px-margin-mobile mb-10">
+<div class="bg-surface-warm p-6 rounded-2xl border border-outline-variant/30">
+<h3 class="font-h3 text-h3 text-primary mb-2">Made Fresh. Served Fast.</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+                    Pizza House serves freshly prepared pizzas, burgers and pasta with authentic recipes and the finest local ingredients. Every meal is a celebration of flavor and quality craftsmanship.
+                </p>
+<button class="font-button text-primary flex items-center gap-1 border-b-2 border-primary pb-0.5 active:opacity-60 transition-opacity">
+                    Discover Pizza House
+                </button>
+</div>
+</section>
+<!-- 7. Opening Hours -->
+<section class="px-margin-mobile mb-10">
+<h3 class="font-h3 text-h3 text-text-primary mb-4">Opening Hours</h3>
+<div class="bg-white rounded-2xl border border-border overflow-hidden">
+<div class="flex items-center justify-between p-4 border-l-4 border-primary bg-primary/5">
+<div class="flex flex-col">
+<span class="font-body-bold text-text-primary">Sunday · Today</span>
+<span class="text-xs text-primary font-bold">Open now</span>
+</div>
+<span class="font-body text-text-primary">09:00 - 23:30</span>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-border/50">
+<span class="text-text-secondary">Mon - Thu</span>
+<span class="font-body text-text-primary">09:00 - 22:30</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<span class="text-text-secondary">Fri - Sat</span>
+<span class="font-body text-text-primary">09:00 - 00:00</span>
+</div>
+</div>
+</section>
+<!-- 8. Visit Pizza House (Map Section) -->
+<section class="px-margin-mobile mb-16">
+<h3 class="font-h3 text-h3 text-text-primary mb-4">Visit Pizza House</h3>
+<div class="relative w-full h-[200px] rounded-2xl overflow-hidden mb-4 border border-border">
+<img class="w-full h-full object-cover grayscale brightness-90" data-alt="A clean, minimalist map graphic of the Kadıköy district in Istanbul, highlighting its urban grid. The map is styled with a light light-mode aesthetic, featuring soft grays and whites. A prominent, large red location pin is placed in a central street, marking the exact spot of Pizza House. The lighting is flat and clear, suited for a high-end UI navigation component." data-location="Istanbul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP7vtlv4Uo0XKtYCbMGk3yI676keZ7Rt0lQqaFtbmlizsCNwfdIQKF36kTZQ0bD85jUqaQh2TxK5_O_hzxNrHrCxlg8B5PTMxxTOyLrlpVyoOGZm8tBLKymPnytryTgJe7_I5kH4yzclYWNwySJ38W1bMj7oLh01YccyIC4FJGo9LlzVDZ9JJujfhaxEAm-xD7BdZHmBVTWBWFj-ZCh_Kj-5gRrdXFBxKkk5HWEO75rLQ7AendXJPYBDxbPRlHLf8BNHlItJ3VFtE"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[48px] drop-shadow-lg animate-bounce" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="pin_drop">pin_drop</span>
+<div>
+<p class="font-body-bold text-text-primary">Kadıköy, Istanbul</p>
+<p class="text-sm text-text-secondary">Caferağa, Mühürdar Cd. No:42, 34710 Kadıköy/İstanbul, Türkiye</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-button h-14 rounded-xl shadow-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined" data-icon="near_me">near_me</span>
+                    Open in Maps
+                </button>
+<div class="grid grid-cols-3 gap-3">
+<button class="h-12 border border-border rounded-xl flex items-center justify-center text-text-primary active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="h-12 border border-border rounded-xl flex items-center justify-center text-text-primary active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<button class="h-12 border border-border rounded-xl flex items-center justify-center text-text-primary active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="camera">camera</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 9. Footer -->
+<footer class="bg-text-primary px-margin-mobile py-10 text-center">
+<h2 class="font-h2 text-h2-mobile text-white mb-2">Pizza House</h2>
+<p class="text-white/60 text-xs mb-8">© 2024 Pizza House. All rights reserved.</p>
+<div class="flex flex-col items-center gap-1">
+<span class="text-[10px] uppercase tracking-[2px] text-white/40">Powered by</span>
+<span class="font-h3 text-primary tracking-tight">YourPlatform</span>
+</div>
+</footer>
+<!-- 10. Sticky Bottom Nav (Shared Component Logic) -->
+<nav class="fixed bottom-0 w-full max-w-[640px] z-50 flex justify-around items-center h-16 px-2 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-primary font-bold transition-transform active:scale-90 active-nav" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] mt-0.5 font-label">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="text-[10px] mt-0.5 font-label">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+<span class="text-[10px] mt-0.5 font-label">Call</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="text-[10px] mt-0.5 font-label">Location</span>
+</a>
+</nav>
+</main>
+<script>
+        // Micro-interaction: Active state visual feedback for Nav
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-primary', 'font-bold', 'active-nav');
+                    l.classList.add('text-on-surface-variant');
+                });
+                link.classList.add('text-primary', 'font-bold', 'active-nav');
+                link.classList.remove('text-on-surface-variant');
+            });
+        });
+
+        // Simple scroll behavior to highlight header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

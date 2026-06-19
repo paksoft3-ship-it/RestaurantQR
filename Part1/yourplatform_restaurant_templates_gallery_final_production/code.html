@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Templates Gallery | YourPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-primary": "#111827",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "secondary-container": "#d9dff5",
+                        "tertiary-container": "#946f00",
+                        "text-secondary": "#667085",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-dim": "#d8dadc",
+                        "primary-container": "#db3516",
+                        "on-primary-container": "#fffbff",
+                        "background": "#f7f9fb",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "success": "#16A34A",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary": "#575e70",
+                        "outline-variant": "#e5beb6",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "primary": "#b51d00",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#b91e00",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-dark": "#C9341A",
+                        "on-surface-variant": "#5c403a",
+                        "on-tertiary-container": "#fffbff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "secondary-fixed": "#dce2f7",
+                        "outline": "#906f69",
+                        "tertiary-fixed": "#ffdf9e",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "canvas": "#FFFFFF",
+                        "on-primary-fixed": "#3e0400",
+                        "on-secondary-container": "#5c6274",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb4a5",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-fixed": "#141b2b",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "danger": "#DC2626",
+                        "on-primary": "#ffffff",
+                        "surface-warm": "#FFF1EB",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#765700",
+                        "border": "#E5E7EB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "mobile-shell-max-width": "640px",
+                        "container-max-width": "1280px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "h1-mobile": ["Manrope"],
+                        "button": ["Inter"],
+                        "h1": ["Manrope"],
+                        "small": ["Inter"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body": ["Inter"],
+                        "h3": ["Manrope"],
+                        "body-bold": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #b51d00, #C9341A);
+        }
+        .hero-pattern {
+            background-color: #f7f9fb;
+            background-image: radial-gradient(#e0e3e5 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-canvas dark:bg-inverse-surface sticky top-0 w-full z-50 border-b border-border dark:border-outline-variant shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-container-max-width mx-auto px-lg py-sm">
+<a class="text-h2 font-h2 font-black text-primary dark:text-primary-fixed-dim" href="/">
+                YourPlatform
+            </a>
+<div class="hidden md:flex items-center space-x-lg">
+<a class="font-body text-body text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">How It Works</a>
+<a class="font-body text-body text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Features</a>
+<a class="font-body text-body text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Products</a>
+<a class="font-body text-body text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Examples</a>
+<a class="font-body text-body text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 opacity-80 scale-95 transition-all" href="#">Templates</a>
+<a class="font-body text-body text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Packages</a>
+</div>
+<div class="flex items-center space-x-md">
+<button aria-label="Toggle Menu" class="md:hidden text-secondary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<a class="hidden md:inline-flex bg-primary text-on-primary font-button text-button px-md py-xs rounded-lg hover:bg-primary-dark transition-colors items-center" href="#quote">
+                    Request a Quote
+                </a>
+</div>
+</div>
+</nav>
+<main>
+<!-- 1. Hero Section -->
+<section class="relative pt-xxl pb-xxl lg:pt-32 lg:pb-32 overflow-hidden hero-pattern">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative z-10">
+<div class="space-y-lg max-w-xl">
+<div class="inline-flex items-center space-x-2 bg-surface-container-high px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-small text-small text-secondary font-bold tracking-wider uppercase">MANAGED RESTAURANT DESIGN DIRECTIONS</span>
+</div>
+<h1 class="font-display text-h1-mobile md:text-display text-text-primary">
+                        A Restaurant Experience That Matches Your <span class="text-gradient">Brand and Customers</span>
+</h1>
+<p class="font-body text-body text-text-secondary text-lg">
+                        Choose from five professionally managed visual directions. We handle the setup, you focus on the food. Our high-performance templates are built for speed-to-value and appetizing clarity.
+                    </p>
+<div class="pt-sm flex flex-col sm:flex-row gap-md">
+<a class="bg-primary text-on-primary font-button text-button px-xl py-md rounded-lg text-center hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20" href="#form">
+                            Request Recommendation
+                        </a>
+<a class="bg-canvas text-text-primary border border-border font-button text-button px-xl py-md rounded-lg text-center hover:bg-surface-container transition-colors" href="#styles">
+                            Explore Styles
+                        </a>
+</div>
+</div>
+<div class="relative h-[600px] w-full flex items-center justify-center lg:justify-end perspective-1000">
+<!-- Layered Phone Mockups -->
+<div class="relative w-full max-w-[320px] h-[650px] transform rotate-[-5deg] hover:rotate-0 transition-transform duration-700 z-30">
+<div class="absolute inset-0 bg-text-primary rounded-[40px] shadow-2xl overflow-hidden border-[8px] border-text-primary">
+<div class="absolute top-0 w-full h-6 bg-text-primary z-20 flex justify-center">
+<div class="w-1/3 h-4 bg-black rounded-b-xl"></div>
+</div>
+<img class="w-full h-full object-cover" data-alt="A vibrant, high-contrast user interface for a modern fast food restaurant app named Pizza House. The screen features a bold red header, large appetizing photos of pizzas with a slight glassmorphism price tag overlay, and clear, thick primary buttons. The style is energetic, minimalistic but loud, utilizing heavy whitespace against striking red and dark gray accents. Shot in a bright, modern lighting style typical of top-tier mobile UI presentations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo-C4kZfdMHupsRy0XlgNL-9UIWXp-2DfWkZMmihOdQ73EIlHE4uA7znOqAaFRI4pdmGgzNhwqkVkeEiNR37rw4XJp6RQmVLDgT72mmiEo39FCETe4ZPrespq3dyaXgbggGDABA7oarm6xkUvT5qyr0Hexw-6TZ3moRYjRTcy-w02xcc6zqvHGYJB0bmSd3B6yTYUZBBDddyON8ZKCVA7vKt6X_bkxYcjMW25avv36f_x2jP6ZtQj7WVCPQFVkfiTJAUknKZ4B7UE"/>
+<div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 glass-panel px-4 py-2 rounded-full shadow-lg">
+<span class="font-body-bold text-small text-text-primary">Modern Fast Food</span>
+</div>
+</div>
+</div>
+<div class="absolute w-full max-w-[280px] h-[580px] right-[10%] top-[10%] transform rotate-[5deg] opacity-70 blur-[2px] z-20">
+<div class="absolute inset-0 bg-text-primary rounded-[36px] shadow-xl overflow-hidden border-[6px] border-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A warm, inviting user interface for a Mediterranean restaurant app named Anatolia Grill. The screen features an elegant heritage aesthetic with terracotta and cream colors, subtle textures, and beautifully lit photos of kebabs and mezze. The typography uses refined serif headers mixed with clean sans-serif body text, creating a premium yet accessible feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5IHRdWYwXDOsTbOIxS7UwNJ6EVTC-oD7aQwEJet0o9Jq8By48maFNAG1Xafxd96chxBH8V5MwyiU0Rh_oCA_ZNN5Az-iKTydYdrM7gVMb29t6cQlVl2D2O9mqt53UwZTcwA6YHa39ZTgkIXe8VabD8E31ytKxaQyB9B1GfLjUkA0GNxzUL33Iw9K2heW77odN5SvcmOs6839EOOfO_RMWxJye-4awgpUhWm7EwnRTEMVy63HpRJCh-1ipS_aK-x5AEbdmAb4mFo0"/>
+</div>
+</div>
+<div class="absolute w-full max-w-[260px] h-[540px] right-[30%] top-[20%] transform rotate-[-10deg] opacity-40 blur-[4px] z-10">
+<div class="absolute inset-0 bg-text-primary rounded-[32px] shadow-lg overflow-hidden border-[4px] border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A highly refined, editorial user interface for a premium dining restaurant app named Bosphorus Kitchen. The design uses a sophisticated palette of ivory, near-black, and subtle gold accents. The layout is sparse, featuring high-end food photography with deep shadows, elegant typography, and minimalist navigation elements that convey luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPvSYmrd-22QloNmS-6lxW6CENa9HEufjSk5Dq6Z2zshQKahYXcAWj2uXk7ahLQCtggkpmYUeo4hOjtLqjjix4Fl2WgB-zmPDxyiXsvIuD0Bf_NQUnMaK5JPjOZswTk3-z6xnuO38e2yjXJ_024Ywak_t8TUg_pjWmU2i0Dqef4iRtKlEzjsOJjB0o1jtNs046X-qj5iBub-P6FRxzU4yknUWK72UwzcD6L7XVcaNOf9kNtdlIXfumLNhHcke8SHboylCs5i8NqEY"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-text-primary dark:bg-surface-container-lowest w-full">
+<div class="max-w-container-max-width mx-auto px-lg py-xxl flex flex-col md:flex-row justify-between items-start md:items-center gap-xl">
+<div class="space-y-sm">
+<a class="text-h3 font-h3 font-bold text-canvas dark:text-primary" href="/">
+                    YourPlatform
+                </a>
+<p class="font-small text-small text-secondary-fixed-dim">
+                    © 2024 YourPlatform. All rights reserved.
+                </p>
+</div>
+<div class="flex flex-wrap gap-md md:gap-lg">
+<a class="font-body text-body text-secondary-fixed-dim dark:text-on-secondary-container hover:text-primary-fixed-dim dark:hover:text-primary underline transition-colors" href="#">Privacy Policy</a>
+<a class="font-body text-body text-secondary-fixed-dim dark:text-on-secondary-container hover:text-primary-fixed-dim dark:hover:text-primary underline transition-colors" href="#">Terms of Service</a>
+<a class="font-body text-body text-secondary-fixed-dim dark:text-on-secondary-container hover:text-primary-fixed-dim dark:hover:text-primary underline transition-colors" href="#">Contact Us</a>
+<a class="font-body text-body text-secondary-fixed-dim dark:text-on-secondary-container hover:text-primary-fixed-dim dark:hover:text-primary underline transition-colors" href="#">Support</a>
+<a class="font-body text-body text-secondary-fixed-dim dark:text-on-secondary-container hover:text-primary-fixed-dim dark:hover:text-primary underline transition-colors" href="#">Careers</a>
+</div>
+</div>
+</footer>
+</body></html>

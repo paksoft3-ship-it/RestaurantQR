@@ -1,0 +1,130 @@
+import type { Locale } from "./locales";
+import { DEFAULT_LOCALE } from "./locales";
+
+/**
+ * Common shell + navigation strings for English, Turkish and Arabic.
+ * Missing keys fall back safely to English. Page content may remain English
+ * where complete translations are not yet supplied.
+ */
+
+export type Dictionary = Record<string, string>;
+
+const en: Dictionary = {
+  "nav.howItWorks": "How It Works",
+  "nav.features": "Features",
+  "nav.qrNfc": "QR & NFC Products",
+  "nav.examples": "Restaurant Examples",
+  "nav.templates": "Templates",
+  "nav.packages": "Packages",
+  "nav.faq": "FAQ",
+  "nav.contact": "Contact",
+  "cta.viewDemo": "View Demo",
+  "cta.requestQuote": "Request a Quote",
+  "action.callOrder": "Call Order",
+  "action.pickMeal": "Pick Your Meal",
+  "action.onlineOrder": "Online Order with Pay",
+  "action.visitUs": "Visit Us",
+  "common.menu": "Menu",
+  "common.home": "Home",
+  "common.contact": "Contact",
+  "common.backToMenu": "Back to menu",
+  "common.openNow": "Open now",
+  "common.closed": "Closed",
+  "rb.callOrder": "Call Order",
+  "rb.pickMeal": "Pick Your Meal",
+  "rb.onlineOrder": "Online Order with Pay",
+  "rb.addContact": "Add Contact",
+  "rb.openContacts": "Open contact options",
+  "rb.closeContacts": "Close contact options",
+  "rb.callUs": "Call Us",
+  "rb.whatsapp": "WhatsApp",
+  "rb.directions": "Get Directions",
+  "rb.instagram": "Instagram",
+  "rb.facebook": "Facebook",
+  "rb.website": "Website",
+  "rb.email": "Email",
+  "rb.unavailable": "Action unavailable",
+  "rb.opensExternal": "Opens an external website",
+};
+
+const tr: Dictionary = {
+  "nav.howItWorks": "Nasıl Çalışır",
+  "nav.features": "Özellikler",
+  "nav.qrNfc": "QR & NFC Ürünleri",
+  "nav.examples": "Restoran Örnekleri",
+  "nav.templates": "Şablonlar",
+  "nav.packages": "Paketler",
+  "nav.faq": "SSS",
+  "nav.contact": "İletişim",
+  "cta.viewDemo": "Demoyu Gör",
+  "cta.requestQuote": "Teklif İste",
+  "action.callOrder": "Telefonla Sipariş",
+  "action.pickMeal": "Yemeğini Seç",
+  "action.onlineOrder": "Online Sipariş ve Ödeme",
+  "action.visitUs": "Bizi Ziyaret Et",
+  "common.menu": "Menü",
+  "common.home": "Ana Sayfa",
+  "common.contact": "İletişim",
+  "common.backToMenu": "Menüye dön",
+  "common.openNow": "Şimdi açık",
+  "common.closed": "Kapalı",
+  "rb.callOrder": "Telefonla Sipariş",
+  "rb.pickMeal": "Menüyü Gör",
+  "rb.onlineOrder": "Online Sipariş ve Ödeme",
+  "rb.addContact": "Rehbere Ekle",
+  "rb.openContacts": "İletişim seçeneklerini aç",
+  "rb.closeContacts": "İletişim seçeneklerini kapat",
+  "rb.callUs": "Bizi Ara",
+  "rb.whatsapp": "WhatsApp",
+  "rb.directions": "Yol Tarifi Al",
+  "rb.instagram": "Instagram",
+  "rb.facebook": "Facebook",
+  "rb.website": "Web Sitesi",
+  "rb.email": "E-posta",
+  "rb.unavailable": "Bu işlem kullanılamıyor",
+  "rb.opensExternal": "Harici bir web sitesi açılır",
+};
+
+const ar: Dictionary = {
+  "nav.howItWorks": "كيف يعمل",
+  "nav.features": "المميزات",
+  "nav.qrNfc": "منتجات QR و NFC",
+  "nav.examples": "أمثلة المطاعم",
+  "nav.templates": "القوالب",
+  "nav.packages": "الباقات",
+  "nav.faq": "الأسئلة الشائعة",
+  "nav.contact": "اتصل بنا",
+  "cta.viewDemo": "عرض تجريبي",
+  "cta.requestQuote": "اطلب عرض سعر",
+  "action.callOrder": "اطلب بالهاتف",
+  "action.pickMeal": "اختر وجبتك",
+  "action.onlineOrder": "اطلب أونلاين وادفع",
+  "action.visitUs": "زورونا",
+  "common.menu": "القائمة",
+  "common.home": "الرئيسية",
+  "common.contact": "اتصل",
+  "common.backToMenu": "العودة إلى القائمة",
+  "common.openNow": "مفتوح الآن",
+  "common.closed": "مغلق",
+  "rb.callOrder": "اطلب بالهاتف",
+  "rb.pickMeal": "اختر وجبتك",
+  "rb.onlineOrder": "اطلب أونلاين وادفع",
+  "rb.addContact": "أضف إلى جهات الاتصال",
+  "rb.openContacts": "فتح خيارات التواصل",
+  "rb.closeContacts": "إغلاق خيارات التواصل",
+  "rb.callUs": "اتصل بنا",
+  "rb.whatsapp": "واتساب",
+  "rb.directions": "احصل على الاتجاهات",
+  "rb.instagram": "إنستغرام",
+  "rb.facebook": "فيسبوك",
+  "rb.website": "الموقع الإلكتروني",
+  "rb.email": "البريد الإلكتروني",
+  "rb.unavailable": "هذا الإجراء غير متاح",
+  "rb.opensExternal": "يفتح موقعًا خارجيًا",
+};
+
+export const dictionaries: Record<Locale, Dictionary> = { en, tr, ar, de: en };
+
+export function translate(locale: Locale, key: string): string {
+  return dictionaries[locale]?.[key] ?? dictionaries[DEFAULT_LOCALE][key] ?? key;
+}

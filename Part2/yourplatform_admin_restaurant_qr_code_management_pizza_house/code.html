@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza House - QR Code Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-container": "#db3516",
+                        "canvas": "#FFFFFF",
+                        "tertiary-container": "#946f00",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "text-primary": "#111827",
+                        "inverse-primary": "#ffb4a5",
+                        "surface-tint": "#b91e00",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "danger": "#DC2626",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-fixed": "#3e0400",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#404758",
+                        "on-error": "#ffffff",
+                        "success": "#16A34A",
+                        "on-secondary-container": "#5c6274",
+                        "secondary-container": "#d9dff5",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-tertiary-fixed": "#261a00",
+                        "primary-dark": "#C9341A",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed": "#ffdad3",
+                        "surface": "#f7f9fb",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#e5beb6",
+                        "on-surface-variant": "#5c403a",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "primary": "#b51d00",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-surface": "#191c1e",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#dce2f7",
+                        "surface-variant": "#e0e3e5",
+                        "surface-warm": "#FFF1EB",
+                        "outline": "#906f69",
+                        "secondary": "#575e70",
+                        "on-primary-container": "#fffbff",
+                        "surface-container-low": "#f2f4f6",
+                        "text-secondary": "#667085",
+                        "error-container": "#ffdad6",
+                        "border": "#E5E7EB"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "xs": "8px",
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "mobile-shell-max-width": "640px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "margin-mobile": "20px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "body": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "h3": ["Manrope"],
+                        "small": ["Inter"],
+                        "button": ["Inter"],
+                        "h1": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component JSON Mapping) -->
+<nav class="fixed left-0 top-0 h-full w-[240px] bg-secondary dark:bg-secondary-fixed-dim text-primary dark:text-primary-fixed border-r border-border flex flex-col z-20">
+<div class="p-6 border-b border-border/10">
+<h2 class="font-h2 text-h2 font-extrabold text-on-primary">Admin Panel</h2>
+<p class="font-small text-small text-on-primary/70 mt-1">QR Management</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary hover:bg-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 border-l-4 border-primary bg-secondary-container text-on-secondary-container" href="#">
+<span class="material-symbols-outlined fill">qr_code_2</span>
+<span class="font-body-bold text-body-bold">QR Codes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary hover:bg-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-body text-body">Locations</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary hover:bg-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body text-body">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-secondary hover:bg-secondary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body text-body">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-border/10">
+<button class="w-full bg-primary hover:bg-primary-dark text-on-primary font-button text-button py-3 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Create New QR
+            </button>
+<ul class="mt-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-secondary hover:bg-secondary-fixed-variant transition-colors opacity-90" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-small text-small">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-secondary hover:bg-secondary-fixed-variant transition-colors opacity-90" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-small text-small">Log Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col ml-[240px] h-full overflow-hidden bg-background relative">
+<!-- TopNavBar (Shared Component JSON Mapping) -->
+<header class="sticky top-0 w-full bg-surface dark:bg-surface-dim border-b border-border shadow-sm z-10">
+<div class="flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-6">
+<h1 class="font-h3 text-h3 font-bold text-primary">QR Operations</h1>
+<!-- Search Bar (on_left) -->
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border rounded-lg font-small text-small focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Global Search..." type="text"/>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-body-bold border-b-2 border-primary pb-1" href="#">All Codes</a>
+<a class="text-text-secondary font-body pb-1 hover:text-primary-dark transition-all" href="#">Production</a>
+<a class="text-text-secondary font-body pb-1 hover:text-primary-dark transition-all" href="#">Archive</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-button text-button text-primary hover:text-primary-dark transition-colors px-4 py-2 border border-primary rounded-lg">Export CSV</button>
+<button class="text-text-secondary hover:text-primary transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full p-1">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full overflow-hidden w-8 h-8 flex items-center justify-center bg-surface-container-highest">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, professional avatar of a male restaurant administrator with a subtle smile, wearing a dark blue shirt, well-lit in a modern office environment. High-key lighting, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIUPRUz6boYQY16VNUhccwQPjNPJ8OiyExDL_23DBRoitQD8syp2AA8JLv1tsXAS8Lt-UCZ874LvTBofDF82KT4VaK8iT5y6KLfddYzmwSHa5KkUnHJuJ5aQlpMBP0yRQXaY4hD2ZGkF_ic2rDMNqzZb5ru0Ot3f-iBjyPeuuP-X1tRMviNEpJkBAgYApsOBqCGzpGjIERL7-NjUw2htxBmfcwGyfv2gnHxv1jYT2t2wT5VWohcmZQXDvu-GwddPOzYBDoongMFFk"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden">
+<!-- Restaurant Context Header -->
+<div class="bg-surface border-b border-border px-8 py-6">
+<div class="flex items-start justify-between max-w-container-max-width mx-auto">
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 bg-surface-container border border-border rounded-xl overflow-hidden shrink-0 shadow-sm">
+<img alt="Pizza House Logo" class="w-full h-full object-contain p-2" data-alt="A modern, high-contrast, minimalist logo for 'Pizza House' featuring a stylized, geometric pizza slice in vibrant red-orange against a clean white background. Crisp vector style, professional branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR6FYKgtxf4Gqir4StCHIWgpjXbq7Pw2NURxNhy_A_uDtLhhJfjpIQT1luQEnNxsGnXZINxQMwVGfQrhIVCVob54hk3CcH2iQ1PfyBg6gCyhO_hh7LAz4BkGFlCZv_1CEqKoNqraYFLo8lReHCp-pueZ-XvPCcyGIm0T_Z9CSg3tC53uj26-XQhZxR-IJWTrltbw7j30LZ9M29nckQzsEvB3xfVi6wWmKzLumw2m7L_Y2L4Mpdc0fjLywycU-YFlK00tqD1hGQ8xk"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="font-h1 text-h1 text-text-primary">Pizza House</h1>
+<span class="bg-surface-container-high text-on-surface-variant font-small text-small px-2 py-1 rounded-md border border-border tabular-nums">RST-00024</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary font-small text-small">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Kadıköy, Istanbul</span>
+</div>
+<div class="flex items-center gap-4 mt-3 font-small text-small">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary"></span> <strong class="text-text-primary tabular-nums">28</strong> Total QR Codes</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-success"></span> <strong class="text-text-primary tabular-nums">24</strong> Active</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-danger"></span> <strong class="text-text-primary tabular-nums">3</strong> Issues</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Workspace Tabs -->
+<div class="mt-6 max-w-container-max-width mx-auto">
+<nav class="flex overflow-x-auto hide-scrollbar border-b border-border">
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Overview</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">General Info</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Branding</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Menu</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Media</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Customer Actions</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-primary border-b-2 border-primary whitespace-nowrap" href="#">QR Codes</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">NFC Products</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Campaigns</a>
+<a class="px-4 py-3 font-body-bold text-body-bold text-text-secondary hover:text-text-primary whitespace-nowrap" href="#">Analytics</a>
+</nav>
+</div>
+</div>
+<!-- Operations Status Bar -->
+<div class="bg-surface-warm border-b border-outline-variant px-8 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-danger">warning</span>
+<span class="font-body-bold text-body-bold text-danger">Review Required</span>
+<span class="font-small text-small text-on-surface-variant">3 QR records require attention</span>
+</div>
+<button class="text-danger font-button text-button hover:underline">View Issues</button>
+</div>
+<!-- Main Content Area with Split Layout -->
+<div class="flex-1 flex max-w-container-max-width mx-auto w-full h-[calc(100vh-280px)]">
+<!-- Left Panel: Table & Metrics -->
+<div class="flex-1 flex flex-col p-8 border-r border-border min-w-0">
+<!-- Summary Metrics (Bento-style) -->
+<div class="grid grid-cols-5 gap-4 mb-8">
+<div class="bg-surface border border-border p-4 rounded-xl shadow-sm">
+<span class="font-small text-small text-text-secondary block mb-1">Total Assigned</span>
+<span class="font-h2 text-h2 text-text-primary tabular-nums block">28</span>
+</div>
+<div class="bg-surface border border-border p-4 rounded-xl shadow-sm border-l-4 border-l-success">
+<span class="font-small text-small text-text-secondary block mb-1">Active</span>
+<span class="font-h2 text-h2 text-text-primary tabular-nums block">24</span>
+</div>
+<div class="bg-surface border border-border p-4 rounded-xl shadow-sm border-l-4 border-l-tertiary-fixed-dim">
+<span class="font-small text-small text-text-secondary block mb-1">Awaiting Artwork</span>
+<span class="font-h2 text-h2 text-text-primary tabular-nums block">5</span>
+</div>
+<div class="bg-surface border border-border p-4 rounded-xl shadow-sm border-l-4 border-l-tertiary-fixed-dim">
+<span class="font-small text-small text-text-secondary block mb-1">Awaiting Installation</span>
+<span class="font-h2 text-h2 text-text-primary tabular-nums block">4</span>
+</div>
+<div class="bg-surface border border-border p-4 rounded-xl shadow-sm">
+<span class="font-small text-small text-text-secondary block mb-1">Total Scans</span>
+<span class="font-h2 text-h2 text-primary tabular-nums block">4,820</span>
+</div>
+</div>
+<!-- Main Toolbar -->
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border rounded-lg font-small text-small focus:ring-2 focus:ring-primary outline-none" placeholder="Search QR ID, label, table..." type="text"/>
+</div>
+<button class="flex items-center gap-2 border border-border bg-surface px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors font-button text-button text-text-primary">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                Filters
+                            </button>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-on-primary font-button text-button px-5 py-2.5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Create QR Code
+                        </button>
+</div>
+<!-- QR Records Table -->
+<div class="flex-1 bg-surface border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-border sticky top-0 z-10">
+<tr>
+<th class="p-4 w-12"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">QR Record</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">Assignment</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">Destination</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">Status</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">Health</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap">Artwork</th>
+<th class="p-4 font-button text-button text-text-secondary whitespace-nowrap text-right">Scans</th>
+</tr>
+</thead>
+<tbody class="font-small text-small text-text-primary divide-y divide-border">
+<!-- Active Row (TABLE-KDK-07) -->
+<tr class="bg-surface-warm border-l-4 border-l-primary cursor-pointer hover:bg-surface-container-low transition-colors">
+<td class="p-4"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-canvas border border-border rounded p-1">
+<img alt="QR Thumbnail" class="w-full h-full object-contain" data-alt="A clean, sharp black and white QR code graphic generated for a digital menu, isolated on a white background. High contrast, precise edges, modern tech feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACvzjqWPJ3FzjmfcsgwlAbi1xmFe6Vq5_u8JdpMjHSIfZztu07Bf-gBguwHSfXAsC6lMbQOdg1H5_KI7qN73OkJoxeKb7tUVQ8J7CEbSCJaIgV36p8bdjvSEfT3M0DGgiF9BXfBRuiDHzsxivaPjsDV7zGDH5fwRANVqjvJbbViwR5KBxNdLWeyQI-MpHe_GzCLMJCzLOHIHaduL1PbShnAK3y4SrqgERTB4YNDeSkAX6tNiY2YNS26iSKMPzS7dedjYg_OCXtZsI"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-text-primary">TABLE-KDK-07</span>
+<span class="text-text-secondary tabular-nums">ID: 88A92B</span>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-bold">Table 7</td>
+<td class="p-4">Digital Menu</td>
+<td class="p-4"><span class="bg-success/10 text-success px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">Active</span></td>
+<td class="p-4">Healthy</td>
+<td class="p-4">Approved</td>
+<td class="p-4 text-right tabular-nums font-body-bold">284</td>
+</tr>
+<!-- Standard Row -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="p-4"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-canvas border border-border rounded p-1">
+<img alt="QR Thumbnail" class="w-full h-full object-contain" data-alt="A clean, sharp black and white QR code graphic generated for a digital menu, isolated on a white background. High contrast, precise edges, modern tech feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzgLE1oUU3zcSEq3fXpDr2EVzM9m9w4dgiAHp7ByTqKUh7ll4D9POR3xWWNRcQZqMqxPpM5JPCH0s9nZOfgaF7Z6XO8FZhKzFOoXEBgaUBOwg7XyX2yKXrbGPLBxPTBC0SPzvGH8-LjP-Zh1zVX8cPHpI2wd0kT7y0qyeaVfnWjZis3KHXWgCwFHn4csQrAv9zyI-IzN9Xq4rHLxOIjECsVSYsD7SKhUvp2C0NWZRAzliexa5lKNrmP-wKg1iCxV6hi0ikeqNsgXo"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-text-primary">TABLE-KDK-08</span>
+<span class="text-text-secondary tabular-nums">ID: 88A92C</span>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-bold">Table 8</td>
+<td class="p-4">Digital Menu</td>
+<td class="p-4"><span class="bg-success/10 text-success px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">Active</span></td>
+<td class="p-4">Healthy</td>
+<td class="p-4">Approved</td>
+<td class="p-4 text-right tabular-nums">192</td>
+</tr>
+<!-- Issue Row -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="p-4"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-canvas border border-border rounded p-1 opacity-50">
+<img alt="QR Thumbnail" class="w-full h-full object-contain" data-alt="A generic placeholder for a missing QR code artwork, featuring a light gray square with a subtle dash border on a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN5TowN6Dax-0UJs-5En23uzHnUnBNeqQBfkr2YmsfLzSn7RsBDp7Gkigrpflh8lK5s3GuqEon4GtaHaTEyn6Wl-eYTrjg-nVsvG8_THYbXagA4wW4B7EFdfE5ZpD3u-iZE9aac3BpY5Id58oejod5vbSp1XTh_Sk3btzH8yv732GM0FyNpz9dv1gIP47yAM3SZq9WoIYvABf3JivJ99KpgQAgUr2cjvnbNtSZH0qzxzIc70CXkn6ycZIB9uzxW1kOQtDiYOK9Tms"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-bold text-text-primary">TABLE-KDK-09</span>
+<span class="text-text-secondary tabular-nums">ID: 88A92D</span>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-bold">Table 9</td>
+<td class="p-4">Digital Menu</td>
+<td class="p-4"><span class="bg-tertiary-fixed-dim/20 text-tertiary px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">Pending</span></td>
+<td class="p-4"><span class="text-danger flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">error</span> Needs Setup</span></td>
+<td class="p-4 text-danger font-body-bold">Awaiting</td>
+<td class="p-4 text-right tabular-nums text-text-secondary">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border flex items-center justify-between bg-surface-container-low text-text-secondary font-small text-small">
+<span>Showing 1-10 of 28 results</span>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-surface border border-border rounded disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 hover:bg-surface border border-border rounded"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Detail Panel (Active for TABLE-KDK-07) -->
+<div class="w-[400px] bg-surface flex flex-col h-full overflow-y-auto border-l border-border shrink-0 shadow-[-4px_0_15px_rgba(0,0,0,0.02)]">
+<div class="p-6 border-b border-border sticky top-0 bg-surface/95 backdrop-blur z-10 flex justify-between items-center">
+<div>
+<h3 class="font-h3 text-h3 text-text-primary">TABLE-KDK-07</h3>
+<span class="text-text-secondary font-small text-small tabular-nums">ID: 88A92B</span>
+</div>
+<button class="p-2 text-text-secondary hover:text-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-6">
+<!-- Artwork Preview -->
+<div class="bg-surface-container-low border border-border rounded-xl p-6 flex flex-col items-center text-center">
+<span class="font-body-bold text-body-bold text-text-secondary mb-4 uppercase tracking-wider text-xs">Artwork Preview</span>
+<div class="w-48 h-48 bg-canvas border-2 border-border rounded-lg p-2 shadow-sm mb-4">
+<img alt="QR Artwork Preview" class="w-full h-full object-contain" data-alt="A highly detailed preview of a physical table tent displaying a clear, scannable QR code. The table tent is branded with 'Pizza House' in modern typography, set against a pristine white background. High contrast, commercial product photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZc8mM-W_2cEEcwOuVtzWeUIHvMu-Pz8SSUd-mZROcAN2LXzSnLYlxdOA_OyerovWshTLCw3Pa97PCvYTO1QsCAX1qiFwxyo06J2XwCarpV7geF9lVoV3dYwb1JkM18SX6CANz6BldwEANb6JuyFguFRypSqEDD0hzr7Qz8kBj7O9xyvyYi8GJW-4F7oFLB6YfWUNffY54ftn_wXyiRAYF2EPoDtsdwZynXLSTG1hSiaaEbID6lRYuOXuFDHuHqx0-TVD9u_RLWcQ"/>
+</div>
+<span class="bg-success/10 text-success px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> v3 Approved</span>
+</div>
+<!-- Details List -->
+<div class="space-y-4">
+<div class="flex justify-between border-b border-border pb-3">
+<span class="font-small text-small text-text-secondary">Destination</span>
+<span class="font-body-bold text-body-bold text-text-primary text-right">Pizza House Digital Menu<br/><a class="text-primary hover:underline text-sm font-normal" href="#">menu.pizza.house/t/7</a></span>
+</div>
+<div class="flex justify-between border-b border-border pb-3">
+<span class="font-small text-small text-text-secondary">Assignment Info</span>
+<span class="font-body-bold text-body-bold text-text-primary">Main Dining Area</span>
+</div>
+<div class="flex justify-between border-b border-border pb-3">
+<span class="font-small text-small text-text-secondary">Last Scanned</span>
+<span class="font-body-bold text-body-bold text-text-primary tabular-nums">2 hours ago</span>
+</div>
+<div class="flex justify-between border-b border-border pb-3">
+<span class="font-small text-small text-text-secondary">Total Scans</span>
+<span class="font-body-bold text-body-bold text-text-primary tabular-nums">284</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-auto pt-6 flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary-dark text-on-primary font-button text-button py-3 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                                Download Artwork
+                            </button>
+<button class="w-full border border-border bg-surface hover:bg-surface-container-low text-text-primary font-button text-button py-3 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">edit</span>
+                                Edit Destination
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

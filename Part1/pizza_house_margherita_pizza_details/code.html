@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Margherita Pizza - Pizza House</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#141b2b",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary": "#765700",
+                        "inverse-primary": "#ffb4a5",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-warm": "#FFF1EB",
+                        "on-primary": "#ffffff",
+                        "success": "#16A34A",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#b51d00",
+                        "primary-dark": "#C9341A",
+                        "tertiary-fixed": "#ffdf9e",
+                        "border": "#E5E7EB",
+                        "on-surface-variant": "#5c403a",
+                        "tertiary-container": "#946f00",
+                        "surface-container": "#eceef0",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "text-secondary": "#667085",
+                        "surface": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "canvas": "#FFFFFF",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "secondary-container": "#d9dff5",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed": "#3e0400",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-container": "#5c6274",
+                        "outline-variant": "#e5beb6",
+                        "text-primary": "#111827",
+                        "secondary-fixed": "#dce2f7",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#b91e00",
+                        "primary-container": "#db3516",
+                        "inverse-on-surface": "#eff1f3",
+                        "outline": "#906f69",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "danger": "#DC2626",
+                        "secondary": "#575e70",
+                        "on-secondary-fixed-variant": "#404758",
+                        "on-tertiary-container": "#fffbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "mobile-shell-max-width": "640px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1280px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body": ["Inter"],
+                        "button": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "small": ["Inter"],
+                        "display": ["Manrope"],
+                        "body-bold": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex justify-center w-full">
+<div class="w-full max-w-mobile-shell-max-width bg-canvas min-h-screen shadow-lg relative pb-24">
+<!-- Sticky Header -->
+<header class="fixed top-0 w-full max-w-mobile-shell-max-width z-50 bg-canvas/90 backdrop-blur-md border-b border-border shadow-sm flex justify-between items-center px-margin-mobile h-16">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-text-primary text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-text-primary">Product Details</h1>
+<button aria-label="Share" class="p-2 -mr-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-text-primary text-[24px]">share</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-16">
+<!-- Product Hero Image -->
+<div class="w-full h-[300px] relative bg-surface-container-high overflow-hidden">
+<img alt="Margherita Pizza" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsG9gll-oc3XYUbbBT5DjTT1hXEodAxcpYUmOlCsOwmUOTTXQ4V8PLjT0WTM3d3g6oWq6p6MGHX4u4j8rRz7JKg89z1Wd1CnQGHRvWVhDmW-8TucgSUAzCCY0gC_3mwFkbfuF0hUz02nKk9neQ4xrwThAcKIFrJT8A0At9LQzwiYIJY2MBKEPcCen8cdUN4kna8lkHIXijOGVLw9c6a5p9gUZK-vHr8Y7pBH_7OaLM7VdJCMVt9solIoUE"/>
+</div>
+<div class="px-margin-mobile py-lg">
+<!-- Info Block -->
+<div class="mb-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-small font-small text-text-secondary uppercase tracking-wider">Pizza</span>
+<span class="w-1 h-1 rounded-full bg-border"></span>
+<div class="flex items-center gap-1 text-success">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="text-small font-small font-semibold">Available</span>
+</div>
+</div>
+<h2 class="font-h1-mobile text-h1-mobile text-text-primary mb-3">Margherita Pizza</h2>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary font-small text-small font-semibold">Popular</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-success/10 text-success font-small text-small font-semibold">Vegetarian</span>
+</div>
+<div class="text-h2 font-h2 text-primary-container">₺240</div>
+</div>
+<!-- About Section -->
+<div class="mb-lg">
+<h3 class="font-h3 text-h3 text-text-primary mb-3">About This Dish</h3>
+<p class="font-body text-body text-text-secondary mb-4">
+                        Our classic Margherita is an homage to the Neapolitan tradition. A perfectly blistered, hand-stretched crust serves as the canvas for our vibrant, slow-simmered San Marzano tomato sauce.
+                    </p>
+<p class="font-body text-body text-text-secondary">
+                        Topped generously with fresh, milky mozzarella di bufala, fragrant basil leaves torn by hand, and a finishing drizzle of premium extra virgin olive oil. Simple, pure, and utterly delicious.
+                    </p>
+</div>
+<!-- Ingredients -->
+<div class="mb-lg">
+<h3 class="font-h3 text-h3 text-text-primary mb-3">Ingredients</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-surface-container rounded-lg font-body-bold text-body-bold text-text-primary border border-border">Tomato Sauce</span>
+<span class="px-4 py-2 bg-surface-container rounded-lg font-body-bold text-body-bold text-text-primary border border-border">Mozzarella</span>
+<span class="px-4 py-2 bg-surface-container rounded-lg font-body-bold text-body-bold text-text-primary border border-border">Fresh Basil</span>
+<span class="px-4 py-2 bg-surface-container rounded-lg font-body-bold text-body-bold text-text-primary border border-border">Olive Oil</span>
+<span class="px-4 py-2 bg-surface-container rounded-lg font-body-bold text-body-bold text-text-primary border border-border">Pizza Dough</span>
+</div>
+</div>
+<!-- Variants -->
+<div class="mb-lg">
+<div class="flex justify-between items-end mb-3">
+<h3 class="font-h3 text-h3 text-text-primary">Available Sizes</h3>
+<span class="text-small font-small text-text-secondary">Required</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col p-4 rounded-xl border-2 border-primary bg-primary/5 text-left relative overflow-hidden transition-all">
+<span class="material-symbols-outlined absolute top-2 right-2 text-primary text-[20px] fill">check_circle</span>
+<span class="font-body-bold text-body-bold text-text-primary mb-1">Regular</span>
+<span class="font-body text-body text-text-secondary">₺240</span>
+</button>
+<button class="flex flex-col p-4 rounded-xl border border-border bg-canvas text-left hover:border-text-secondary transition-all">
+<span class="font-body-bold text-body-bold text-text-primary mb-1">Large</span>
+<span class="font-body text-body text-text-secondary">₺320</span>
+</button>
+</div>
+</div>
+<!-- Allergens & Dietary -->
+<div class="mb-lg bg-surface-warm p-4 rounded-xl border border-outline-variant">
+<div class="flex items-center gap-2 mb-3 text-primary-dark">
+<span class="material-symbols-outlined">info</span>
+<h3 class="font-body-bold text-body-bold">Dietary &amp; Allergen Information</h3>
+</div>
+<ul class="space-y-2 mb-4">
+<li class="flex items-center gap-2 font-body text-body text-text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Vegetarian
+                        </li>
+<li class="flex items-center gap-2 font-body text-body text-text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span> Contains Gluten
+                        </li>
+<li class="flex items-center gap-2 font-body text-body text-text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span> Contains Dairy
+                        </li>
+</ul>
+<button class="w-full py-2 px-4 rounded-lg border border-primary text-primary font-button text-button hover:bg-primary/5 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">phone</span>
+                        Call for Allergen Details
+                    </button>
+</div>
+<!-- Preparation Info -->
+<div class="mb-xl bg-surface-container-low rounded-xl p-4 border border-border">
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+<span class="font-body text-body">Prepared fresh to order</span>
+</li>
+<li class="flex items-center gap-3 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span class="font-body text-body">15-20 mins prep time</span>
+</li>
+<li class="flex items-center gap-3 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+<span class="font-body text-body">Dine-in or Takeaway</span>
+</li>
+<li class="flex items-center gap-3 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+<span class="font-body text-body">External delivery available</span>
+</li>
+</ul>
+</div>
+<!-- Actions -->
+<div class="space-y-3 mb-xl">
+<button class="w-full py-4 rounded-xl bg-primary text-on-primary font-button text-button flex items-center justify-center gap-2 hover:bg-primary-dark transition-colors shadow-sm">
+                        Online Order with Pay
+                        <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 rounded-xl bg-text-primary text-on-primary font-button text-button flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-[20px]">call</span>
+                            Call Order
+                        </button>
+<button class="py-3 rounded-xl border border-border bg-canvas text-text-primary font-button text-button flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+                            Share
+                        </button>
+</div>
+</div>
+<!-- Related Items -->
+<div class="mb-xl">
+<h3 class="font-h3 text-h3 text-text-primary mb-4">You May Also Like</h3>
+<div class="flex overflow-x-auto gap-4 pb-4 -mx-margin-mobile px-margin-mobile snap-x scrollbar-hide">
+<!-- Related Card 1 -->
+<div class="min-w-[200px] bg-canvas rounded-xl border border-border shadow-sm snap-start flex-shrink-0 overflow-hidden">
+<div class="h-32 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A high quality, appetizing close-up food photography shot of a classic Pepperoni Pizza with slightly charred crust edges and perfectly cupped pepperoni slices holding small pools of oil. The lighting is warm and directional, emphasizing the texture of the melted cheese and crispy pepperoni. Modern fast food styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnkkzEb0PWE5c6Fra-P6nCpG8Yoza8Q5V8qnenxaGd9VMx_njZJ3WbigIpyBEU8ESwArNgilXvIgB9m5wyfcl8l8WFCyVIbxe6NrpvmiMSVQLCYstcEkT_vdZNSQ-GgndW0rpXZLNpcP-iIg3sp_tMHVt1hfPYt09SQjUtPMTaaKozKQ9bAslq5nxhDjqojfHlI5-P9V5TmRBOc89bciUqjveZoArRo7FqRJrFf6Q23FW-f7z-ZYOAIpIFs6rmzFavfRdBW02pi40"/>
+</div>
+<div class="p-3">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-1 truncate">Pepperoni Pizza</h4>
+<div class="font-body text-body text-primary-dark">₺280</div>
+</div>
+</div>
+<!-- Related Card 2 -->
+<div class="min-w-[200px] bg-canvas rounded-xl border border-border shadow-sm snap-start flex-shrink-0 overflow-hidden">
+<div class="h-32 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A mouth-watering close-up studio shot of a thick BBQ Chicken Burger. The brioche bun is toasted, and thick cut chicken breast is generously coated in dark, glossy BBQ sauce, topped with crispy onion rings and melted cheddar. Set against a clean, light surface background with bright, clear lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV_YofqCRcIR5ONCC51AKBT3DIutnarjsyJTHhVNVgSclkKMNiZBuWehZhgRAZCoFD-NYE0HUwlN2OUSe9-u659i5y8G_220YXYOJe8scmcp30PPS7GB4ZwRpRHeO36NOgMH3cNzlpf26lnFXbcik3R_yMD_7-a8PhOFTSQlbJL_XDChK8LflqN0TZfBFmC_EJSY0IyIjdpR9uoshJe2Yed0F1BosjoGo0tpnXMe9P4kyay09w_HjuyXhLqOc6cPzC8bXxRMDObtg"/>
+</div>
+<div class="p-3">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-1 truncate">BBQ Chicken Burger</h4>
+<div class="font-body text-body text-primary-dark">₺220</div>
+</div>
+</div>
+<!-- Related Card 3 -->
+<div class="min-w-[200px] bg-canvas rounded-xl border border-border shadow-sm snap-start flex-shrink-0 overflow-hidden">
+<div class="h-32 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="An elegant, overhead shot of Creamy Chicken Pasta in a deep ceramic bowl. Penne pasta is coated in a rich, white garlic cream sauce, garnished with grilled chicken slices, cracked black pepper, and freshly grated parmesan. Soft, natural daylight illuminates the dish against a minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaTuHhRLBRw1gt6sV3zHg5oiD5b1LwocMkzSSQsf3kFhNROSlfqWPY4O0MVWM9a4_XeINRgC-jSWpGaOsKrq0kbzmxOvRafxYY6SWPkSRz0MkKYdcreEGfip1Efw5FllAa2ihbjHhJd54ZFh5fOnq9Z0G89i0O8ahTCyHllS4dRf-yYBGcjlU3hN2f0_evNkgnYF0DHL8mBu17XlPpcwaeIjw0dm1pkXLj-c6xWLm4-wO3acsFA580i_ipMduMjkaAfAdic0Tiapo"/>
+</div>
+<div class="p-3">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-1 truncate">Creamy Chicken Pasta</h4>
+<div class="font-body text-body text-primary-dark">₺195</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Restaurant Shortcut -->
+<div class="bg-surface rounded-xl p-4 border border-border flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[24px]">local_pizza</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-text-primary">Pizza House</h4>
+<div class="flex items-center gap-1 text-success text-small font-small">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                Open Now
+                            </div>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-canvas border border-border text-text-primary font-button text-small hover:bg-surface-container transition-colors">
+                        View Menu
+                    </button>
+</div>
+</div>
+</main>
+<!-- Sticky Footer Action -->
+<div class="fixed bottom-0 w-full max-w-mobile-shell-max-width z-50 bg-canvas border-t border-border p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] flex items-center justify-between pb-safe">
+<div class="flex flex-col">
+<span class="text-small font-small text-text-secondary line-through hidden">₺320</span>
+<span class="font-h2 text-h2 text-text-primary">₺240</span>
+</div>
+<button class="px-8 py-3 rounded-xl bg-primary text-on-primary font-button text-button flex items-center gap-2 hover:bg-primary-dark transition-colors shadow-sm">
+                Order Online
+                <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+</div>
+</div>
+<style>
+        /* Hide scrollbar for horizontal scrolling but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Safe area for mobile devices */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    </style>
+</body></html>

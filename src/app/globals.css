@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/*
+  YourPlatform design tokens.
+  Canonical brand palette comes from the master spec (section 9) and the
+  Modern Fast Food design system. Token names mirror the Stitch design exports
+  (bg-primary, text-text-primary, bg-surface-warm, font-display, text-h1, ...)
+  so the supplied designs port over without renaming every class.
+*/
+
+@theme {
+  /* ---- Brand / public palette ---- */
+  --color-primary: #f04424;
+  --color-primary-dark: #c9341a;
+  --color-canvas: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surface-muted: #f1f5f9;
+  --color-surface-warm: #fff1eb;
+  --color-surface-bright: #ffffff;
+  --color-surface-container: #f1f5f9;
+  --color-surface-container-high: #e6e8ea;
+  --color-on-surface: #111827;
+
+  --color-navy: #111827;
+  --color-navy-deep: #0b1220;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #667085;
+  --color-text-tertiary: #98a2b3;
+
+  --color-border: #e5e7eb;
+  --color-input-border: #d0d5dd;
+
+  --color-accent: #ffc533;
+
+  /* ---- Semantic status ---- */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
+
+  /* surface-warm-ish outline used in designs */
+  --color-outline-variant: #f3d3c9;
+
+  /* ---- Typography ---- */
+  --font-display: var(--font-manrope, "Manrope"), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-manrope, "Manrope"), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter, "Inter"), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter, "Inter"), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: 38px;
+  --text-display--line-height: 42px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 800;
+
+  --text-h1: 30px;
+  --text-h1--line-height: 35px;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h1--font-weight: 800;
+
+  --text-h2: 24px;
+  --text-h2--line-height: 30px;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 19px;
+  --text-h3--line-height: 25px;
+  --text-h3--font-weight: 700;
+
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+
+  --text-small: 14px;
+  --text-small--line-height: 20px;
+
+  --text-button: 15px;
+  --text-button--line-height: 20px;
+  --text-button--font-weight: 700;
+
+  /*
+    NOTE: do not add named spacing keys (--spacing-sm/md/lg/xl/...). In Tailwind
+    v4 they collide with sizing utilities, making max-w-md/max-w-xl/w-lg resolve
+    to a few pixels. Use the numeric spacing scale (p-4, gap-6, ...) instead.
+  */
+
+  /* ---- Container widths (max-w-page / max-w-shell) ---- */
+  --container-shell: 640px;
+  --container-page: 1280px;
+
+  /* ---- Radii (semantic) ---- */
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-panel: 20px;
+
+  /* ---- Elevation ---- */
+  --shadow-card: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  --shadow-lift: 0 10px 25px -5px rgba(16, 24, 40, 0.1), 0 8px 10px -6px rgba(16, 24, 40, 0.08);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Visible focus for keyboard users on every interactive element. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* RTL preparation: logical-property friendly defaults. */
+  [dir="rtl"] {
+    text-align: right;
+  }
+}
+
+@layer utilities {
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  /*
+    Public restaurant shell: reserve space for the fixed bottom action bar so it
+    never covers content (footer, cookie controls, campaign buttons, etc.).
+  */
+  .restaurant-public-shell {
+    --restaurant-action-bar-height: 76px;
+    padding-bottom: calc(
+      var(--restaurant-action-bar-height) + env(safe-area-inset-bottom) + 16px
+    );
+  }
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print stylesheet for legal pages. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}

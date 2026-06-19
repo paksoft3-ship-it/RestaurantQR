@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public Website CMS - YourPlatform Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#b51d00",
+                        "surface-tint": "#b91e00",
+                        "surface": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "success": "#16A34A",
+                        "on-error-container": "#93000a",
+                        "outline": "#906f69",
+                        "on-secondary-fixed-variant": "#404758",
+                        "background": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#946f00",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary-container": "#d9dff5",
+                        "outline-variant": "#e5beb6",
+                        "on-secondary-container": "#5c6274",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#5c403a",
+                        "inverse-primary": "#ffb4a5",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-error": "#ffffff",
+                        "danger": "#DC2626",
+                        "primary-container": "#db3516",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad3",
+                        "on-tertiary": "#ffffff",
+                        "surface-warm": "#FFF1EB",
+                        "secondary-fixed": "#dce2f7",
+                        "primary-dark": "#C9341A",
+                        "on-tertiary-fixed": "#261a00",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "text-secondary": "#667085",
+                        "on-primary-fixed": "#3e0400",
+                        "surface-container": "#eceef0",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#191c1e",
+                        "canvas": "#FFFFFF",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-low": "#f2f4f6",
+                        "border": "#E5E7EB",
+                        "on-tertiary-container": "#fffbff",
+                        "text-primary": "#111827",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "secondary": "#575e70",
+                        "surface-variant": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "sm": "12px",
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "mobile-shell-max-width": "640px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-bold": ["Inter"],
+                        "button": ["Inter"],
+                        "body": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "small": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body text-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-secondary dark:bg-inverse-surface font-body text-body flex flex-col h-screen w-60 fixed left-0 top-0 z-40 border-r border-outline-variant flat no shadows transition-colors duration-200">
+<div class="p-lg border-b border-outline-variant/30 flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold text-lg">Y</div>
+<div>
+<h1 class="font-h2 text-h2 font-bold text-on-secondary leading-none tracking-tight">YourPlatform</h1>
+<p class="text-secondary-fixed-dim text-small font-small">Admin Console</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-sm scrollbar-hide">
+<ul class="space-y-base px-sm">
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">storefront</span>
+<span>Restaurants</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">restaurant_menu</span>
+<span>Menus</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">qr_code_2</span>
+<span>QR Codes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">nfc</span>
+<span>NFC Products</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">campaign</span>
+<span>Campaigns</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-secondary-fixed-dim hover:text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span>Analytics</span>
+</a>
+</li>
+<li class="pt-md mt-sm border-t border-outline-variant/20">
+<div class="px-sm pb-xs text-xs font-bold text-secondary-fixed-dim uppercase tracking-wider">Platform Management</div>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-primary bg-primary border-l-4 border-on-primary-fixed-variant transition-colors mt-xs" href="#">
+<span class="material-symbols-outlined text-lg">web</span>
+<span>Website CMS</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="p-sm border-t border-outline-variant/30 mt-auto">
+<div class="flex items-center gap-sm px-sm py-xs">
+<div class="w-8 h-8 rounded-full bg-surface-dim overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A small circular avatar image of a professional admin user, subtly lit with a warm neutral tone, fitting a modern corporate SaaS aesthetic. A generic user icon could also work." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSISSd5jsiruUmz-sWAb9IcLdjj5TQqCVNdNbWktUKiQFpvOR49x_Gtfm5xpWSeOPxleMlR_WZJG-P43N13vYF4N7q3YtVkPdgX6bVTO-n0d6BEkfMusz0IC4MZDVHyy56XTdNvA0X3BT2qDzTOoPv0vTXDFZWRvXXWsXziVBjr4PTGG3KUdrHr65HG0IunlvCvm5_mV32Im4PLmXOpQIJS799ZHQ4nC9kvdHqu7nAYK2Xrzff84RqFcUfhUX2rdK6DGxHPb-jR9U"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-small font-body-bold text-on-secondary truncate">Admin User</p>
+<p class="text-xs text-secondary-fixed-dim truncate">Super Admin</p>
+</div>
+<button class="text-secondary-fixed-dim hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-60 h-screen w-[calc(100%-15rem)]">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim font-body text-body sticky top-0 full-width border-b border-outline-variant shadow-sm transition-all duration-150 z-30">
+<div class="flex justify-between items-center h-16 px-lg">
+<div class="flex items-center gap-md flex-1">
+<h2 class="font-h3 text-h3 font-bold text-primary">Public Website CMS</h2>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-danger"></span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-xs"></div>
+<button class="bg-primary hover:bg-primary-dark text-on-primary font-button text-button px-md py-xs rounded-lg transition-colors flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                        Create Page Draft
+                    </button>
+</div>
+</div>
+</header>
+<!-- Main Workspace Scrollable Area -->
+<main class="flex-1 overflow-y-auto bg-background p-lg flex gap-lg">
+<!-- Left/Center Content Column -->
+<div class="flex-1 flex flex-col gap-lg min-w-0">
+<!-- Metrics Bar -->
+<div class="grid grid-cols-3 gap-md">
+<div class="bg-canvas border border-border rounded-xl p-md flex items-center justify-between shadow-sm">
+<div>
+<p class="text-text-secondary font-small text-small">Published Pages</p>
+<p class="font-h2 text-h2 text-text-primary mt-xs">18</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center text-success">
+<span class="material-symbols-outlined fill text-xl">check_circle</span>
+</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md flex items-center justify-between shadow-sm">
+<div>
+<p class="text-text-secondary font-small text-small">Draft Changes</p>
+<p class="font-h2 text-h2 text-text-primary mt-xs">7</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed-dim/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-xl">edit_document</span>
+</div>
+</div>
+<div class="bg-canvas border border-danger/30 rounded-xl p-md flex items-center justify-between shadow-sm bg-error-container/20">
+<div>
+<p class="text-danger font-small text-small font-bold">Content Issues</p>
+<p class="font-h2 text-h2 text-danger mt-xs">5</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-danger/10 flex items-center justify-center text-danger">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+</div>
+</div>
+<!-- Alert Area -->
+<div class="flex flex-col gap-sm">
+<div class="bg-error-container/50 border border-danger/30 rounded-lg p-sm flex items-start gap-sm">
+<span class="material-symbols-outlined text-danger mt-0.5">gavel</span>
+<div class="flex-1">
+<p class="font-body-bold text-body-bold text-danger">Legal Review Required</p>
+<p class="text-small font-small text-on-surface-variant mt-0.5">The "Privacy Policy" draft contains untracked changes that require legal sign-off before publishing.</p>
+</div>
+<button class="text-danger font-button text-button px-sm py-xs hover:bg-danger/10 rounded transition-colors">Review</button>
+</div>
+<div class="bg-surface-warm border border-outline-variant rounded-lg p-sm flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-0.5">link_off</span>
+<div class="flex-1">
+<p class="font-body-bold text-body-bold text-on-surface">Broken Navigation Link</p>
+<p class="text-small font-small text-on-surface-variant mt-0.5">Footer item "Partner With Us" links to a 404 page (/partners/join).</p>
+</div>
+<button class="text-primary font-button text-button px-sm py-xs hover:bg-primary/5 rounded transition-colors">Fix Link</button>
+</div>
+</div>
+<!-- CMS Navigation Tabs -->
+<div class="border-b border-border">
+<nav aria-label="Tabs" class="flex gap-md px-sm">
+<a class="border-b-2 border-primary text-primary py-sm px-xs font-body-bold text-body-bold" href="#">Pages</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">Shared Content</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">Navigation</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">Translations</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">SEO</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">Redirects</a>
+<a class="border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-outline py-sm px-xs font-body text-body transition-colors" href="#">Legal Pages</a>
+</nav>
+</div>
+<!-- Data Table Workspace -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm flex flex-col flex-1 overflow-hidden">
+<div class="p-sm border-b border-border flex justify-between items-center bg-surface-container-lowest">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary text-sm">search</span>
+<input class="w-full pl-xl pr-sm py-xs border border-border rounded-lg text-small font-small focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Search pages..." type="text"/>
+</div>
+<div class="flex gap-sm">
+<button class="border border-border text-text-primary px-sm py-xs rounded-lg font-button text-button flex items-center gap-xs hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead class="bg-surface-container-low text-text-secondary font-small text-small sticky top-0 z-10 border-b border-border">
+<tr>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Page</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Type</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Public Route</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Languages</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">SEO</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Status</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border text-small font-small">
+<!-- Row 1 (Active/Selected state mock) -->
+<tr class="bg-primary/5 hover:bg-primary/5 transition-colors group cursor-pointer border-l-4 border-l-primary">
+<td class="py-sm px-md">
+<div class="font-body-bold text-body-bold text-text-primary">Platform Features</div>
+<div class="text-xs text-text-secondary">Updated 2h ago by Sarah J.</div>
+</td>
+<td class="py-sm px-md"><span class="bg-surface-container px-2 py-0.5 rounded text-xs">Landing Page</span></td>
+<td class="py-sm px-md font-mono text-xs text-secondary">/features</td>
+<td class="py-sm px-md">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-success" title="EN (Ready)"></span>
+<span class="w-2 h-2 rounded-full bg-success" title="ES (Ready)"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim" title="FR (Draft)"></span>
+</div>
+</td>
+<td class="py-sm px-md">
+<div class="flex items-center gap-1 text-success">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-xs">Good</span>
+</div>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-tertiary-fixed-dim/20 text-tertiary text-xs font-bold border border-tertiary-fixed-dim/30">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Draft Changes
+                                        </span>
+</td>
+<td class="py-sm px-md text-right opacity-100 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer border-l-4 border-l-transparent">
+<td class="py-sm px-md">
+<div class="font-body-bold text-body-bold text-text-primary">Home (Default)</div>
+<div class="text-xs text-text-secondary">Updated 3d ago by System</div>
+</td>
+<td class="py-sm px-md"><span class="bg-surface-container px-2 py-0.5 rounded text-xs">Home Page</span></td>
+<td class="py-sm px-md font-mono text-xs text-secondary">/</td>
+<td class="py-sm px-md">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-success" title="EN (Ready)"></span>
+<span class="w-2 h-2 rounded-full bg-success" title="ES (Ready)"></span>
+<span class="w-2 h-2 rounded-full bg-success" title="FR (Ready)"></span>
+</div>
+</td>
+<td class="py-sm px-md">
+<div class="flex items-center gap-1 text-success">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-xs">Good</span>
+</div>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-success/10 text-success text-xs font-bold border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Published
+                                        </span>
+</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer border-l-4 border-l-transparent">
+<td class="py-sm px-md">
+<div class="font-body-bold text-body-bold text-text-primary">Pricing</div>
+<div class="text-xs text-text-secondary">Updated 1w ago by Mike R.</div>
+</td>
+<td class="py-sm px-md"><span class="bg-surface-container px-2 py-0.5 rounded text-xs">Standard Page</span></td>
+<td class="py-sm px-md font-mono text-xs text-secondary">/pricing</td>
+<td class="py-sm px-md">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-success" title="EN (Ready)"></span>
+<span class="w-2 h-2 rounded-full bg-surface-dim" title="ES (Missing)"></span>
+<span class="w-2 h-2 rounded-full bg-surface-dim" title="FR (Missing)"></span>
+</div>
+</td>
+<td class="py-sm px-md">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="text-xs">Missing Meta</span>
+</div>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-success/10 text-success text-xs font-bold border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> Published
+                                        </span>
+</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-error-container/10 hover:bg-error-container/20 transition-colors group cursor-pointer border-l-4 border-l-transparent">
+<td class="py-sm px-md">
+<div class="font-body-bold text-body-bold text-text-primary">Privacy Policy</div>
+<div class="text-xs text-text-secondary">Updated 1h ago by Legal Team</div>
+</td>
+<td class="py-sm px-md"><span class="bg-surface-container px-2 py-0.5 rounded text-xs">Legal Page</span></td>
+<td class="py-sm px-md font-mono text-xs text-secondary">/legal/privacy</td>
+<td class="py-sm px-md">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-danger" title="EN (Needs Review)"></span>
+<span class="w-2 h-2 rounded-full bg-danger" title="ES (Needs Review)"></span>
+</div>
+</td>
+<td class="py-sm px-md">
+<div class="flex items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-sm">do_not_disturb_on</span>
+<span class="text-xs">No Index</span>
+</div>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-error-container text-danger text-xs font-bold border border-danger/30">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span> Review Required
+                                        </span>
+</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="text-text-secondary hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm border-t border-border flex justify-between items-center text-xs text-text-secondary bg-surface-container-lowest">
+<span>Showing 1-4 of 32 pages</span>
+<div class="flex gap-xs">
+<button class="p-1 hover:bg-surface-container rounded disabled:opacity-50"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-1 hover:bg-surface-container rounded"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Detail Panel (Bento-style layout) -->
+<aside class="w-80 flex flex-col gap-md overflow-y-auto scrollbar-hide pb-lg">
+<!-- Detail Header -->
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-h3 text-h3 text-text-primary">Platform Features</h3>
+<button class="text-text-secondary hover:text-text-primary transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex flex-col gap-xs text-small font-small">
+<div class="flex justify-between border-b border-border pb-xs">
+<span class="text-text-secondary">Route:</span>
+<span class="font-mono text-text-primary">/features</span>
+</div>
+<div class="flex justify-between border-b border-border py-xs">
+<span class="text-text-secondary">Template:</span>
+<span class="text-text-primary">Feature Grid V2</span>
+</div>
+<div class="flex justify-between pt-xs">
+<span class="text-text-secondary">Last Edited:</span>
+<span class="text-text-primary">Today, 10:42 AM</span>
+</div>
+</div>
+<div class="mt-md flex gap-sm">
+<button class="flex-1 bg-primary text-on-primary font-button text-button py-xs rounded-lg shadow-sm hover:bg-primary-dark transition-colors text-center">Edit Draft</button>
+<button class="w-10 h-10 border border-border rounded-lg flex items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors" title="Settings">
+<span class="material-symbols-outlined text-sm">settings</span>
+</button>
+</div>
+</div>
+<!-- Publication Status Card -->
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-tertiary">edit_document</span> Draft Status
+                    </h4>
+<div class="bg-surface-container-low rounded-lg p-sm border border-border text-small font-small mb-sm">
+<p class="text-text-primary mb-2">You have unpublished changes on this page.</p>
+<div class="flex justify-between text-xs text-text-secondary">
+<span>Live Version: v2.4</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">Compare <span class="material-symbols-outlined" style="font-size: 12px;">compare_arrows</span></a>
+</div>
+</div>
+<button class="w-full border border-primary text-primary font-button text-button py-xs rounded-lg hover:bg-primary/5 transition-colors text-center">Publish Changes</button>
+</div>
+<!-- SEO Checklist -->
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-center mb-sm">
+<h4 class="font-body-bold text-body-bold text-text-primary">SEO Readiness</h4>
+<span class="text-success text-xs font-bold bg-success/10 px-2 py-0.5 rounded">95/100</span>
+</div>
+<ul class="space-y-sm text-small font-small">
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-success text-sm mt-0.5">check_circle</span>
+<div>
+<p class="text-text-primary">Meta Title length</p>
+<p class="text-xs text-text-secondary">54 chars (Optimal)</p>
+</div>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-success text-sm mt-0.5">check_circle</span>
+<div>
+<p class="text-text-primary">Meta Description length</p>
+<p class="text-xs text-text-secondary">152 chars (Optimal)</p>
+</div>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-tertiary text-sm mt-0.5">warning</span>
+<div>
+<p class="text-text-primary">Missing Alt Tags</p>
+<p class="text-xs text-text-secondary">2 images missing alt text</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Mobile Preview Mini -->
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<h4 class="font-body-bold text-body-bold text-text-primary mb-sm flex items-center justify-between">
+                        Preview
+                        <div class="flex gap-1">
+<button class="text-primary bg-primary/10 p-1 rounded"><span class="material-symbols-outlined text-xs">smartphone</span></button>
+<button class="text-text-secondary hover:bg-surface-container p-1 rounded transition-colors"><span class="material-symbols-outlined text-xs">desktop_windows</span></button>
+<button class="text-text-secondary hover:bg-surface-container p-1 rounded transition-colors ml-1"><span class="material-symbols-outlined text-xs">open_in_new</span></button>
+</div>
+</h4>
+<div class="w-full h-64 bg-surface-dim rounded-lg border-4 border-inverse-surface overflow-hidden relative flex flex-col mx-auto max-w-[180px]">
+<!-- Mock Mobile Header -->
+<div class="h-6 bg-canvas border-b border-border flex items-center justify-center px-2">
+<div class="w-2 h-2 rounded bg-primary"></div>
+<div class="w-12 h-1 bg-surface-container ml-auto rounded"></div>
+</div>
+<!-- Mock Mobile Content -->
+<div class="flex-1 bg-surface p-2 flex flex-col gap-2">
+<div class="w-full h-16 bg-surface-container rounded" data-alt="A stylized placeholder representing a hero banner graphic on a mobile phone screen, modern corporate aesthetic with subtle primary red brand colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnvlu3OMmYOWKn2VCE7DeviHkm9nwPjS55RAV2nq8K4wii2mYEyd-JR6zjbz_-XzX2Z6yOgt2ncqP4mxdJvAaSLdPXDYqMbs7Y7cL4EE-9lmMhtthe10e6liAzyJnSpSDZPLA5_kQ6bmGBaNIMh5gYAQKl7cmsPvQrSkRO8PiHFiodiy52RxV1Co4P9gaDQ81kU_8s6V1ZcGupc9FHI8QpbOuDjdOBjZL790fbCIuVCESSGuVonc5wheCLUAr6tzf6wWnoWa-zoG8'); background-size: cover; background-position: center;"></div>
+<div class="w-3/4 h-3 bg-text-primary rounded"></div>
+<div class="w-full h-2 bg-text-secondary rounded opacity-50"></div>
+<div class="w-5/6 h-2 bg-text-secondary rounded opacity-50"></div>
+<div class="w-1/2 h-4 bg-primary rounded mt-1"></div>
+<div class="grid grid-cols-2 gap-1 mt-2">
+<div class="w-full h-10 bg-canvas border border-border rounded"></div>
+<div class="w-full h-10 bg-canvas border border-border rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

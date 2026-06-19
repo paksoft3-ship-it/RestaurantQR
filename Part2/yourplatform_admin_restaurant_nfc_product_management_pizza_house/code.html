@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant NFC Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "text-primary": "#111827",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "danger": "#DC2626",
+                      "surface-tint": "#b91e00",
+                      "surface": "#f7f9fb",
+                      "border": "#E5E7EB",
+                      "background": "#f7f9fb",
+                      "tertiary-container": "#946f00",
+                      "tertiary": "#765700",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "on-surface": "#191c1e",
+                      "surface-container-highest": "#e0e3e5",
+                      "text-secondary": "#667085",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary-container": "#fffbff",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary-container": "#fffbff",
+                      "primary": "#b51d00",
+                      "primary-fixed": "#ffdad3",
+                      "outline": "#906f69",
+                      "surface-container-low": "#f2f4f6",
+                      "secondary-fixed": "#dce2f7",
+                      "on-secondary-fixed": "#141b2b",
+                      "surface-warm": "#FFF1EB",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "tertiary-fixed": "#ffdf9e",
+                      "surface-container-lowest": "#ffffff",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed": "#3e0400",
+                      "secondary": "#575e70",
+                      "on-secondary-container": "#5c6274",
+                      "surface-container": "#eceef0",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#191c1e",
+                      "outline-variant": "#e5beb6",
+                      "error-container": "#ffdad6",
+                      "canvas": "#FFFFFF",
+                      "on-tertiary-fixed": "#261a00",
+                      "on-surface-variant": "#5c403a",
+                      "inverse-primary": "#ffb4a5",
+                      "success": "#16A34A",
+                      "on-error": "#ffffff",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-container": "#d9dff5",
+                      "primary-dark": "#C9341A",
+                      "inverse-on-surface": "#eff1f3",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "surface-variant": "#e0e3e5",
+                      "primary-container": "#db3516",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "base": "4px",
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "mobile-shell-max-width": "640px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "container-max-width": "1280px",
+                      "xs": "8px",
+                      "gutter": "16px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "small": [
+                              "Inter"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "button": [
+                              "Inter"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-text-primary font-body antialiased flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-secondary dark:bg-secondary font-body text-body font-bold fixed left-0 top-0 h-full w-60 border-r border-border flex flex-col z-50">
+<div class="p-lg border-b border-border">
+<h1 class="font-h2 text-h2 font-extrabold text-on-primary">NFC Manager</h1>
+<p class="text-small text-secondary-fixed-dim mt-base">System Administrator</p>
+</div>
+<div class="p-md">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm rounded-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                New Product
+            </button>
+</div>
+<ul class="flex-1 overflow-y-auto py-sm">
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg bg-primary text-on-primary border-l-4 border-primary-fixed opacity-90 scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">contactless</span>
+                    NFC Products
+                </a>
+</li>
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                    Restaurants
+                </a>
+</li>
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                    Hardware Health
+                </a>
+</li>
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">developer_board</span>
+                    Programming
+                </a>
+</li>
+<li class="px-md py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="border-t border-border p-md">
+<ul>
+<li class="py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">help</span>
+                        Support
+                    </a>
+</li>
+<li class="py-xs">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-secondary-fixed-variant hover:text-on-primary hover:bg-primary-dark transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">logout</span>
+                        Logout
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="ml-60 w-[calc(100%-240px)] min-h-screen flex flex-col">
+<!-- TopAppBar (from JSON) -->
+<header class="bg-canvas dark:bg-surface-container font-body text-body sticky top-0 w-full border-b border-border shadow-sm flex items-center justify-between px-md py-xs z-40 focus-within:ring-2 focus-within:ring-primary">
+<div class="flex items-center gap-md">
+<h2 class="font-h3 text-h3 font-bold text-text-primary">Restaurant Workspace</h2>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-text-secondary">search</span>
+<input class="pl-xl pr-md py-xs border border-border rounded-lg bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow text-small w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md text-primary dark:text-primary-fixed">
+<button class="hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">help_outline</span></button>
+<button class="hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-lg overflow-y-auto">
+<!-- Breadcrumbs -->
+<div class="flex items-center text-small text-text-secondary mb-md">
+<span>Admin</span>
+<span class="material-symbols-outlined text-sm mx-xs">chevron_right</span>
+<span>Restaurants</span>
+<span class="material-symbols-outlined text-sm mx-xs">chevron_right</span>
+<span>Pizza House</span>
+<span class="material-symbols-outlined text-sm mx-xs">chevron_right</span>
+<span class="font-body-bold text-text-primary">NFC Products</span>
+</div>
+<!-- Restaurant Header -->
+<div class="bg-canvas border border-border rounded-xl p-lg flex items-center justify-between shadow-sm mb-lg">
+<div class="flex items-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border border-border">
+<img class="w-full h-full object-cover" data-alt="A modern, minimalist logo for a fast-casual pizza restaurant featuring a stylized pizza slice graphic in vibrant red and white, set against a clean, flat background. The lighting is bright and even, typical of a high-quality vector brand asset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB23phEQ4qiUXExNc6M2HXSV4UryVI-S_hT2EXh7BC6aE16yMA7igzR2zGGEzqPkutnubliKbAxHpZJHbxUz2EjF2N0P3cIU64f1OC60zJ_ewL4F2ErX5doW5ay-xC7skjXS-K69CRcZOkpxanwCEYlpavmIQwTGN8gf4kRjwtOPOqbJTddmHu0YYootff4FSza8pZZYz0EZhp1BWc7h5YlVOEb-rAw32kjf5MdA2pMFF7GlU3k7nmW5n5Uo3zAEb3WFZEIFU4Cxkc"/>
+</div>
+<div>
+<h1 class="font-h1 text-h1 text-text-primary">Pizza House</h1>
+<div class="flex items-center gap-md mt-xs text-small text-text-secondary">
+<span class="flex items-center gap-xs bg-surface px-sm py-base rounded-md border border-border">ID: RST-00024</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">location_on</span> Kadıköy, Istanbul</span>
+</div>
+</div>
+</div>
+<div class="flex gap-md text-center">
+<div class="px-md border-r border-border">
+<div class="text-h2 font-h2 text-text-primary">24</div>
+<div class="text-small text-text-secondary uppercase tracking-wider">Assigned</div>
+</div>
+<div class="px-md border-r border-border">
+<div class="text-h2 font-h2 text-success">20</div>
+<div class="text-small text-text-secondary uppercase tracking-wider">Active</div>
+</div>
+<div class="px-md">
+<div class="text-h2 font-h2 text-error">3</div>
+<div class="text-small text-text-secondary uppercase tracking-wider">Issues</div>
+</div>
+</div>
+</div>
+<!-- Workspace Tabs -->
+<div class="border-b border-border mb-lg flex gap-lg overflow-x-auto">
+<button class="py-sm text-text-secondary hover:text-primary text-body-bold whitespace-nowrap">Overview</button>
+<button class="py-sm text-text-secondary hover:text-primary text-body-bold whitespace-nowrap">General Info</button>
+<button class="py-sm text-text-secondary hover:text-primary text-body-bold whitespace-nowrap">Branding</button>
+<button class="py-sm text-text-secondary hover:text-primary text-body-bold whitespace-nowrap">QR Codes</button>
+<button class="py-sm text-primary border-b-2 border-primary text-body-bold whitespace-nowrap">NFC Products</button>
+<button class="py-sm text-text-secondary hover:text-primary text-body-bold whitespace-nowrap">Campaigns</button>
+</div>
+<!-- Operational Status Bar -->
+<div class="flex gap-md mb-lg">
+<div class="bg-error-container text-on-error-container px-md py-sm rounded-lg flex items-center gap-sm flex-1 border border-error/20">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-body-bold">Review Required (3 products)</span>
+</div>
+<div class="bg-[#dcfce7] text-[#166534] px-md py-sm rounded-lg flex items-center gap-sm flex-1 border border-[#bbf7d0]">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-body-bold">Healthy (All destinations available)</span>
+</div>
+</div>
+<!-- Metric Cards -->
+<div class="grid grid-cols-5 gap-md mb-lg">
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<div class="text-small text-text-secondary mb-xs">Total Assigned</div>
+<div class="font-h2 text-h2 text-text-primary">24</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm border-l-4 border-l-success">
+<div class="text-small text-text-secondary mb-xs">Active</div>
+<div class="font-h2 text-h2 text-text-primary">20</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm border-l-4 border-l-[#3b82f6]">
+<div class="text-small text-text-secondary mb-xs">Awaiting Programming</div>
+<div class="font-h2 text-h2 text-text-primary">2</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm border-l-4 border-l-tertiary-fixed-dim">
+<div class="text-small text-text-secondary mb-xs">Awaiting Installation</div>
+<div class="font-h2 text-h2 text-text-primary">4</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm">
+<div class="text-small text-text-secondary mb-xs">Total Taps</div>
+<div class="font-h2 text-h2 text-text-primary">3,760</div>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="flex gap-lg h-[600px]">
+<!-- Table View Area -->
+<div class="flex-[2] flex flex-col bg-canvas border border-border rounded-xl shadow-sm overflow-hidden">
+<!-- Toolbar -->
+<div class="p-md border-b border-border flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="w-full pl-xl pr-md py-xs border border-border rounded-lg text-small focus:ring-2 focus:ring-primary outline-none" placeholder="Search NFC ID, product..." type="text"/>
+</div>
+<button class="flex items-center gap-xs px-sm py-xs border border-border rounded-lg text-small text-text-secondary hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filters
+                            </button>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-md py-xs rounded-lg hover:bg-primary-dark transition-colors shadow-sm">
+                            Assign NFC Product
+                        </button>
+</div>
+<!-- Table -->
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface sticky top-0 border-b border-border text-small text-text-secondary z-10">
+<tr>
+<th class="p-md font-body-bold"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></th>
+<th class="p-md font-body-bold">NFC Product</th>
+<th class="p-md font-body-bold">Assignment</th>
+<th class="p-md font-body-bold">Status</th>
+<th class="p-md font-body-bold text-right">Taps</th>
+</tr>
+</thead>
+<tbody class="text-small text-text-primary">
+<!-- Row 1 (Selected) -->
+<tr class="border-b border-border bg-primary-fixed/20 hover:bg-primary-fixed/30 cursor-pointer transition-colors">
+<td class="p-md"><input checked="" class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded bg-surface border border-border flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">crop_portrait</span>
+</div>
+<div>
+<div class="font-body-bold text-primary dark:text-primary-fixed">TABLE-NFC-KDK-07</div>
+<div class="text-text-secondary text-[12px]">Table Stand</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<div class="font-body-bold">Table 7</div>
+<div class="text-text-secondary text-[12px]">Digital Menu</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-[#dcfce7] text-[#166534] border border-[#bbf7d0] text-[12px] font-body-bold">
+<span class="w-2 h-2 rounded-full bg-[#166534]"></span> Active
+                                        </span>
+</td>
+<td class="p-md text-right font-body-bold">186</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-border hover:bg-surface cursor-pointer transition-colors">
+<td class="p-md"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded bg-surface border border-border flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">branding_watermark</span>
+</div>
+<div>
+<div class="font-body-bold">TABLE-NFC-KDK-12</div>
+<div class="text-text-secondary text-[12px]">Table Card</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<div class="font-body-bold">Table 12</div>
+<div class="text-text-secondary text-[12px]">Product: Margherita</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-[#dbeafe] text-[#1e40af] border border-[#bfdbfe] text-[12px] font-body-bold">
+<span class="w-2 h-2 rounded-full bg-[#1e40af]"></span> Awaiting Prog.
+                                        </span>
+</td>
+<td class="p-md text-right font-body-bold">0</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-border hover:bg-surface cursor-pointer transition-colors">
+<td class="p-md"><input class="rounded border-border text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded bg-surface border border-border flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">nfc</span>
+</div>
+<div>
+<div class="font-body-bold">STICKER-KDK-01</div>
+<div class="text-text-secondary text-[12px]">NFC Sticker</div>
+</div>
+</div>
+</td>
+<td class="p-md">
+<div class="font-body-bold">Counter 1</div>
+<div class="text-text-secondary text-[12px]">Digital Menu</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-error-container text-on-error-container border border-error/20 text-[12px] font-body-bold">
+<span class="w-2 h-2 rounded-full bg-error"></span> Damaged
+                                        </span>
+</td>
+<td class="p-md text-right font-body-bold">42</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Detail Panel -->
+<aside class="flex-1 bg-canvas border border-border rounded-xl shadow-sm flex flex-col overflow-hidden">
+<div class="p-lg border-b border-border bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-h3 text-h3 text-text-primary">TABLE-NFC-KDK-07</h3>
+<span class="inline-flex items-center gap-xs mt-xs px-sm py-1 rounded-full bg-[#dcfce7] text-[#166534] border border-[#bbf7d0] text-[12px] font-body-bold">
+<span class="w-2 h-2 rounded-full bg-[#166534]"></span> Active
+                                </span>
+</div>
+<button class="p-xs text-text-secondary hover:text-primary transition-colors rounded-lg hover:bg-surface"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<!-- Product Preview -->
+<div class="w-full h-40 bg-surface rounded-lg border border-border flex items-center justify-center overflow-hidden relative mb-md">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#E5E7EB 1px, transparent 1px); background-size: 16px 16px;"></div>
+<img class="h-32 object-contain relative z-10 drop-shadow-md" data-alt="A clean 3D render of a sleek, modern table stand designed for a restaurant, featuring clear Pizza House branding in bright red and white, and a prominent 'Tap to View Menu' label near the top. The lighting is bright and studio-like, emphasizing the glossy finish of the stand against a pure white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfzx0mcgMl82G_Fz1rHBNqqsJjjqD_FA-Y_H22_-mHuSDkpc3DP5jhqiY6HeQMod661e6Phr8n_Dz-DDxhdNonJydkIAq47P6kuV3Ucekny9XlPKa0hCzsO-wrIOdRKxYrWci8Sbf-_xBR_hXpbwvf8IXAloKEFAR1-obfcymU5CrsX1I-I7j17MkZPZ5gEECo0x0CNFdV0KzSOS0JfHgLeJQ2H7xGkOkqw5T8YBzLKMerUPOimzPJjn4ic8upwFxLoxRP2j_Tckc"/>
+</div>
+<!-- Details Grid -->
+<div class="space-y-md text-small">
+<div class="grid grid-cols-3 gap-sm">
+<div class="text-text-secondary">Destination</div>
+<div class="col-span-2 font-body-bold flex items-center gap-xs">
+                                    Digital Menu 
+                                    <span class="text-text-secondary font-body text-[12px] truncate">/restaurants/pizza-house/menu</span>
+<span class="material-symbols-outlined text-[16px] text-success">check_circle</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-sm">
+<div class="text-text-secondary">Programming</div>
+<div class="col-span-2 font-body-bold">
+                                    Confirmed (Batch: B-0042)
+                                    <div class="text-text-secondary font-body text-[12px]">2024-05-12</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-sm">
+<div class="text-text-secondary">Installation</div>
+<div class="col-span-2 font-body-bold">
+                                    Main Dining Area
+                                    <div class="text-text-secondary font-body text-[12px]">Installed: 2024-05-14</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interaction Summary -->
+<div class="p-lg flex-1 overflow-auto">
+<h4 class="font-body-bold text-text-primary mb-md">Interaction Summary (7 Days)</h4>
+<div class="flex items-end gap-sm h-32 w-full mb-xs">
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 40%"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 60%"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 30%"></div>
+<div class="bg-primary hover:bg-primary-dark transition-colors w-full rounded-t-sm" style="height: 80%"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 50%"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 90%"></div>
+<div class="bg-primary/20 hover:bg-primary/40 transition-colors w-full rounded-t-sm" style="height: 70%"></div>
+</div>
+<div class="flex justify-between text-[12px] text-text-secondary border-t border-border pt-xs">
+<span>Mon</span><span>Tue</span><span>Wed</span><span class="font-bold text-text-primary">Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-md border-t border-border bg-surface flex flex-col gap-sm">
+<button class="w-full bg-canvas border border-border text-text-primary font-button text-button py-xs rounded-lg hover:bg-surface-container transition-colors shadow-sm">Edit Assignment</button>
+<button class="w-full bg-canvas border border-border text-text-primary font-button text-button py-xs rounded-lg hover:bg-surface-container transition-colors shadow-sm">Test Destination</button>
+<button class="w-full text-error font-button text-button py-xs rounded-lg hover:bg-error-container transition-colors">Request Replacement</button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

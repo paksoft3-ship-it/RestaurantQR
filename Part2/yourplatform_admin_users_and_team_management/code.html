@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Users and Team Management - YourPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#8e1500",
+                      "secondary-container": "#d9dff5",
+                      "on-background": "#191c1e",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d8dadc",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "surface-bright": "#f7f9fb",
+                      "border": "#E5E7EB",
+                      "primary-fixed": "#ffdad3",
+                      "primary-container": "#db3516",
+                      "on-primary-fixed": "#3e0400",
+                      "inverse-primary": "#ffb4a5",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-surface": "#191c1e",
+                      "secondary": "#575e70",
+                      "text-primary": "#111827",
+                      "success": "#16A34A",
+                      "danger": "#DC2626",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#5c403a",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#b91e00",
+                      "canvas": "#FFFFFF",
+                      "primary-dark": "#C9341A",
+                      "background": "#f7f9fb",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f2f4f6",
+                      "outline-variant": "#e5beb6",
+                      "tertiary-fixed": "#ffdf9e",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "surface": "#f7f9fb",
+                      "primary": "#b51d00",
+                      "outline": "#906f69",
+                      "text-secondary": "#667085",
+                      "on-secondary-fixed": "#141b2b",
+                      "surface-warm": "#FFF1EB",
+                      "tertiary": "#765700",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "on-tertiary-fixed": "#261a00",
+                      "secondary-fixed": "#dce2f7",
+                      "on-secondary-container": "#5c6274",
+                      "on-secondary-fixed-variant": "#404758",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#946f00",
+                      "inverse-surface": "#2d3133",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "on-primary-container": "#fffbff",
+                      "on-tertiary-container": "#fffbff",
+                      "surface-variant": "#e0e3e5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "container-max-width": "1280px",
+                      "xs": "8px",
+                      "mobile-shell-max-width": "640px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px",
+                      "xl": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "h1-mobile": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "small": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "button": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for sleek UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #E5E7EB;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #c0c6db;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased selection:bg-primary-container selection:text-white flex min-h-screen">
+<!-- JSON: SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-secondary dark:bg-on-secondary-fixed text-primary dark:text-primary-fixed border-r border-border flex flex-col z-50 transition-all duration-300 hidden md:flex">
+<!-- Logo Area -->
+<div class="p-lg border-b border-border/10">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white font-bold">Y</div>
+<div>
+<h1 class="font-h2 text-h2 font-extrabold text-on-primary-fixed leading-none">YourPlatform</h1>
+<span class="font-small text-small text-secondary-fixed-dim">Admin CMS</span>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto py-md space-y-1 px-xs">
+<!-- Active logic: The prompt doesn't map directly to the JSON labels, but it asks for "Team and Access". 
+                 Looking at the JSON labels: ["Dashboard", "Restaurants", "Menus", "QR Codes", "NFC Products", "Campaigns", "Analytics", "Enquiries", "Media Library", "Website CMS", "Platform Settings"]
+                 "Platform Settings" is the closest logical match for an Admin Users / Team Management page within the global nav. -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">dashboard</span>
+<span class="font-body-bold text-small">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">storefront</span>
+<span class="font-body-bold text-small">Restaurants</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">restaurant_menu</span>
+<span class="font-body-bold text-small">Menus</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">qr_code</span>
+<span class="font-body-bold text-small">QR Codes</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">nfc</span>
+<span class="font-body-bold text-small">NFC Products</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">campaign</span>
+<span class="font-body-bold text-small">Campaigns</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">analytics</span>
+<span class="font-body-bold text-small">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">contact_support</span>
+<span class="font-body-bold text-small">Enquiries</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">perm_media</span>
+<span class="font-body-bold text-small">Media Library</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-secondary-fixed-dim hover:text-white hover:bg-on-secondary-fixed-variant transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] opacity-70 group-hover:opacity-100">web</span>
+<span class="font-body-bold text-small">Website CMS</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-primary bg-primary border-l-4 border-primary-fixed shadow-md transform scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-bold text-small">Platform Settings</span>
+</a>
+</nav>
+<!-- User Profile minimal -->
+<div class="p-md border-t border-border/10">
+<div class="flex items-center gap-sm cursor-pointer hover:bg-on-secondary-fixed-variant p-sm rounded-lg transition-colors">
+<img class="w-8 h-8 rounded-full object-cover border border-secondary-fixed-dim" data-alt="A small, professional headshot of an administrative user in a modern software interface, clean lighting, light mode context, subtle rounded border." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADuPHsAvEqMMPCqHvRChskVGKkoAnw9O9HwtwXLusdorjH61bgHdjpTm4eYP0i0Ie_pwg8aXCxKPjKWcIh3cnxnMdp17lyM9fiMPGvZadXquuZxKAzbrcPESDJl-kXbEh7QSk_s7eFOF2PLtkkXQHTGmFAh3oWiVYy0O-wOQyUkWAzm-6IGsOesOWPKEsawJAhXMLrC1hCrY-gJY4mou5L3D1lQ9x7LXXG6rhdL9o469vH-KQikBVF34uyFUAs5GcwOfeQ3PzRzug"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-bold text-small text-white truncate">SysAdmin</p>
+<p class="font-small text-[12px] text-secondary-fixed-dim truncate">View Profile</p>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[16px]">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[240px] flex flex-col min-w-0 bg-background">
+<!-- JSON: TopNavBar -->
+<header class="sticky top-0 w-full z-40 bg-canvas dark:bg-background border-b border-border shadow-sm flex justify-between items-center px-lg py-sm h-16">
+<!-- Mobile Menu Toggle (hidden on md) -->
+<button class="md:hidden p-sm text-text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<!-- Search Bar (on_left as per JSON) -->
+<div class="flex-1 flex items-center max-w-md hidden sm:flex">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary text-[20px]">search</span>
+<input class="w-full pl-xl pr-sm py-2 bg-surface border border-border rounded-lg font-small text-small text-text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-text-secondary" placeholder="Search settings, users, or tools..." type="text"/>
+<div class="absolute right-sm top-1/2 -translate-y-1/2 flex items-center gap-1">
+<kbd class="hidden lg:inline-block px-2 py-0.5 text-[10px] font-bold text-text-secondary bg-canvas border border-border rounded">⌘</kbd>
+<kbd class="hidden lg:inline-block px-2 py-0.5 text-[10px] font-bold text-text-secondary bg-canvas border border-border rounded">K</kbd>
+</div>
+</div>
+</div>
+<!-- Spacer for mobile if search is hidden -->
+<div class="flex-1 sm:hidden"></div>
+<!-- Actions Right -->
+<div class="flex items-center gap-md">
+<button class="text-text-secondary hover:text-primary-dark transition-all opacity-80 hover:opacity-100 relative p-1 rounded-full hover:bg-surface">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full border border-canvas"></span>
+</button>
+<button class="text-text-secondary hover:text-primary-dark transition-all opacity-80 hover:opacity-100 p-1 rounded-full hover:bg-surface hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-6 w-px bg-border mx-sm"></div>
+<!-- Trailing Primary Action -->
+<button class="hidden lg:flex items-center gap-xs bg-primary text-white font-button text-button px-md py-2 rounded-lg hover:bg-primary-dark transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Quick Create
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-md lg:p-lg">
+<div class="max-w-container-max-width mx-auto space-y-lg">
+<!-- Context Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<div class="flex items-center gap-xs text-text-secondary font-small text-small mb-1">
+<a class="hover:text-primary" href="#">Platform Settings</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-text-primary font-body-bold">Users &amp; Teams</span>
+</div>
+<h2 class="font-h1 text-h1 text-text-primary">Admin Users and Team Management</h2>
+<p class="font-body text-body text-text-secondary mt-1 flex items-center gap-md">
+<span><strong class="text-text-primary">18</strong> Active</span> • 
+                            <span class="text-tertiary-container"><strong class="text-tertiary">3</strong> Pending</span> • 
+                            <span class="text-danger"><strong class="text-danger">4</strong> Issues</span>
+</p>
+</div>
+<div class="flex items-center gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-xs px-md py-2 bg-surface text-text-primary border border-border rounded-lg font-button text-button hover:bg-surface-container transition-colors shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export Report
+                        </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-xs px-md py-2 bg-primary text-white rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                            Invite Admin
+                        </button>
+</div>
+</div>
+<!-- Main Layout: Grid -> left content, right sticky detail panel -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg items-start">
+<!-- Left Column (Main Content) -->
+<div class="xl:col-span-8 space-y-lg">
+<!-- Summary Metrics (Bento Grid Style) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-sm">
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-sm opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">group</span>
+</div>
+<p class="font-small text-small text-text-secondary mb-1">Active Admins</p>
+<p class="font-display text-display text-text-primary">18</p>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-sm opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[48px] text-tertiary" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<p class="font-small text-small text-text-secondary mb-1">Pending Invites</p>
+<p class="font-display text-display text-text-primary">3</p>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-sm opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[48px] text-success" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<p class="font-small text-small text-text-secondary mb-1">MFA Enabled</p>
+<div class="flex items-baseline gap-1">
+<p class="font-display text-display text-text-primary">16</p>
+<span class="font-small text-small text-text-secondary">/ 18</span>
+</div>
+</div>
+<div class="bg-canvas border border-border rounded-xl p-md shadow-sm relative overflow-hidden group border-l-4 border-l-danger">
+<div class="absolute top-0 right-0 p-sm opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[48px] text-danger" style="font-variation-settings: 'FILL' 1;">key</span>
+</div>
+<p class="font-small text-small text-text-secondary mb-1">Elevated Access</p>
+<p class="font-display text-display text-text-primary">5</p>
+</div>
+</div>
+<!-- Security Alerts -->
+<div class="bg-surface-warm border border-outline-variant rounded-xl p-md shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-md relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 w-1 bg-primary"></div>
+<div class="flex items-start gap-sm">
+<div class="mt-0.5 p-1 bg-error-container text-error rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-text-primary">Action Required: 2 Users missing MFA</h4>
+<p class="font-small text-small text-text-secondary mt-0.5">Global policy requires MFA for all elevated roles by next week.</p>
+</div>
+</div>
+<button class="shrink-0 px-md py-1.5 bg-canvas border border-border text-text-primary font-button text-button rounded hover:bg-surface transition-colors shadow-sm whitespace-nowrap">
+                                Review Access
+                            </button>
+</div>
+<!-- Users Table Section -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Toolbar -->
+<div class="px-md py-sm border-b border-border bg-surface-bright flex flex-col sm:flex-row justify-between items-start sm:items-center gap-sm">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary text-[18px]">search</span>
+<input class="w-full pl-xl pr-sm py-1.5 bg-canvas border border-border rounded font-small text-small focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Filter users..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 px-sm py-1.5 border border-border rounded bg-canvas text-text-secondary hover:text-text-primary font-small text-small hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                                        Filter
+                                    </button>
+<button class="p-1.5 border border-border rounded bg-canvas text-text-secondary hover:text-text-primary hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Table Container (Horizontal Scroll) -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-border font-small text-small text-text-secondary">
+<th class="px-md py-sm font-semibold w-12"></th> <!-- Avatar/Checkbox -->
+<th class="px-md py-sm font-semibold">User</th>
+<th class="px-md py-sm font-semibold">Role &amp; Team</th>
+<th class="px-md py-sm font-semibold">Status</th>
+<th class="px-md py-sm font-semibold">Security</th>
+<th class="px-md py-sm font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-body text-small bg-canvas">
+<!-- Row 1: Selected (USR-00018) -->
+<tr class="hover:bg-surface transition-colors bg-primary-fixed/10 group cursor-pointer border-l-2 border-l-primary relative">
+<td class="px-md py-md align-top">
+<img class="w-10 h-10 rounded-full object-cover border border-border shadow-sm" data-alt="A modern, diverse portrait avatar of a female product manager in a crisp office environment, soft light, minimal background, high quality profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHU6fF6Edig1H5qH2222RrHCzCM8_rZkCg9Lc7GNoxjRgjBcHKhLL8flwlqg55Gq89dGit3jLP3U9xj9cIbHlbceexXVpFeFzR12nF2Y0VLsDQxSc3ku_QdkvPG5s74feOe0zXv50c_t-1Jf7DJIpxidzvZ1FOvNhfqLo1pduAI0gSkb9wS2siygxDwnmXMHuyNLcqYHAy6bClgkaAn0s9ih597sOc0FLoo8ZMw_Dtaw40IQNLicslCNfe9GoHe3_ctT9kv7qr9kc"/>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">Sarah Jenkins</div>
+<div class="text-text-secondary text-[13px]">sarah.j@yourplatform.com</div>
+<div class="text-text-secondary text-[11px] font-mono mt-1 bg-surface-container px-1 py-0.5 rounded inline-block">USR-00018</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">Content Manager</div>
+<div class="flex items-center gap-1 text-text-secondary text-[13px] mt-0.5">
+<span class="material-symbols-outlined text-[14px]">group</span>
+                                                    Marketing Team
+                                                </div>
+</td>
+<td class="px-md py-md align-top">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-bold bg-success/10 text-success border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                                    Active
+                                                </span>
+</td>
+<td class="px-md py-md align-top">
+<div class="flex items-center gap-1 text-success text-[13px] font-medium">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+                                                    MFA Active
+                                                </div>
+<div class="text-text-secondary text-[12px] mt-1">Last: 2h ago</div>
+</td>
+<td class="px-md py-md align-top text-right">
+<button class="p-1 text-text-secondary hover:text-primary rounded hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Standard Active -->
+<tr class="hover:bg-surface transition-colors group border-l-2 border-l-transparent">
+<td class="px-md py-md align-top">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-border flex items-center justify-center font-bold text-text-secondary text-sm">MR</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">Marcus Reed</div>
+<div class="text-text-secondary text-[13px]">m.reed@yourplatform.com</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">Support Agent</div>
+<div class="flex items-center gap-1 text-text-secondary text-[13px] mt-0.5">
+<span class="material-symbols-outlined text-[14px]">headset_mic</span>
+                                                    Customer Success
+                                                </div>
+</td>
+<td class="px-md py-md align-top">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-bold bg-success/10 text-success border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                                    Active
+                                                </span>
+</td>
+<td class="px-md py-md align-top">
+<div class="flex items-center gap-1 text-success text-[13px] font-medium">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+                                                    MFA Active
+                                                </div>
+<div class="text-text-secondary text-[12px] mt-1">Last: 1d ago</div>
+</td>
+<td class="px-md py-md align-top text-right">
+<button class="p-1 text-text-secondary hover:text-primary rounded hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: MFA Warning -->
+<tr class="hover:bg-surface transition-colors group border-l-2 border-l-transparent bg-error-container/5">
+<td class="px-md py-md align-top">
+<img class="w-10 h-10 rounded-full object-cover border border-border shadow-sm" data-alt="A casual portrait avatar of a young male software developer in a modern office, wearing a hoodie, shallow depth of field, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD9ZbVXemwLJ8sGffUk9niUsBnrG3WwbXr3-UTwjlWP6Ij6aiQJJrbdnhOaQqXe8sPICOJ_4HjpcAkH8mmzf2repyuYcXU3iulzsxd4HssIzPS1U17HiHh7RuNG9B2HlgyCwFJS3OtKEkQVtlLtJzW1edTFdqLPN6rdD5-85TTByf8hhrUlRCz_m3HjfEqy_DTFEiZWX7UrnGf2qwC2FnMVoxli0fD_ihXqeM_L78DSMD0cPxmAVD38DRdO0NyqTjm2dkYwBvEgEw"/>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">David Chen</div>
+<div class="text-text-secondary text-[13px]">d.chen@yourplatform.com</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">System Architect</div>
+<div class="flex items-center gap-1 text-text-secondary text-[13px] mt-0.5">
+<span class="material-symbols-outlined text-[14px]">code</span>
+                                                    Engineering
+                                                </div>
+</td>
+<td class="px-md py-md align-top">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-bold bg-success/10 text-success border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                                    Active
+                                                </span>
+</td>
+<td class="px-md py-md align-top">
+<div class="flex items-center gap-1 text-danger text-[13px] font-medium bg-error-container/20 px-1.5 py-0.5 rounded inline-flex">
+<span class="material-symbols-outlined text-[16px]">gpp_bad</span>
+                                                    Setup Required
+                                                </div>
+</td>
+<td class="px-md py-md align-top text-right">
+<button class="p-1 text-text-secondary hover:text-primary rounded hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Pending Invite -->
+<tr class="hover:bg-surface transition-colors group border-l-2 border-l-transparent opacity-70">
+<td class="px-md py-md align-top">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-border border-dashed flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary italic">Awaiting Acceptance</div>
+<div class="text-text-secondary text-[13px]">l.thompson@yourplatform.com</div>
+</td>
+<td class="px-md py-md align-top">
+<div class="font-body-bold text-text-primary">Data Analyst</div>
+<div class="flex items-center gap-1 text-text-secondary text-[13px] mt-0.5">
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+                                                    Operations
+                                                </div>
+</td>
+<td class="px-md py-md align-top">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[12px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                                    Invited (2d ago)
+                                                </span>
+</td>
+<td class="px-md py-md align-top text-text-secondary text-[13px]">
+                                                —
+                                            </td>
+<td class="px-md py-md align-top text-right">
+<button class="text-[12px] font-button text-primary hover:underline opacity-0 group-hover:opacity-100 focus:opacity-100">
+                                                    Resend
+                                                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-md py-sm border-t border-border bg-canvas flex items-center justify-between text-small text-text-secondary">
+<div>Showing 1 to 4 of 18 results</div>
+<div class="flex gap-1">
+<button class="p-1 rounded border border-border bg-surface-container-lowest hover:bg-surface disabled:opacity-50"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-1 rounded border border-border bg-surface-container-lowest hover:bg-surface"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Detail Panel (Sticky) -->
+<div class="xl:col-span-4 sticky top-[80px] space-y-md">
+<!-- Panel Header -->
+<div class="bg-canvas border border-border rounded-xl shadow-sm overflow-hidden flex flex-col h-[calc(100vh-120px)]">
+<!-- User Card Header -->
+<div class="p-md border-b border-border bg-surface-bright relative overflow-hidden">
+<!-- Decorative subtle bg pattern -->
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C9341A_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<div class="flex justify-between items-start relative z-10">
+<img class="w-16 h-16 rounded-xl object-cover border-2 border-canvas shadow-sm" data-alt="A modern, diverse portrait avatar of a female product manager in a crisp office environment, soft light, minimal background, high quality profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOttZeKn5M_uVLsAJ2Pttkp1y57M15Vfx7QSiREhun6Y_t6QoM3WCgRwdaqgHVgWoxarTM4AFwL7sHaiwW5QO-8I4ikPo-eZYVFnWxo8noaqDVDBkbD5h9fcPKpBuyWVIxPmc4ogK5L89wU7A6FTZM_EybhGC4e13vgUIscwFCv_D9NvG85NBBF6nJBlHZ_a1z1x0shS407q3SrFu3h_-WUcFHjew0XXxIKpURTXrJMyA-E3-CZYtTHvtqbvQA_Q5JnRtfO3w7RmU"/>
+<button class="p-1.5 bg-canvas rounded-full border border-border hover:bg-surface shadow-sm text-text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="mt-sm relative z-10">
+<h3 class="font-h2 text-h2 text-text-primary">Sarah Jenkins</h3>
+<p class="font-small text-small text-text-secondary">sarah.j@yourplatform.com</p>
+</div>
+<div class="mt-md flex gap-xs relative z-10">
+<button class="flex-1 py-1.5 border border-border bg-canvas rounded font-button text-small text-text-primary hover:bg-surface transition-colors text-center shadow-sm">Edit Profile</button>
+<button class="py-1.5 px-3 border border-error/30 bg-error-container/20 rounded font-button text-small text-error hover:bg-error-container/40 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] block">block</span>
+</button>
+</div>
+</div>
+<!-- Panel Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-md space-y-lg">
+<!-- Identity details -->
+<div>
+<h4 class="font-body-bold text-[12px] uppercase tracking-wider text-text-secondary mb-sm">Identity Reference</h4>
+<div class="grid grid-cols-2 gap-sm text-small">
+<div>
+<p class="text-text-secondary text-[11px]">System ID</p>
+<p class="font-mono text-text-primary">USR-00018</p>
+</div>
+<div>
+<p class="text-text-secondary text-[11px]">Created</p>
+<p class="text-text-primary">Oct 12, 2023</p>
+</div>
+<div>
+<p class="text-text-secondary text-[11px]">Last Sign-in</p>
+<p class="text-text-primary">Today, 09:42 AM</p>
+</div>
+<div>
+<p class="text-text-secondary text-[11px]">IP Location</p>
+<p class="text-text-primary">London, UK</p>
+</div>
+</div>
+</div>
+<hr class="border-border"/>
+<!-- Access & Scope -->
+<div>
+<h4 class="font-body-bold text-[12px] uppercase tracking-wider text-text-secondary mb-sm flex justify-between">
+                                        Access Scope
+                                        <a class="text-primary hover:underline lowercase normal-case" href="#">Manage</a>
+</h4>
+<div class="bg-surface border border-border rounded-lg p-sm space-y-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">badge</span>
+<div>
+<p class="font-body-bold text-small text-text-primary leading-tight">Content Manager</p>
+<p class="text-[12px] text-text-secondary">Primary Role</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">corporate_fare</span>
+<div>
+<p class="font-body-bold text-small text-text-primary leading-tight">All Regions</p>
+<p class="text-[12px] text-text-secondary">Entity Scope</p>
+</div>
+</div>
+</div>
+<!-- Effective Permissions Tags -->
+<div class="mt-sm flex flex-wrap gap-1">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[11px] text-text-secondary border border-border">menu.edit</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[11px] text-text-secondary border border-border">campaign.create</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[11px] text-text-secondary border border-border">media.manage</span>
+<span class="px-2 py-0.5 bg-surface-container-lowest rounded text-[11px] text-text-secondary border border-dashed border-border flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">add</span> View All (14)</span>
+</div>
+</div>
+<hr class="border-border"/>
+<!-- Account Readiness Checklist -->
+<div>
+<h4 class="font-body-bold text-[12px] uppercase tracking-wider text-text-secondary mb-sm">Account Readiness</h4>
+<ul class="space-y-xs">
+<li class="flex items-start gap-xs text-small">
+<span class="material-symbols-outlined text-success text-[18px] shrink-0">check_circle</span>
+<span class="text-text-primary">Email Verified</span>
+</li>
+<li class="flex items-start gap-xs text-small">
+<span class="material-symbols-outlined text-success text-[18px] shrink-0">check_circle</span>
+<span class="text-text-primary">MFA Configured (App)</span>
+</li>
+<li class="flex items-start gap-xs text-small">
+<span class="material-symbols-outlined text-success text-[18px] shrink-0">check_circle</span>
+<span class="text-text-primary">Security Policy Acknowledged</span>
+</li>
+<li class="flex items-start gap-xs text-small">
+<span class="material-symbols-outlined text-border text-[18px] shrink-0">radio_button_unchecked</span>
+<span class="text-text-secondary">Emergency Contact Added</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Panel Footer -->
+<div class="p-md border-t border-border bg-surface-bright mt-auto">
+<button class="w-full flex items-center justify-center gap-xs py-2 bg-canvas border border-border rounded font-button text-small text-text-primary hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">history</span>
+                                    View Audit Log
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom spacing -->
+<div class="h-xl"></div>
+</div>
+</main>
+</body></html>

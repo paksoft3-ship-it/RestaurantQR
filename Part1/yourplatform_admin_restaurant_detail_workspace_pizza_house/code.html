@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Detail Workspace - Pizza House</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#5c6274",
+                      "background": "#f7f9fb",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "on-surface": "#191c1e",
+                      "surface-container-high": "#e6e8ea",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "primary": "#b51d00",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e0e3e5",
+                      "success": "#16A34A",
+                      "surface": "#f7f9fb",
+                      "primary-dark": "#C9341A",
+                      "surface-warm": "#FFF1EB",
+                      "on-primary": "#ffffff",
+                      "text-secondary": "#667085",
+                      "surface-tint": "#b91e00",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "secondary": "#575e70",
+                      "outline-variant": "#e5beb6",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-primary-fixed": "#3e0400",
+                      "on-primary-container": "#fffbff",
+                      "tertiary-fixed": "#ffdf9e",
+                      "inverse-primary": "#ffb4a5",
+                      "primary-fixed": "#ffdad3",
+                      "danger": "#DC2626",
+                      "surface-container-low": "#f2f4f6",
+                      "outline": "#906f69",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#141b2b",
+                      "on-secondary-fixed-variant": "#404758",
+                      "border": "#E5E7EB",
+                      "secondary-container": "#d9dff5",
+                      "on-surface-variant": "#5c403a",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#261a00",
+                      "tertiary": "#765700",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#946f00",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "primary-container": "#db3516",
+                      "on-background": "#191c1e",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-bright": "#f7f9fb",
+                      "text-primary": "#111827",
+                      "surface-dim": "#d8dadc",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "canvas": "#FFFFFF",
+                      "on-tertiary-container": "#fffbff",
+                      "inverse-surface": "#2d3133",
+                      "secondary-fixed": "#dce2f7",
+                      "inverse-on-surface": "#eff1f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px",
+                      "xxl": "48px",
+                      "xs": "8px",
+                      "md": "16px",
+                      "base": "4px",
+                      "sm": "12px",
+                      "mobile-shell-max-width": "640px",
+                      "container-max-width": "1280px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "h3": ["Manrope"],
+                      "h1-mobile": ["Manrope"],
+                      "h1": ["Manrope"],
+                      "button": ["Inter"],
+                      "small": ["Inter"],
+                      "body-bold": ["Inter"],
+                      "body": ["Inter"],
+                      "h2": ["Manrope"],
+                      "display": ["Manrope"]
+              },
+              "fontSize": {
+                      "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                      "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body text-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col bg-primary dark:bg-primary-dark fixed left-0 top-0 h-full w-[280px] py-lg shadow-sm z-50">
+<div class="px-lg mb-8">
+<h1 class="font-display text-h3 text-on-primary mb-2">Artisan Admin</h1>
+<p class="font-small text-small text-on-primary/70">Manage your neighborhood</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-on-primary text-primary font-button text-button py-3 rounded-lg shadow-sm hover:bg-on-primary/90 transition-colors">
+<span class="flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Restaurant
+                </span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto px-2 space-y-2">
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span>Menus</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="px-2 mt-auto pt-4 border-t border-on-primary/10 space-y-2">
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary/70 hover:text-on-primary rounded-lg px-4 py-3 mx-2 hover:bg-primary-container/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[280px] h-full overflow-y-auto bg-surface-container-lowest">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center h-16 px-lg w-full bg-surface dark:bg-surface-dim border-b border-border sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<span class="font-h2 text-h2 text-primary">Artisan Platform</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<div class="p-lg md:p-xxl max-w-container-max-width mx-auto space-y-lg">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-text-secondary font-small text-small">
+<a class="hover:text-primary transition-colors" href="#">Restaurants</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-text-primary font-medium">Pizza House</span>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-6 border-b border-border">
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 rounded-xl overflow-hidden border border-border shadow-sm flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A vibrant, high-quality, perfectly centered circular logo for a modern, fast-food pizza restaurant named 'Pizza House'. The logo features a minimalist, stylized pizza slice with bold red and orange colors, set against a pristine white background. The aesthetic is clean, energetic, and professional, suitable for a light-mode corporate SaaS dashboard application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLBzldCUavhJ1B4qWyg9DY2JVUhMcZcxxAqXnUByqPEz2XRXv5Hg4KJDeN56RR0kw9NJatQGxq3Y0EftLIK3Tjdn7VoZ5LC9PkkKPUcVHvwVU5A0iKZx7v-bD6cpTpp8Tx0UKsgubOGIQ1WZ9TbZvcnokHR7ZH8ZPZxjUtFzhJ3QfJpodeP4qvQTYkkBd2PdxTE10ji6BBQylaSTp32nlaRU5nX8_ZUG3c6-5MfqxD7v16jF2gmaBSQPflsentTRUGVwlfByplMWk"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="font-h1 text-h1 text-text-primary">Pizza House</h2>
+<span class="bg-success/10 text-success font-small text-small px-2 py-1 rounded-full border border-success/20">Published</span>
+</div>
+<p class="text-text-secondary font-small text-small">RST-00024 • 123 Main St, Techville</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2 bg-surface text-text-primary border border-border rounded-lg font-button text-button hover:bg-surface-container transition-colors shadow-sm">
+                        Preview
+                    </button>
+<button class="flex-1 md:flex-none px-4 py-2 bg-surface text-text-primary border border-border rounded-lg font-button text-button hover:bg-surface-container transition-colors shadow-sm">
+                        Edit
+                    </button>
+<button class="flex-1 md:flex-none px-4 py-2 bg-primary text-on-primary rounded-lg font-button text-button hover:bg-primary-dark transition-colors shadow-sm flex items-center justify-center gap-2">
+<span>Continue Setup</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Tab Navigation -->
+<div class="flex overflow-x-auto border-b border-border no-scrollbar">
+<button class="px-4 py-3 text-primary border-b-2 border-primary font-body-bold text-body-bold whitespace-nowrap">Overview</button>
+<button class="px-4 py-3 text-text-secondary hover:text-primary transition-colors font-body text-body whitespace-nowrap">Menu</button>
+<button class="px-4 py-3 text-text-secondary hover:text-primary transition-colors font-body text-body whitespace-nowrap">QR/NFC</button>
+<button class="px-4 py-3 text-text-secondary hover:text-primary transition-colors font-body text-body whitespace-nowrap">Campaigns</button>
+<button class="px-4 py-3 text-text-secondary hover:text-primary transition-colors font-body text-body whitespace-nowrap">Analytics</button>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left/Main Column -->
+<div class="col-span-1 lg:col-span-2 space-y-lg">
+<!-- Progress Bar -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-h3 text-h3 text-text-primary">Restaurant Setup Progress</h3>
+<span class="font-body-bold text-body-bold text-success">100% Complete</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-success w-full rounded-full"></div>
+</div>
+</div>
+<!-- Requires Attention -->
+<div class="bg-surface-warm border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="warning" data-weight="fill">warning</span>
+<h3 class="font-h3 text-h3 text-text-primary">Requires Attention</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex items-start justify-between p-3 bg-canvas border border-border rounded-lg shadow-sm hover:shadow transition-shadow">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container mt-0.5" data-icon="restaurant_menu">restaurant_menu</span>
+<div>
+<p class="font-body-bold text-body-bold text-text-primary">3 Unpublished Menu Changes</p>
+<p class="font-small text-small text-text-secondary">Price updates for large pizzas need review.</p>
+</div>
+</div>
+<button class="text-primary font-button text-button hover:underline">Review</button>
+</li>
+<li class="flex items-start justify-between p-3 bg-canvas border border-border rounded-lg shadow-sm hover:shadow transition-shadow">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-danger mt-0.5" data-icon="nfc">nfc</span>
+<div>
+<p class="font-body-bold text-body-bold text-text-primary">1 Unassigned NFC Stand</p>
+<p class="font-small text-small text-text-secondary">Table 12 stand is active but unlinked.</p>
+</div>
+</div>
+<button class="text-primary font-button text-button hover:underline">Assign</button>
+</li>
+</ul>
+</div>
+<!-- Bento Grid Info Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<!-- Digital Menu Card -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-text-primary" data-icon="menu_book">menu_book</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary" data-icon="arrow_outward">arrow_outward</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-text-secondary mb-1">Digital Menu</h4>
+<div class="flex items-end gap-2">
+<span class="font-h2 text-h2 text-text-primary">42</span>
+<span class="font-small text-small text-text-secondary mb-1">products</span>
+</div>
+<p class="font-small text-small text-danger mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="image_not_supported">image_not_supported</span>
+                                    3 missing images
+                                </p>
+</div>
+</div>
+<!-- QR Codes Card -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-text-primary" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary" data-icon="arrow_outward">arrow_outward</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-text-secondary mb-1">QR Codes</h4>
+<div class="flex items-end gap-2">
+<span class="font-h2 text-h2 text-text-primary">6</span>
+<span class="font-small text-small text-text-secondary mb-1">active</span>
+</div>
+</div>
+</div>
+<!-- NFC Products Card -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-text-primary" data-icon="contactless">contactless</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary" data-icon="arrow_outward">arrow_outward</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-text-secondary mb-1">NFC Products</h4>
+<div class="flex items-end gap-2">
+<span class="font-h2 text-h2 text-text-primary">7</span>
+<span class="font-small text-small text-text-secondary mb-1">active</span>
+</div>
+<p class="font-small text-small text-tertiary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="info">info</span>
+                                    1 unassigned
+                                </p>
+</div>
+</div>
+<!-- Active Campaigns Card -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="arrow_outward">arrow_outward</span>
+</div>
+<div>
+<h4 class="font-body-bold text-body-bold text-primary mb-1">Active Campaigns</h4>
+<div class="flex items-end gap-2">
+<span class="font-h2 text-h2 text-text-primary">Scan &amp; Win</span>
+</div>
+<p class="font-small text-small text-text-secondary mt-2">Ends in 12 days</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar content) -->
+<div class="col-span-1 space-y-lg">
+<!-- Mobile Preview Placeholder -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm flex flex-col items-center">
+<h3 class="font-h3 text-h3 text-text-primary w-full text-left mb-4">Mobile Preview</h3>
+<div class="w-[280px] h-[500px] bg-canvas border-[8px] border-surface-container-high rounded-[32px] overflow-hidden relative shadow-inner">
+<div class="absolute inset-0 bg-surface flex flex-col items-center justify-center p-4 text-center">
+<span class="material-symbols-outlined text-surface-dim text-[48px] mb-2" data-icon="smartphone">smartphone</span>
+<p class="font-small text-small text-text-secondary">Read-only preview of Pizza House homepage.</p>
+<p class="font-small text-small text-text-secondary mt-4 italic">Illustrative Admin Data</p>
+</div>
+</div>
+</div>
+<!-- Readiness Summary -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-4">Readiness Summary</h3>
+<ul class="space-y-3">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Profile Info</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Menu Imported</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body text-text-primary">Branding Applied</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="font-body text-body text-text-secondary">Payment Gateway Connected</span>
+</li>
+</ul>
+</div>
+<!-- Recent Activity -->
+<div class="bg-surface border border-border rounded-xl p-md shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-4">Recent Activity</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="mt-1">
+<span class="material-symbols-outlined text-text-secondary text-[20px]" data-icon="sell">sell</span>
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-text-primary">Prices Updated</p>
+<p class="font-small text-small text-text-secondary">Admin user modified prices for 'Beverages' category.</p>
+<p class="font-small text-small text-text-secondary mt-1">2 hours ago</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="mt-1">
+<span class="material-symbols-outlined text-text-secondary text-[20px]" data-icon="campaign">campaign</span>
+</div>
+<div>
+<p class="font-body-bold text-body-bold text-text-primary">Campaign Activated</p>
+<p class="font-small text-small text-text-secondary">'Scan &amp; Win' campaign status changed to Active.</p>
+<p class="font-small text-small text-text-secondary mt-1">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="text-center font-small text-small text-text-secondary pb-lg italic">Illustrative Admin Data</p>
+</div>
+</main>
+</body></html>

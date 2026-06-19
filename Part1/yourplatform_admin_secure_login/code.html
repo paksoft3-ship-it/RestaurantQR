@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DineFlow Admin Sign In</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#b91e00",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "tertiary-fixed": "#ffdf9e",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#fffbff",
+                      "text-primary": "#111827",
+                      "primary-dark": "#C9341A",
+                      "text-secondary": "#667085",
+                      "surface-variant": "#e0e3e5",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "primary": "#b51d00",
+                      "on-surface-variant": "#5c403a",
+                      "on-background": "#191c1e",
+                      "success": "#16A34A",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#5c6274",
+                      "surface-container-highest": "#e0e3e5",
+                      "inverse-primary": "#ffb4a5",
+                      "surface-container": "#eceef0",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "on-tertiary-fixed": "#261a00",
+                      "surface-dim": "#d8dadc",
+                      "outline-variant": "#e5beb6",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "danger": "#DC2626",
+                      "canvas": "#FFFFFF",
+                      "primary-fixed": "#ffdad3",
+                      "border": "#E5E7EB",
+                      "tertiary": "#765700",
+                      "inverse-surface": "#2d3133",
+                      "on-secondary-fixed-variant": "#404758",
+                      "secondary-container": "#d9dff5",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-warm": "#FFF1EB",
+                      "surface-container-high": "#e6e8ea",
+                      "primary-container": "#db3516",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "outline": "#906f69",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#fffbff",
+                      "secondary": "#575e70",
+                      "secondary-fixed": "#dce2f7",
+                      "error": "#ba1a1a",
+                      "background": "#f7f9fb",
+                      "on-secondary-fixed": "#141b2b",
+                      "tertiary-container": "#946f00",
+                      "surface": "#f7f9fb",
+                      "on-primary-fixed": "#3e0400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "xs": "8px",
+                      "gutter": "16px",
+                      "base": "4px",
+                      "mobile-shell-max-width": "640px",
+                      "margin-mobile": "20px",
+                      "container-max-width": "1280px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "small": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "button": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "h1-mobile": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "small": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "30px",
+                              {
+                                      "lineHeight": "35px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "h3": [
+                              "19px",
+                              {
+                                      "lineHeight": "25px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "30px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display": [
+                              "38px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+      </style>
+</head>
+<body class="bg-surface font-body text-body text-text-primary antialiased h-screen w-full overflow-hidden flex flex-col md:flex-row rtl:space-x-reverse">
+<!-- Left Visual Panel (Visible only on md+) -->
+<div class="hidden md:flex md:w-[55%] lg:w-[60%] relative bg-[#111827] flex-col justify-between p-12 lg:p-16 overflow-hidden">
+<!-- Abstract Background Motifs -->
+<div class="absolute inset-0 pattern-dots opacity-20"></div>
+<!-- Animated Gradient Orb -->
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary-dark/20 blur-[100px]"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-tertiary-fixed-dim/10 blur-[120px]"></div>
+<!-- Header content inside visual panel -->
+<div class="relative z-10 max-w-xl">
+<h1 class="font-display text-display text-white mb-6">Manage Every Restaurant Experience From One Secure Workspace</h1>
+<p class="font-body text-body text-surface-dim">DineFlow Enterprise Control Center. Real-time menu synchronization, instant QR provisioning, and multi-location analytics.</p>
+</div>
+<!-- Composition Preview Area -->
+<div class="relative z-10 w-full h-full mt-12 flex items-center justify-center">
+<div class="relative w-full max-w-2xl aspect-[4/3]">
+<!-- Main Dashboard Card -->
+<div class="absolute top-0 left-0 w-3/4 glass-panel rounded-xl p-6 shadow-2xl transform hover:-translate-y-2 transition-transform duration-300">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-tint flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-white">Restaurants Overview</h3>
+<p class="font-small text-small text-surface-dim">12 Active Locations</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-small text-small text-success">All Systems Operational</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-white/5 rounded-lg p-4">
+<span class="material-symbols-outlined text-surface-dim mb-2 block" data-icon="restaurant">restaurant</span>
+<div class="font-body-bold text-body-bold text-white">4,209</div>
+<div class="font-small text-small text-surface-variant">Orders Today</div>
+</div>
+<div class="bg-white/5 rounded-lg p-4">
+<span class="material-symbols-outlined text-surface-dim mb-2 block" data-icon="qr_code_scanner">qr_code_scanner</span>
+<div class="font-body-bold text-body-bold text-white">18.2k</div>
+<div class="font-small text-small text-surface-variant">QR Scans</div>
+</div>
+<div class="bg-white/5 rounded-lg p-4">
+<span class="material-symbols-outlined text-surface-dim mb-2 block" data-icon="payments">payments</span>
+<div class="font-body-bold text-body-bold text-white">$42.1k</div>
+<div class="font-small text-small text-surface-variant">Revenue</div>
+</div>
+</div>
+</div>
+<!-- Floating QR Status Card -->
+<div class="absolute bottom-8 left-8 w-1/2 glass-panel rounded-xl p-5 shadow-2xl z-20">
+<div class="flex items-center gap-4 mb-4">
+<div class="p-3 bg-white/10 rounded-lg">
+<span class="material-symbols-outlined text-white text-[28px]" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<div>
+<div class="font-body-bold text-body-bold text-white">QR &amp; NFC Status</div>
+<div class="font-small text-small text-surface-dim">Instant provisioning active</div>
+</div>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed-dim w-[85%] rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2 font-small text-small text-surface-variant">
+<span>Provisioned Tags</span>
+<span>850 / 1000</span>
+</div>
+</div>
+<!-- Mobile Preview Float -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-[400px] bg-canvas rounded-[32px] border-8 border-[#1a2332] shadow-2xl z-30 overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-surface-container-high relative">
+<div class="bg-cover bg-center w-full h-full absolute inset-0" data-alt="A highly detailed close-up shot of a gourmet wood-fired pizza with fresh basil and melted mozzarella. The lighting is warm and inviting, highlighting the appetizing textures of the crust and toppings. The aesthetic is clean, modern, and high-quality food photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDt6rXUw0j6M-qOINVjJEh9g5gE1Bz8zvn9M-Gdn_NfP1TVQnDcCA1ZHIANEFA7mSvQuRfzxgnEOba_uEA_fR2QxgZqWUofUp2DXTkfH8uEuaNbVtC0_S8qaMsrpWmciOc1ldA2rSd-0P7tK_TVUSTgNIiGzaJxaRjNvo6XnK--aJOYSVc3fyPoFklsz4Z3hbHG9QdS3TvbnCPB3mwVZzA0_BZujCfBa4T9MQP-W5NhloKJFPAkKK3KxzrJHIJh9sIiNMwyqtEkrtM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<div class="font-h3 text-h3 text-white">Pizza House</div>
+<div class="font-small text-small text-surface-variant">Downtown Location</div>
+</div>
+</div>
+<div class="flex-1 p-4 bg-surface">
+<div class="w-full h-8 bg-surface-container rounded mb-3"></div>
+<div class="w-3/4 h-8 bg-surface-container rounded mb-4"></div>
+<div class="grid grid-cols-2 gap-2">
+<div class="aspect-square bg-surface-container rounded-lg"></div>
+<div class="aspect-square bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Form Panel -->
+<div class="w-full md:w-[45%] lg:w-[40%] bg-canvas h-full flex flex-col relative z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.05)] overflow-y-auto">
+<!-- Header -->
+<header class="flex justify-between items-center p-8 shrink-0">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="font-h3 text-h3 text-white leading-none">D</span>
+</div>
+<span class="font-h3 text-h3 font-bold text-text-primary tracking-tight">DineFlow</span>
+</div>
+<a class="font-small text-small text-text-secondary hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                Return to Website
+            </a>
+</header>
+<!-- Main Form Area -->
+<main class="flex-1 flex flex-col justify-center px-8 sm:px-16 md:px-12 lg:px-20 py-8">
+<div class="w-full max-w-md mx-auto">
+<div class="mb-10 text-center md:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container rounded-full font-small text-small font-semibold mb-4 tracking-wide uppercase text-[11px]">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Authorized Team Access
+                    </div>
+<h2 class="font-h2 text-h2 text-text-primary mb-2">Sign In to DineFlow</h2>
+<p class="font-body text-body text-text-secondary">Authorized DineFlow team access only. All actions are logged.</p>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-body-bold text-body-bold text-text-primary" for="admin-email">Admin Email</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-3 bg-surface border border-border rounded-xl text-text-primary placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow font-body text-body" id="admin-email" name="email" placeholder="name@dineflow.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-body-bold text-body-bold text-text-primary" for="admin-password">Password</label>
+<a class="font-small text-small text-primary hover:text-primary-dark transition-colors font-semibold" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary" data-icon="lock">lock</span>
+</div>
+<input class="block w-full pl-11 pr-12 py-3 bg-surface border border-border rounded-xl text-text-primary placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow font-body text-body" id="admin-password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-text-secondary hover:text-text-primary transition-colors focus:outline-none" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined" data-icon="visibility" id="password-toggle-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-border rounded" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block font-small text-small text-text-secondary" for="remember-me">
+                            Stay Signed In
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-sm font-button text-button text-white bg-[#F04424] hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors" type="submit">
+                        Sign In to Admin Panel
+                    </button>
+<!-- Generic Error Placeholder (Hidden by default) -->
+<div class="hidden mt-4 p-4 bg-error-container border border-error/20 rounded-xl flex items-start gap-3" id="error-message">
+<span class="material-symbols-outlined text-error shrink-0" data-icon="error">error</span>
+<p class="font-small text-small text-on-error-container mt-0.5">Authentication failed. Please check your credentials and try again.</p>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer -->
+<footer class="p-8 shrink-0 border-t border-border mt-auto">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="font-small text-small text-text-secondary">
+                    © 2024 DineFlow. All rights reserved.
+                </p>
+<div class="flex gap-4 font-small text-small text-text-secondary">
+<a class="hover:text-text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</div>
+<script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('admin-password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = 'visibility';
+            }
+        }
+
+        // Simple form validation demo
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Simulate an error for demonstration if email doesn't contain specific domain
+            if(!email.includes('@dineflow.com') && email.length > 0) {
+                 document.getElementById('error-message').classList.remove('hidden');
+            } else {
+                 document.getElementById('error-message').classList.add('hidden');
+                 // Proceed with login logic...
+                 console.log('Login attempt with:', email);
+                 // Add loading state to button...
+                 const btn = this.querySelector('button[type="submit"]');
+                 const originalText = btn.innerHTML;
+                 btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span>';
+                 setTimeout(() => { btn.innerHTML = originalText; }, 1000);
+            }
+        });
+    </script>
+</body></html>

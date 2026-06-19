@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YourPlatform - FAQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-primary": "#111827",
+                        "success": "#16A34A",
+                        "tertiary": "#765700",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#5c6274",
+                        "on-primary-fixed": "#3e0400",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "danger": "#DC2626",
+                        "surface-variant": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d9dff5",
+                        "on-secondary-fixed-variant": "#404758",
+                        "border": "#E5E7EB",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "outline": "#906f69",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "secondary": "#575e70",
+                        "canvas": "#FFFFFF",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed": "#261a00",
+                        "outline-variant": "#e5beb6",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-primary": "#ffb4a5",
+                        "tertiary-container": "#946f00",
+                        "surface-container-high": "#e6e8ea",
+                        "text-secondary": "#667085",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#5c403a",
+                        "secondary-fixed": "#dce2f7",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#b91e00",
+                        "primary": "#b51d00",
+                        "tertiary-fixed": "#ffdf9e",
+                        "primary-container": "#db3516",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "primary-dark": "#C9341A",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "background": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "surface-warm": "#FFF1EB",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#fffbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max-width": "1280px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "mobile-shell-max-width": "640px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "h1-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "small": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "body": ["Inter"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-input:checked ~ .accordion-content {
+            max-height: 500px; /* arbitrary large value */
+            opacity: 1;
+        }
+        .accordion-input:checked ~ .accordion-header .icon-expand {
+            transform: rotate(180deg);
+            color: #b51d00; /* primary */
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="bg-canvas dark:bg-background border-b border-border dark:border-outline-variant shadow-sm fixed top-0 w-full z-50">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center px-lg py-md">
+<!-- Brand -->
+<a class="font-h2 text-h2 font-extrabold text-primary flex items-center gap-xs hover:opacity-80 transition-opacity" href="#">
+                YourPlatform
+            </a>
+<!-- Navigation Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">How It Works</a>
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">Features</a>
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">Products</a>
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">Examples</a>
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">Templates</a>
+<a class="text-text-secondary hover:text-primary transition-colors hover:bg-surface-container-low transition-all px-xs py-base rounded-md" href="#">Packages</a>
+<!-- Active State Example (FAQ) - Though not explicitly in the list, if it were, it would look like this -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1 px-xs py-base" href="#">FAQ</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<a class="hidden md:flex font-button text-button text-text-secondary hover:text-primary transition-colors active:scale-95 duration-200 py-sm px-md rounded-lg" href="#">View Demo</a>
+<a class="font-button text-button bg-primary text-white hover:bg-primary-dark transition-colors active:scale-95 duration-200 py-sm px-md rounded-lg shadow-sm" href="#">Request a Quote</a>
+<!-- Mobile Menu Toggle -->
+<button aria-label="Menu" class="md:hidden p-xs text-text-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] pb-xxl">
+<!-- Hero Section -->
+<section class="bg-surface-warm py-xxl px-margin-mobile md:px-lg text-center relative overflow-hidden">
+<div class="max-w-3xl mx-auto relative z-10">
+<h1 class="font-h1-mobile text-h1-mobile md:font-display md:text-display text-text-primary mb-md">Questions About Your Restaurant’s QR & NFC Experience</h1>
+<p class="font-body text-body text-text-secondary mb-xl max-w-2xl mx-auto">Everything you need to know about our concierge setup, contactless menus, and managed service platform.</p>
+<!-- Search Input -->
+<div class="relative max-w-2xl mx-auto group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="w-full h-14 md:h-16 pl-[48px] pr-[120px] rounded-xl border-2 border-border focus:border-primary focus:ring-0 text-body font-body bg-white shadow-sm transition-all" placeholder="Search for answers..." type="text"/>
+<button class="absolute inset-y-2 right-2 bg-primary text-white font-button text-button px-lg rounded-lg hover:bg-primary-dark transition-colors active:scale-95 shadow-sm">
+                        Search
+                    </button>
+</div>
+</div>
+</section>
+<!-- Category Navigation -->
+<section class="border-b border-border bg-white sticky top-[88px] z-40 shadow-sm">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg py-sm overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-sm min-w-max">
+<button class="bg-primary-container text-white font-button text-button px-md py-sm rounded-full transition-colors whitespace-nowrap">All Questions</button>
+<button class="bg-surface hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-button text-button px-md py-sm rounded-full border border-border transition-colors whitespace-nowrap">Getting Started</button>
+<button class="bg-surface hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-button text-button px-md py-sm rounded-full border border-border transition-colors whitespace-nowrap">Menu Management</button>
+<button class="bg-surface hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-button text-button px-md py-sm rounded-full border border-border transition-colors whitespace-nowrap">QR & NFC Hardware</button>
+<button class="bg-surface hover:bg-surface-container-high text-text-secondary hover:text-text-primary font-button text-button px-md py-sm rounded-full border border-border transition-colors whitespace-nowrap">Billing & Support</button>
+</div>
+</div>
+</section>
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg py-xxl grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Main FAQ Content -->
+<div class="lg:col-span-8 space-y-xl">
+<!-- Featured Questions Grid -->
+<div>
+<h2 class="font-h2 text-h2 text-text-primary mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary fill">star</span>
+                        Featured Questions
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Featured Card 1 -->
+<div class="bg-white border border-border rounded-xl p-lg shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-body-bold text-body-bold text-text-primary group-hover:text-primary transition-colors">Does the Restaurant Need an Account?</h3>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<p class="font-small text-small text-text-secondary line-clamp-3">No. We handle everything. You never need to log in or manage software. We are a fully managed service designed to let you focus on your food.</p>
+</div>
+<!-- Featured Card 2 -->
+<div class="bg-white border border-border rounded-xl p-lg shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-body-bold text-body-bold text-text-primary group-hover:text-primary transition-colors">Who Uploads the Menu?</h3>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<p class="font-small text-small text-text-secondary line-clamp-3">Our concierge team does. Simply email us your PDF, take a photo of your physical menu, or send us a link. We digitize, format, and optimize it for mobile viewing instantly.</p>
+</div>
+<!-- Featured Card 3 -->
+<div class="bg-white border border-border rounded-xl p-lg shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-body-bold text-body-bold text-text-primary group-hover:text-primary transition-colors">How long does setup take?</h3>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<p class="font-small text-small text-text-secondary line-clamp-3">From the moment you sign up, your digital menu is live within 24 hours. Physical QR & NFC displays arrive at your location within 3-5 business days.</p>
+</div>
+<!-- Featured Card 4 -->
+<div class="bg-white border border-border rounded-xl p-lg shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-200 cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-body-bold text-body-bold text-text-primary group-hover:text-primary transition-colors">Can I update prices later?</h3>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<p class="font-small text-small text-text-secondary line-clamp-3">Yes. Just text or email your dedicated support agent with the changes. We update your digital menu immediately. No reprint costs required.</p>
+</div>
+</div>
+</div>
+<!-- Accordion Section: Getting Started -->
+<div>
+<h2 class="font-h2 text-h2 text-text-primary mb-md pb-xs border-b-2 border-border">Getting Started</h2>
+<div class="space-y-sm">
+<!-- Accordion Item 1 -->
+<div class="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
+<input class="accordion-input hidden" id="faq-1" type="checkbox"/>
+<label class="accordion-header flex justify-between items-center p-md cursor-pointer hover:bg-surface-container-low transition-colors select-none" for="faq-1">
+<span class="font-body-bold text-body-bold text-text-primary">What exactly does YourPlatform provide?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 icon-expand">expand_more</span>
+</label>
+<div class="accordion-content bg-surface px-md py-0">
+<div class="py-md border-t border-border font-body text-body text-text-secondary">
+                                    We provide a complete contactless menu solution. This includes high-quality, custom-branded physical QR & NFC displays for your tables, and a beautifully designed, mobile-optimized digital menu. We manage all the technical setup, hosting, and ongoing updates so you don't have to lift a finger.
+                                </div>
+</div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
+<input class="accordion-input hidden" id="faq-2" type="checkbox"/>
+<label class="accordion-header flex justify-between items-center p-md cursor-pointer hover:bg-surface-container-low transition-colors select-none" for="faq-2">
+<span class="font-body-bold text-body-bold text-text-primary">Do I need an app to use this?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 icon-expand">expand_more</span>
+</label>
+<div class="accordion-content bg-surface px-md py-0">
+<div class="py-md border-t border-border font-body text-body text-text-secondary">
+                                    Neither you nor your customers need an app. Customers simply tap their phone on the NFC tag or scan the QR code using their standard camera app. The menu opens instantly in their mobile browser. For restaurants, there is no dashboard to manage—you communicate updates directly with our team.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion Section: Hardware -->
+<div>
+<h2 class="font-h2 text-h2 text-text-primary mb-md pb-xs border-b-2 border-border">QR & NFC Hardware</h2>
+<div class="space-y-sm">
+<!-- Accordion Item 3 -->
+<div class="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
+<input class="accordion-input hidden" id="faq-3" type="checkbox"/>
+<label class="accordion-header flex justify-between items-center p-md cursor-pointer hover:bg-surface-container-low transition-colors select-none" for="faq-3">
+<span class="font-body-bold text-body-bold text-text-primary">What happens if a table display is damaged?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 icon-expand">expand_more</span>
+</label>
+<div class="accordion-content bg-surface px-md py-0">
+<div class="py-md border-t border-border font-body text-body text-text-secondary">
+                                    Our standard displays are built to withstand heavy restaurant use, including spills and wiping. However, if one breaks or is lost, simply contact us. We offer affordable replacements shipped next-day.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar / Sticky Lead Gen -->
+<div class="lg:col-span-4">
+<div class="sticky top-[160px] space-y-lg">
+<!-- Support Contact Cards -->
+<div class="bg-surface-warm border border-outline-variant rounded-xl p-lg">
+<h3 class="font-h3 text-h3 text-text-primary mb-sm">Still Have a Question?</h3>
+<p class="font-small text-small text-text-secondary mb-lg">Our concierge team is ready to assist you immediately.</p>
+<div class="space-y-sm">
+<a class="flex items-center gap-md p-sm bg-white rounded-lg border border-border hover:border-primary hover:shadow-sm transition-all group" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">chat</span>
+</div>
+<div>
+<div class="font-body-bold text-body-bold text-text-primary">WhatsApp Us</div>
+<div class="font-small text-small text-text-secondary">Fastest response</div>
+</div>
+</a>
+<a class="flex items-center gap-md p-sm bg-white rounded-lg border border-border hover:border-primary hover:shadow-sm transition-all group" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">call</span>
+</div>
+<div>
+<div class="font-body-bold text-body-bold text-text-primary">Call Support</div>
+<div class="font-small text-small text-text-secondary">Mon-Fri, 9am-6pm</div>
+</div>
+</a>
+</div>
+</div>
+<!-- Lead Gen Form -->
+<div class="bg-white border border-border rounded-xl p-lg shadow-sm">
+<h3 class="font-h3 text-h3 text-text-primary mb-md">Ask Your Question</h3>
+<form class="space-y-md">
+<div>
+<label class="block font-small text-small text-text-primary mb-xs" for="name">Your Name</label>
+<input class="w-full h-12 px-sm rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary text-body font-body transition-colors" id="name" placeholder="John Doe" type="text"/>
+</div>
+<div>
+<label class="block font-small text-small text-text-primary mb-xs" for="email">Email or Phone</label>
+<input class="w-full h-12 px-sm rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary text-body font-body transition-colors" id="email" placeholder="john@restaurant.com" type="text"/>
+</div>
+<div>
+<label class="block font-small text-small text-text-primary mb-xs" for="message">How can we help?</label>
+<textarea class="w-full px-sm py-sm rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary text-body font-body transition-colors resize-none" id="message" placeholder="I have a question about..." rows="3"></textarea>
+</div>
+<button class="w-full h-12 bg-text-primary text-white font-button text-button rounded-lg hover:bg-primary transition-colors active:scale-95 flex items-center justify-center gap-xs" type="button">
+                                Send Message
+                                <span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-secondary-fixed dark:bg-inverse-surface border-t border-outline-variant w-full py-xxl">
+<div class="max-w-container-max-width mx-auto px-lg grid grid-cols-2 md:grid-cols-4 gap-lg">
+<!-- Brand Column -->
+<div class="col-span-2 md:col-span-1">
+<div class="font-h3 text-h3 font-bold text-white mb-sm">YourPlatform</div>
+<p class="font-body text-small text-secondary-fixed-dim max-w-xs">
+                    Built for high-speed hospitality. We manage the tech so you can manage the taste.
+                </p>
+</div>
+<!-- Links -->
+<div class="flex flex-col gap-sm">
+<a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors hover:underline transition-opacity duration-200" href="#">Company</a>
+<a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors hover:underline transition-opacity duration-200" href="#">Platform</a>
+<a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors hover:underline transition-opacity duration-200" href="#">Services</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors hover:underline transition-opacity duration-200" href="#">Privacy</a>
+<a class="font-body text-small text-secondary-fixed-dim hover:text-white transition-colors hover:underline transition-opacity duration-200" href="#">Terms</a>
+<a class="font-body-bold text-small text-primary-fixed hover:underline transition-opacity duration-200" href="#">FAQ</a>
+</div>
+<!-- Copyright -->
+<div class="col-span-2 md:col-span-4 mt-lg pt-lg border-t border-secondary text-center md:text-left">
+<p class="font-body text-small text-secondary-fixed-dim">© 2024 YourPlatform. All rights reserved. Built for high-speed hospitality.</p>
+</div>
+</div>
+</footer>
+</body></html>

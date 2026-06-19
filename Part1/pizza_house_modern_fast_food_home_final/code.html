@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza House</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-tertiary-fixed": "#261a00",
+                        "border": "#E5E7EB",
+                        "tertiary": "#765700",
+                        "secondary-fixed": "#dce2f7",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdad3",
+                        "tertiary-container": "#946f00",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-container": "#db3516",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "tertiary-fixed": "#ffdf9e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d9dff5",
+                        "danger": "#DC2626",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-warm": "#FFF1EB",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#141b2b",
+                        "on-primary-fixed": "#3e0400",
+                        "surface-bright": "#f7f9fb",
+                        "primary-dark": "#C9341A",
+                        "on-secondary-fixed-variant": "#404758",
+                        "inverse-primary": "#ffb4a5",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#eff1f3",
+                        "text-secondary": "#667085",
+                        "secondary": "#575e70",
+                        "outline-variant": "#e5beb6",
+                        "outline": "#906f69",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "canvas": "#FFFFFF",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "text-primary": "#111827",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "surface": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "success": "#16A34A",
+                        "primary": "#b51d00",
+                        "on-surface-variant": "#5c403a",
+                        "on-secondary-container": "#5c6274",
+                        "surface-tint": "#b91e00",
+                        "surface-container-highest": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "mobile-shell-max-width": "640px",
+                        "container-max-width": "1280px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter", "sans-serif"],
+                        "display": ["Manrope", "sans-serif"],
+                        "h3": ["Manrope", "sans-serif"],
+                        "h1": ["Manrope", "sans-serif"],
+                        "small": ["Inter", "sans-serif"],
+                        "h2": ["Manrope", "sans-serif"],
+                        "h1-mobile": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "body-bold": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            -webkit-font-smoothing: antialiased;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .glass-overlay {
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-surface w-full max-w-mobile-shell-max-width mx-auto relative pb-24 shadow-2xl">
+<!-- Top App Bar -->
+<header class="bg-surface docked full-width top-0 sticky z-50 border-b border-border shadow-sm flex justify-between items-center px-margin-mobile h-16 w-full max-w-mobile-shell-max-width mx-auto">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-h2-mobile text-h2-mobile font-extrabold text-primary">Sizzling Slices</h1>
+<button class="flex items-center gap-1 hover:bg-surface-container-high transition-colors active:scale-95 px-2 py-1 rounded-full text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">language</span>
+<span class="font-small text-small">EN</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full h-[400px] overflow-hidden">
+<img alt="A stunning, high-definition photograph of a fresh, hot pizza right out of a wood-fired oven. The pizza is topped with vibrant, melting mozzarella, charred pepperoni slices, and fresh green basil leaves. The lighting is warm and dramatic, highlighting the crispy, blistered crust and the glistening olive oil. The setting is a rustic, dark-toned restaurant interior, evoking a premium, artisanal dining experience." class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0BnxaUas3apsygiSxIiILNH2HvM1V8dWUxxHNsW32yMJuUl8veE53yD_Ur0J7F7P1zuWGqYHOSOKaO19q_S1MYRTz8F2IgvcW5Y3oTGsMzQQ1_bTS-Jc0iZlo8l33as33tWHBGT_Sz1AhzU99_2x3Wv0KtTZ0PbSTvpB8ezmLcdgNKob-5lJvhQjZ3WVXuLD0RIhyRKiNmMDrSkaR3K9wW1Wws5LwIP63SOP_VLeaLUy0jF9E7LqHYXEXn8ShlbQtoqGI8l9_80w"/>
+<div class="absolute inset-0 glass-overlay flex flex-col justify-end p-margin-mobile">
+<div class="flex items-center gap-xs mb-sm">
+<div class="bg-canvas rounded-full px-sm py-1 flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-small text-small font-bold text-text-primary">Open Now</span>
+</div>
+<span class="font-small text-small text-on-primary">Closes at 11:30 PM</span>
+</div>
+<h1 class="font-display text-display text-on-primary mb-xs">Pizza House</h1>
+<p class="font-h3 text-h3 text-on-primary mb-sm font-normal">Freshly Baked, Made with Love</p>
+<div class="flex items-center gap-sm text-on-primary/90 font-small text-small">
+<span>Pizza · Burgers · Pasta</span>
+<span>•</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-primary">4.8</span>
+<span>· 260 reviews</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Actions Grid -->
+<section class="px-margin-mobile -mt-6 relative z-10 grid grid-cols-2 gap-sm mb-lg">
+<button class="bg-[#F04424] text-white rounded-xl p-4 flex flex-col items-center justify-center gap-2 shadow-md active:scale-95 transition-transform h-24">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">call</span>
+<span class="font-button text-button">Call Order</span>
+</button>
+<button class="bg-[#111827] text-white rounded-xl p-4 flex flex-col items-center justify-center gap-2 shadow-md active:scale-95 transition-transform h-24">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-button text-button">Pick Your Meal</span>
+</button>
+<button class="bg-[#F8FAFC] text-[#111827] border border-border rounded-xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform h-24">
+<span class="material-symbols-outlined text-[32px] text-[#F04424]" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
+<span class="font-button text-button">Online Order</span>
+</button>
+<button class="bg-[#F8FAFC] text-[#111827] border border-border rounded-xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform h-24">
+<span class="material-symbols-outlined text-[32px] text-[#F04424]" style="font-variation-settings: 'FILL' 0;">location_on</span>
+<span class="font-button text-button">Visit Us</span>
+</button>
+</section>
+<!-- Popular Choices -->
+<section class="px-margin-mobile mb-lg">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-h2 text-h2 text-text-primary">Popular Choices</h2>
+<button class="font-small text-small font-bold text-primary active:opacity-80">See All</button>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Card 1 -->
+<div class="bg-canvas rounded-2xl p-2 border border-border flex items-center gap-sm active:bg-surface-container-low transition-colors shadow-sm">
+<img alt="A beautiful, appetizing top-down view of a classic Margherita pizza on a rustic wooden board. The pizza features a perfectly charred, bubbly crust, bright red tomato sauce, large melted pools of fresh mozzarella cheese, and vibrant green basil leaves scattered across the top. A subtle drizzle of olive oil adds a glossy finish. The lighting is bright and natural, creating a clean, modern aesthetic suitable for a high-end fast-casual restaurant." class="w-20 h-20 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPuSomuzEG5qxHwiyM8uXZW4WnBdjtDfr3qoyRw74FRlJUKZ71ixp0Bbu8kwDR9lIzQfUCWqTIi-CEQDwX1_LuiNdbxRiYX3MQn7_w_i-IHZzc1UgLYoLXSc11Yhjsqrp0DsGDDiOjtejoduxQ1KrBeoNpe76Z1VbLKYkB_pRHbyQi-8q6WWQHlLe6Os1AQKmBb5QGmPCU0RswmE_0yo5nx5H0mpNl5QLsCWFAqIlY8Q1ANz7rd4XeIJ2XnC0yvOB4b26J_Bu06O0"/>
+<div class="flex-grow">
+<h3 class="font-body-bold text-body-bold text-text-primary">Margherita Pizza</h3>
+<p class="font-small text-small text-text-secondary line-clamp-1">Classic tomato sauce, fresh mozzarella</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-text-secondary pr-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-canvas rounded-2xl p-2 border border-border flex items-center gap-sm active:bg-surface-container-low transition-colors shadow-sm">
+<img alt="A mouth-watering, close-up shot of a towering BBQ Chicken Burger sitting on a rustic wooden serving plank. The burger features a grilled, juicy chicken breast slathered in rich, dark BBQ sauce, topped with melted cheddar cheese, crisp lettuce, and a generous pile of crispy, golden fried onion strings. The bun is perfectly toasted and glossy. In the blurred background, a frosty glass of beer and golden french fries complete the appetizing, high-energy scene." class="w-20 h-20 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDff2DcucWCa97H9awVaZ4--zTsCZWDQWSbSs2dvlPbm3unjCvWi4HJb7vKat2apsSTFWDKaJq67o3_pW_UKw5Cqmc767-ZU5zfa9ygXyzxmGhuxkKOHuagHCJ9voKPfixR1rjCofpWenPLqC0MrnqQ1d8mBBefYAwtT24S4QJeEkVifoICmxJY2tEOACOR-ihwyEN99FAppM2n5HRviIEQsXPutj5kORNLtWLi1UGrF-Trztonpu7vDwSMvv7P1R0X8keQLJXiXpc"/>
+<div class="flex-grow">
+<h3 class="font-body-bold text-body-bold text-text-primary">BBQ Chicken Burger</h3>
+<p class="font-small text-small text-text-secondary line-clamp-1">Grilled chicken, smoky BBQ sauce</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-text-secondary pr-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-canvas rounded-2xl p-2 border border-border flex items-center gap-sm active:bg-surface-container-low transition-colors shadow-sm">
+<img alt="An inviting, high-resolution image of a generous bowl of Creamy Chicken Penne Pasta set on a distressed wooden table. The pasta is coated in a rich, velvety, creamy white sauce, mixed with tender chunks of grilled chicken breast. The dish is beautifully garnished with finely grated parmesan cheese and fresh chopped parsley. A silver fork rests on a linen napkin beside the bowl. The warm, inviting lighting emphasizes the dish's comforting and premium quality." class="w-20 h-20 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCPCyZmcTivArDtKcXANHctGaEtdnQmErJ2xhEGSVuf3JuQQ31hNO5hIT5p1aK9_FIqIUeh209f0rNbR4rT-uCDDawiGPsFgwiErEQu2VnFSydwvNEWDWCgqU1O2TVW87D3liveXFmScp3vV2WDPR_FdGXduy219gTAmxg732vk_0D_FaRQVVGbVHABdJ8WzFMC5_ktVkljNRXsl30vQX98TwTKwBzp_sZNOdK5HyxNdb1sE28OAE53s9QccP-Vn2yY50Vig6W-vQ"/>
+<div class="flex-grow">
+<h3 class="font-body-bold text-body-bold text-text-primary">Creamy Chicken Pasta</h3>
+<p class="font-small text-small text-text-secondary line-clamp-1">Penne, grilled chicken, alfredo sauce</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-text-secondary pr-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Campaign Panel -->
+<section class="px-margin-mobile mb-lg">
+<div class="bg-[#F04424] rounded-[20px] p-lg text-white relative overflow-hidden shadow-md">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="relative z-10">
+<h2 class="font-h2 text-h2 mb-xs">Scan &amp; Win</h2>
+<p class="font-body text-body text-white/90 mb-md max-w-[250px]">Scan, explore the menu and discover today’s special reward.</p>
+<button class="bg-white text-[#F04424] font-button text-button py-2 px-4 rounded-xl active:scale-95 transition-transform shadow-sm">
+                        View Today’s Reward
+                    </button>
+</div>
+</div>
+</section>
+<!-- Value Statement -->
+<section class="px-margin-mobile mb-lg">
+<div class="bg-surface-warm rounded-2xl p-lg border border-outline-variant/30">
+<h2 class="font-h2 text-h2 text-[#111827] mb-sm">Made Fresh. Served Fast.</h2>
+<p class="font-body text-body text-text-secondary mb-md">Pizza House serves freshly prepared pizzas, burgers and pasta made with locally sourced ingredients. Experience the perfect blend of speed and quality in every bite.</p>
+<button class="flex items-center gap-1 font-button text-button text-[#F04424] active:opacity-80">
+                    Discover Pizza House
+                    <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Opening Hours -->
+<section class="px-margin-mobile mb-lg bg-canvas py-md border-y border-border">
+<h2 class="font-h3 text-h3 text-text-primary mb-md">Opening Hours</h2>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center py-2 border-b border-border/50">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F04424]"></span>
+<span class="font-body-bold text-body-bold text-[#F04424]">Sunday · Today</span>
+</div>
+<span class="font-body text-body text-text-primary">11:00 AM - 11:30 PM</span>
+</div>
+<div class="flex justify-between items-center py-2 text-text-secondary">
+<span class="font-body text-body">Monday - Thursday</span>
+<span class="font-body text-body">11:00 AM - 10:30 PM</span>
+</div>
+<div class="flex justify-between items-center py-2 text-text-secondary">
+<span class="font-body text-body">Friday - Saturday</span>
+<span class="font-body text-body">11:00 AM - 11:30 PM</span>
+</div>
+</div>
+</section>
+<!-- Visit Section -->
+<section class="px-margin-mobile mb-xl">
+<h2 class="font-h3 text-h3 text-text-primary mb-md">Visit Us</h2>
+<div class="rounded-2xl overflow-hidden border border-border shadow-sm mb-md h-[150px] relative bg-surface-variant flex items-center justify-center">
+<!-- Map Placeholder -->
+<span class="material-symbols-outlined text-[48px] text-secondary/50" data-location="Istanbul" style="font-variation-settings: 'FILL' 1;">map</span>
+<div class="absolute bottom-0 w-full bg-white/90 backdrop-blur-sm p-sm border-t border-border">
+<p class="font-body-bold text-body-bold text-text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#F04424]" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                        Kadıköy, Istanbul, Türkiye
+                    </p>
+</div>
+</div>
+<button class="w-full bg-[#F04424] text-white font-button text-button py-3 rounded-xl mb-md shadow-sm active:scale-95 transition-transform">
+                Open in Maps
+            </button>
+<div class="grid grid-cols-4 gap-xs">
+<button class="bg-canvas border border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1 active:bg-surface-container-low transition-colors text-text-primary">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">call</span>
+<span class="font-small text-[11px]">Call</span>
+</button>
+<button class="bg-canvas border border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1 active:bg-surface-container-low transition-colors text-success">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-small text-[11px] text-text-primary">WhatsApp</span>
+</button>
+<button class="bg-canvas border border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1 active:bg-surface-container-low transition-colors text-primary-dark">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">photo_camera</span>
+<span class="font-small text-[11px] text-text-primary">Instagram</span>
+</button>
+<button class="bg-canvas border border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1 active:bg-surface-container-low transition-colors text-secondary">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">person_add</span>
+<span class="font-small text-[11px] text-text-primary">Save</span>
+</button>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="px-margin-mobile mb-xl py-md flex justify-center gap-md border-y border-border/50 bg-surface">
+<div class="flex items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-small text-small font-bold text-text-primary">4.8</span>
+</div>
+<span class="text-border">•</span>
+<div class="flex items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">eco</span>
+<span class="font-small text-small">Fresh ingredients</span>
+</div>
+<span class="text-border">•</span>
+<div class="flex items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">local_dining</span>
+<span class="font-small text-small">Prepared daily</span>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#111827] text-white py-xl px-margin-mobile flex flex-col items-center gap-md pb-32">
+<h2 class="font-h2-mobile text-h2-mobile font-extrabold text-white">Pizza House</h2>
+<p class="font-body text-body text-white/70">Freshly Baked, Made with Love</p>
+<div class="flex gap-lg mt-sm">
+<a class="font-small text-small text-white/70 hover:text-white underline decoration-white/30" href="#">Privacy Policy</a>
+<a class="font-small text-small text-white/70 hover:text-white underline decoration-white/30" href="#">Terms of Service</a>
+</div>
+<p class="font-small text-small text-white/50 mt-md">Powered by YourPlatform</p>
+<p class="font-small text-[12px] text-white/30 mt-xs">© 2024 Sizzling Slices. All rights reserved.</p>
+</footer>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-mobile-shell-max-width flex justify-around items-center h-20 bg-surface px-4 pb-safe border-t border-border shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center justify-center text-[#F04424] font-bold opacity-100 scale-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-small text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors p-2 rounded-xl active:opacity-80 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 0;">restaurant_menu</span>
+<span class="font-small text-[10px]">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors p-2 rounded-xl active:opacity-80 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 0;">call</span>
+<span class="font-small text-[10px]">Call</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors p-2 rounded-xl active:opacity-80 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 0;">location_on</span>
+<span class="font-small text-[10px]">Location</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza House - Contact &amp; Location Editor</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#e5beb6",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "primary-fixed": "#ffdad3",
+                        "surface-tint": "#b91e00",
+                        "secondary": "#575e70",
+                        "surface-warm": "#FFF1EB",
+                        "primary": "#b51d00",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "primary-dark": "#C9341A",
+                        "on-surface-variant": "#5c403a",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#404758",
+                        "background": "#f7f9fb",
+                        "text-primary": "#111827",
+                        "secondary-fixed": "#dce2f7",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "on-secondary": "#ffffff",
+                        "danger": "#DC2626",
+                        "text-secondary": "#667085",
+                        "secondary-container": "#d9dff5",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#db3516",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#946f00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "tertiary": "#765700",
+                        "tertiary-fixed": "#ffdf9e",
+                        "canvas": "#FFFFFF",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed": "#141b2b",
+                        "inverse-surface": "#2d3133",
+                        "border": "#E5E7EB",
+                        "on-primary-fixed": "#3e0400",
+                        "success": "#16A34A",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#5c6274",
+                        "inverse-primary": "#ffb4a5",
+                        "outline": "#906f69",
+                        "on-primary-container": "#fffbff",
+                        "primary-fixed-dim": "#ffb4a5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "container-max-width": "1280px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "mobile-shell-max-width": "640px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body": ["Inter"],
+                        "h3": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "h1": ["Manrope"],
+                        "display": ["Manrope"],
+                        "button": ["Inter"],
+                        "small": ["Inter"],
+                        "h1-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-background font-body flex h-screen overflow-hidden">
+<!-- JSON: SideNavBar -->
+<nav class="bg-secondary dark:bg-on-secondary-fixed-variant text-primary dark:text-primary-fixed font-body text-body fixed left-0 top-0 h-full w-[240px] border-r border-outline-variant flex flex-col h-full z-50">
+<div class="px-lg py-xl flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center overflow-hidden">
+<img alt="Restaurant Logo" class="w-full h-full object-cover" data-alt="A modern, minimalist restaurant logo featuring a stylized pizza slice in bright orange and deep navy blue colors, vector style on a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT1TaOguHDK6Og12oIRM8v-dNSwLUFwhG9lNqObho7PetP_b0xwX52oXVApAdojnaNE_ytURHHhLDbng5UIn7_-Oxjegv1ug2IVlh-GnLtltqSr1n7VjuQq0xY__-USQl8qzrVHcWzAAbq47ezuFSazjB2yP8aqPIBgJlf0e1eZAnb5Oxf1tyvRV_O4lTl8QfTZsLu0TMqZg5pswlu0azFvxfWmEUFKWEBBx17E5ICQjSNuFAncSiCvATRGyP5KYWESH8eKV8up08"/>
+</div>
+<div>
+<h1 class="font-h2 text-h2 text-on-secondary">Admin Panel</h1>
+<p class="text-small text-surface-variant opacity-80">Manage Workspace</p>
+</div>
+</div>
+<div class="px-md mb-md">
+<button class="w-full bg-primary text-on-primary font-button text-button py-sm px-md rounded-xl flex items-center justify-center gap-sm hover:opacity-90 transition-all duration-200">
+<span class="material-symbols-outlined">add</span>
+                New Menu Item
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto py-md space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+                Menu Management
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Order History
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+                Tables &amp; QR
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container border-l-4 border-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto border-t border-on-secondary-fixed-variant p-md space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:bg-on-secondary-fixed-variant transition-colors transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[240px] w-[calc(100%-240px)] flex flex-col h-screen">
+<!-- JSON: TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-on-surface text-primary dark:text-primary-fixed font-body text-body sticky top-0 z-40 w-full border-b border-outline-variant shadow-sm flex justify-between items-center px-lg h-[64px]">
+<div class="flex items-center gap-xl">
+<h2 class="font-h3 text-h3 text-on-surface dark:text-inverse-on-surface">Workspace Editor</h2>
+<!-- Search Bar Placeholder -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-text-secondary">search</span>
+<input class="pl-xl pr-md py-xs rounded-full border border-outline-variant bg-surface text-small w-64 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Global search..." type="text"/>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-text-secondary font-body pb-md pt-md hover:text-primary transition-colors scale-98 active:opacity-80" href="#">Overview</a>
+<a class="text-text-secondary font-body pb-md pt-md hover:text-primary transition-colors scale-98 active:opacity-80" href="#">Categories</a>
+<a class="text-text-secondary font-body pb-md pt-md hover:text-primary transition-colors scale-98 active:opacity-80" href="#">Add-ons</a>
+<a class="text-text-secondary font-body pb-md pt-md hover:text-primary transition-colors scale-98 active:opacity-80" href="#">Availability</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-text-secondary hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="font-button text-button border border-outline-variant px-md py-xs rounded-xl hover:bg-surface-variant transition-colors">Preview</button>
+<button class="font-button text-button bg-primary text-on-primary px-md py-xs rounded-xl hover:opacity-90 transition-colors">Publish Changes</button>
+<img alt="Admin User" class="w-8 h-8 rounded-full border border-outline-variant ml-sm" data-alt="A small, circular avatar portrait of an admin user, a professional smiling person in a brightly lit studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZCpTc8Stn7W56KtnJJIa3bdQ5JdaQoz_ua99CXLXOqqPkHBTFwoRsw43oRUqE7ENGsZ9CPpUzv_GxcwLD-za1--dXtCCShT9tq7GL3fj9nfkxHMO-nrvwLMYvUJ9gEc6FlsC8QCCmVbzS2W6q2BBi2TMZrzmWnU1eCjb44F3TCstQpGRf65ayJ9UwR3vlRuLBWH8kJTmvLWKDmFUVDb7mEyICoUJgiOVkkwcUzJn30ymdCTvjPdkFskZLQDzVTt4AMeHr8rZ1VcI"/>
+</div>
+</header>
+<!-- Page Sub-Header & Tabs -->
+<div class="bg-canvas border-b border-outline-variant px-lg pt-lg">
+<div class="flex items-center justify-between mb-md">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">Pizza House <span class="text-text-secondary font-body text-body ml-sm px-sm py-base bg-surface-variant rounded-md">RST-00024</span></h1>
+<p class="text-text-secondary font-small text-small">Manage public presence and locational data.</p>
+</div>
+<button class="bg-primary text-on-primary font-button text-button py-sm px-lg rounded-xl flex items-center gap-sm hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined">save</span>
+                    Save Contact &amp; Location Draft
+                </button>
+</div>
+<div class="flex gap-lg overflow-x-auto">
+<a class="text-text-secondary font-body-bold text-body-bold pb-sm border-b-2 border-transparent hover:text-primary transition-colors whitespace-nowrap" href="#">Overview</a>
+<a class="text-text-secondary font-body-bold text-body-bold pb-sm border-b-2 border-transparent hover:text-primary transition-colors whitespace-nowrap" href="#">General Information</a>
+<a class="text-text-secondary font-body-bold text-body-bold pb-sm border-b-2 border-transparent hover:text-primary transition-colors whitespace-nowrap" href="#">Branding</a>
+<a class="text-primary font-body-bold text-body-bold pb-sm border-b-2 border-primary whitespace-nowrap" href="#">Contact and Location</a>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg bg-surface">
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Main Editor Column -->
+<div class="lg:col-span-2 space-y-lg">
+<!-- 1. Public Contact Information -->
+<section class="bg-canvas border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">call</span>
+<h2 class="font-h3 text-h3 text-on-surface">Public Contact Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Primary Phone</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="+90 212 555 1234"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">WhatsApp Business</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="+90 532 555 6789"/>
+</div>
+<div class="md:col-span-2">
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Public Email</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="email" value="contact@pizzahouse.com"/>
+</div>
+</div>
+</section>
+<!-- 2. Website and Social Links -->
+<section class="bg-canvas border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">language</span>
+<h2 class="font-h3 text-h3 text-on-surface">Website &amp; Social Links</h2>
+</div>
+<div class="space-y-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Restaurant Website</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="https://" type="url" value="https://www.pizzahouse.com.tr"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Instagram URL</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="https://instagram.com/..." type="url"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Facebook URL</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="https://facebook.com/..." type="url"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Primary Location -->
+<section class="bg-canvas border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<h2 class="font-h3 text-h3 text-on-surface">Primary Location</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Country</label>
+<select class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-canvas">
+<option>Turkey</option>
+<option>United Kingdom</option>
+<option>United States</option>
+</select>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">City</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Istanbul"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">District / Borough</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Kadıköy"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Postal Code</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="34710"/>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Street Address</label>
+<textarea class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" rows="2">Caferağa Mah. Moda Cad. No: 12</textarea>
+</div>
+</section>
+<!-- 4. Map and Directions -->
+<section class="bg-canvas border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">map</span>
+<h2 class="font-h3 text-h3 text-on-surface">Map &amp; Directions</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Latitude</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-surface-container-low focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="40.9882"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Longitude</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-surface-container-low focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="29.0261"/>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Map Destination URL (Google/Apple Maps)</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="url" value="https://maps.google.com/?q=Pizza+House+Kadikoy"/>
+</div>
+</section>
+<!-- 5. Location Visibility -->
+<section class="bg-canvas border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">visibility</span>
+<h2 class="font-h3 text-h3 text-on-surface">Location Visibility</h2>
+</div>
+<div class="space-y-sm">
+<label class="flex items-center gap-sm cursor-pointer p-sm rounded-lg hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant">
+<input checked="" class="text-primary focus:ring-primary w-5 h-5" name="visibility" type="radio"/>
+<div>
+<span class="block font-body-bold text-body text-on-surface">Show Full Address</span>
+<span class="block text-small text-text-secondary">Best for dine-in and pickup locations.</span>
+</div>
+</label>
+<label class="flex items-center gap-sm cursor-pointer p-sm rounded-lg hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant">
+<input class="text-primary focus:ring-primary w-5 h-5" name="visibility" type="radio"/>
+<div>
+<span class="block font-body-bold text-body text-on-surface">General Area Only (Ghost Kitchen)</span>
+<span class="block text-small text-text-secondary">Hides street level detail. Delivery only.</span>
+</div>
+</label>
+</div>
+</section>
+<!-- 6. Internal Representative -->
+<section class="bg-surface-container border border-outline-variant rounded-xl p-lg shadow-inner">
+<div class="flex items-center justify-between mb-md border-b border-outline-variant pb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">admin_panel_settings</span>
+<h2 class="font-h3 text-h3 text-on-surface">Internal Representative</h2>
+</div>
+<span class="bg-surface-variant text-on-surface-variant font-small text-small px-sm py-base rounded text-xs uppercase tracking-wider font-bold">Internal - Not Public</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Contact Person</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-canvas focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Marco Rossi"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Role</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-canvas focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Owner / Manager"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Private Phone</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-canvas focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="+90 555 999 8877"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-on-surface-variant mb-xs">Private Email</label>
+<input class="w-full border border-outline-variant rounded-lg px-md py-sm font-body text-body bg-canvas focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="email" value="marco.rossi@pizzahouse.internal"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Summary Column -->
+<div class="space-y-lg">
+<!-- Public Contact Preview -->
+<div class="bg-canvas border border-outline-variant rounded-xl p-md shadow-sm">
+<h3 class="font-body-bold text-body-bold text-on-surface mb-md">Public Preview</h3>
+<div class="border-[6px] border-surface-container-highest rounded-[2rem] overflow-hidden bg-surface-bright pb-md relative shadow-inner h-[320px]">
+<div class="bg-primary pt-xl pb-md px-md text-on-primary">
+<h4 class="font-h3 text-h3 mb-xs">Pizza House</h4>
+<p class="font-small text-small opacity-90 flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">location_on</span> Kadıköy, Istanbul</p>
+</div>
+<div class="p-md space-y-sm">
+<div class="bg-canvas p-sm rounded-lg border border-outline-variant flex items-center gap-md shadow-sm">
+<div class="bg-primary-fixed text-on-primary-fixed p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</div>
+<div>
+<p class="font-small text-xs text-text-secondary">Call us</p>
+<p class="font-body-bold text-small text-on-surface">+90 212 555 1234</p>
+</div>
+</div>
+<div class="bg-canvas p-sm rounded-lg border border-outline-variant flex items-center gap-md shadow-sm">
+<div class="bg-[#25D366]/20 text-[#075E54] p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</div>
+<div>
+<p class="font-small text-xs text-text-secondary">WhatsApp</p>
+<p class="font-body-bold text-small text-on-surface">+90 532 555 6789</p>
+</div>
+</div>
+<div class="bg-canvas p-sm rounded-lg border border-outline-variant flex items-start gap-md shadow-sm">
+<div class="bg-surface-variant text-on-surface-variant p-xs rounded-full flex items-center justify-center mt-xs">
+<span class="material-symbols-outlined text-[20px]">map</span>
+</div>
+<div>
+<p class="font-small text-xs text-text-secondary">Address</p>
+<p class="font-body-bold text-small text-on-surface">Caferağa Mah. Moda Cad. No: 12</p>
+<button class="text-primary font-button text-xs mt-xs">Get Directions</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Preview -->
+<div class="bg-canvas border border-outline-variant rounded-xl p-md shadow-sm">
+<h3 class="font-body-bold text-body-bold text-on-surface mb-sm">Location Pin</h3>
+<div class="w-full h-40 rounded-lg overflow-hidden relative bg-surface-container-high border border-outline-variant" data-location="Istanbul, Turkey" style="">
+<img alt="Map Location" class="w-full h-full object-cover opacity-80" data-alt="A clean, minimalist digital map showing the Kadikoy district in Istanbul. The map uses a light-mode color palette with subtle beige and light blue tones for water. A prominent, bright red-orange location pin marker indicates a specific restaurant location." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_SCaoaDeOHsUsSEv5S0Og2a8H21KiY0ujmqS0nDiN1jL-88sA7iL8nR6dlrBxXgBCRtzWd9GG83yRKMsMQEAT5t7t-4ErcmSd4vuqfvxjx83dwXEAa7FDItM0UZFcTHP6QI3AHNfNWkmtz-us94_hfqjoAc8ixSRLtHIo531uL9re59rNBal6OdTsla4Be-R1nFmc7U0kjfHtS4sOUUBYHi6cYZTOcYykEZ86-7Qmfz3U5KmjsFgnxUCERWgY6fR_FwC894okPhs"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[40px] drop-shadow-md">location_on</span>
+</div>
+</div>
+</div>
+<!-- Contact Readiness -->
+<div class="bg-canvas border border-outline-variant rounded-xl p-md shadow-sm">
+<h3 class="font-body-bold text-body-bold text-on-surface mb-md">Contact Readiness</h3>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+<span class="font-small text-small text-on-surface">Primary Phone added</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+<span class="font-small text-small text-on-surface">WhatsApp confirmed</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+<span class="font-small text-small text-on-surface">Map configured</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-surface-dim text-[20px]">circle</span>
+<span class="font-small text-small text-text-secondary">TripAdvisor Link (Optional)</span>
+</li>
+</ul>
+</div>
+<!-- Changes in This Draft -->
+<div class="bg-surface-warm border border-outline-variant rounded-xl p-md shadow-sm">
+<h3 class="font-body-bold text-body-bold text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">history</span>
+                            Draft Changes
+                        </h3>
+<ul class="list-disc pl-md space-y-xs font-small text-small text-on-surface-variant">
+<li>WhatsApp number updated</li>
+<li>Address corrected to "Moda Cad."</li>
+</ul>
+</div>
+<p class="text-center font-small text-xs text-text-secondary mt-lg italic">Illustrative Admin Data</p>
+</div>
+</div>
+<!-- Bottom padding for scrollability -->
+<div class="h-xl w-full"></div>
+</div>
+</main>
+</body></html>

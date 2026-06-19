@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Media Library - YourPlatform Admin</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#575e70",
+                      "on-secondary-container": "#5c6274",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed": "#3e0400",
+                      "on-secondary-fixed": "#141b2b",
+                      "surface-warm": "#FFF1EB",
+                      "on-primary-fixed-variant": "#8e1500",
+                      "tertiary-fixed": "#ffdf9e",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f2f4f6",
+                      "outline": "#906f69",
+                      "secondary-fixed": "#dce2f7",
+                      "tertiary-fixed-dim": "#f7be2b",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "primary-dark": "#C9341A",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-variant": "#e0e3e5",
+                      "primary-container": "#db3516",
+                      "success": "#16A34A",
+                      "on-tertiary-fixed": "#261a00",
+                      "on-surface-variant": "#5c403a",
+                      "inverse-primary": "#ffb4a5",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-container": "#d9dff5",
+                      "on-error": "#ffffff",
+                      "on-background": "#191c1e",
+                      "outline-variant": "#e5beb6",
+                      "canvas": "#FFFFFF",
+                      "error-container": "#ffdad6",
+                      "danger": "#DC2626",
+                      "surface-tint": "#b91e00",
+                      "on-tertiary-fixed-variant": "#5b4300",
+                      "text-primary": "#111827",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-error-container": "#93000a",
+                      "on-primary-container": "#fffbff",
+                      "primary-fixed": "#ffdad3",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary-container": "#fffbff",
+                      "primary": "#b51d00",
+                      "surface-container-high": "#e6e8ea",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "on-surface": "#191c1e",
+                      "surface-container-highest": "#e0e3e5",
+                      "text-secondary": "#667085",
+                      "border": "#E5E7EB",
+                      "background": "#f7f9fb",
+                      "surface": "#f7f9fb",
+                      "tertiary": "#765700",
+                      "tertiary-container": "#946f00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "container-max-width": "1280px",
+                      "lg": "24px",
+                      "mobile-shell-max-width": "640px",
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "base": "4px",
+                      "margin-mobile": "20px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "h1": ["Manrope"],
+                      "body": ["Inter"],
+                      "h1-mobile": ["Manrope"],
+                      "display": ["Manrope"],
+                      "button": ["Inter"],
+                      "small": ["Inter"],
+                      "body-bold": ["Inter"],
+                      "h3": ["Manrope"],
+                      "h2": ["Manrope"]
+              },
+              "fontSize": {
+                      "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                      "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E0E3E5;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d8dadc;
+        }
+        
+        /* Subtle selection */
+        .asset-card.selected {
+            border-color: #b51d00;
+            background-color: rgba(219, 53, 22, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-surface text-text-primary font-body antialiased h-screen overflow-hidden flex">
+<!-- Global SideNavBar (From JSON Blueprint) -->
+<aside class="bg-secondary fixed left-0 top-0 h-full w-[240px] border-r border-border flat z-50 flex flex-col overflow-y-auto">
+<!-- Brand Header -->
+<div class="px-4 py-6 border-b border-secondary-fixed/20 flex flex-col gap-2">
+<h2 class="font-h2 text-h2 font-black text-on-primary">Media Library</h2>
+<p class="font-small text-small text-surface-variant">Restaurant Admin</p>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 py-4 flex flex-col gap-1">
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-3 flex items-center gap-3 transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-3 flex items-center gap-3 transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">palette</span>
+                Branding
+            </a>
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-3 flex items-center gap-3 transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+                Menu Products
+            </a>
+<!-- Active Tab -->
+<a class="bg-primary-container text-on-primary-container border-l-4 border-primary px-4 py-3 flex items-center gap-3 transition-all scale-95 active:scale-90 font-body-bold text-body-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+                Gallery
+            </a>
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-3 flex items-center gap-3 transition-all scale-95 active:scale-90 font-body text-body" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<!-- CTA Action -->
+<div class="px-4 py-4">
+<button class="w-full bg-primary hover:bg-primary-dark text-on-primary font-button text-button py-3 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">upload</span>
+                Upload Assets
+            </button>
+</div>
+<!-- Footer Nav -->
+<div class="border-t border-secondary-fixed/20 py-4 flex flex-col gap-1">
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-2 flex items-center gap-3 transition-colors font-small text-small" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                Help Center
+            </a>
+<a class="text-surface-variant hover:text-on-primary hover:bg-on-secondary-container/10 px-4 py-2 flex items-center gap-3 transition-colors font-small text-small" href="#">
+<span class="material-symbols-outlined text-[18px]">cloud_queue</span>
+                Storage Usage
+            </a>
+<!-- Avatar -->
+<div class="mt-4 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Admin Profile Picture" class="w-full h-full object-cover" data-alt="A professional headshot of a restaurant administrator. The subject is smiling slightly, wearing smart casual business attire, set against a clean, neutral gray background. Soft studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMHxndWQUgRDx099Ph4LatjbvmD0rPQkSB2GDk1hxOY2JVl1aqaFv7eQ6N-NyQXn2BAL-qY1SPuzbIslUtH0oKYwJB_y4HY2KNRR9zFRFnnkcR7m5aBXNDnZAsM8821mhTXra_dGDNGYj9HuyJP2EMKokh8kCzJChRfYNc46mlcjryt1NWOuLo8nHMDxr1zeEKp2bo0P3i5-suvG8oU54AR2ZfzXZt4ZH6obwuWuOSEp3ymP0HTowaL3cEAKe1wvSe9OBGPkJgwnY"/>
+</div>
+<div class="flex flex-col">
+<span class="text-on-primary font-small text-small leading-tight">Admin User</span>
+<span class="text-surface-variant text-[11px] leading-tight">Pizza House</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Global TopAppBar (From JSON Blueprint) -->
+<header class="bg-canvas sticky top-0 z-50 w-full border-b border-border shadow-sm flex justify-between items-center px-lg py-md ml-[240px] max-w-[calc(100%-240px)]">
+<div class="flex items-center gap-xl">
+<h1 class="font-h3 text-h3 font-bold text-secondary">Media Assets</h1>
+<nav class="hidden md:flex gap-6">
+<a class="text-primary border-b-2 border-primary font-bold pb-2 font-button text-button" href="#">All Assets</a>
+<a class="text-text-secondary hover:text-primary pb-2 font-button text-button hover:text-primary-dark transition-colors cursor-pointer active:opacity-80" href="#">Recent</a>
+<a class="text-text-secondary hover:text-primary pb-2 font-button text-button hover:text-primary-dark transition-colors cursor-pointer active:opacity-80" href="#">Favorites</a>
+<a class="text-text-secondary hover:text-primary pb-2 font-button text-button hover:text-primary-dark transition-colors cursor-pointer active:opacity-80" href="#">Archived</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 border border-border rounded-lg text-small font-small focus:ring-2 focus:ring-primary focus:border-primary w-64 bg-surface-bright" placeholder="Search media..." type="text"/>
+</div>
+<button class="font-button text-button text-secondary border border-border hover:bg-surface-container-low px-4 py-2 rounded-lg transition-colors">Bulk Actions</button>
+<div class="flex items-center gap-sm text-text-secondary">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined cursor-pointer active:opacity-80">notifications</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined cursor-pointer active:opacity-80">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col h-screen pt-[73px] ml-[240px] fixed inset-0 z-0">
+<!-- Context Header -->
+<section class="bg-canvas border-b border-border px-lg py-md flex flex-col gap-sm shrink-0">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-small font-small text-text-secondary">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span>/</span>
+<a class="hover:text-primary" href="#">Admin</a>
+<span>/</span>
+<a class="hover:text-primary" href="#">Restaurants</a>
+<span>/</span>
+<span class="text-text-primary font-body-bold">Pizza House</span>
+</div>
+<!-- Title Row -->
+<div class="flex items-end justify-between mt-2">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg border border-border bg-surface flex items-center justify-center p-1 shadow-sm">
+<img alt="Pizza House Logo" class="w-full h-full object-contain" data-alt="A professional vector logo design for a modern high-energy fast food pizza brand named Pizza House. The logo features a minimalist stylized slice of pizza with bold red and dark navy blue colors. The aesthetic is clean, corporate, and appetizing, suitable for a bright light-mode administration dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFrLF086n1zdIu5t3sXzhyflDMN49atYwkOVsQlOFAk6TqEa7aVp470CuFctFHwY7Qi_RoSfrf40ntet5DxFVzm6GXOmlHAQYxF_h4D6IG9xQFZijjnsbf5pna7oY1CDhL7tHyet8EeNTLfxFYglhnFkI7AY7WFj-3e4k8OHsPN9-mq6Dzwd0e3VJjBo0KKKkNY-PbM8BYe9081j4UojnihGqYfQRN2UAHKjY4tgf5mj6NLMUj8vAnsVtpDKlCzfBfOVuFGXaYURQ"/>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-text-primary flex items-center gap-2">
+                            Pizza House 
+                            <span class="text-small font-small text-text-secondary bg-surface-container-low px-2 py-1 rounded-md">RST-00024</span>
+</h2>
+<div class="flex gap-4 mt-2 font-small text-small">
+<span class="flex items-center gap-1 text-text-primary"><span class="w-2 h-2 rounded-full bg-primary block"></span> 86 Assets</span>
+<span class="flex items-center gap-1 text-danger"><span class="material-symbols-outlined text-[14px]">warning</span> 9 Issues</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="font-button text-button text-text-secondary hover:text-text-primary px-4 py-2 rounded-lg border border-transparent hover:bg-surface-container-low transition-colors">View Archived</button>
+<button class="font-button text-button text-primary border border-primary/30 hover:bg-primary/5 px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">create_new_folder</span>
+                        Create Collection
+                    </button>
+<button class="font-button text-button bg-primary hover:bg-primary-dark text-on-primary px-5 py-2 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+                        Upload Media
+                    </button>
+</div>
+</div>
+</section>
+<!-- Workspace Tabs -->
+<nav class="bg-canvas border-b border-border px-lg flex gap-lg overflow-x-auto shrink-0 scrollbar-hide">
+<a class="py-3 font-body text-body text-text-secondary hover:text-text-primary border-b-2 border-transparent hover:border-border whitespace-nowrap" href="#">Overview</a>
+<a class="py-3 font-body text-body text-text-secondary hover:text-text-primary border-b-2 border-transparent hover:border-border whitespace-nowrap" href="#">General Info</a>
+<a class="py-3 font-body text-body text-text-secondary hover:text-text-primary border-b-2 border-transparent hover:border-border whitespace-nowrap" href="#">Branding</a>
+<a class="py-3 font-body text-body text-text-secondary hover:text-text-primary border-b-2 border-transparent hover:border-border whitespace-nowrap" href="#">Menu Products</a>
+<a class="py-3 font-body-bold text-body-bold text-primary border-b-2 border-primary whitespace-nowrap" href="#">Media</a>
+<a class="py-3 font-body text-body text-text-secondary hover:text-text-primary border-b-2 border-transparent hover:border-border whitespace-nowrap" href="#">Customer Actions</a>
+</nav>
+<!-- Media Status Bar -->
+<div class="bg-surface-container-low border-b border-border px-lg py-2 flex items-center gap-xl text-small font-small text-text-secondary shrink-0">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary block"></span> <strong>86</strong> Total Media</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success block"></span> <strong>54</strong> Public</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-tertiary block"></span> <strong>12</strong> Internal</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-danger block"></span> <strong>9</strong> Review Required</div>
+</div>
+<!-- Three Panel Layout -->
+<div class="flex flex-1 overflow-hidden bg-surface-bright">
+<!-- 1. Left Rail: Collections -->
+<aside class="w-[240px] bg-canvas border-r border-border flex flex-col overflow-y-auto shrink-0">
+<div class="p-4 flex flex-col gap-6">
+<!-- Collections -->
+<div>
+<h3 class="font-body-bold text-body-bold text-text-primary mb-3 flex items-center justify-between">
+                            Collections
+                            <span class="material-symbols-outlined text-[16px] text-text-secondary cursor-pointer hover:text-primary">add</span>
+</h3>
+<ul class="flex flex-col gap-1 text-small font-small text-text-secondary">
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md bg-surface-container-low text-text-primary font-body-bold" href="#">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+                                    All Media
+                                    <span class="ml-auto text-[12px] font-normal">86</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">folder</span>
+                                    Branding
+                                    <span class="ml-auto text-[12px]">12</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">folder</span>
+                                    Menu Products
+                                    <span class="ml-auto text-[12px]">48</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">folder</span>
+                                    Menu Categories
+                                    <span class="ml-auto text-[12px]">8</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">folder</span>
+                                    Restaurant Gallery
+                                    <span class="ml-auto text-[12px]">18</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Smart Collections -->
+<div>
+<h3 class="font-body-bold text-body-bold text-text-primary mb-3">Smart Collections</h3>
+<ul class="flex flex-col gap-1 text-small font-small text-text-secondary">
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-tertiary">schedule</span>
+                                    Recently Uploaded
+                                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-danger">gpp_maybe</span>
+                                    Requires Review
+                                    <span class="ml-auto bg-error-container text-on-error-container px-1.5 rounded text-[11px] font-bold">9</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-surface-container-low hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-tertiary-container">visibility_off</span>
+                                    Missing Alt Text
+                                    <span class="ml-auto bg-surface-variant text-text-primary px-1.5 rounded text-[11px] font-bold">4</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<!-- 2. Center: Media Grid -->
+<section class="flex-1 flex flex-col bg-surface-bright min-w-0">
+<!-- Toolbar -->
+<div class="px-md py-3 bg-canvas border-b border-border flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-1">
+<div class="relative max-w-sm w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 border border-border rounded-lg text-small focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Search filenames, tags, products..." type="text"/>
+</div>
+<button class="flex items-center gap-1 text-small font-small border border-border rounded-lg px-3 py-1.5 bg-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+                        </button>
+</div>
+<div class="flex items-center border border-border rounded-lg overflow-hidden bg-surface">
+<button class="p-1.5 bg-canvas text-primary"><span class="material-symbols-outlined text-[18px]">grid_view</span></button>
+<button class="p-1.5 text-text-secondary hover:bg-canvas transition-colors"><span class="material-symbols-outlined text-[18px]">view_list</span></button>
+</div>
+</div>
+<!-- Grid Scroll Area -->
+<div class="flex-1 overflow-y-auto p-md">
+<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+<!-- Asset Card 1 (Selected) -->
+<div class="asset-card selected bg-canvas rounded-xl border-2 border-primary shadow-sm overflow-hidden relative group cursor-pointer flex flex-col">
+<div class="absolute top-2 left-2 z-10 bg-canvas rounded bg-opacity-90 shadow-sm p-0.5">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_box</span>
+</div>
+<div class="absolute top-2 right-2 z-10 bg-success text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span> Approved
+                            </div>
+<div class="aspect-[4/3] bg-surface-container-low relative overflow-hidden">
+<img alt="Margherita Main" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A striking, high-resolution food photography shot of a classic Margherita pizza on a rustic wooden board. The lighting is studio-quality, bright and even, highlighting the melted mozzarella cheese, fresh green basil leaves, and blistered crust. The composition is a top-down flat lay, intended to look extremely appetizing and professional for a restaurant menu." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7AK_Ph6Exl3j0zz8HAWQNar5qtraXuVaUJd5VAh3veNvhN1sJEE96H7XX70-swRvfCPxYzmePOw8VZBKUhMAvkFk4WX_FxdCJuRQOvRDJerIGQXqIKmNQ6cRj2SMOKi2i5vYiaxjnbuKjGwkE3911FZzXgKJl9im-kzJ8SRuMZziEfmKhtc2imnJIWfY47x1Uh6jfYp-9XEWiV-yd7PypwV8ipvpR9g0d0Ozj_AdV1xjcVHNHcFUgpVppc5xlkTvSosII7UenH8s"/>
+</div>
+<div class="p-3 border-t border-border flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-body-bold text-small text-text-primary truncate">margherita-main.webp</h4>
+<p class="text-[12px] text-text-secondary mt-0.5">Margherita Pizza Main</p>
+</div>
+<div class="flex items-center justify-between mt-3 text-[11px] text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">link</span> Used in 3 places</span>
+<span>3.2 MB</span>
+</div>
+</div>
+</div>
+<!-- Asset Card 2 (Warning) -->
+<div class="asset-card bg-canvas rounded-xl border border-border shadow-sm overflow-hidden relative group cursor-pointer hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
+<div class="absolute top-2 left-2 z-10 bg-canvas rounded bg-opacity-70 shadow-sm p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">check_box_outline_blank</span>
+</div>
+<div class="absolute top-2 right-2 z-10 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[10px] font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">warning</span> Missing Alt
+                            </div>
+<div class="aspect-[4/3] bg-surface-container-low relative overflow-hidden">
+<img alt="Double Burger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A mouth-watering, perfectly stacked double cheeseburger on a toasted brioche bun, featuring crisp lettuce, bright red tomatoes, and melted cheddar cheese. Shot in a high-key studio environment with a bright white background. The image is hyper-realistic, vivid, and designed for maximum conversion in a fast-casual dining interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7gIRUpUncgrZPmuTqmMvEDjpBe8M5j2b-cYAtzthdlu8EXvYx8Tw5nqms9x759WkIu1snvp6A1Z0u4o-fxLmA9rkFCuVL5YmaCMZrqzBPMsIa28mg23D6KjU0vpvmV89ieE8a6YteIt0wpXUJ5rRwNl_vlS5rGV2eZBTmebEO_ZFH2ZsBadaCMsw5WP1Jc4mhZlEwjShjcFWH7GxSAhdhtshg_NHEeBSEnM7qJDjW-CJBu0TTyhZfCvXGynXgEqgI2r-Viuv8_ss"/>
+</div>
+<div class="p-3 border-t border-border flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-body-bold text-small text-text-primary truncate">db-burger-promo.jpg</h4>
+<p class="text-[12px] text-text-secondary mt-0.5">Double Cheeseburger</p>
+</div>
+<div class="flex items-center justify-between mt-3 text-[11px] text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">link</span> Used in 1 place</span>
+<span>1.8 MB</span>
+</div>
+</div>
+</div>
+<!-- Asset Card 3 (Internal) -->
+<div class="asset-card bg-canvas rounded-xl border border-border shadow-sm overflow-hidden relative group cursor-pointer hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
+<div class="absolute top-2 left-2 z-10 bg-canvas rounded bg-opacity-70 shadow-sm p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">check_box_outline_blank</span>
+</div>
+<div class="absolute top-2 right-2 z-10 bg-surface-variant text-on-surface text-[10px] font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">visibility_off</span> Internal
+                            </div>
+<div class="aspect-[4/3] bg-surface-container-low relative overflow-hidden flex items-center justify-center p-6">
+<!-- Placeholder for a vector logo file -->
+<img alt="Store Icon Vector" class="w-full h-full object-contain opacity-70 group-hover:scale-105 transition-transform duration-300" data-alt="A clean, flat vector illustration of a restaurant storefront icon, styled in a minimalist corporate aesthetic with soft blues and grays. It is a utility graphic used for internal administration rather than public marketing, sitting on a transparent background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ9PMnoSZDV_6_lc4K-jClp9_4UHQVsYMNLukea-ibvNPs8w_gkP9BnDiz4a4Ctxyqx2cnaAGmRdpoJNpz1WcqnWJbaByynoJSvDXTJk4SDt0c1gnwSKY_a2nneL2GXQQG1tBTETUFb7C5iVZQ-mO9mTViq8YK5NmJgOaAvXMZC6uz1hd5RtciyBG48UX3okwKXj7W72bR4i8M6bXTVEdW4ogtgYCB1y4lP7Q6UDaHeukwTLGMVKDwipFpjshC47pe_S1E3JsC4mE"/>
+</div>
+<div class="p-3 border-t border-border flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-body-bold text-small text-text-primary truncate">storefront-icon-v2.svg</h4>
+<p class="text-[12px] text-text-secondary mt-0.5">UI Assets</p>
+</div>
+<div class="flex items-center justify-between mt-3 text-[11px] text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">link</span> Used in 8 places</span>
+<span>45 KB</span>
+</div>
+</div>
+</div>
+<!-- Asset Card 4 (Beverage) -->
+<div class="asset-card bg-canvas rounded-xl border border-border shadow-sm overflow-hidden relative group cursor-pointer hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
+<div class="absolute top-2 left-2 z-10 bg-canvas rounded bg-opacity-70 shadow-sm p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">check_box_outline_blank</span>
+</div>
+<div class="absolute top-2 right-2 z-10 bg-success text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">check_circle</span> Approved
+                            </div>
+<div class="aspect-[4/3] bg-surface-container-low relative overflow-hidden">
+<img alt="Iced Cola" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A refreshing, condensation-covered tall glass of iced cola with a wedge of lemon and a striped straw. The background is a clean, minimal light grey. The lighting emphasizes the effervescence of the drink and the ice cubes. Professional commercial beverage photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnVYfpDQYq4XXloghGoJInUgNOzyk84IWI6DXYJcTg_-4bPIVVaaMkkf0hvK85HkOxBjCZwtVfzcgi6QFv7I6RZEjZOhdDCC8rDAvZDp6Z6d70cUbKS_pecNk8BZrddaDrKl8VLAjGFeKTvfikm01Vtcd7ZFYzu321LErzCILWLT590rVfejT-ClP1rFEZ9bjkeSOjnVOcx0Bk8nUF1kPbQzdinAe99F8r_GXUrvA_7yXimLeVFUyNfo1R1lM9QyRBCvus1y688Ts"/>
+</div>
+<div class="p-3 border-t border-border flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-body-bold text-small text-text-primary truncate">iced-cola-tall.jpg</h4>
+<p class="text-[12px] text-text-secondary mt-0.5">Beverages Category</p>
+</div>
+<div class="flex items-center justify-between mt-3 text-[11px] text-text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">link</span> Used in 2 places</span>
+<span>2.1 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Simplified) -->
+<div class="mt-8 flex justify-center items-center gap-2">
+<button class="p-1 text-text-secondary hover:text-text-primary disabled:opacity-50" disabled=""><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary font-small font-bold flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container-low text-text-secondary font-small flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container-low text-text-secondary font-small flex items-center justify-center transition-colors">3</button>
+<span class="text-text-secondary">...</span>
+<button class="p-1 text-text-secondary hover:text-text-primary"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</section>
+<!-- 3. Right Rail: Detail Panel -->
+<aside class="w-[340px] bg-canvas border-l border-border flex flex-col overflow-y-auto shrink-0 shadow-[-4px_0_15px_-5px_rgba(0,0,0,0.05)] relative z-10">
+<!-- Panel Header -->
+<div class="px-md py-4 border-b border-border flex items-start justify-between sticky top-0 bg-canvas/95 backdrop-blur-sm z-20">
+<div class="pr-4">
+<h3 class="font-body-bold text-body-bold text-text-primary break-all leading-tight">margherita-main.webp</h3>
+<p class="text-small text-success flex items-center gap-1 mt-1 font-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span> Approved (Public)
+                        </p>
+</div>
+<button class="text-text-secondary hover:text-text-primary bg-surface-container-low p-1.5 rounded-full transition-colors shrink-0">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-md flex flex-col gap-6">
+<!-- Image Preview -->
+<div class="w-full bg-surface-container border border-border rounded-lg overflow-hidden relative group">
+<div class="aspect-[4/3] relative">
+<img alt="Preview Margherita Main" class="w-full h-full object-cover" data-alt="A striking, high-resolution food photography shot of a classic Margherita pizza on a rustic wooden board. The lighting is studio-quality, bright and even, highlighting the melted mozzarella cheese, fresh green basil leaves, and blistered crust. The composition is a top-down flat lay, intended to look extremely appetizing and professional for a restaurant menu." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRVPhka7VRQYRssWN0KFR_edXzSChl8UBdaiTZgowhBT_GFS04o3xxNnBCPsUkcoLbB5DtSPrDmmOPAYJI3_oLVuIhtFCe2JR5hkgte884-spWjkAMy87MGp7rWJqkvdJ3m6QzZl40TgS1tgbgvqxXa3OUHvwoSjGABIWgaCwlFF0lc-TUT1Z8emdhk99xC-PTU3h657Iaw-_OArUgmZ3qWy1OYk30qOCx11SbcEWODHOIfhuHdXT2VRVJChkd4Q959-i9zE-0loA"/>
+<!-- Crop/Focus Marker Simulation -->
+<div class="absolute inset-0 border-[rgba(255,255,255,0.4)] border border-dashed m-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 border-2 border-white rounded-full flex items-center justify-center shadow-lg">
+<span class="w-1 h-1 bg-white rounded-full"></span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low px-3 py-2 flex justify-between items-center text-[11px] font-body text-text-secondary border-t border-border">
+<span>1600 × 1200 px</span>
+<div class="flex gap-2">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">crop</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">open_in_full</span></button>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container-highest hover:bg-surface-variant text-text-primary font-button text-small py-2 rounded-lg transition-colors border border-border">Replace</button>
+<button class="flex-1 bg-surface-container-highest hover:bg-surface-variant text-text-primary font-button text-small py-2 rounded-lg transition-colors border border-border">Download</button>
+</div>
+<!-- Metadata Accordion -->
+<div class="border border-border rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low text-text-primary font-body-bold text-small hover:bg-surface-variant transition-colors">
+                            Metadata
+                            <span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+<div class="px-4 py-3 bg-canvas flex flex-col gap-3 text-small">
+<div class="flex justify-between">
+<span class="text-text-secondary">Asset ID</span>
+<span class="font-mono text-text-primary">AST-00482</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">File Type</span>
+<span class="text-text-primary">image/webp</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">File Size</span>
+<span class="text-text-primary">3.2 MB</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">Uploaded</span>
+<span class="text-text-primary text-right">Oct 24, 2023<br/><span class="text-[11px] text-text-secondary">by Admin User</span></span>
+</div>
+</div>
+</div>
+<!-- Usage Accordion -->
+<div class="border border-border rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low text-text-primary font-body-bold text-small hover:bg-surface-variant transition-colors">
+                            Usage (3)
+                            <span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+<div class="px-4 py-3 bg-canvas flex flex-col gap-2">
+<a class="flex items-start gap-2 p-2 rounded hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary mt-0.5 group-hover:text-primary">restaurant_menu</span>
+<div>
+<p class="font-body-bold text-[13px] text-text-primary">Margherita Pizza</p>
+<p class="text-[11px] text-text-secondary">Menu Product (Published)</p>
+</div>
+</a>
+<a class="flex items-start gap-2 p-2 rounded hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary mt-0.5 group-hover:text-primary">star</span>
+<div>
+<p class="font-body-bold text-[13px] text-text-primary">Hero Banner - Homepage</p>
+<p class="text-[11px] text-text-secondary">UI Component</p>
+</div>
+</a>
+<a class="flex items-start gap-2 p-2 rounded hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary mt-0.5 group-hover:text-primary">local_offer</span>
+<div>
+<p class="font-body-bold text-[13px] text-text-primary">Lunch Special Promo</p>
+<p class="text-[11px] text-text-secondary">Marketing Campaign</p>
+</div>
+</a>
+</div>
+</div>
+<!-- Accessibility Accordion -->
+<div class="border border-border rounded-lg overflow-hidden border-primary/20 shadow-[0_0_10px_rgba(181,29,0,0.05)]">
+<button class="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low text-text-primary font-body-bold text-small hover:bg-surface-variant transition-colors">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-primary">accessibility_new</span> Accessibility</span>
+<span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+<div class="px-4 py-4 bg-canvas flex flex-col gap-4">
+<!-- Alt Text EN -->
+<div class="flex flex-col gap-1.5">
+<label class="text-[12px] font-body-bold text-text-primary flex justify-between">
+                                    Alt Text (English) <span class="text-success material-symbols-outlined text-[14px]">check</span>
+</label>
+<textarea class="w-full text-small p-2 border border-border rounded-md bg-surface focus:ring-1 focus:ring-primary focus:border-primary resize-none" rows="2">A fresh, hot Margherita pizza with melted mozzarella and basil leaves on a wooden board.</textarea>
+</div>
+<!-- Alt Text TR -->
+<div class="flex flex-col gap-1.5">
+<label class="text-[12px] font-body-bold text-text-primary flex justify-between">
+                                    Alt Text (Turkish) <span class="text-tertiary-container material-symbols-outlined text-[14px]">warning</span>
+</label>
+<textarea class="w-full text-small p-2 border border-tertiary-fixed-dim rounded-md bg-surface focus:ring-1 focus:ring-primary focus:border-primary resize-none" placeholder="Requires translation..." rows="2"></textarea>
+<span class="text-[10px] text-tertiary-container">Translation required for Turkish locale.</span>
+</div>
+<button class="text-primary text-[12px] font-bold text-left hover:underline">Generate with AI</button>
+</div>
+</div>
+<!-- Rights & Origin -->
+<div class="border border-border rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low text-text-primary font-body-bold text-small hover:bg-surface-variant transition-colors">
+                            Rights &amp; Origin
+                            <span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+<div class="px-4 py-3 bg-canvas flex flex-col gap-3 text-small">
+<div class="flex justify-between">
+<span class="text-text-secondary">Source</span>
+<span class="text-text-primary font-body-bold">Restaurant Supplied</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-secondary">License</span>
+<span class="text-text-primary">Commercial Use</span>
+</div>
+</div>
+</div>
+<!-- Destructive Action -->
+<div class="pt-4 border-t border-border mt-2">
+<button class="w-full py-2 flex items-center justify-center gap-2 text-danger hover:bg-error-container/50 font-button text-small rounded-lg transition-colors border border-transparent hover:border-danger/20">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                            Move to Archive
+                        </button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Campaign Editor - Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#eff1f3",
+                        "danger": "#DC2626",
+                        "surface-warm": "#FFF1EB",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "canvas": "#FFFFFF",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#e5beb6",
+                        "background": "#f7f9fb",
+                        "success": "#16A34A",
+                        "primary-dark": "#C9341A",
+                        "text-secondary": "#667085",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed": "#3e0400",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#5c6274",
+                        "outline": "#906f69",
+                        "text-primary": "#111827",
+                        "surface": "#f7f9fb",
+                        "secondary": "#575e70",
+                        "tertiary": "#765700",
+                        "inverse-surface": "#2d3133",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdad3",
+                        "on-background": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface-tint": "#b91e00",
+                        "tertiary-container": "#946f00",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-surface-variant": "#5c403a",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "secondary-fixed": "#dce2f7",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d9dff5",
+                        "primary-container": "#db3516",
+                        "primary": "#b51d00",
+                        "on-secondary-fixed": "#141b2b",
+                        "border": "#E5E7EB",
+                        "inverse-primary": "#ffb4a5",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "mobile-shell-max-width": "640px",
+                        "xl": "32px",
+                        "sm": "12px",
+                        "xxl": "48px",
+                        "margin-mobile": "20px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "container-max-width": "1280px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "h3": ["Manrope"],
+                        "button": ["Inter"],
+                        "small": ["Inter"],
+                        "body": ["Inter"],
+                        "h2": ["Manrope"],
+                        "h1-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", {"lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display": ["38px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-bold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "h3": ["19px", {"lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700"}],
+                        "button": ["15px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "h1-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-inverse-surface dark:bg-inverse-surface text-primary dark:text-primary-fixed font-body text-body font-h2 text-h2 text-on-primary fixed left-0 top-0 h-full w-[240px] border-r border-outline-variant flat no shadows flex flex-col h-screen py-md z-50">
+<div class="px-md mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold">R</div>
+<div>
+<h1 class="font-h3 text-h3 text-on-primary m-0">Admin Panel</h1>
+<p class="font-small text-small text-on-secondary-container m-0">Restaurant OS</p>
+</div>
+</div>
+<ul class="flex-1 flex flex-col gap-xs px-sm">
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-secondary-container hover:text-inverse-on-surface hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-button text-button">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-secondary-container hover:text-inverse-on-surface hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-button text-button">Menu Management</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary-fixed border-l-4 border-primary bg-on-secondary-fixed-variant hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-button text-button">Campaigns</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-secondary-container hover:text-inverse-on-surface hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-button text-button">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-secondary-container hover:text-inverse-on-surface hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-button text-button">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-secondary-container hover:text-inverse-on-surface hover:bg-secondary-container transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-button text-button">Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-sm mt-auto">
+<button class="w-full bg-primary text-white py-sm rounded-lg font-button text-button hover:bg-primary-dark transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined">add</span>
+                New Campaign
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[240px] flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim text-primary dark:text-primary-fixed-dim font-h3 text-h3 font-h2 text-h2 font-black text-primary sticky top-0 w-full border-b border-border shadow-sm flex justify-between items-center px-lg h-16 ml-[240px] w-[calc(100%-240px)] z-40" style="margin-left: 0; width: 100%;">
+<div class="flex items-center gap-md">
+<h2 class="font-h3 text-h3 text-text-primary m-0">Campaign Editor</h2>
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-surface text-small focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex gap-sm">
+<button class="text-text-secondary hover:text-primary transition-all"><span class="material-symbols-outlined">upload_file</span></button>
+<button class="text-text-secondary hover:text-primary transition-all"><span class="material-symbols-outlined">add_box</span></button>
+</div>
+<div class="flex items-center gap-sm border-l border-border pl-md ml-xs">
+<button class="text-text-secondary hover:text-primary transition-all active:opacity-80"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-text-secondary hover:text-primary transition-all active:opacity-80"><span class="material-symbols-outlined">help_outline</span></button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border overflow-hidden ml-xs cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Admin User Profile photo, professional headshot in a modern office environment, soft natural lighting, high resolution, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaCi39tcYK4UCD1jX5yaMyChrLsdmywUcIBH10diUCP06PJ-KTR8qjqEQVOZpLdMeyKZJ6syFXqQOahp_B4qBuT2EU7d_Qn-yWPn-PIoQqaXfDZhcf4-K7etEqApjzq43tIjMbuPwd-VOOqJvi1Wl9qa26e8nKDWyyL3GZOrPtOPx2dPagLliGqy6t02LyEtZVeRg7wGDl_OYyEaU02I56GRS7gogOGGdLLKcVUiMYMUVbwk-8kSQn-S_ylk0G5-ILoB-d4mienH0"/>
+</div>
+<button class="bg-primary text-white px-md py-2 rounded-lg font-button text-button hover:bg-primary-dark transition-colors ml-sm">Publish</button>
+</div>
+</div>
+</header>
+<!-- Context Header -->
+<div class="bg-canvas border-b border-border px-lg py-sm flex flex-col sm:flex-row sm:items-center justify-between gap-sm flex-shrink-0">
+<div class="flex flex-col">
+<div class="flex items-center gap-xs text-small text-text-secondary">
+<span class="font-body-bold text-text-primary">Pizza House</span>
+<span>(RST-00024)</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Campaign CMP-00018</span>
+</div>
+<div class="flex items-center gap-sm mt-xs">
+<h1 class="font-h2 text-h2 text-text-primary m-0">Scan &amp; Win</h1>
+<span class="px-2 py-1 bg-[#EFF6FF] text-[#1D4ED8] rounded text-xs font-semibold uppercase tracking-wider border border-[#BFDBFE]">Draft Changes</span>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="px-sm py-2 text-text-secondary hover:text-text-primary font-button text-small transition-colors">Cancel</button>
+<button class="px-sm py-2 text-text-secondary hover:text-text-primary font-button text-small transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">visibility</span> Preview</button>
+<button class="px-sm py-2 text-text-secondary hover:text-text-primary font-button text-small transition-colors">Validate</button>
+<button class="bg-primary text-white px-md py-2 rounded-lg font-button text-button hover:bg-primary-dark transition-colors ml-xs">Save</button>
+</div>
+</div>
+<!-- Scrollable Workspace -->
+<div class="flex-1 overflow-y-auto flex">
+<!-- Left Editor Column -->
+<div class="flex-1 p-lg flex flex-col gap-lg max-w-4xl mx-auto">
+<!-- Campaign Type -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<h3 class="font-h3 text-h3 text-text-primary mb-md flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">category</span> Campaign Type</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+<div class="border-2 border-primary bg-surface-warm rounded-lg p-sm cursor-pointer flex flex-col items-center text-center gap-xs">
+<span class="material-symbols-outlined text-primary text-xl">qr_code_scanner</span>
+<span class="font-body-bold text-primary">Scan and Win</span>
+</div>
+<div class="border border-border bg-surface rounded-lg p-sm cursor-pointer hover:border-text-secondary transition-colors flex flex-col items-center text-center gap-xs opacity-60">
+<span class="material-symbols-outlined text-text-secondary text-xl">diamond</span>
+<span class="font-body-bold text-text-secondary">Discount Code</span>
+</div>
+<div class="border border-border bg-surface rounded-lg p-sm cursor-pointer hover:border-text-secondary transition-colors flex flex-col items-center text-center gap-xs opacity-60">
+<span class="material-symbols-outlined text-text-secondary text-xl">loyalty</span>
+<span class="font-body-bold text-text-secondary">Loyalty Points</span>
+</div>
+</div>
+</section>
+<!-- Identity -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<h3 class="font-h3 text-h3 text-text-primary mb-md flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">badge</span> Identity</h3>
+<div class="flex flex-col gap-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Campaign Title</label>
+<input class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" type="text" value="Scan &amp; Win"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Public Summary</label>
+<input class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" type="text" value="Scan the QR code on your receipt to win a free Fresh Lemonade!"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Full Description</label>
+<textarea class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" rows="3">Join our summer celebration! Every purchase comes with a chance to win. Simply scan the QR code printed at the bottom of your receipt using your mobile phone.</textarea>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">URL Slug</label>
+<div class="flex items-center">
+<span class="bg-surface border border-r-0 border-border rounded-l-lg px-sm py-2 text-text-secondary text-body font-mono text-sm">/campaigns/</span>
+<input class="flex-1 border border-border rounded-r-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body font-mono text-sm" type="text" value="scan-and-win"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Languages -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3 text-text-primary flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">translate</span> Languages</h3>
+<button class="text-primary font-button text-small flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-[16px]">add</span> Add Language</button>
+</div>
+<div class="flex border-b border-border mb-md">
+<button class="px-md py-sm font-button text-small text-text-secondary hover:text-text-primary border-b-2 border-transparent focus:outline-none flex items-center gap-xs">
+                            Turkish <span class="w-2 h-2 rounded-full bg-success inline-block"></span>
+</button>
+<button class="px-md py-sm font-button text-small text-primary border-b-2 border-primary focus:outline-none flex items-center gap-xs">
+                            English <span class="w-2 h-2 rounded-full bg-[#3B82F6] inline-block"></span>
+</button>
+<button class="px-md py-sm font-button text-small text-text-secondary hover:text-text-primary border-b-2 border-transparent focus:outline-none flex items-center gap-xs">
+                            Arabic <span class="w-2 h-2 rounded-full bg-danger inline-block"></span>
+</button>
+</div>
+<p class="text-small text-text-secondary mb-sm">English content is currently <span class="text-[#3B82F6] font-semibold">In Review</span>.</p>
+</section>
+<!-- Participation Period -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<h3 class="font-h3 text-h3 text-text-primary mb-md flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">calendar_month</span> Participation Period</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Start Date</label>
+<input class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" type="date" value="2026-06-10"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">End Date</label>
+<input class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" type="date" value="2026-06-30"/>
+</div>
+</div>
+<div class="mt-sm">
+<label class="block font-body-bold text-small text-text-primary mb-xs">Timezone</label>
+<select class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body bg-white">
+<option>Europe/Istanbul (UTC+3)</option>
+<option>Europe/London (UTC+1)</option>
+</select>
+</div>
+</section>
+<!-- Reward -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<h3 class="font-h3 text-h3 text-text-primary mb-md flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">redeem</span> Reward</h3>
+<div class="border border-border rounded-lg p-sm flex items-center justify-between bg-surface">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 bg-surface-container-highest rounded-md overflow-hidden border border-border">
+<img class="w-full h-full object-cover" data-alt="A cold, refreshing glass of Fresh Lemonade with ice cubes and lemon slices, condensation on the glass, modern fast food photography style, bright and appetizing lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVWeZB2e0J93C4vsfzxuwFkgo9TsLftX3hGFmtOfbU240QZDiE-pIuAW7pQwfkuvkhjSuaxq44NuhnE37eHG84FpkCuRMljApTUmLJ39vsS4yFfJekNHlTfzW4wdNgBT3j8XSisgAHiPF1SrAw2luts4OSGAuddXi-lZ1VsWFwEG8av7cEUO6Yv0jayW0NEvf5YhqnLsYS_1f9lo58TGdoVBXEFoKpgtszpANlKcrbM8ZTgjjxGUEeCHtF9w9PZbd59-bgZTUuZdQ"/>
+</div>
+<div>
+<h4 class="font-body-bold text-text-primary m-0">Fresh Lemonade</h4>
+<p class="text-small text-text-secondary m-0">Menu Product • Available</p>
+<p class="text-xs text-text-secondary font-mono mt-1">Linked: margherita-lemonade-combo</p>
+</div>
+</div>
+<button class="text-primary font-button text-small hover:underline">Change</button>
+</div>
+</section>
+<!-- Eligibility & Terms -->
+<section class="bg-canvas border border-border rounded-xl p-md">
+<h3 class="font-h3 text-h3 text-text-primary mb-md flex items-center gap-xs"><span class="material-symbols-outlined text-text-secondary">rule</span> Eligibility &amp; Terms</h3>
+<div class="flex flex-col gap-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Minimum Age</label>
+<input class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body" type="number" value="18"/>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Entry Limit</label>
+<select class="w-full border border-border rounded-lg px-sm py-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body bg-white">
+<option>1 entry per verified contact</option>
+<option>Unlimited entries</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-body-bold text-small text-text-primary mb-xs">Terms &amp; Conditions</label>
+<div class="border border-border rounded-lg overflow-hidden">
+<div class="bg-surface border-b border-border px-sm py-2 flex gap-2">
+<button class="p-1 hover:bg-surface-container-high rounded text-text-secondary"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-1 hover:bg-surface-container-high rounded text-text-secondary"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-1 hover:bg-surface-container-high rounded text-text-secondary"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+</div>
+<textarea class="w-full border-none px-sm py-2 focus:ring-0 outline-none text-body resize-none" rows="4">1. Participation is limited to 1 per person.
+2. Excludes delivery orders.
+3. Privacy policy applies regarding contact info.</textarea>
+</div>
+</div>
+</div>
+</section>
+<div class="h-12"></div> <!-- Bottom padding -->
+</div>
+<!-- Right Sidebar Column -->
+<div class="w-80 bg-surface border-l border-border flex flex-col flex-shrink-0">
+<div class="p-md border-b border-border bg-canvas sticky top-0 z-10">
+<h3 class="font-h3 text-h3 text-text-primary m-0 mb-sm">Campaign Readiness</h3>
+<div class="w-full bg-surface-container-high rounded-full h-2 mb-2">
+<div class="bg-success h-2 rounded-full" style="width: 76%"></div>
+</div>
+<p class="text-small text-text-secondary text-right">19 of 25 items complete</p>
+</div>
+<div class="p-md flex-1 overflow-y-auto flex flex-col gap-lg">
+<!-- Live Mobile Preview -->
+<div>
+<h4 class="font-body-bold text-small text-text-primary mb-sm uppercase tracking-wider text-xs">Live Preview</h4>
+<div class="border-[4px] border-[#1F2937] rounded-[2rem] w-[280px] h-[580px] mx-auto bg-canvas overflow-hidden relative shadow-lg">
+<!-- Mobile Notch -->
+<div class="absolute top-0 inset-x-0 h-6 bg-[#1F2937] rounded-b-xl w-32 mx-auto z-20"></div>
+<!-- Mobile App Content -->
+<div class="h-full flex flex-col overflow-y-auto pb-4">
+<!-- Mobile Header -->
+<div class="bg-surface-container-lowest pt-8 pb-3 px-4 border-b border-border sticky top-0 z-10 text-center">
+<h2 class="font-h2 text-[18px] text-text-primary m-0">Pizza House</h2>
+</div>
+<!-- Hero Image -->
+<div class="w-full h-48 bg-surface-container-highest relative">
+<img class="w-full h-full object-cover" data-alt="A close up, highly appetizing shot of Fresh Lemonade in a tall glass, bright summer lighting, set against a blurred clean restaurant background, vibrant yellow and green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCP_hV_rYdwZHmEtv3pSIx4ztxI3HiBnTJzZw8n0mpgqZ2NvE_QEZquIIdsvymSSvUdd2KdUWHVzojiTf-H8Qa86UUdM1fLpfhhhBq-8SL3_X55U9mRtZbGaZzjlP5mmKDoEiM1L9Hei7VWdmlscWGSmTdk0AhD6J4OD1RZ-lAkl8vjPPPP2-DyuQvQXXHg48vCSm3thj53SfJQZPPsKxqhx5h_7xED4Eesk961RoDMea_aZ1Q1dP_CUoNX9Re4h9HHQl69nx2Pfc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+<h1 class="font-h1 text-[24px] text-white m-0 leading-tight">Scan &amp; Win</h1>
+</div>
+</div>
+<!-- Mobile Body -->
+<div class="p-4 flex flex-col gap-4">
+<p class="font-body text-[14px] text-text-secondary m-0">Scan the QR code on your receipt to win a free Fresh Lemonade!</p>
+<div class="bg-surface rounded-lg p-3 border border-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">redeem</span>
+<div>
+<div class="font-body-bold text-[14px] text-text-primary">Reward</div>
+<div class="text-[12px] text-text-secondary">Fresh Lemonade</div>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-3 border border-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary">calendar_today</span>
+<div>
+<div class="font-body-bold text-[14px] text-text-primary">Valid</div>
+<div class="text-[12px] text-text-secondary">10 - 30 June 2026</div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-button text-[16px] hover:bg-primary-dark transition-colors mt-2">Participate</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Summary -->
+<div>
+<h4 class="font-body-bold text-small text-text-primary mb-sm uppercase tracking-wider text-xs">Timeline</h4>
+<div class="relative pl-4 border-l-2 border-border ml-2 flex flex-col gap-4 py-2">
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-success ring-4 ring-surface"></div>
+<p class="font-body-bold text-small text-text-primary m-0">Draft</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-success ring-4 ring-surface"></div>
+<p class="font-body-bold text-small text-text-primary m-0">Review</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-[#10B981] ring-4 ring-surface flex items-center justify-center border-2 border-white"><span class="w-1.5 h-1.5 bg-white rounded-full"></span></div>
+<p class="font-body-bold text-small text-[#10B981] m-0">Approved (Current)</p>
+</div>
+<div class="relative opacity-50">
+<div class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-surface-variant ring-4 ring-surface"></div>
+<p class="font-body-bold text-small text-text-secondary m-0">Scheduled</p>
+</div>
+<div class="relative opacity-50">
+<div class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-surface-variant ring-4 ring-surface"></div>
+<p class="font-body-bold text-small text-text-secondary m-0">Active</p>
+</div>
+</div>
+</div>
+<!-- Reward Summary Mini -->
+<div class="bg-canvas border border-border rounded-lg p-sm">
+<h4 class="font-body-bold text-small text-text-primary mb-xs uppercase tracking-wider text-xs">Reward Summary</h4>
+<p class="font-body-bold text-small text-text-primary m-0">Fresh Lemonade</p>
+<p class="text-xs text-text-secondary m-0">Menu Product • <span class="text-success font-medium">Available</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

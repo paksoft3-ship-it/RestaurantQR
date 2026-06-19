@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Features - YourPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#575e70",
+                        "outline-variant": "#e5beb6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-warm": "#FFF1EB",
+                        "primary-dark": "#C9341A",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "surface-dim": "#d8dadc",
+                        "danger": "#DC2626",
+                        "tertiary": "#765700",
+                        "outline": "#906f69",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#f7be2b",
+                        "inverse-primary": "#ffb4a5",
+                        "secondary-container": "#d9dff5",
+                        "on-tertiary-fixed": "#261a00",
+                        "canvas": "#FFFFFF",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#404758",
+                        "primary-fixed": "#ffdad3",
+                        "primary-container": "#db3516",
+                        "surface": "#f7f9fb",
+                        "text-primary": "#111827",
+                        "surface-container-high": "#e6e8ea",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#fffbff",
+                        "primary": "#b51d00",
+                        "secondary-fixed": "#dce2f7",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#8e1500",
+                        "error": "#ba1a1a",
+                        "border": "#E5E7EB",
+                        "on-primary-fixed": "#3e0400",
+                        "on-secondary-fixed": "#141b2b",
+                        "surface-tint": "#b91e00",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-container": "#946f00",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#5c403a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "success": "#16A34A",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-secondary-container": "#5c6274",
+                        "on-background": "#191c1e",
+                        "text-secondary": "#667085",
+                        "surface-container": "#eceef0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "mobile-shell-max-width": "640px",
+                        "xxl": "48px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "container-max-width": "1280px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Manrope"],
+                        "body-bold": ["Inter"],
+                        "h1": ["Manrope"],
+                        "body": ["Inter"],
+                        "h2": ["Manrope"],
+                        "display": ["Manrope"],
+                        "small": ["Inter"],
+                        "button": ["Inter"],
+                        "h1-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h3": ["19px", { "lineHeight": "25px", "letterSpacing": "0em", "fontWeight": "700" }],
+                        "body-bold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1": ["30px", { "lineHeight": "35px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display": ["38px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "small": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "h1-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body antialiased selection:bg-primary/20">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-canvas/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-border dark:border-outline-variant shadow-sm transition-all duration-300">
+<div class="flex items-center justify-between px-md py-xs max-w-container-max-width mx-auto">
+<!-- Brand -->
+<a class="flex items-center gap-2 group" href="#">
+<img alt="YourPlatform Logo" class="w-8 h-8 rounded" data-alt="A bold, modern red and yellow square logo with a stylized smiling face and grid pattern, representing a tech-forward restaurant platform." src="https://lh3.googleusercontent.com/aida/AP1WRLv8571dM2V-yWqp8ltl7ckdx8RrKpXGNZJphD3shBOlDaYC-T9erfxMHsTRdcFQjf3Dr8UfAuS_DYu6eusoGOetltwu1-zRfs3VVmedJXIini-ELBVLvcOr16JSjQxgMWtKysWATMqX0zZ1mkpsE4jc78S68IZx-rIQFYZ3afQp_Kkiz7ZWpRXR7zSp8vI0MgsO-qhoAeX5FaZdtBBetJYHzqhLxd2_n3fgWcSFrjyN8a_LQhIiMvMoc_o"/>
+<span class="font-h2 text-h2 font-black text-text-primary dark:text-inverse-on-surface tracking-tight group-hover:text-primary transition-colors">YourPlatform</span>
+</a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-button text-button text-text-secondary dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">How It Works</a>
+<a class="font-button text-button text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary py-4 -mb-[18px]" href="#">Features</a>
+<a class="font-button text-button text-text-secondary dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">Products</a>
+<a class="font-button text-button text-text-secondary dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">Examples</a>
+<a class="font-button text-button text-text-secondary dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">Packages</a>
+<a class="font-button text-button text-text-secondary dark:text-surface-variant hover:text-primary transition-colors duration-200" href="#">FAQ</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<a class="hidden lg:flex font-button text-button text-text-primary hover:text-primary transition-colors px-sm py-xs" href="#">View Demo</a>
+<a class="font-button text-button bg-primary text-white px-md py-xs rounded-xl hover:bg-primary-dark transition-colors shadow-sm active:scale-95 flex items-center gap-2" href="#">
+                    Request a Quote
+                </a>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-xxl">
+<!-- Hero Section -->
+<section class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg py-xl md:py-xxl grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+<div class="lg:col-span-5 space-y-lg">
+<div class="inline-flex items-center gap-2 px-sm py-base rounded-full bg-surface-container-high border border-border text-small font-body-bold text-text-secondary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Fully Managed Service
+                </div>
+<h1 class="font-display text-display text-text-primary">
+                    Everything Your Restaurant Needs for a Better <span class="text-primary relative inline-block">QR and NFC <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary/20" preserveaspectratio="none" viewbox="0 0 100 10"><path d="M0 5 Q 50 10 100 5" fill="transparent" stroke="currentColor" stroke-width="4"></path></svg></span> Experience.
+                </h1>
+<p class="font-body text-body text-text-secondary text-lg">
+                    We handle the menu updates, link management, and hardware programming. You just focus on serving great food. A complete, done-for-you digital dining suite.
+                </p>
+<div class="flex flex-wrap gap-sm pt-xs">
+<button class="bg-primary text-white font-button text-button px-lg py-sm rounded-xl hover:bg-primary-dark transition-colors shadow-sm flex items-center gap-2">
+                        Get Started <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<button class="bg-canvas border-2 border-border text-text-primary font-button text-button px-lg py-sm rounded-xl hover:border-primary/30 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">play_circle</span> Watch Overview
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-7 relative h-[500px] md:h-[600px] w-full mt-xl lg:mt-0 perspective-1000">
+<!-- Layered Device Mockups -->
+<div class="absolute right-0 md:right-12 top-0 w-[240px] md:w-[280px] z-30 transform hover:-translate-y-4 transition-transform duration-500 rounded-[24px] shadow-2xl border-4 border-inverse-surface bg-inverse-surface overflow-hidden">
+<div class="w-full h-8 bg-inverse-surface flex justify-center items-center rounded-t-[20px]"><div class="w-16 h-4 bg-black rounded-full"></div></div>
+<img alt="Restaurant Landing Page" class="w-full h-auto object-cover" data-alt="Mobile interface showing a modern restaurant landing page with four prominent action buttons: Call Order, Pick Your Meal, Online Order, and Visit Us, in a bright red and white theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxGiU14P_qTPy-bbl2RG4St0BzcermvKzs-4qO9eCsWxEsiLmRE-XFMVl77G2imODyPUJzhTASEA_Kmo2kka65jTDLI84KLLugi4uXmE1DT4YNSXuafpjgLjjrTsEXcGbhkLbf4abnzIuEwLXFQOiBwsyqdAhBuJGCF7fLLR25dueGlXu_ApuzqWn2JjL558CKPjlm8TBhNJDAtTo4_LAzivJUXGpM_ioQDSwFcbul_VY2kkJ_b7crc7atjzAJO9vcbOcIOkVG7pk"/>
+</div>
+<div class="absolute left-0 md:left-24 top-24 w-[240px] md:w-[280px] z-20 transform hover:-translate-y-4 transition-transform duration-500 rounded-[24px] shadow-xl border-4 border-inverse-surface bg-inverse-surface overflow-hidden opacity-90 scale-95">
+<div class="w-full h-8 bg-inverse-surface flex justify-center items-center rounded-t-[20px]"><div class="w-16 h-4 bg-black rounded-full"></div></div>
+<img alt="Digital Menu" class="w-full h-auto object-cover" data-alt="Mobile interface displaying a digital food menu with large appealing photos of dishes, categorized tabs, and clear pricing in a clean, modern layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2VSfqfy-5hegBUEPahIzSwzmErAPd9Cg1STiF3Fk-460CDJzOYOpfZjn2tyCHZM51yNl7qk74Fi-ZLBfGf7unt8X0YEbZLs6rBYCzK2KqZ9FeSWJshx3Gb8ueNrAl_yPH-BIjD927zihSjrn4J3FDawIbhDq3F69YG3yqqaloyov0vJ3_E3zbSnlVE6tk-iMWwf-EcV87VfHL2eT2coTC_IDjdpXzudwwHTN2roKZ2Vs-HFMleLvJWYIUL3DpDCKHL_bcbR2q4PY"/>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-radial from-primary/10 to-transparent rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Feature Category Navigation (Sticky) -->
+<div class="sticky top-[72px] z-40 bg-canvas/90 backdrop-blur-md border-b border-border py-sm px-margin-mobile md:px-lg mb-xl">
+<div class="max-w-container-max-width mx-auto flex overflow-x-auto hide-scrollbar gap-sm snap-x">
+<button class="snap-start shrink-0 px-md py-xs rounded-full bg-primary text-white font-button text-button shadow-sm">Customer Experience</button>
+<button class="snap-start shrink-0 px-md py-xs rounded-full bg-surface-container-low text-text-secondary hover:bg-surface-container-high transition-colors font-button text-button">Digital Menu</button>
+<button class="snap-start shrink-0 px-md py-xs rounded-full bg-surface-container-low text-text-secondary hover:bg-surface-container-high transition-colors font-button text-button">QR &amp; NFC Hardware</button>
+<button class="snap-start shrink-0 px-md py-xs rounded-full bg-surface-container-low text-text-secondary hover:bg-surface-container-high transition-colors font-button text-button">Managed Updates</button>
+<button class="snap-start shrink-0 px-md py-xs rounded-full bg-surface-container-low text-text-secondary hover:bg-surface-container-high transition-colors font-button text-button">Analytics</button>
+</div>
+</div>
+<!-- Detailed Features -->
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-lg space-y-xxl">
+<!-- Feature 1: Mobile Page -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div class="order-2 md:order-1 flex justify-center relative">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl transform scale-150"></div>
+<div class="w-[280px] rounded-[24px] shadow-2xl border-4 border-inverse-surface bg-inverse-surface overflow-hidden relative z-10">
+<div class="w-full h-8 bg-inverse-surface flex justify-center items-center rounded-t-[20px]"><div class="w-16 h-4 bg-black rounded-full"></div></div>
+<img alt="Branded Page" class="w-full h-auto" data-alt="A branded mobile restaurant page featuring a bold red header, a prominent 'Open' status indicator, and a clean grid of four primary actions for ordering and contact." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhwLyliNTH6UQfOWNJOpnIhtOwS-FFVzNnIdHLPoBB-zIjQ5j5hvKpOhjHJ1VISWPUa9Bvyx88f_GlTI4fxCPtpxbWTOZAAOnGz80dyn18yNNj4IjYuzggF61g5nNegCGIVcYY8yXjz0YuIdBmHxisyjbR6CCETYYJVZJ3QTQQ6-cOTbCD2Rb-SN4hze58sScPvSRbYScR79Ex0_X-YCACmyma2YRLm0UkBqhsk5YGjoeMrZvD7T3TWCZbtv_wYkdDA1W4kN4m4x4"/>
+</div>
+</div>
+<div class="order-1 md:order-2 space-y-md">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-sm">
+<span class="material-symbols-outlined" data-weight="fill">storefront</span>
+</div>
+<h2 class="font-h2 text-h2 text-text-primary">A Branded Mobile Page for Every Restaurant</h2>
+<p class="font-body text-body text-text-secondary">
+                        Your custom landing page acts as a digital concierge. Customers scan once and are immediately presented with your brand, current status, and clear actions. No hunting for links.
+                    </p>
+<ul class="space-y-sm pt-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-success mt-1">check_circle</span>
+<div>
+<strong class="font-body-bold text-text-primary block">Four Primary Actions Grid</strong>
+<span class="font-small text-small text-text-secondary">Optimized for thumb-reach, guiding users instantly to order, call, or view menus.</span>
+</div>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-success mt-1">check_circle</span>
+<div>
+<strong class="font-body-bold text-text-primary block">Live Status Indicators</strong>
+<span class="font-small text-small text-text-secondary">Automatically shows if you are Open, Closed, or Busy based on your schedule.</span>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<!-- Feature 2: Digital Menu -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center bg-surface-container-low -mx-margin-mobile md:-mx-lg px-margin-mobile md:px-lg py-xl rounded-2xl">
+<div class="space-y-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-text-primary mb-sm">
+<span class="material-symbols-outlined" data-weight="fill">restaurant_menu</span>
+</div>
+<h2 class="font-h2 text-h2 text-text-primary">Beautiful, Fast Digital Menus</h2>
+<p class="font-body text-body text-text-secondary">
+                        Ditch the PDF. We build a native mobile menu that loads instantly, looks appetizing, and makes finding dishes effortless.
+                    </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm pt-sm">
+<div class="bg-canvas p-sm rounded-xl border border-border shadow-sm">
+<span class="material-symbols-outlined text-primary mb-1">search</span>
+<h4 class="font-body-bold text-text-primary text-sm">Instant Search</h4>
+<p class="font-small text-small text-text-secondary mt-1">Find dishes instantly without scrolling.</p>
+</div>
+<div class="bg-canvas p-sm rounded-xl border border-border shadow-sm">
+<span class="material-symbols-outlined text-primary mb-1">category</span>
+<h4 class="font-body-bold text-text-primary text-sm">Smart Categories</h4>
+<p class="font-small text-small text-text-secondary mt-1">Smooth horizontal navigation pills.</p>
+</div>
+</div>
+</div>
+<div class="flex justify-center relative">
+<div class="w-[280px] rounded-[24px] shadow-xl border-4 border-inverse-surface bg-inverse-surface overflow-hidden relative z-10 transform rotate-2">
+<div class="w-full h-8 bg-inverse-surface flex justify-center items-center rounded-t-[20px]"><div class="w-16 h-4 bg-black rounded-full"></div></div>
+<img alt="Digital Menu List" class="w-full h-auto" data-alt="A clean, appetizing digital menu interface showing categorized food items with vibrant photography, clear pricing, and a smooth search bar at the top." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVjBww5su6ugMc-818-V3P6_h-WyJ0keWAvQXwBpj1FvbrrXOXFEYF8a15NtGw6fDeK0yIx_dvxSM2Oec8i9rQ12sxA2p3txlQDJM0T8JtcQIXyErP0zpvjruxxsvtmPYGdu8cP4jCJnrjF3e1FMCy_1rHNISaaO9InX9LHhq56HQcYgLeXgMsfvWjGrempZ2jNGLGTvuTfM4TXR_ausKU7mtdp1lRknC--BTy0bMo6Y1NFfT2sYK7gCPwNCFth3ThBB2hgtiE27A"/>
+</div>
+</div>
+</section>
+<!-- Feature 3: Managed Updates -->
+<section class="text-center max-w-3xl mx-auto space-y-lg">
+<span class="font-button text-button text-primary tracking-wider uppercase">The 'Managed' Difference</span>
+<h2 class="font-h1 text-h1 text-text-primary">You Change the Menu. We Change the App.</h2>
+<p class="font-body text-body text-text-secondary text-lg">
+                    Don't waste time logging into dashboards. Simply send us your updated menu, and our team updates your digital presence across all QR codes and links within 24 hours.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center items-center gap-md pt-md">
+<div class="bg-surface-container-high p-md rounded-xl w-full sm:w-48 text-left border border-border relative">
+<span class="material-symbols-outlined text-text-secondary mb-2">mail</span>
+<p class="font-body-bold text-text-primary text-sm">1. Send Update</p>
+<p class="font-small text-small text-text-secondary">Email us the PDF</p>
+<div class="hidden sm:block absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-canvas rounded-full border border-border flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="bg-primary/10 p-md rounded-xl w-full sm:w-48 text-left border border-primary/20 relative">
+<span class="material-symbols-outlined text-primary mb-2">engineering</span>
+<p class="font-body-bold text-primary text-sm">2. We Build It</p>
+<p class="font-small text-small text-text-secondary">Our team formats it</p>
+<div class="hidden sm:block absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-canvas rounded-full border border-border flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="bg-success/10 p-md rounded-xl w-full sm:w-48 text-left border border-success/20">
+<span class="material-symbols-outlined text-success mb-2">cloud_done</span>
+<p class="font-body-bold text-success text-sm">3. Live Everywhere</p>
+<p class="font-small text-small text-text-secondary">Instantly updated</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-xxl pb-xl bg-inverse-surface dark:bg-on-background">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-container-max-width mx-auto px-margin-mobile md:px-xl">
+<!-- Brand Column -->
+<div class="space-y-sm">
+<div class="flex items-center gap-2">
+<img alt="YourPlatform Logo" class="w-6 h-6 rounded grayscale brightness-200" data-alt="A bold, modern red and yellow square logo with a stylized smiling face and grid pattern, representing a tech-forward restaurant platform." src="https://lh3.googleusercontent.com/aida/AP1WRLv8571dM2V-yWqp8ltl7ckdx8RrKpXGNZJphD3shBOlDaYC-T9erfxMHsTRdcFQjf3Dr8UfAuS_DYu6eusoGOetltwu1-zRfs3VVmedJXIini-ELBVLvcOr16JSjQxgMWtKysWATMqX0zZ1mkpsE4jc78S68IZx-rIQFYZ3afQp_Kkiz7ZWpRXR7zSp8vI0MgsO-qhoAeX5FaZdtBBetJYHzqhLxd2_n3fgWcSFrjyN8a_LQhIiMvMoc_o"/>
+<span class="font-h3 text-h3 font-bold text-surface-container-lowest">YourPlatform</span>
+</div>
+<p class="font-small text-small text-surface-variant max-w-xs">
+                    The fully managed QR and digital experience platform for modern restaurants.
+                </p>
+</div>
+<!-- Links Column -->
+<div class="flex flex-col gap-sm md:col-span-2 md:flex-row md:justify-end md:gap-xl">
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Platform</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Company</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Contact</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Privacy</a>
+<a class="font-body text-body text-surface-variant hover:text-surface-bright hover:underline transition-all cursor-pointer" href="#">Terms</a>
+</div>
+<!-- Copyright -->
+<div class="md:col-span-3 border-t border-secondary mt-lg pt-lg text-center md:text-left">
+<p class="font-small text-small text-surface-variant">© 2024 YourPlatform. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>
