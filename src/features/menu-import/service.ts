@@ -9,6 +9,7 @@ import {
   STAGE_META,
   TERMINAL_STATUSES,
   type ImportConfig,
+  type ImportErrorCode,
   type ImportProcessingStatus,
   type ImportResult,
   type MenuImport,
@@ -179,6 +180,40 @@ export const menuImportService = {
 
   saveResult(importId: string, result: ImportResult): MenuImport | null {
     return this.patch(importId, { result });
+  },
+
+  /**
+   * Attach a real extraction result (from the OCR API) and move the import
+   * straight into review. Records the pipeline as completed in the event log so
+   * the detail page shows a finished run instead of the simulated animation.
+   */
+  ingestResult(importId: string, result: ImportResult, reviewedBy: string | null): MenuImport | null {
+    const rec = demoStore.menuImports.byId(importId);
+    if (!rec) return null;
+    const completed: ImportResult = { ...result, importId, restaurantId: rec.restaurantId };
+    this.appendEvent(importId, event("RUNNING_OCR", "RUNNING_OCR", 40, "Read pages with on-device OCR"));
+    this.appendEvent(importId, event("STRUCTURING_DATA", "STRUCTURING_DATA", 88, "Structured categories and products"));
+    return this.patch(importId, {
+      processingStatus: "REVIEW_REQUIRED",
+      reviewStatus: "IN_REVIEW",
+      reviewedBy,
+      progress: 100,
+      currentStage: "REVIEW_REQUIRED",
+      pageCount: completed.source.pageCount,
+      pdfType: completed.source.pdfType,
+      result: completed,
+    });
+  },
+
+  /** Mark an import as failed with a human-readable summary. */
+  markFailed(importId: string, errorCode: ImportErrorCode, summary: string): MenuImport | null {
+    this.appendEvent(importId, event("DONE", "FAILED", 0, summary));
+    return this.patch(importId, {
+      processingStatus: "FAILED",
+      currentStage: null,
+      errorCode,
+      errorSummary: summary,
+    });
   },
 
   resolveWarning(importId: string, warningId: string, resolvedBy: string | null): MenuImport | null {

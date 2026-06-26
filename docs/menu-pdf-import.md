@@ -4,12 +4,23 @@ Convert a restaurant menu PDF into structured, **reviewable** JSON and import th
 approved result into the restaurant's **draft** menu. The published menu is never
 touched until you separately publish.
 
-> **Demo reality.** This repository is a demo-architecture app (no real DB/queue/
-> object-storage/OCR). The feature is built against the project's interfaces: a
-> replaceable `MenuExtractionWorker` with a **deterministic in-app extractor** (no
-> real OCR), the demo store for persistence, and a real **Python worker scaffold**
-> (`services/menu-extraction-worker`) for production. Extraction is labelled
-> *simulated* in the UI; nothing is auto-imported.
+> **Extraction is real (on-device OCR).** Uploaded PDFs are rasterised with
+> Poppler's `pdftoppm` and read with **Tesseract** via the API route
+> `POST /api/menu-import/extract` (Node runtime). The route calls `ocrPdf()`
+> (`src/features/menu-import/worker/tesseract-runner.ts`) then the pure parser
+> `parseOcrToResult()` (`.../worker/ocr-parser.ts`) to produce a reviewable
+> `ImportResult`. Prices and structure recover well; **item names on dense scanned
+> menus are noisy and must be corrected during review.** Persistence is still the
+> demo store, and a real **Python worker scaffold**
+> (`services/menu-extraction-worker`) remains for a production queue/storage setup.
+> Nothing is auto-imported — human review and approval are mandatory.
+>
+> **Prerequisites:** `tesseract` and `pdftoppm` (poppler) must be on PATH —
+> `brew install tesseract poppler` (macOS) or the distro equivalent. If a tool is
+> missing the route returns `503 OCR_FAILED` with an actionable message and the
+> import is marked `FAILED` (re-upload to retry). The legacy deterministic
+> extractor (`buildDeterministicResult`) is retained but no longer on the upload
+> path.
 
 ## Workflow
 

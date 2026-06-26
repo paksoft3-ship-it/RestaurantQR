@@ -11,7 +11,7 @@ import { routes } from "@/lib/routes";
 import { appConfig } from "@/lib/config/app-config";
 import { formatDate, titleCase } from "@/lib/utils";
 import type { Restaurant } from "@/domain/entities";
-import type { MenuImport, ImportConfig } from "@/domain/menu-import";
+import type { MenuImport, ImportConfig, ImportResult, ImportErrorCode } from "@/domain/menu-import";
 import {
   importConfigSchema,
   EXTRACTION_MODES,
@@ -139,27 +139,59 @@ export default function MenuImportLandingPage() {
     if (file) validateFile(file);
   };
 
-  const onSubmit = (config: ImportConfig) => {
+  const onSubmit = async (config: ImportConfig) => {
     if (!validated) {
       setFileError("Choose a PDF file before starting the import.");
       return;
     }
     setSubmitting(true);
+
+    const created = menuImportService.create({
+      restaurantId: id,
+      fileName: validated.file.name,
+      fileSize: validated.file.size,
+      pageCount: validated.pageCount,
+      pdfType: "scanned",
+      config,
+      createdBy: user?.id ?? null,
+      idempotencyKey: `${validated.file.name}-${validated.file.size}-${Date.now()}`,
+    });
+    const detailHref = routes.admin.restaurantMenuImportDetail(id, created.id);
+
     try {
-      const created = menuImportService.create({
-        restaurantId: id,
-        fileName: validated.file.name,
-        fileSize: validated.file.size,
-        pageCount: validated.pageCount,
-        pdfType: "mixed",
-        config,
-        createdBy: user?.id ?? null,
-        idempotencyKey: `${validated.file.name}-${validated.file.size}`,
-      });
-      router.push(routes.admin.restaurantMenuImportDetail(id, created.id));
+      const body = new FormData();
+      body.append("file", validated.file);
+      body.append("importId", created.id);
+      body.append("restaurantId", id);
+      body.append("config", JSON.stringify(config));
+
+      const res = await fetch("/api/menu-import/extract", { method: "POST", body });
+      const data = (await res.json().catch(() => ({}))) as {
+        result?: ImportResult;
+        error?: string;
+        errorCode?: ImportErrorCode;
+      };
+
+      if (!res.ok || !data.result) {
+        const message = data.error ?? "OCR extraction failed.";
+        menuImportService.markFailed(created.id, data.errorCode ?? "OCR_FAILED", message);
+        toast({ title: "Extraction failed", description: message, intent: "danger" });
+        router.push(detailHref);
+        return;
+      }
+
+      menuImportService.ingestResult(created.id, data.result, user?.id ?? null);
+      router.push(detailHref);
     } catch {
-      setSubmitting(false);
+      menuImportService.markFailed(
+        created.id,
+        "OCR_FAILED",
+        "Could not reach the extraction service.",
+      );
       toast({ title: "Could not start import", intent: "danger" });
+      router.push(detailHref);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -231,8 +263,9 @@ export default function MenuImportLandingPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-warning/30 bg-warning/5 p-3 text-small text-warning">
         <Icon name="TriangleAlert" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          Extraction is simulated in this demo (no real OCR). Every import still requires human
-          review before anything is saved — nothing is published automatically.
+          Menus are read with on-device OCR (Tesseract). Scanned/photographed menus are noisy —
+          expect to correct item names. Every import requires human review before anything is
+          saved, and nothing is published automatically.
         </span>
       </div>
 
@@ -383,8 +416,8 @@ export default function MenuImportLandingPage() {
 
             <div className="mt-5 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs text-text-secondary">
-                Starting an import queues a simulated extraction job. You will review the results
-                before anything reaches the draft menu.
+                Starting an import runs OCR on the PDF (this can take a few seconds per page). You
+                will review the results before anything reaches the draft menu.
               </p>
               <Button type="submit" disabled={!validated || submitting}>
                 {submitting ? (
@@ -392,7 +425,7 @@ export default function MenuImportLandingPage() {
                 ) : (
                   <Icon name="Play" className="size-4" aria-hidden />
                 )}
-                Start Import
+                {submitting ? "Reading PDF…" : "Start Import"}
               </Button>
             </div>
           </AdminSection>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { formatDate } from "@/lib/utils";
@@ -35,6 +35,7 @@ export default function MenuImportDetailPage() {
   const params = useParams<{ restaurantId: string; importId: string }>();
   const restaurantId = params.restaurantId;
   const importId = params.importId;
+  const router = useRouter();
   const user = useAdminUser();
   const { toast } = useToast();
 
@@ -73,10 +74,10 @@ export default function MenuImportDetailPage() {
     setCancelOpen(false);
   };
 
+  // Real OCR needs the original file, which only the upload page holds. Send the
+  // user back there to re-pick it rather than running the simulated fallback.
   const onRetry = () => {
-    startedRef.current = true;
-    void menuImportService.startExtraction(importId);
-    toast({ title: "Retrying extraction", intent: "info" });
+    router.push(routes.admin.restaurantMenuImport(restaurantId));
   };
 
   if (ready && !record) {
@@ -161,14 +162,14 @@ export default function MenuImportDetailPage() {
             title="Extraction failed"
             description={
               record.errorSummary ??
-              "The simulated extraction job did not complete. You can retry it."
+              "The OCR extraction job did not complete. Re-upload the PDF to try again."
             }
           />
           <PermissionGate user={user} permission={PERMISSIONS.MENU_IMPORT_RETRY}>
             <div className="flex justify-center">
               <Button onClick={onRetry}>
                 <Icon name="RotateCcw" className="size-4" aria-hidden />
-                Retry extraction
+                Re-upload PDF
               </Button>
             </div>
           </PermissionGate>
