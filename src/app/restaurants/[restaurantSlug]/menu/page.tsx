@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getRepositories } from "@/data/repositories";
+import { getMenuPdfMeta } from "@/data/menu-pdf";
 import { Container } from "@/components/shared/container";
 import { EmptyState } from "@/components/shared/states";
 import { MenuBrowser } from "@/components/restaurant/menu-browser";
+import { Icon } from "@/components/shared/icon";
 import { restaurantMetadata } from "../metadata";
 
 interface PageProps {
@@ -27,9 +29,10 @@ export default async function MenuPage({ params }: PageProps) {
   const restaurant = await repos.restaurants.getBySlug(restaurantSlug);
   if (!restaurant) notFound();
 
-  const [categories, products] = await Promise.all([
+  const [categories, products, pdf] = await Promise.all([
     repos.menus.categories(restaurant.id),
     repos.menus.products(restaurant.id),
+    getMenuPdfMeta(restaurant.id),
   ]);
 
   const activeCategories = categories.filter((c) => c.status === "active");
@@ -44,6 +47,17 @@ export default async function MenuPage({ params }: PageProps) {
         <p className="mt-1 text-small text-text-secondary">
           {restaurant.displayName || restaurant.name}
         </p>
+        {pdf ? (
+          <a
+            href={`/api/restaurants/${restaurant.id}/menu-pdf`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-small font-semibold text-white transition-colors hover:bg-primary-dark"
+          >
+            <Icon name="FileText" className="size-4" aria-hidden />
+            View menu (PDF)
+          </a>
+        ) : null}
       </header>
 
       {activeCategories.length === 0 || visibleProducts.length === 0 ? (

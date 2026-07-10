@@ -213,3 +213,14 @@ export const platformSettings = pgTable("platform_settings", {
 });
 
 export const PLATFORM_SETTINGS_ID = "global";
+
+// A single uploaded menu PDF per restaurant. The bytes are stored base64 in the
+// database (no extra object-storage service needed); metadata is queried
+// separately so the large payload is never loaded unless the file is served.
+export const menuPdfs = pgTable("menu_pdfs", {
+  restaurantId: text("restaurant_id").primaryKey(),
+  filename: text("filename").notNull(),
+  fileSize: integer("file_size").notNull(),
+  contentBase64: text("content_base64").notNull(),
+  uploadedAt: text("uploaded_at").notNull(),
+});

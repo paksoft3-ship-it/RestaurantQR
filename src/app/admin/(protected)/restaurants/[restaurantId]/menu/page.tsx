@@ -17,6 +17,7 @@ import { AdminSection } from "@/components/admin/admin-section";
 import { ConfirmationDialog } from "@/components/admin/confirmation-dialog";
 import { RestaurantContextHeader } from "@/components/admin/restaurant-context-header";
 import { RestaurantWorkspaceTabs } from "@/components/admin/restaurant-workspace-tabs";
+import { MenuPdfManager } from "@/components/admin/menu-pdf-manager";
 import { useAdminUser } from "@/components/admin/admin-user-context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -225,6 +226,12 @@ export default function DigitalMenuManagerPage() {
       />
 
       <RestaurantWorkspaceTabs restaurantId={id} />
+
+      <PermissionGate user={user} permission={PERMISSIONS.MENU_EDIT}>
+        <AdminSection title="Menu PDF" icon="FileText">
+          <MenuPdfManager restaurantId={id} />
+        </AdminSection>
+      </PermissionGate>
 
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="Info" className="mt-0.5 size-4 shrink-0" aria-hidden />
