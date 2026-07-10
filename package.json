@@ -18,7 +18,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx scripts/db-seed.ts",
-    "db:reset": "tsx scripts/db-seed.ts --reset"
+    "db:reset": "tsx scripts/db-seed.ts --reset",
+    "auth:set-password": "tsx scripts/set-admin-password.ts"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",

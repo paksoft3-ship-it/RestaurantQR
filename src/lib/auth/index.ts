@@ -45,8 +45,35 @@ export async function requirePermission(permission: Permission): Promise<AdminUs
   return user;
 }
 
+async function issueSession(user: AdminUser): Promise<void> {
+  const payload: SessionPayload = {
+    userId: user.id,
+    email: user.email,
+    role: user.role as Role,
+    exp: Math.floor(Date.now() / 1000) + authConfig.sessionMaxAgeSeconds,
+  };
+  const store = await cookies();
+  store.set(authConfig.cookieName, encodeSession(payload), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: authConfig.isProduction,
+    path: "/",
+    maxAge: authConfig.sessionMaxAgeSeconds,
+  });
+}
+
 export async function signIn(email: string, password: string): Promise<SignInResult> {
   warnIfMisconfigured();
+
+  // Real auth: verify a per-user scrypt password hash from the database.
+  if (authConfig.authMode === "real") {
+    const user = await getRepositories().auth.verifyCredentials(email, password);
+    if (!user) return { ok: false, reason: "invalid" };
+    if (user.status === "locked") return { ok: false, reason: "locked" };
+    if (user.status === "inactive") return { ok: false, reason: "inactive" };
+    await issueSession(user);
+    return { ok: true };
+  }
 
   if (!mockAuthEnabled) {
     // Mock auth never silently works in production.
@@ -65,21 +92,7 @@ export async function signIn(email: string, password: string): Promise<SignInRes
   if (user.status === "locked") return { ok: false, reason: "locked" };
   if (user.status === "inactive") return { ok: false, reason: "inactive" };
 
-  const payload: SessionPayload = {
-    userId: user.id,
-    email: user.email,
-    role: user.role as Role,
-    exp: Math.floor(Date.now() / 1000) + authConfig.sessionMaxAgeSeconds,
-  };
-
-  const store = await cookies();
-  store.set(authConfig.cookieName, encodeSession(payload), {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: authConfig.isProduction,
-    path: "/",
-    maxAge: authConfig.sessionMaxAgeSeconds,
-  });
+  await issueSession(user);
   return { ok: true };
 }
 

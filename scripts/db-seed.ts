@@ -38,6 +38,7 @@ import {
   seedWebsiteContent,
 } from "@/data/seed";
 import { PLATFORM_SETTINGS_ID } from "@/data/db/schema";
+import { hashPassword } from "@/lib/auth/password";
 
 function requireUrl(): string {
   const url = process.env.DATABASE_URL;
@@ -177,8 +178,20 @@ async function main() {
         seedActivity.map((a) => ({ id: a.id, resourceId: a.resourceId, timestamp: a.timestamp, data: a })),
       );
 
+    // Optionally bootstrap a real-auth password (AUTH_MODE=real) for the seeded
+    // admins. Set SEED_ADMIN_PASSWORD to enable login; otherwise passwordHash is
+    // left null and must be set later via `pnpm auth:set-password`.
+    const seedPw = process.env.SEED_ADMIN_PASSWORD;
+    if (seedPw) console.log("Seeding admin password hash(es) from SEED_ADMIN_PASSWORD…");
     await db.insert(schema.adminUsers).values(
-      seedAdminUsers.map((u) => ({ id: u.id, email: u.email, data: u })),
+      await Promise.all(
+        seedAdminUsers.map(async (u) => ({
+          id: u.id,
+          email: u.email,
+          passwordHash: seedPw ? await hashPassword(seedPw) : null,
+          data: u,
+        })),
+      ),
     );
 
     if (seedTeam.length)

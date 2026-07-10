@@ -11,18 +11,28 @@ const isProduction = process.env.NODE_ENV === "production";
 const allowMockInProduction = process.env.ALLOW_MOCK_AUTH_IN_PRODUCTION === "true";
 
 /**
+ * Real auth verifies per-user scrypt password hashes stored in the database.
+ * Enabled with `AUTH_MODE=real` (requires DATABASE_URL + AUTH_SECRET). When
+ * real auth is on, mock auth is always off.
+ */
+export const authMode: "real" | "mock" = process.env.AUTH_MODE === "real" ? "real" : "mock";
+
+/**
  * Mock auth is active in non-production when `ENABLE_MOCK_AUTH=true`, OR in
- * production only when `ALLOW_MOCK_AUTH_IN_PRODUCTION=true` is explicitly set.
+ * production only when `ALLOW_MOCK_AUTH_IN_PRODUCTION=true` is explicitly set —
+ * and never when real auth is enabled.
  */
 export const mockAuthEnabled =
-  (!isProduction && process.env.ENABLE_MOCK_AUTH === "true") ||
-  (isProduction && allowMockInProduction);
+  authMode !== "real" &&
+  ((!isProduction && process.env.ENABLE_MOCK_AUTH === "true") ||
+    (isProduction && allowMockInProduction));
 
 /** Whether to fall back to demo credentials/secret (dev, or opted-in demo prod). */
 const useDemoDefaults = !isProduction || allowMockInProduction;
 
 export const authConfig = {
   isProduction,
+  authMode,
   mockAuthEnabled,
   allowMockInProduction,
   cookieName: "yp_admin_session",

@@ -219,9 +219,11 @@ const authRepo: AuthRepository = {
   async findByEmail(email) {
     return seedAdminUsers.find((u) => u.email.toLowerCase() === email.toLowerCase()) ?? null;
   },
-  async verifyCredentials(email) {
-    // Credential verification is handled by the auth adapter (mock secret).
-    return authRepo.findByEmail(email);
+  async verifyCredentials() {
+    // The in-memory mock backend stores no password hashes. Real auth
+    // (AUTH_MODE=real) therefore fails closed unless a database is configured;
+    // mock-mode sign-in uses the mock secret path in `signIn`, not this method.
+    return null;
   },
 };
 

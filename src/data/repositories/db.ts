@@ -20,6 +20,7 @@ import type {
 import type { ActivityRecord, Branding, Enquiry, Restaurant } from "@/domain/entities";
 import { getLegalPage } from "@/content/legal";
 import { createId } from "@/lib/utils";
+import { verifyPassword } from "@/lib/auth/password";
 import { getDb, schema } from "@/data/db/client";
 
 /**
@@ -332,9 +333,15 @@ const authRepo: AuthRepository = {
     const rows = await getDb().select({ data: schema.adminUsers.data }).from(schema.adminUsers);
     return rows.map((r) => r.data).find((u) => u.email.toLowerCase() === email.toLowerCase()) ?? null;
   },
-  async verifyCredentials(email) {
-    // Credential verification is handled by the auth adapter (mock secret).
-    return authRepo.findByEmail(email);
+  async verifyCredentials(email, password) {
+    // Real auth: match the email, then verify the stored scrypt password hash.
+    const rows = await getDb()
+      .select({ data: schema.adminUsers.data, passwordHash: schema.adminUsers.passwordHash })
+      .from(schema.adminUsers);
+    const match = rows.find((r) => r.data.email.toLowerCase() === email.toLowerCase());
+    if (!match) return null;
+    const ok = await verifyPassword(password, match.passwordHash);
+    return ok ? match.data : null;
   },
 };
 

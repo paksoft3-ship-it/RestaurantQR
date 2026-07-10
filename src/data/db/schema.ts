@@ -146,6 +146,9 @@ export const activity = pgTable("activity", {
 export const adminUsers = pgTable("admin_users", {
   id: text("id").primaryKey(),
   email: text("email").notNull().unique(),
+  // scrypt password hash for real auth (AUTH_MODE=real). Never returned to the
+  // client — the AdminUser domain entity (in `data`) has no password field.
+  passwordHash: text("password_hash"),
   data: jsonb("data").$type<AdminUser>().notNull(),
 });
 
