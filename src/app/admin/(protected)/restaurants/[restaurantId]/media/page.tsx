@@ -11,6 +11,7 @@ import { mediaAssetSchema, type MediaAssetInput } from "@/domain/schemas";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import type { MediaAsset, Restaurant } from "@/domain/entities";
 import { MEDIA_TYPES, RIGHTS_STATUSES, ASSET_STATUSES, type MediaType } from "@/domain/enums";
 import { PERMISSIONS, type Role } from "@/domain/permissions";
@@ -53,7 +54,12 @@ const STATUS_LABELS: Record<(typeof ASSET_STATUSES)[number], string> = {
 
 /** Resolve an asset's display image, falling back to a deterministic placeholder. */
 function assetImage(asset: Pick<MediaAsset, "publicUrl" | "type">): string {
-  if (asset.publicUrl && (asset.publicUrl.startsWith("/") || asset.publicUrl.startsWith("blob:"))) {
+  if (
+    asset.publicUrl &&
+    (asset.publicUrl.startsWith("/") ||
+      asset.publicUrl.startsWith("http") ||
+      asset.publicUrl.startsWith("blob:"))
+  ) {
     return asset.publicUrl;
   }
   return PLACEHOLDER_BY_TYPE[asset.type];
@@ -156,9 +162,8 @@ export default function RestaurantMediaLibraryPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-warning/30 bg-warning/5 p-3 text-small text-warning">
         <Icon name="AlertTriangle" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          Illustrative Admin Data. Demo uploads are temporary: previews live in the browser only and
-          do not persist. Saved assets use a deterministic placeholder image. No restaurant-owner
-          uploads.
+          Files upload to storage when Blob is configured (BLOB_READ_WRITE_TOKEN); otherwise a
+          placeholder image is stored. No restaurant-owner uploads.
         </span>
       </div>
 
@@ -324,6 +329,9 @@ function MediaAssetDialog({
 }: MediaAssetDialogProps) {
   const { toast } = useToast();
   const [preview, setPreview] = useState<string | null>(asset ? assetImage(asset) : null);
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(
+    asset && asset.publicUrl.startsWith("http") ? asset.publicUrl : null,
+  );
 
   const {
     register,
@@ -343,22 +351,31 @@ function MediaAssetDialog({
 
   const type = watch("type");
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
     objectUrls.current.push(url);
     setPreview(url);
-    toast({
-      title: "Upload preview ready",
-      description: "Demo upload only — temporary, will not persist. A placeholder is stored on save.",
-      intent: "warning",
-    });
+    setUploadedUrl(null);
+
+    const uploaded = await uploadImage(file, "media");
+    if (uploaded) {
+      setUploadedUrl(uploaded);
+      setPreview(uploaded);
+      toast({ title: "File uploaded", description: "Saved to storage.", intent: "success" });
+    } else {
+      toast({
+        title: "Upload preview ready",
+        description: "Preview only — configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        intent: "warning",
+      });
+    }
   };
 
   const onSubmit = handleSubmit((input) => {
-    // Demo uploads are temporary; persist a deterministic placeholder instead of the blob URL.
-    const publicUrl = PLACEHOLDER_BY_TYPE[input.type];
+    // Use the uploaded file URL when available; otherwise fall back to a placeholder.
+    const publicUrl = uploadedUrl ?? PLACEHOLDER_BY_TYPE[input.type];
     if (mode === "create") {
       const newId = createId("media");
       const created: MediaAsset = {
@@ -380,7 +397,11 @@ function MediaAssetDialog({
         resourceId: newId,
         description: `Added media asset ${input.filename}`,
       });
-      toast({ title: "Asset added", description: "Demo upload stored as a placeholder.", intent: "success" });
+      toast({
+        title: "Asset added",
+        description: uploadedUrl ? "File saved to storage." : "Stored as a placeholder (configure Blob to save files).",
+        intent: "success",
+      });
     } else if (asset) {
       demoStore.media.update(asset.id, {
         filename: input.filename,
@@ -388,6 +409,7 @@ function MediaAssetDialog({
         altText: input.altText ? input.altText : null,
         rightsStatus: input.rightsStatus,
         status: input.status,
+        ...(uploadedUrl ? { publicUrl: uploadedUrl } : {}),
       });
       demoStore.recordActivity({
         actorId,
@@ -431,7 +453,7 @@ function MediaAssetDialog({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="media-upload">Upload (demo)</Label>
+              <Label htmlFor="media-upload">Upload</Label>
               <input
                 id="media-upload"
                 type="file"
@@ -439,8 +461,8 @@ function MediaAssetDialog({
                 onChange={handleFile}
                 className="block w-full text-small text-text-secondary file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-[12px] file:border file:border-input-border file:bg-canvas file:px-4 file:text-small file:font-semibold file:text-text-primary hover:file:bg-surface"
               />
-              <p className="text-xs text-warning">
-                Temporary demo preview. A deterministic placeholder is stored on save.
+              <p className="text-xs text-text-tertiary">
+                Uploads to storage when Blob is configured; otherwise a placeholder is stored on save.
               </p>
             </div>
           </div>

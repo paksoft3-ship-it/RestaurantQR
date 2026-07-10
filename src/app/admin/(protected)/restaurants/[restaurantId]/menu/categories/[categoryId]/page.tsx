@@ -11,6 +11,7 @@ import { menuCategorySchema, type MenuCategoryInput } from "@/domain/schemas";
 import { demoStore } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { createId } from "@/lib/utils";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import { resolveText } from "@/lib/i18n/locales";
 import type { MenuCategory, Restaurant } from "@/domain/entities";
 import { MENU_STATUSES } from "@/domain/enums";
@@ -92,18 +93,25 @@ export default function MenuCategoryEditorPage() {
     };
   }, []);
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (imageObjectUrl.current) URL.revokeObjectURL(imageObjectUrl.current);
     const url = URL.createObjectURL(file);
     imageObjectUrl.current = url;
     setImagePreview(url);
-    toast({
-      title: "Image preview ready",
-      description: "Demo upload only — this preview is temporary and will not persist.",
-      intent: "warning",
-    });
+
+    const uploaded = await uploadImage(file, "categories");
+    if (uploaded) {
+      setImagePreview(uploaded);
+      toast({ title: "Image uploaded", description: "Saved to storage.", intent: "success" });
+    } else {
+      toast({
+        title: "Image preview ready",
+        description: "Preview only — configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        intent: "warning",
+      });
+    }
   };
 
   const onSubmit = handleSubmit((input) => {
@@ -117,7 +125,10 @@ export default function MenuCategoryEditorPage() {
         localizedDescription,
         sortOrder: input.sortOrder,
         status: input.status,
-        image: imagePreview && imagePreview.startsWith("/") ? imagePreview : null,
+        image:
+          imagePreview && (imagePreview.startsWith("/") || imagePreview.startsWith("http"))
+            ? imagePreview
+            : null,
       };
       demoStore.categories.create(category);
       demoStore.recordActivity({
@@ -286,8 +297,8 @@ export default function MenuCategoryEditorPage() {
                 <p className="flex items-start gap-2 rounded-[12px] border border-warning/30 bg-warning/5 p-3 text-xs text-warning">
                   <Icon name="AlertTriangle" className="mt-0.5 size-4 shrink-0" aria-hidden />
                   <span>
-                    Demo upload only. This image preview is temporary, lives in the browser, and will
-                    not persist. Approved media is managed in the Media Library.
+                    Images upload to storage when Blob is configured; otherwise the preview is local
+                    only. Approved media is also managed in the Media Library.
                   </span>
                 </p>
               </div>

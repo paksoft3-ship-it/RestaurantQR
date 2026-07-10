@@ -11,6 +11,7 @@ import { menuProductSchema, type MenuProductInput } from "@/domain/schemas";
 import { demoStore } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { createId, formatPrice, slugify } from "@/lib/utils";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import { resolveText } from "@/lib/i18n/locales";
 import type { MenuCategory, MenuProduct, Restaurant } from "@/domain/entities";
 import { AVAILABILITY_STATUSES } from "@/domain/enums";
@@ -164,18 +165,25 @@ function ProductEditor() {
     }
   }, [nameEn, slugEdited, setValue]);
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (imageObjectUrl.current) URL.revokeObjectURL(imageObjectUrl.current);
     const url = URL.createObjectURL(file);
     imageObjectUrl.current = url;
     setImagePreview(url);
-    toast({
-      title: "Image preview ready",
-      description: "Demo upload only — this preview is temporary and will not persist.",
-      intent: "warning",
-    });
+
+    const uploaded = await uploadImage(file, "products");
+    if (uploaded) {
+      setImagePreview(uploaded);
+      toast({ title: "Image uploaded", description: "Saved to storage.", intent: "success" });
+    } else {
+      toast({
+        title: "Image preview ready",
+        description: "Preview only — configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        intent: "warning",
+      });
+    }
   };
 
   const onSubmit = handleSubmit((input) => {
@@ -193,7 +201,10 @@ function ProductEditor() {
         localizedDescription,
         price: input.price,
         currency: input.currency,
-        image: imagePreview && imagePreview.startsWith("/") ? imagePreview : null,
+        image:
+          imagePreview && (imagePreview.startsWith("/") || imagePreview.startsWith("http"))
+            ? imagePreview
+            : null,
         availability: input.availability,
         variants,
         dietaryLabels: input.dietaryLabels,
@@ -517,8 +528,8 @@ function ProductEditor() {
                 <p className="flex items-start gap-2 rounded-[12px] border border-warning/30 bg-warning/5 p-3 text-xs text-warning">
                   <Icon name="AlertTriangle" className="mt-0.5 size-4 shrink-0" aria-hidden />
                   <span>
-                    Demo upload only. This preview is temporary, lives in the browser, and will not
-                    persist. Approved imagery is managed in the Media Library.
+                    Images upload to storage when Blob is configured; otherwise the preview is local
+                    only. Approved imagery is also managed in the Media Library.
                   </span>
                 </p>
               </div>

@@ -10,6 +10,7 @@ import { brandingEditSchema, type BrandingEditInput } from "@/domain/schemas";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { titleCase } from "@/lib/utils";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import type { Branding, Restaurant } from "@/domain/entities";
 import { RIGHTS_STATUSES } from "@/domain/enums";
 import { PERMISSIONS } from "@/domain/permissions";
@@ -180,6 +181,8 @@ export default function BrandingEditPage() {
       cardStyle: input.cardStyle,
       iconStyle: input.iconStyle,
       rightsStatus: input.rightsStatus,
+      ...(logoPreview && logoPreview.startsWith("http") ? { logo: logoPreview } : {}),
+      ...(coverPreview && coverPreview.startsWith("http") ? { coverImage: coverPreview } : {}),
       ...(review ? { reviewStatus: review } : {}),
       // Branding edits NEVER publish the restaurant.
     });
@@ -203,18 +206,24 @@ export default function BrandingEditPage() {
     toast({ title: "Branding approved", intent: "success" });
   });
 
-  const handleUpload = (
+  const handleUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     setter: (url: string | null) => void,
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setter(URL.createObjectURL(file));
-    toast({
-      title: "Upload is temporary (demo)",
-      description: "This preview is local only and not persisted.",
-      intent: "info",
-    });
+    const uploaded = await uploadImage(file, "branding");
+    if (uploaded) {
+      setter(uploaded);
+      toast({ title: "Image uploaded", description: "Save the draft to apply it.", intent: "success" });
+    } else {
+      toast({
+        title: "Preview only",
+        description: "Configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        intent: "info",
+      });
+    }
   };
 
   if (ready && !restaurant) {
@@ -434,7 +443,7 @@ export default function BrandingEditPage() {
               </div>
             </div>
             <p className="mt-2 text-xs text-text-tertiary">
-              Demo uploads are temporary and shown as a local preview only.
+              Images upload to storage when Blob is configured; save the draft to apply them.
             </p>
           </AdminSection>
 
