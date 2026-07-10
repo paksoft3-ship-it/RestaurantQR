@@ -33,6 +33,7 @@ export const routes = {
   admin: {
     login: () => "/admin/login",
     dashboard: () => "/admin",
+    account: () => "/admin/account",
     restaurants: () => "/admin/restaurants",
     restaurantNew: () => "/admin/restaurants/new",
     restaurant: (id: string) => `/admin/restaurants/${id}`,

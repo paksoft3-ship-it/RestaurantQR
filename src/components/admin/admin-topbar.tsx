@@ -147,6 +147,14 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 <Icon name="Settings" className="size-4 text-text-secondary" aria-hidden />
                 Settings
               </Link>
+              <Link
+                role="menuitem"
+                href={routes.admin.account()}
+                className="flex min-h-11 items-center gap-2.5 rounded-[10px] px-3 text-small text-text-primary hover:bg-surface"
+              >
+                <Icon name="KeyRound" className="size-4 text-text-secondary" aria-hidden />
+                Change password
+              </Link>
               <form action={signOutAction} className="mt-1">
                 <button
                   type="submit"
