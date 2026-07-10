@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { customerActionSchema } from "@/domain/schemas";
@@ -121,6 +121,14 @@ export default function CustomerActionsPage() {
   const [dirty, setDirty] = useState(false);
   const [removeTarget, setRemoveTarget] = useState<DraftAction | null>(null);
 
+  // Mirror `dirty` into a ref so the store-change handler can read the latest
+  // value without being a dependency of the mount effect (otherwise the effect
+  // would re-run and reload — discarding in-progress edits on every keystroke).
+  const dirtyRef = useRef(false);
+  useEffect(() => {
+    dirtyRef.current = dirty;
+  }, [dirty]);
+
   const load = useCallback(() => {
     const r = demoStore.getRestaurant(id);
     const actions = demoStore.customerActions
@@ -135,11 +143,11 @@ export default function CustomerActionsPage() {
   useEffect(() => {
     load();
     const handler = () => {
-      if (!dirty) load();
+      if (!dirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, dirty]);
+  }, [load]);
 
   const patchRow = (rowId: string, patch: Partial<DraftAction>) => {
     setRows((prev) => prev.map((r) => (r.id === rowId ? { ...r, ...patch } : r)));

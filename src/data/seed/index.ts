@@ -462,7 +462,7 @@ export const seedCustomerActions: CustomerAction[] = [
   { id: "act_call", restaurantId: "rest_pizza_house", type: "call-order", label: { en: "Call Order" }, destinationType: "phone", destination: "+1-512-555-0142", enabled: true, status: "configured", sortOrder: 1 },
   { id: "act_menu", restaurantId: "rest_pizza_house", type: "pick-your-meal", label: { en: "Pick Your Meal" }, destinationType: "internal", destination: "/restaurants/pizza-house/menu", enabled: true, status: "configured", sortOrder: 2 },
   { id: "act_online", restaurantId: "rest_pizza_house", type: "online-order", label: { en: "Online Order with Pay" }, destinationType: "external", destination: "https://order.example.com/pizza-house", enabled: true, status: "configured", sortOrder: 3 },
-  { id: "act_visit", restaurantId: "rest_pizza_house", type: "visit-us", label: { en: "Visit Us" }, destinationType: "map", destination: "https://maps.google.com/?q=Pizza+House+Austin", enabled: true, status: "configured", sortOrder: 4 },
+  { id: "act_visit", restaurantId: "rest_pizza_house", type: "visit-us", label: { en: "Add Contact" }, destinationType: "map", destination: "https://maps.google.com/?q=Pizza+House+Austin", enabled: true, status: "configured", sortOrder: 4 },
   { id: "act_wa", restaurantId: "rest_pizza_house", type: "whatsapp", label: { en: "WhatsApp" }, destinationType: "whatsapp", destination: "+15125550142", enabled: true, status: "configured", sortOrder: 5 },
   { id: "act_ig", restaurantId: "rest_pizza_house", type: "instagram", label: { en: "Instagram" }, destinationType: "external", destination: "https://instagram.com/pizzahouse", enabled: true, status: "configured", sortOrder: 6 },
 ];

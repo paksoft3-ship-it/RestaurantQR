@@ -47,15 +47,21 @@ import {
   seedWebsiteContent,
 } from "@/data/seed";
 import { appConfig } from "@/lib/config/app-config";
+import { adminPersist } from "@/data/admin/actions";
+import type { AdminSnapshot, ArrayCollectionKey, PersistOp } from "@/data/admin/types";
 
 /**
- * Browser-local demo persistence. In demo mode, admin create/edit operations
- * persist here so changes survive navigation. This is NOT a production database
- * — it is gated behind the repository-shaped API and clearly labelled in the UI.
+ * Admin persistence layer with two interchangeable backends behind ONE stable,
+ * synchronous API (so every admin page stays unchanged):
  *
- * Backed by a single versioned, corruption-safe localStorage record. Each entity
- * collection is exposed through a typed array API (all/byId/where/create/update/
- * remove/reorder/setAll), plus singleton helpers for settings/opening-hours.
+ *  - "db" mode (a database is configured): an in-memory cache is hydrated once
+ *    from Postgres via {@link hydrateAdminStore}; reads are served from the
+ *    cache and every write is applied optimistically to the cache AND persisted
+ *    to the database through the `adminPersist` server action. The database is
+ *    the source of truth (the public site reads it directly).
+ *
+ *  - "local" mode (no database): the original browser-`localStorage` demo
+ *    persistence, kept so demo deployments work with no backend.
  */
 
 const STORAGE_KEY = "yp_demo_store";
@@ -117,7 +123,70 @@ function freshData(): DemoData {
   };
 }
 
+/** Empty cache used in db mode before hydration (pages render after hydration). */
+function emptyData(): DemoData {
+  return {
+    version: SEED_VERSION,
+    restaurants: [],
+    branding: [],
+    categories: [],
+    products: [],
+    customerActions: [],
+    locations: [],
+    openingHours: {},
+    campaigns: [],
+    qr: [],
+    nfc: [],
+    media: [],
+    enquiries: [],
+    team: [],
+    audit: [],
+    websiteContent: [],
+    templates: [],
+    packages: [],
+    faq: [],
+    legal: [],
+    menuImports: [],
+    settings: structuredClone(seedSettings),
+  };
+}
+
+// ---- Backend mode + db-mode cache ----
+let mode: "local" | "db" = "local";
+let cache: DemoData | null = null;
+
+/**
+ * Seed the db-mode cache from a database snapshot. Called once by the admin
+ * layout's store provider. Switches the store into "db" mode.
+ */
+export function hydrateAdminStore(snapshot: AdminSnapshot): void {
+  mode = "db";
+  cache = { version: SEED_VERSION, ...snapshot };
+  dispatchChange();
+}
+
+export function isAdminStoreHydrated(): boolean {
+  return mode === "db" && cache !== null;
+}
+
+function dispatchChange(): void {
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(CHANGE_EVENT));
+}
+
+// Serialize persistence so optimistic writes reach the DB in dispatch order
+// (prevents e.g. a setAll delete racing a preceding create insert).
+let persistChain: Promise<void> = Promise.resolve();
+function persist(op: PersistOp): void {
+  if (mode !== "db") return;
+  persistChain = persistChain
+    .then(() => adminPersist(op))
+    .catch((error) => {
+      console.error(`[admin-store] failed to persist ${op.kind}`, error);
+    });
+}
+
 function read(): DemoData {
+  if (mode === "db") return cache ?? emptyData();
   if (typeof window === "undefined") return freshData();
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -138,7 +207,13 @@ function read(): DemoData {
   }
 }
 
+/** Commit a mutated data object: persist to the active backend and notify. */
 function write(data: DemoData): void {
+  if (mode === "db") {
+    cache = data;
+    dispatchChange();
+    return;
+  }
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -161,6 +236,9 @@ interface ArrayApi<T> {
 
 function arrayApi<T extends { id: string }>(key: ArrayCollections): ArrayApi<T> {
   const list = (d: DemoData) => d[key] as unknown as T[];
+  const collection = key as ArrayCollectionKey;
+  const hasSortOrder = (item: T): item is T & { sortOrder: number } =>
+    typeof (item as { sortOrder?: unknown }).sortOrder === "number";
   return {
     all: () => list(read()),
     byId: (id) => list(read()).find((x) => x.id === id) ?? null,
@@ -169,6 +247,7 @@ function arrayApi<T extends { id: string }>(key: ArrayCollections): ArrayApi<T> 
       const d = read();
       (d[key] as unknown as T[]).unshift(item);
       write(d);
+      persist({ kind: "create", collection, item });
       return item;
     },
     update: (id, patch) => {
@@ -178,6 +257,7 @@ function arrayApi<T extends { id: string }>(key: ArrayCollections): ArrayApi<T> 
       if (idx < 0) return null;
       arr[idx] = { ...arr[idx], ...patch };
       write(d);
+      persist({ kind: "update", collection, id, next: arr[idx] });
       return arr[idx];
     },
     remove: (id) => {
@@ -187,6 +267,7 @@ function arrayApi<T extends { id: string }>(key: ArrayCollections): ArrayApi<T> 
       if (next.length === arr.length) return false;
       (d[key] as unknown as T[]) = next;
       write(d);
+      persist({ kind: "remove", collection, id });
       return true;
     },
     reorder: (ids) => {
@@ -195,20 +276,25 @@ function arrayApi<T extends { id: string }>(key: ArrayCollections): ArrayApi<T> 
       const byId = new Map(arr.map((x) => [x.id, x]));
       const ordered = ids.map((id) => byId.get(id)).filter((x): x is T => Boolean(x));
       const rest = arr.filter((x) => !ids.includes(x.id));
-      (d[key] as unknown as T[]) = [...ordered, ...rest];
+      const nextArr = [...ordered, ...rest].map((item, index) =>
+        hasSortOrder(item) ? { ...item, sortOrder: index } : item,
+      );
+      (d[key] as unknown as T[]) = nextArr;
       write(d);
+      persist({ kind: "setAll", collection, items: nextArr });
     },
     setAll: (items) => {
       const d = read();
       (d[key] as unknown as T[]) = items;
       write(d);
+      persist({ kind: "setAll", collection, items });
     },
   };
 }
 
 export const demoStore = {
   isEnabled(): boolean {
-    return appConfig.demoMode;
+    return appConfig.demoMode || mode === "db";
   },
 
   // ---- Restaurants (Part 1 API — keep stable) ----
@@ -221,6 +307,7 @@ export const demoStore = {
     const d = read();
     d.restaurants = [restaurant, ...d.restaurants];
     write(d);
+    persist({ kind: "restaurant.create", item: restaurant });
     return restaurant;
   },
   updateRestaurant: (id: string, patch: Partial<Restaurant>): Restaurant | null => {
@@ -229,6 +316,7 @@ export const demoStore = {
     if (idx < 0) return null;
     d.restaurants[idx] = { ...d.restaurants[idx], ...patch, updatedAt: new Date().toISOString() };
     write(d);
+    persist({ kind: "restaurant.update", id, next: d.restaurants[idx] });
     return d.restaurants[idx];
   },
   getBranding: (restaurantId: string): Branding | null =>
@@ -236,15 +324,17 @@ export const demoStore = {
   updateBranding: (restaurantId: string, patch: Partial<Branding>): Branding | null => {
     const d = read();
     const idx = d.branding.findIndex((b) => b.restaurantId === restaurantId);
+    let value: Branding;
     if (idx < 0) {
-      const created = { restaurantId, ...patch } as Branding;
-      d.branding.push(created);
-      write(d);
-      return created;
+      value = { restaurantId, ...patch } as Branding;
+      d.branding.push(value);
+    } else {
+      value = { ...d.branding[idx], ...patch };
+      d.branding[idx] = value;
     }
-    d.branding[idx] = { ...d.branding[idx], ...patch };
     write(d);
-    return d.branding[idx];
+    persist({ kind: "branding.set", restaurantId, value });
+    return value;
   },
 
   // ---- Part 2 entity collections ----
@@ -272,6 +362,7 @@ export const demoStore = {
     const d = read();
     d.openingHours[restaurantId] = hours;
     write(d);
+    persist({ kind: "openingHours.set", restaurantId, hours });
   },
 
   // ---- Settings (singleton) ----
@@ -280,6 +371,7 @@ export const demoStore = {
     const d = read();
     d.settings = { ...d.settings, ...patch, updatedAt: new Date().toISOString() };
     write(d);
+    persist({ kind: "settings.set", value: d.settings });
     return d.settings;
   },
 
@@ -293,10 +385,15 @@ export const demoStore = {
     const d = read();
     d.audit = [created, ...d.audit];
     write(d);
+    persist({ kind: "create", collection: "audit", item: created });
     return created;
   },
 
   reset(): void {
+    if (mode === "db") {
+      dispatchChange();
+      return;
+    }
     if (typeof window === "undefined") return;
     window.localStorage.removeItem(STORAGE_KEY);
     read();

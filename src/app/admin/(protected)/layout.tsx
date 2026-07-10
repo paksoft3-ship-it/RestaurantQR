@@ -6,9 +6,13 @@ import { routes } from "@/lib/routes";
 import { isDemoMode } from "@/lib/config/app-config";
 import { ToastProvider } from "@/components/ui/toast";
 import { AdminUserProvider } from "@/components/admin/admin-user-context";
+import { AdminStoreProvider } from "@/components/admin/admin-store-provider";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminTopbar } from "@/components/admin/admin-topbar";
 import { Icon } from "@/components/shared/icon";
+import { isDatabaseConfigured } from "@/data/db/client";
+import { loadAdminSnapshot } from "@/data/admin/actions";
+import type { AdminSnapshot } from "@/data/admin/types";
 import type { AdminUser } from "@/domain/entities";
 
 export const metadata: Metadata = {
@@ -23,6 +27,11 @@ export default async function ProtectedAdminLayout({
 }) {
   const current = await getCurrentAdminUser();
   if (!current) redirect(`${routes.admin.login()}?reason=auth`);
+
+  // When a database is configured, load the admin data once here and hand it to
+  // the store provider to hydrate the client cache (writes persist to the DB).
+  const dbBacked = isDatabaseConfigured();
+  const snapshot: AdminSnapshot | null = dbBacked ? await loadAdminSnapshot() : null;
 
   // Pass a plain, serializable user to client components. Resolve effective
   // permissions here so the client never recomputes against the role table.
@@ -39,6 +48,7 @@ export default async function ProtectedAdminLayout({
   return (
     <ToastProvider>
       <AdminUserProvider user={user}>
+      <AdminStoreProvider dbBacked={dbBacked} snapshot={snapshot}>
       <div className="flex min-h-dvh bg-surface">
         <AdminSidebar user={user} />
         <div className="flex min-w-0 flex-1 flex-col">
@@ -54,6 +64,7 @@ export default async function ProtectedAdminLayout({
           </main>
         </div>
       </div>
+      </AdminStoreProvider>
       </AdminUserProvider>
     </ToastProvider>
   );
