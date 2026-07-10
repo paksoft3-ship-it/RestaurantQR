@@ -11,8 +11,17 @@ import * as schema from "./schema";
  * and demo deployments keep working with no database.
  */
 
+/**
+ * The connection string. Prefers DATABASE_URL, but falls back to POSTGRES_URL
+ * so the Vercel–Neon integration (which sets both) works out of the box.
+ */
+export function getDatabaseUrl(): string | undefined {
+  const url = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
+  return url && url.trim().length > 0 ? url.trim() : undefined;
+}
+
 export function isDatabaseConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL && process.env.DATABASE_URL.trim().length > 0);
+  return Boolean(getDatabaseUrl());
 }
 
 export type Database = ReturnType<typeof drizzle<typeof schema>>;
@@ -25,13 +34,14 @@ const globalForDb = globalThis as unknown as {
 };
 
 export function getDb(): Database {
-  if (!isDatabaseConfigured()) {
+  const url = getDatabaseUrl();
+  if (!url) {
     throw new Error(
-      "DATABASE_URL is not set. Configure it to use the database-backed repositories.",
+      "No database URL. Set DATABASE_URL (or POSTGRES_URL) to use the database-backed repositories.",
     );
   }
   if (!globalForDb.__ypDb) {
-    const sql = postgres(process.env.DATABASE_URL as string, {
+    const sql = postgres(url, {
       max: 10,
       prepare: false,
     });
