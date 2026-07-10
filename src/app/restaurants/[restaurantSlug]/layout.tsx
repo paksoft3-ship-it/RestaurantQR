@@ -39,9 +39,21 @@ export default async function RestaurantLayout({ children, params }: RestaurantL
     DEFAULT_LOCALE,
   );
 
+  // Apply the restaurant's brand colors as scoped CSS variables (falls back to
+  // the default design tokens when branding is absent).
+  const brandStyle = branding?.colors
+    ? ({
+        "--color-primary": branding.colors.primary,
+        "--color-primary-dark": branding.colors.primaryDark,
+        "--color-accent": branding.colors.accent,
+        "--color-surface": branding.colors.surface,
+        "--color-text-primary": branding.colors.text,
+      } as React.CSSProperties)
+    : undefined;
+
   return (
     <ToastProvider>
-      <div className="restaurant-public-shell flex min-h-dvh flex-col bg-canvas">
+      <div className="restaurant-public-shell flex min-h-dvh flex-col bg-canvas" style={brandStyle}>
         <RestaurantPublicHeader restaurant={restaurant} logoUrl={branding?.logo} />
         <main className="flex-1">{children}</main>
         <RestaurantFooter restaurant={restaurant} />

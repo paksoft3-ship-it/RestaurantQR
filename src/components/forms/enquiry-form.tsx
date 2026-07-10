@@ -12,6 +12,7 @@ import {
   type RestaurantType,
 } from "@/domain/enums";
 import { getFormTransport, type FormResult } from "@/lib/forms/transport";
+import { submitEnquiry } from "./enquiry-actions";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea, Select, Field, Checkbox, Label } from "@/components/ui/input";
@@ -98,6 +99,9 @@ export function EnquiryForm() {
     if (submitState.kind === "submitting") return; // duplicate-submission guard
     setSubmitState({ kind: "submitting" });
     try {
+      // Persist the enquiry so it reaches /admin/enquiries (best-effort; the
+      // transport below still drives the on-screen confirmation).
+      await submitEnquiry(values).catch(() => undefined);
       const result = await getFormTransport().submit("enquiry", values);
       if (result.status === "demo" || result.status === "ok") {
         setSubmitState({ kind: "success", result });
