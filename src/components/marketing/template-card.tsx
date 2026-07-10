@@ -6,7 +6,7 @@ interface TemplateCardProps {
   name: string;
   description: string;
   bestFor: string;
-  image: string;
+  image: string | null;
   className?: string;
 }
 
@@ -23,7 +23,13 @@ export function TemplateCard({ name, description, bestFor, image, className }: T
       )}
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">
-        <Image src={image} alt={`${name} visual direction`} fill className="object-cover" sizes="(min-width: 1024px) 33vw, 100vw" />
+        {image ? (
+          <Image src={image} alt={`${name} visual direction`} fill className="object-cover" sizes="(min-width: 1024px) 33vw, 100vw" />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-warm to-surface">
+            <Icon name="Palette" className="size-8 text-primary/40" aria-hidden />
+          </div>
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
         <h3 className="font-heading text-h3 font-bold text-text-primary">{name}</h3>

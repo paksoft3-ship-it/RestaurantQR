@@ -5,6 +5,7 @@ import type {
   AuthRepository,
   BrandingRepository,
   CampaignRepository,
+  ContentRepository,
   EnquiryRepository,
   LegalContentRepository,
   MediaRepository,
@@ -26,14 +27,19 @@ import {
   seedCategories,
   seedCustomerActions,
   seedEnquiries,
+  seedFaqEntries,
   seedMedia,
   seedNFCProducts,
   seedOpeningHours,
+  seedPackages,
   seedProducts,
   seedQRCodes,
   seedRestaurants,
   seedLocations,
   seedAdminUsers,
+  seedSettings,
+  seedTemplates,
+  seedWebsiteContent,
 } from "@/data/seed";
 
 /**
@@ -227,6 +233,24 @@ const authRepo: AuthRepository = {
   },
 };
 
+const contentRepo: ContentRepository = {
+  async settings() {
+    return seedSettings;
+  },
+  async websiteContent() {
+    return seedWebsiteContent.filter((w) => w.status === "published");
+  },
+  async templates() {
+    return seedTemplates.filter((t) => t.status === "published").sort((a, b) => a.sortOrder - b.sortOrder);
+  },
+  async packages() {
+    return seedPackages.filter((p) => p.status === "published").sort((a, b) => a.sortOrder - b.sortOrder);
+  },
+  async faq() {
+    return seedFaqEntries.filter((f) => f.status === "published").sort((a, b) => a.sortOrder - b.sortOrder);
+  },
+};
+
 export const repositories: RepositoryBundle = {
   restaurants: restaurantRepo,
   branding: brandingRepo,
@@ -240,4 +264,5 @@ export const repositories: RepositoryBundle = {
   media: mediaRepo,
   activity: activityRepo,
   auth: authRepo,
+  content: contentRepo,
 };

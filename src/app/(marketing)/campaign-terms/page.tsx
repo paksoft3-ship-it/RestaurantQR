@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLegalPage } from "@/content/legal";
+import { getRepositories } from "@/data/repositories";
 import { LegalPageLayout } from "@/components/legal/legal-page-layout";
 import { appConfig } from "@/lib/config/app-config";
 
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
     "Generic terms for promotional campaigns and reward mechanics operated for restaurants on YourPlatform.",
 };
 
-export default function CampaignTermsPage() {
-  const page = getLegalPage("campaign-terms");
+export default async function CampaignTermsPage() {
+  const page = (await getRepositories().legal.get("campaign-terms")) ?? getLegalPage("campaign-terms");
   return (
     <LegalPageLayout
       page={page}

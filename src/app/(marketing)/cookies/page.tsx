@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLegalPage } from "@/content/legal";
+import { getRepositories } from "@/data/repositories";
 import { LegalPageLayout } from "@/components/legal/legal-page-layout";
 import { CookiePreferences } from "@/components/legal/cookie-preferences";
 import { appConfig } from "@/lib/config/app-config";
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
     "How YourPlatform uses cookies, the categories involved, and how to manage your cookie preferences.",
 };
 
-export default function CookiesPage() {
-  const page = getLegalPage("cookies");
+export default async function CookiesPage() {
+  const page = (await getRepositories().legal.get("cookies")) ?? getLegalPage("cookies");
   return (
     <LegalPageLayout
       page={page}

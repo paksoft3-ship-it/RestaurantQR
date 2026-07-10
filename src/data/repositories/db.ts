@@ -6,6 +6,7 @@ import type {
   AuthRepository,
   BrandingRepository,
   CampaignRepository,
+  ContentRepository,
   EnquiryRepository,
   LegalContentRepository,
   MediaRepository,
@@ -22,6 +23,8 @@ import { getLegalPage } from "@/content/legal";
 import { createId } from "@/lib/utils";
 import { verifyPassword } from "@/lib/auth/password";
 import { getDb, schema } from "@/data/db/client";
+import { PLATFORM_SETTINGS_ID } from "@/data/db/schema";
+import { seedSettings } from "@/data/seed";
 
 /**
  * Database-backed implementation of the repository contracts (Drizzle + Postgres).
@@ -283,7 +286,46 @@ const analyticsRepo: AnalyticsRepository = {
 
 const legalRepo: LegalContentRepository = {
   async get(type) {
-    return getLegalPage(type);
+    const rows = await getDb().select({ data: schema.legalPages.data }).from(schema.legalPages);
+    const match = rows.map((r) => r.data).find((l) => l.type === type && l.status === "published");
+    // Fall back to the authored static content if nothing is published in the DB.
+    return match ?? getLegalPage(type);
+  },
+};
+
+const contentRepo: ContentRepository = {
+  async settings() {
+    const [row] = await getDb()
+      .select({ data: schema.platformSettings.data })
+      .from(schema.platformSettings)
+      .where(eq(schema.platformSettings.id, PLATFORM_SETTINGS_ID))
+      .limit(1);
+    return row?.data ?? seedSettings;
+  },
+  async websiteContent() {
+    const rows = await getDb().select({ data: schema.websiteContent.data }).from(schema.websiteContent);
+    return rows.map((r) => r.data).filter((w) => w.status === "published");
+  },
+  async templates() {
+    const rows = await getDb()
+      .select({ data: schema.templates.data })
+      .from(schema.templates)
+      .orderBy(asc(schema.templates.sortOrder));
+    return rows.map((r) => r.data).filter((t) => t.status === "published");
+  },
+  async packages() {
+    const rows = await getDb()
+      .select({ data: schema.packages.data })
+      .from(schema.packages)
+      .orderBy(asc(schema.packages.sortOrder));
+    return rows.map((r) => r.data).filter((p) => p.status === "published");
+  },
+  async faq() {
+    const rows = await getDb()
+      .select({ data: schema.faqEntries.data })
+      .from(schema.faqEntries)
+      .orderBy(asc(schema.faqEntries.sortOrder));
+    return rows.map((r) => r.data).filter((f) => f.status === "published");
   },
 };
 
@@ -358,4 +400,5 @@ export const dbRepositories: RepositoryBundle = {
   media: mediaRepo,
   activity: activityRepo,
   auth: authRepo,
+  content: contentRepo,
 };

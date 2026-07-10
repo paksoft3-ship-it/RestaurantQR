@@ -5,15 +5,20 @@ import type {
   Campaign,
   CustomerAction,
   Enquiry,
+  FaqEntry,
   LegalPage,
   MediaAsset,
   MenuCategory,
   MenuProduct,
   NFCProduct,
   OpeningHours,
+  PackagePlan,
+  PlatformSettings,
   QRCodeRecord,
   Restaurant,
   RestaurantLocation,
+  Template,
+  WebsiteContentBlock,
 } from "@/domain/entities";
 import type { LegalPageType } from "@/domain/enums";
 
@@ -118,6 +123,18 @@ export interface AuthRepository {
   verifyCredentials(email: string, password: string): Promise<AdminUser | null>;
 }
 
+/**
+ * Managed marketing/content collections edited in admin and read by the public
+ * marketing pages. Reads return published items ordered for display.
+ */
+export interface ContentRepository {
+  settings(): Promise<PlatformSettings>;
+  websiteContent(): Promise<WebsiteContentBlock[]>;
+  templates(): Promise<Template[]>;
+  packages(): Promise<PackagePlan[]>;
+  faq(): Promise<FaqEntry[]>;
+}
+
 export interface RepositoryBundle {
   restaurants: RestaurantRepository;
   branding: BrandingRepository;
@@ -131,4 +148,5 @@ export interface RepositoryBundle {
   media: MediaRepository;
   activity: ActivityRepository;
   auth: AuthRepository;
+  content: ContentRepository;
 }

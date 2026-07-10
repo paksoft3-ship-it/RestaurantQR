@@ -4,6 +4,8 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { FaqAccordion, type FaqItem } from "@/components/marketing/faq-accordion";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { routes } from "@/lib/routes";
+import { getRepositories } from "@/data/repositories";
+import { titleCase } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -11,30 +13,28 @@ export const metadata: Metadata = {
     "Frequently asked questions about YourPlatform's managed QR/NFC restaurant service — how it works, products, languages, updates and ordering.",
 };
 
-const categories = [
-  { id: "general", label: "General" },
-  { id: "managed", label: "Managed service" },
-  { id: "qr-nfc", label: "QR & NFC" },
-  { id: "menu", label: "Menu & ordering" },
-  { id: "updates", label: "Updates & support" },
-];
+// Friendly labels for known category slugs; unknown ones fall back to title case.
+const CATEGORY_LABELS: Record<string, string> = {
+  general: "General",
+  managed: "Managed service",
+  "qr-nfc": "QR & NFC",
+  menu: "Menu & ordering",
+  updates: "Updates & support",
+};
 
-const items: FaqItem[] = [
-  { id: "what-is", category: "general", question: "What is YourPlatform?", answer: "A managed QR/NFC restaurant platform. We create and maintain branded restaurant pages, digital menus and QR/NFC products on your behalf." },
-  { id: "who-for", category: "general", question: "Who is it for?", answer: "Restaurants that want a professional digital experience without managing any software themselves." },
-  { id: "do-i-login", category: "managed", question: "Do I get a login or dashboard?", answer: "No. YourPlatform is a fully managed service. There are no restaurant-owner accounts, logins or dashboards — our team handles everything." },
-  { id: "approve", category: "managed", question: "Do I approve changes before they go live?", answer: "Yes. You review a private preview and nothing is published without your approval." },
-  { id: "qr-nfc-diff", category: "qr-nfc", question: "What's the difference between QR and NFC?", answer: "QR codes are scanned with a camera; NFC products are tapped with a phone. Both open the same branded restaurant experience." },
-  { id: "products", category: "qr-nfc", question: "What QR/NFC products are available?", answer: "Table tents, NFC table stands, NFC cards, QR and NFC stickers, window stickers, counter displays and printed cards — all configured and produced for you." },
-  { id: "four-actions", category: "menu", question: "What are the four customer actions?", answer: "Call Order, Pick Your Meal, Online Order with Pay, and Visit Us — the actions guests use most, placed front and centre." },
-  { id: "online-order", category: "menu", question: "Is there a checkout or cart?", answer: "No internal checkout. 'Online Order with Pay' links to your existing external ordering or delivery website." },
-  { id: "languages", category: "menu", question: "Can the experience be multilingual?", answer: "Yes. We can configure a primary language and additional languages for your restaurant." },
-  { id: "updates", category: "updates", question: "How do I update my menu or hours?", answer: "Just send us the changes. Our team keeps your menu, hours, links and campaigns up to date." },
-  { id: "support", category: "updates", question: "What kind of support is included?", answer: "Ongoing managed support is part of the service. Specific terms are confirmed in your quote." },
-  { id: "pricing", category: "general", question: "How much does it cost?", answer: "Pricing is tailored to your restaurant — there are no fixed setup fees. Request a quote and we'll prepare clear pricing." },
-];
+export default async function FaqPage() {
+  const entries = await getRepositories().content.faq();
+  const items: FaqItem[] = entries.map((e) => ({
+    id: e.id,
+    category: e.category,
+    question: e.question,
+    answer: e.answer,
+  }));
+  const categories = Array.from(new Set(entries.map((e) => e.category))).map((id) => ({
+    id,
+    label: CATEGORY_LABELS[id] ?? titleCase(id),
+  }));
 
-export default function FaqPage() {
   return (
     <>
       <section className="py-16 md:py-20">

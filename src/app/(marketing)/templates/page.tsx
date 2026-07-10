@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { TemplateCard } from "@/components/marketing/template-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { routes } from "@/lib/routes";
+import { getRepositories } from "@/data/repositories";
 
 export const metadata: Metadata = {
   title: "Restaurant Templates",
@@ -11,15 +12,8 @@ export const metadata: Metadata = {
     "Five managed visual directions — Modern Fast Food, Warm Mediterranean, Premium Dining, Fresh & Healthy, and Café & Bakery — tailored to your brand by our team.",
 };
 
-const templates = [
-  { name: "Modern Fast Food", description: "Bold, energetic and conversion-focused for pizza, burgers and casual dining.", bestFor: "Pizzerias, burger bars, fried chicken, street food", image: "/images/templates/modern-fast-food.jpg" },
-  { name: "Warm Mediterranean", description: "Inviting, earthy tones for grills, mezze and Mediterranean kitchens.", bestFor: "Grills, kebab houses, mezze restaurants", image: "/images/templates/warm-mediterranean.jpg" },
-  { name: "Premium Dining", description: "Refined and elegant for fine dining and signature restaurants.", bestFor: "Fine dining, seafood, steakhouses", image: "/images/templates/premium-dining.jpg" },
-  { name: "Fresh & Healthy", description: "Clean, bright and vibrant for bowls, salads and juices.", bestFor: "Healthy fast-casual, juice bars, vegan", image: "/images/templates/fresh-healthy.jpg" },
-  { name: "Café & Bakery", description: "Cosy and crafted for cafés, bakeries and brunch spots.", bestFor: "Cafés, bakeries, brunch, patisseries", image: "/images/templates/cafe-bakery.jpg" },
-];
-
-export default function TemplatesPage() {
+export default async function TemplatesPage() {
+  const templates = await getRepositories().content.templates();
   return (
     <>
       <section className="py-16 md:py-20">
@@ -38,7 +32,7 @@ export default function TemplatesPage() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {templates.map((t) => (
               <TemplateCard
-                key={t.name}
+                key={t.id}
                 name={t.name}
                 description={t.description}
                 bestFor={t.bestFor}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLegalPage } from "@/content/legal";
+import { getRepositories } from "@/data/repositories";
 import { LegalPageLayout } from "@/components/legal/legal-page-layout";
 import { appConfig } from "@/lib/config/app-config";
 
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
     "The rules and guidelines for using the YourPlatform website, a fully managed QR/NFC restaurant service.",
 };
 
-export default function TermsPage() {
-  const page = getLegalPage("terms");
+export default async function TermsPage() {
+  const page = (await getRepositories().legal.get("terms")) ?? getLegalPage("terms");
   return (
     <LegalPageLayout
       page={page}
