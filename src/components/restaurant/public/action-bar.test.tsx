@@ -10,16 +10,23 @@ import type { Restaurant, CustomerAction } from "@/domain/entities";
 vi.mock("next/navigation", () => ({ usePathname: () => "/restaurants/pizza-house" }));
 
 const restaurant = { id: "r1", slug: "pizza-house", name: "Pizza House", displayName: "Pizza House" } as Restaurant;
-function act(type: CustomerAction["type"], dt: CustomerAction["destinationType"], dest: string): CustomerAction {
-  return { id: `a_${type}`, restaurantId: "r1", type, label: { en: type }, destinationType: dt, destination: dest, enabled: true, status: "configured", sortOrder: 1 };
+function act(
+  type: CustomerAction["type"],
+  dt: CustomerAction["destinationType"],
+  dest: string,
+  label: string = type,
+): CustomerAction {
+  return { id: `a_${type}`, restaurantId: "r1", type, label: { en: label }, destinationType: dt, destination: dest, enabled: true, status: "configured", sortOrder: 1 };
 }
 
+// The bottom-bar labels are data-driven (the admin-set customer-action labels),
+// falling back to translations when an action has none (e.g. pick-your-meal here).
 const fullData = buildRestaurantPublicActions(
   restaurant,
   [
-    act("call-order", "phone", "+1-512-555-0142"),
-    act("online-order", "external", "https://order.example.com/ph"),
-    act("visit-us", "map", "https://maps.google.com/?q=ph"),
+    act("call-order", "phone", "+1-512-555-0142", "Call Order"),
+    act("online-order", "external", "https://order.example.com/ph", "Online Order with Pay"),
+    act("visit-us", "map", "https://maps.google.com/?q=ph", "Add Contact"),
     act("whatsapp", "whatsapp", "+15125550142"),
     act("instagram", "external", "https://instagram.com/ph"),
   ],

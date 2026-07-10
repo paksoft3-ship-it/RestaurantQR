@@ -1,6 +1,7 @@
 import type { CustomerAction, Restaurant, RestaurantLocation } from "@/domain/entities";
 import type { CustomerActionType } from "@/domain/enums";
 import type { Locale } from "@/lib/i18n/locales";
+import { resolveText } from "@/lib/i18n/locales";
 import { routes } from "@/lib/routes";
 import {
   type FixedRestaurantAction,
@@ -20,6 +21,18 @@ export const ACTION_ICONS = {
 function destinationFor(actions: CustomerAction[], type: CustomerActionType): string | null {
   const match = actions.find((a) => a.enabled && a.type === type && a.destination?.trim());
   return match?.destination?.trim() ?? null;
+}
+
+/** The admin-set public label for an action type, or null to use the default. */
+function labelFor(
+  actions: CustomerAction[],
+  type: CustomerActionType,
+  locale: Locale,
+): string | null {
+  const match = actions.find((a) => a.type === type);
+  if (!match) return null;
+  const text = resolveText(match.label, locale)?.trim();
+  return text ? text : null;
 }
 
 function addressLine(location: RestaurantLocation | null): string | null {
@@ -71,6 +84,15 @@ export function buildRestaurantPublicActions(
     facebookUrl: null, // no facebook field in the data model — hidden by design
     websiteUrl: null, // no dedicated public website field — hidden by design
     publicEmail,
+    labels: {
+      callOrder: labelFor(actions, "call-order", locale),
+      pickYourMeal: labelFor(actions, "pick-your-meal", locale),
+      externalOrder: labelFor(actions, "online-order", locale),
+      // The bottom "Add Contact" button follows the save-contact action if set,
+      // otherwise the (renamed) visit-us action's label.
+      addContact:
+        labelFor(actions, "save-contact", locale) ?? labelFor(actions, "visit-us", locale),
+    },
   };
 }
 
@@ -82,20 +104,29 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
       iconSrc: ACTION_ICONS.callOrder,
       href: data.orderPhone ? `tel:${data.orderPhone}` : null,
       available: Boolean(data.orderPhone),
+      label: data.labels.callOrder,
     },
-    { type: "OPEN_MENU", iconSrc: ACTION_ICONS.pickYourMeal, href: data.menuUrl, available: true },
+    {
+      type: "OPEN_MENU",
+      iconSrc: ACTION_ICONS.pickYourMeal,
+      href: data.menuUrl,
+      available: true,
+      label: data.labels.pickYourMeal,
+    },
     {
       type: "EXTERNAL_ORDER",
       iconSrc: ACTION_ICONS.onlineOrderPay,
       href: data.externalOrderingUrl,
       available: Boolean(data.externalOrderingUrl),
       external: true,
+      label: data.labels.externalOrder,
     },
     {
       type: "ADD_CONTACT",
       iconSrc: ACTION_ICONS.addContact,
       href: data.contactCardUrl,
       available: data.hasContactData && Boolean(data.contactCardUrl),
+      label: data.labels.addContact,
     },
   ];
 }

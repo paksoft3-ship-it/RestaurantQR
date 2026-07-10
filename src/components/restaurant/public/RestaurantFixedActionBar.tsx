@@ -41,7 +41,7 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
     >
       <ul className="mx-auto flex max-w-shell items-stretch justify-around">
         {fixed.map((action) => {
-          const label = t(LABEL_KEY[action.type]);
+          const label = action.label ?? t(LABEL_KEY[action.type]);
           switch (action.type) {
             case "CALL_ORDER":
               return (
