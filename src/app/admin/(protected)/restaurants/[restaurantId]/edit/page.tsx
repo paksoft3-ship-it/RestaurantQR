@@ -100,15 +100,20 @@ export default function RestaurantEditPage() {
     }
   }, [id, reset]);
 
+  const isDirtyRef = useRef(false);
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirty]);
+
   useEffect(() => {
     load();
     // Re-load on external changes only when not dirty to avoid clobbering edits.
     const handler = () => {
-      if (!isDirty) load();
+      if (!isDirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, isDirty]);
+  }, [load]);
 
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {

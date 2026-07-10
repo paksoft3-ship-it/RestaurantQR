@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -93,14 +93,19 @@ export default function ContactLocationPage() {
     if (r) reset(defaultValues(loc, acts));
   }, [id, reset]);
 
+  const isDirtyRef = useRef(false);
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirty]);
+
   useEffect(() => {
     load();
     const handler = () => {
-      if (!isDirty) load();
+      if (!isDirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, isDirty]);
+  }, [load]);
 
   const persistContactMethod = (
     type: CustomerActionType,

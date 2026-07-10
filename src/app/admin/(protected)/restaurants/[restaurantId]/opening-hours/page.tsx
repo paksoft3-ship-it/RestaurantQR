@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { openingHoursSchema } from "@/domain/schemas";
@@ -90,14 +90,19 @@ export default function OpeningHoursPage() {
     setDirty(false);
   }, [id]);
 
+  const dirtyRef = useRef(false);
+  useEffect(() => {
+    dirtyRef.current = dirty;
+  }, [dirty]);
+
   useEffect(() => {
     load();
     const handler = () => {
-      if (!dirty) load();
+      if (!dirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, dirty]);
+  }, [load]);
 
   const mutate = (next: OpeningHours[]) => {
     setDays(next);

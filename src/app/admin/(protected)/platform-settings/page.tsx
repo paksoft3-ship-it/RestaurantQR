@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
@@ -56,14 +56,19 @@ export default function PlatformSettingsPage() {
     });
   }, [reset]);
 
+  const isDirtyRef = useRef(false);
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirty]);
+
   useEffect(() => {
     load();
     const handler = () => {
-      if (!isDirty) load();
+      if (!isDirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, isDirty]);
+  }, [load]);
 
   const onSave = handleSubmit((input) => {
     demoStore.updateSettings({

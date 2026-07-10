@@ -124,14 +124,22 @@ export default function BrandingEditPage() {
     }
   }, [id, reset]);
 
+  // Mirror isDirty into a ref so the store-change handler reads the latest value
+  // without being an effect dependency (otherwise editing a field re-runs the
+  // effect, reloads, and discards the edit).
+  const isDirtyRef = useRef(false);
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirty]);
+
   useEffect(() => {
     load();
     const handler = () => {
-      if (!isDirty) load();
+      if (!isDirtyRef.current) load();
     };
     window.addEventListener(DEMO_STORE_EVENT, handler);
     return () => window.removeEventListener(DEMO_STORE_EVENT, handler);
-  }, [load, isDirty]);
+  }, [load]);
 
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
