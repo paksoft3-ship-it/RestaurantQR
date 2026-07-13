@@ -21,6 +21,7 @@ const FILLED: Record<CustomerActionType, "primary" | "dark" | "outline"> = {
   email: "outline",
   instagram: "outline",
   share: "outline",
+  custom: "outline",
 };
 
 const TILE_STYLE = {

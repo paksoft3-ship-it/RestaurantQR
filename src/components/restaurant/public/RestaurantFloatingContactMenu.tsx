@@ -8,6 +8,7 @@ import { trackRestaurantAction } from "@/lib/restaurant-actions/restaurantAction
 import { useTranslations } from "@/lib/i18n/use-translations";
 import { useLocale } from "@/lib/i18n/locale-provider";
 import { Icon } from "@/components/shared/icon";
+import { ActionIcon } from "./ActionIcon";
 import { cn } from "@/lib/utils";
 
 /**
@@ -148,11 +149,11 @@ export function RestaurantFloatingContactMenu({
               className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span className="whitespace-nowrap rounded-full border border-border bg-canvas px-3 py-1.5 text-small font-semibold text-text-primary shadow-card">
-                {t(item.labelKey)}
+                {item.label ?? (item.labelKey ? t(item.labelKey) : "")}
                 {item.external ? <span className="sr-only"> — {t("rb.opensExternal")}</span> : null}
               </span>
-              <span className="flex size-11 items-center justify-center rounded-full bg-primary text-white shadow-lift">
-                <Icon name={item.icon} className="size-5" aria-hidden />
+              <span className="flex size-11 items-center justify-center overflow-hidden rounded-full bg-primary text-white shadow-lift">
+                <ActionIcon icon={item.icon} size={20} className="size-5" imgClassName="size-6 rounded-sm" />
               </span>
             </a>
           </li>

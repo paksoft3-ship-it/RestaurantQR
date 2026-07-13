@@ -5,11 +5,12 @@ import { LocaleProvider } from "@/lib/i18n/locale-provider";
 import { RestaurantFixedActionBar } from "./RestaurantFixedActionBar";
 import { RestaurantFloatingContactMenu } from "./RestaurantFloatingContactMenu";
 import { buildRestaurantPublicActions } from "@/lib/restaurant-actions/buildRestaurantActions";
-import type { Restaurant, CustomerAction } from "@/domain/entities";
+import type { Restaurant, CustomerAction, RestaurantLocation } from "@/domain/entities";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/restaurants/pizza-house" }));
 
 const restaurant = { id: "r1", slug: "pizza-house", name: "Pizza House", displayName: "Pizza House" } as Restaurant;
+const location = { id: "l1", restaurantId: "r1", locationName: "Main", country: "US", city: "Austin", district: null, address: "120 Congress Ave", postalCode: null, latitude: null, longitude: null, mapUrl: "https://maps.google.com/?q=120+Congress+Ave", timezone: null, publicLabel: null, internalNotes: null } as RestaurantLocation;
 function act(
   type: CustomerAction["type"],
   dt: CustomerAction["destinationType"],
@@ -30,7 +31,7 @@ const fullData = buildRestaurantPublicActions(
     act("whatsapp", "whatsapp", "+15125550142"),
     act("instagram", "external", "https://instagram.com/ph"),
   ],
-  null,
+  location,
   "en",
   { allowHttp: false },
 );

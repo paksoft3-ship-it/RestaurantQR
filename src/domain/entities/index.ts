@@ -158,6 +158,12 @@ export interface CustomerAction {
   label: LocalizedText;
   destinationType: DestinationType;
   destination: string | null;
+  /**
+   * Optional admin-chosen icon override. Either a lucide icon name (e.g.
+   * "MapPin") or an uploaded image URL ("https://…" / "/…"). When null/absent
+   * the public UI falls back to the built-in icon for the action type.
+   */
+  icon?: string | null;
   enabled: boolean;
   status: "configured" | "needs-config";
   sortOrder: number;

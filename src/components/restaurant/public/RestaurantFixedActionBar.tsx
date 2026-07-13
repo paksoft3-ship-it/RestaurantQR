@@ -48,6 +48,7 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
                 <RestaurantActionItem
                   key={action.type}
                   iconSrc={action.iconSrc}
+                  iconOverride={action.iconOverride}
                   label={label}
                   mode={action.available ? "tel" : "disabled"}
                   href={action.href}
@@ -60,6 +61,7 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
                 <RestaurantActionItem
                   key={action.type}
                   iconSrc={action.iconSrc}
+                  iconOverride={action.iconOverride}
                   label={label}
                   mode="internal"
                   href={action.href}
@@ -72,6 +74,7 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
                 <RestaurantActionItem
                   key={action.type}
                   iconSrc={action.iconSrc}
+                  iconOverride={action.iconOverride}
                   label={label}
                   mode={action.available ? "external" : "disabled"}
                   href={action.href}
@@ -85,12 +88,22 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
                 <RestaurantActionItem
                   key={action.type}
                   iconSrc={action.iconSrc}
+                  iconOverride={action.iconOverride}
                   label={label}
-                  mode={action.available ? "download" : "disabled"}
+                  mode={action.available ? action.mode : "disabled"}
                   href={action.href}
+                  srHint={action.mode === "external" ? t("rb.opensExternal") : undefined}
                   downloadName={`${actions.restaurantSlug}-contact.vcf`}
                   unavailableLabel={t("rb.unavailable")}
-                  onActivate={() => track("add-contact", "restaurant_vcard_downloaded", "download")}
+                  onActivate={() =>
+                    track(
+                      "add-contact",
+                      action.mode === "download"
+                        ? "restaurant_vcard_downloaded"
+                        : "restaurant_contact_action_clicked",
+                      action.mode,
+                    )
+                  }
                 />
               );
             default:

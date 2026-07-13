@@ -13,7 +13,7 @@ function action(type: CustomerAction["type"], destinationType: CustomerAction["d
   return { id: `a_${type}`, restaurantId: "r1", type, label: { en: type }, destinationType, destination, enabled: true, status: "configured", sortOrder: 1 };
 }
 
-const location = { id: "l1", restaurantId: "r1", locationName: "Main", country: "US", city: "Austin", district: "Downtown", address: "120 Congress Ave", postalCode: "78701", latitude: null, longitude: null, mapUrl: null, timezone: null, publicLabel: null, internalNotes: null } as RestaurantLocation;
+const location = { id: "l1", restaurantId: "r1", locationName: "Main", country: "US", city: "Austin", district: "Downtown", address: "120 Congress Ave", postalCode: "78701", latitude: null, longitude: null, mapUrl: "https://maps.google.com/?q=120+Congress+Ave", timezone: null, publicLabel: null, internalNotes: null } as RestaurantLocation;
 
 describe("urlSafety", () => {
   it("normalizes phone numbers for tel:", () => {
@@ -98,5 +98,102 @@ describe("missing data", () => {
     expect(fixed[2].available).toBe(false); // external
     expect(fixed[3].available).toBe(false); // add contact
     expect(buildFloatingActions(data)).toHaveLength(0);
+  });
+});
+
+describe("Add Contact button link", () => {
+  it("opens the visit-us destination when set (external), not the vCard", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [action("visit-us", "external", "https://hover.cards/2b75c15a")],
+      null,
+      "en",
+      { allowHttp: false },
+    );
+    const addContact = buildFixedActions(data)[3];
+    expect(addContact.type).toBe("ADD_CONTACT");
+    expect(addContact.available).toBe(true);
+    expect(addContact.href).toBe("https://hover.cards/2b75c15a");
+    expect(addContact.type === "ADD_CONTACT" && addContact.mode).toBe("external");
+  });
+
+  it("honors a map-type destination on the Add Contact button", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [action("visit-us", "map", "https://hover.cards/2b75c15a")],
+      null,
+      "en",
+      { allowHttp: false },
+    );
+    const addContact = buildFixedActions(data)[3];
+    expect(addContact.href).toBe("https://hover.cards/2b75c15a");
+  });
+
+  it("falls back to the vCard download when no contact link is set", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [action("call-order", "phone", "+1-512-555-0142")], // gives contact data
+      location,
+      "en",
+    );
+    const addContact = buildFixedActions(data)[3];
+    expect(addContact.href).toBe("/api/restaurants/pizza-house/contact-card");
+    expect(addContact.type === "ADD_CONTACT" && addContact.mode).toBe("download");
+  });
+
+  it("prefers a save-contact link over the visit-us link", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [
+        action("save-contact", "external", "https://hover.cards/save"),
+        action("visit-us", "external", "https://hover.cards/visit"),
+      ],
+      null,
+      "en",
+      { allowHttp: false },
+    );
+    expect(buildFixedActions(data)[3].href).toBe("https://hover.cards/save");
+  });
+});
+
+describe("custom buttons + icon overrides", () => {
+  function withIcon(a: CustomerAction, icon: string): CustomerAction {
+    return { ...a, icon };
+  }
+
+  it("adds enabled custom actions to the floating menu with their label + link", () => {
+    const custom = withIcon(action("custom", "external", "https://example.com/book"), "Calendar");
+    custom.label = { en: "Book a table" };
+    const data = buildRestaurantPublicActions(restaurant, [custom], null, "en", { allowHttp: false });
+    const floating = buildFloatingActions(data);
+    const item = floating.find((f) => f.label === "Book a table");
+    expect(item).toBeDefined();
+    expect(item?.href).toBe("https://example.com/book");
+    expect(item?.icon).toBe("Calendar");
+    expect(item?.external).toBe(true);
+  });
+
+  it("skips custom actions with no valid destination", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [action("custom", "external", "not a url")],
+      null,
+      "en",
+      { allowHttp: false },
+    );
+    expect(data.custom).toHaveLength(0);
+  });
+
+  it("carries per-button icon overrides onto the fixed actions", () => {
+    const data = buildRestaurantPublicActions(
+      restaurant,
+      [withIcon(action("call-order", "phone", "+1-512-555-0142"), "Headset")],
+      null,
+      "en",
+    );
+    const call = buildFixedActions(data)[0];
+    expect(call.iconOverride).toBe("Headset");
+    // untouched actions keep the built-in PNG with no override
+    expect(buildFixedActions(data)[1].iconOverride).toBeNull();
   });
 });

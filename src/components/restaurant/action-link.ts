@@ -18,6 +18,7 @@ export const ACTION_ICON: Record<CustomerActionType, string> = {
   email: "Mail",
   instagram: "Instagram",
   share: "Share2",
+  custom: "Link",
 };
 
 function sanitizePhone(value: string): string {

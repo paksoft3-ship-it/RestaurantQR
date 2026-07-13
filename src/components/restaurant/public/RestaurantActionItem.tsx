@@ -1,11 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ActionIcon } from "./ActionIcon";
 
 interface RestaurantActionItemProps {
   iconSrc: string;
+  /** Admin override icon (lucide name or image URL). Falls back to `iconSrc`. */
+  iconOverride?: string | null;
   label: string;
   /** Mode determines the element + behavior. */
   mode: "internal" | "tel" | "external" | "download" | "disabled";
@@ -25,6 +27,7 @@ interface RestaurantActionItemProps {
  */
 export function RestaurantActionItem({
   iconSrc,
+  iconOverride,
   label,
   mode,
   href,
@@ -41,13 +44,12 @@ export function RestaurantActionItem({
         active ? "text-primary" : "text-text-secondary",
       )}
     >
-      <Image
-        src={iconSrc}
-        alt=""
-        width={38}
-        height={38}
-        className="size-9 object-contain"
-        aria-hidden
+      <ActionIcon
+        icon={iconOverride}
+        fallbackSrc={iconSrc}
+        size={38}
+        className="size-9"
+        imgClassName="size-9"
       />
       <span className={cn("text-[11px] font-semibold leading-tight", active && "text-primary")}>
         {label}
@@ -65,7 +67,13 @@ export function RestaurantActionItem({
           aria-disabled="true"
           className="flex min-h-[60px] flex-col items-center justify-center gap-1 px-1 py-1.5 text-center text-text-tertiary opacity-60"
         >
-          <Image src={iconSrc} alt="" width={38} height={38} className="size-9 object-contain opacity-70" aria-hidden />
+          <ActionIcon
+            icon={iconOverride}
+            fallbackSrc={iconSrc}
+            size={38}
+            className="size-9"
+            imgClassName="size-9 opacity-70"
+          />
           <span className="text-[11px] font-semibold leading-tight">{label}</span>
           <span className="sr-only">{unavailableLabel ?? "Action unavailable"}</span>
         </span>

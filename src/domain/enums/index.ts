@@ -75,6 +75,7 @@ export const CUSTOMER_ACTION_TYPES = [
   "email",
   "instagram",
   "share",
+  "custom",
 ] as const;
 export type CustomerActionType = (typeof CUSTOMER_ACTION_TYPES)[number];
 

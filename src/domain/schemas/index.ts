@@ -200,6 +200,7 @@ export const customerActionSchema = z.object({
   labelEn: z.string().min(1, "Label is required"),
   destinationType: z.enum(DESTINATION_TYPES),
   destination: z.string().max(400).optional().or(z.literal("")),
+  icon: z.string().max(400).optional().or(z.literal("")),
   enabled: z.boolean().default(true),
 });
 export type CustomerActionInput = z.infer<typeof customerActionSchema>;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { customerActionSchema } from "@/domain/schemas";
@@ -29,6 +29,7 @@ import { Icon } from "@/components/shared/icon";
 import { PermissionGate } from "@/components/shared/permission-gate";
 import { EmptyState } from "@/components/shared/states";
 import { useToast } from "@/components/ui/toast";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import { cn } from "@/lib/utils";
 
 const PRIMARY_TYPES: CustomerActionType[] = ["call-order", "pick-your-meal", "online-order", "visit-us"];
@@ -37,25 +38,60 @@ const TYPE_LABELS: Record<CustomerActionType, string> = {
   "call-order": "Call Order",
   "pick-your-meal": "Pick Your Meal",
   "online-order": "Online Order with Pay",
-  "visit-us": "Visit Us",
+  "visit-us": "Add Contact",
   whatsapp: "WhatsApp",
   "save-contact": "Save Contact",
   email: "Email",
   instagram: "Instagram",
   share: "Share",
+  custom: "Custom button",
 };
 
 const TYPE_ICONS: Record<CustomerActionType, string> = {
   "call-order": "Phone",
   "pick-your-meal": "BookOpen",
   "online-order": "CreditCard",
-  "visit-us": "MapPin",
+  "visit-us": "Contact",
   whatsapp: "MessageCircle",
   "save-contact": "Contact",
   email: "Mail",
   instagram: "Instagram",
   share: "Share2",
+  custom: "Link",
 };
+
+/** An icon value is an uploaded image when it looks like a URL/path. */
+function isImageIcon(icon: string | null | undefined): boolean {
+  return Boolean(icon && (icon.startsWith("http") || icon.startsWith("/")));
+}
+
+/** Curated lucide icons offered in the per-button icon picker. */
+const PRESET_ICONS = [
+  "Phone",
+  "MapPin",
+  "Navigation",
+  "BookOpen",
+  "Utensils",
+  "CreditCard",
+  "ShoppingBag",
+  "ShoppingCart",
+  "Contact",
+  "UserPlus",
+  "MessageCircle",
+  "Mail",
+  "Instagram",
+  "Facebook",
+  "Globe",
+  "Link",
+  "Star",
+  "Heart",
+  "Gift",
+  "Calendar",
+  "Clock",
+  "Camera",
+  "Music",
+  "Youtube",
+];
 
 const DESTINATION_LABELS: Record<DestinationType, string> = {
   internal: "Internal page",
@@ -72,7 +108,105 @@ interface DraftAction {
   labelEn: string;
   destinationType: DestinationType;
   destination: string;
+  /** Lucide icon name or uploaded image URL; "" = built-in default. */
+  icon: string;
   enabled: boolean;
+}
+
+/** Small preview of the current icon (uploaded image or lucide). */
+function IconSwatch({ icon, defaultIcon }: { icon: string; defaultIcon: string }) {
+  const resolved = icon.trim();
+  if (isImageIcon(resolved)) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={resolved} alt="" className="size-6 object-contain" />;
+  }
+  return <Icon name={resolved || defaultIcon} className="size-5" aria-hidden />;
+}
+
+/** Per-button icon control: preset lucide picker + custom image upload + reset. */
+function IconField({
+  rowId,
+  value,
+  defaultIcon,
+  onChange,
+  notify,
+}: {
+  rowId: string;
+  value: string;
+  defaultIcon: string;
+  onChange: (next: string) => void;
+  notify: ReturnType<typeof useToast>["toast"];
+}) {
+  const [open, setOpen] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const inputId = `icon-upload-${rowId}`;
+
+  const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setUploading(true);
+    const uploaded = await uploadImage(file, "action-icons");
+    setUploading(false);
+    if (uploaded) {
+      onChange(uploaded);
+      notify({ title: "Icon uploaded", description: "Save the draft to apply it.", intent: "success" });
+    } else {
+      notify({
+        title: "Upload unavailable",
+        description: "Configure Blob storage (BLOB_READ_WRITE_TOKEN) to upload custom icons.",
+        intent: "info",
+      });
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-border bg-canvas text-primary">
+          <IconSwatch icon={value} defaultIcon={defaultIcon} />
+        </span>
+        <Button type="button" variant="outline" size="sm" onClick={() => setOpen((o) => !o)}>
+          <Icon name="LayoutGrid" className="size-4" aria-hidden /> Choose icon
+        </Button>
+        <Button type="button" variant="ghost" size="sm" asChild>
+          <label htmlFor={inputId} className="cursor-pointer">
+            <Icon name="Upload" className="size-4" aria-hidden /> {uploading ? "Uploading…" : "Upload"}
+            <input id={inputId} type="file" accept="image/*" className="sr-only" onChange={handleUpload} />
+          </label>
+        </Button>
+        {value ? (
+          <Button type="button" variant="ghost" size="sm" onClick={() => onChange("")}>
+            Reset
+          </Button>
+        ) : null}
+      </div>
+      {open ? (
+        <div className="flex flex-wrap gap-1.5 rounded-[10px] border border-border bg-canvas p-2">
+          {PRESET_ICONS.map((name) => (
+            <button
+              key={name}
+              type="button"
+              aria-label={`Use ${name} icon`}
+              aria-pressed={value === name}
+              onClick={() => {
+                onChange(name);
+                setOpen(false);
+              }}
+              className={cn(
+                "flex size-8 items-center justify-center rounded-[8px] border",
+                value === name
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border text-text-secondary hover:border-primary/50",
+              )}
+            >
+              <Icon name={name} className="size-4" aria-hidden />
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 function toDraft(action: CustomerAction): DraftAction {
@@ -82,6 +216,7 @@ function toDraft(action: CustomerAction): DraftAction {
     labelEn: resolveText(action.label),
     destinationType: action.destinationType,
     destination: action.destination ?? "",
+    icon: action.icon ?? "",
     enabled: action.enabled,
   };
 }
@@ -101,7 +236,7 @@ function rowError(row: DraftAction): string | null {
   const value = row.destination.trim();
   if (row.enabled && value.length === 0) return "Enabled actions need a destination";
   if ((row.destinationType === "external" || row.destinationType === "map") && value) {
-    if (!/^https:\/\//i.test(value)) return "External links must start with https://";
+    if (!/^https?:\/\//i.test(value)) return "Links must start with https:// (or http://)";
   }
   if (row.destinationType === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
     return "Enter a valid email address";
@@ -174,7 +309,9 @@ export default function CustomerActionsPage() {
 
   const addSupporting = () => {
     const used = new Set(rows.map((r) => r.type));
-    const available = CUSTOMER_ACTION_TYPES.find((t) => !PRIMARY_TYPES.includes(t) && !used.has(t));
+    const available = CUSTOMER_ACTION_TYPES.find(
+      (t) => !PRIMARY_TYPES.includes(t) && t !== "custom" && !used.has(t),
+    );
     const type = available ?? "share";
     setRows((prev) => [
       ...prev,
@@ -184,6 +321,24 @@ export default function CustomerActionsPage() {
         labelEn: TYPE_LABELS[type],
         destinationType: "external",
         destination: "",
+        icon: "",
+        enabled: false,
+      },
+    ]);
+    setDirty(true);
+  };
+
+  /** Add a brand-new custom button (label / icon / link fully editable). */
+  const addCustom = () => {
+    setRows((prev) => [
+      ...prev,
+      {
+        id: createId("act"),
+        type: "custom",
+        labelEn: "New button",
+        destinationType: "external",
+        destination: "",
+        icon: "",
         enabled: false,
       },
     ]);
@@ -232,6 +387,7 @@ export default function CustomerActionsPage() {
         label: { en: row.labelEn },
         destinationType: row.destinationType,
         destination: value || null,
+        icon: row.icon.trim() || null,
         enabled: row.enabled,
         status: (value ? "configured" : "needs-config") as CustomerAction["status"],
         sortOrder: index + 1,
@@ -305,11 +461,13 @@ export default function CustomerActionsPage() {
       >
         <div className="flex flex-wrap items-start gap-3">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-surface-warm text-primary">
-            <Icon name={TYPE_ICONS[row.type]} className="size-5" aria-hidden />
+            <IconSwatch icon={row.icon} defaultIcon={TYPE_ICONS[row.type]} />
           </span>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <p className="font-semibold text-text-primary">{TYPE_LABELS[row.type]}</p>
+              <p className="font-semibold text-text-primary">
+                {row.type === "custom" ? row.labelEn.trim() || "Custom button" : TYPE_LABELS[row.type]}
+              </p>
               {isPrimary ? (
                 <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
                   Primary
@@ -372,6 +530,15 @@ export default function CustomerActionsPage() {
                   }
                   aria-invalid={error ? true : undefined}
                   onChange={(e) => patchRow(row.id, { destination: e.target.value })}
+                />
+              </Field>
+              <Field label="Button icon" htmlFor={`icon-upload-${row.id}`} className="sm:col-span-2">
+                <IconField
+                  rowId={row.id}
+                  value={row.icon}
+                  defaultIcon={TYPE_ICONS[row.type]}
+                  onChange={(next) => patchRow(row.id, { icon: next })}
+                  notify={toast}
                 />
               </Field>
             </div>
@@ -452,22 +619,28 @@ export default function CustomerActionsPage() {
           </AdminSection>
 
           <AdminSection
-            title="Supporting actions"
-            description="Optional actions such as WhatsApp, Email, Save Contact, Share and Social."
+            title="Supporting & custom buttons"
+            description="Optional actions (WhatsApp, Email, Save Contact, Share, Social) plus any custom buttons — each with its own label, icon and link. These appear in the floating “+” menu."
             icon="Plus"
             actions={
               <PermissionGate user={user} permission={PERMISSIONS.RESTAURANT_EDIT}>
-                <Button type="button" variant="ghost" size="sm" onClick={addSupporting}>
-                  <Icon name="Plus" className="size-4" aria-hidden />
-                  Add action
-                </Button>
+                <div className="flex items-center gap-1">
+                  <Button type="button" variant="ghost" size="sm" onClick={addSupporting}>
+                    <Icon name="Plus" className="size-4" aria-hidden />
+                    Add action
+                  </Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={addCustom}>
+                    <Icon name="Sparkles" className="size-4" aria-hidden />
+                    Add custom button
+                  </Button>
+                </div>
               </PermissionGate>
             }
           >
             {supportingRows.length === 0 ? (
               <EmptyState
                 title="No supporting actions"
-                description="Add optional actions like WhatsApp or Email."
+                description="Add optional actions like WhatsApp or Email, or a custom button with your own icon and link."
                 icon="MousePointerClick"
               />
             ) : (
@@ -495,7 +668,9 @@ export default function CustomerActionsPage() {
                         key={a.id}
                         className="flex flex-col items-center gap-1 rounded-[12px] bg-surface p-3 text-center"
                       >
-                        <Icon name={TYPE_ICONS[a.type]} className="size-5 text-primary" aria-hidden />
+                        <span className="flex size-5 items-center justify-center text-primary">
+                          <IconSwatch icon={a.icon} defaultIcon={TYPE_ICONS[a.type]} />
+                        </span>
                         <span className="text-[11px] font-medium text-text-primary">
                           {a.labelEn || TYPE_LABELS[a.type]}
                         </span>

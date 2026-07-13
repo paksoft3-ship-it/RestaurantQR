@@ -1,9 +1,10 @@
 import type { CustomerAction, Restaurant, RestaurantLocation } from "@/domain/entities";
-import type { CustomerActionType } from "@/domain/enums";
+import type { CustomerActionType, DestinationType } from "@/domain/enums";
 import type { Locale } from "@/lib/i18n/locales";
 import { resolveText } from "@/lib/i18n/locales";
 import { routes } from "@/lib/routes";
 import {
+  type FixedActionMode,
   type FixedRestaurantAction,
   type FloatingContactAction,
   type RestaurantPublicActionData,
@@ -18,9 +19,19 @@ export const ACTION_ICONS = {
   addContact: `${ICON_BASE}/add-contact.png`,
 } as const;
 
+function findEnabled(actions: CustomerAction[], type: CustomerActionType): CustomerAction | null {
+  return actions.find((a) => a.enabled && a.type === type && a.destination?.trim()) ?? null;
+}
+
 function destinationFor(actions: CustomerAction[], type: CustomerActionType): string | null {
-  const match = actions.find((a) => a.enabled && a.type === type && a.destination?.trim());
-  return match?.destination?.trim() ?? null;
+  return findEnabled(actions, type)?.destination?.trim() ?? null;
+}
+
+/** The admin-chosen icon override (lucide name or image URL) for an action type. */
+function iconFor(actions: CustomerAction[], type: CustomerActionType): string | null {
+  const match = actions.find((a) => a.type === type);
+  const icon = match?.icon?.trim();
+  return icon ? icon : null;
 }
 
 /** The admin-set public label for an action type, or null to use the default. */
@@ -33,6 +44,62 @@ function labelFor(
   if (!match) return null;
   const text = resolveText(match.label, locale)?.trim();
   return text ? text : null;
+}
+
+interface ResolvedDestination {
+  href: string;
+  mode: FixedActionMode;
+  external: boolean;
+}
+
+/**
+ * Turn a destination type + value into a safe href + how it should open.
+ * Reuses the shared URL-safety helpers (production stays https-only for web
+ * links). Returns null when the destination is missing or unsafe.
+ */
+function resolveDestination(
+  destinationType: DestinationType,
+  destination: string | null | undefined,
+  allowHttp: boolean,
+): ResolvedDestination | null {
+  const value = destination?.trim();
+  if (!value) return null;
+  switch (destinationType) {
+    case "phone": {
+      const phone = normalizePhone(value);
+      return phone ? { href: `tel:${phone}`, mode: "tel", external: false } : null;
+    }
+    case "email": {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return null;
+      return { href: `mailto:${value}`, mode: "tel", external: false };
+    }
+    case "whatsapp": {
+      const wa = buildWhatsappUrl(value);
+      return wa ? { href: wa, mode: "external", external: true } : null;
+    }
+    case "external":
+    case "map": {
+      const web = safeWebUrl(value, { allowHttp });
+      return web ? { href: web, mode: "external", external: true } : null;
+    }
+    case "internal": {
+      // Only same-origin app paths are treated as internal links.
+      return value.startsWith("/") ? { href: value, mode: "internal", external: false } : null;
+    }
+    default:
+      return null;
+  }
+}
+
+/** Resolve an enabled action of a given type to a safe href + open mode. */
+function resolveEnabled(
+  actions: CustomerAction[],
+  type: CustomerActionType,
+  allowHttp: boolean,
+): ResolvedDestination | null {
+  const action = findEnabled(actions, type);
+  if (!action) return null;
+  return resolveDestination(action.destinationType, action.destination, allowHttp);
 }
 
 function addressLine(location: RestaurantLocation | null): string | null {
@@ -60,12 +127,42 @@ export function buildRestaurantPublicActions(
 
   const orderPhone = normalizePhone(destinationFor(actions, "call-order"));
   const externalOrderingUrl = safeWebUrl(destinationFor(actions, "online-order"), { allowHttp });
-  const directionsUrl = safeWebUrl(destinationFor(actions, "visit-us"), { allowHttp });
   const whatsappUrl = buildWhatsappUrl(destinationFor(actions, "whatsapp"));
   const instagramUrl = safeWebUrl(destinationFor(actions, "instagram"), { allowHttp });
   const publicEmail = destinationFor(actions, "email");
 
   const hasContactData = Boolean(orderPhone || publicEmail || addressLine(location));
+  const contactCardUrl = hasContactData ? `/api/restaurants/${slug}/contact-card` : null;
+
+  // The bottom "Add Contact" button uses the admin-set link on the (renamed)
+  // visit-us action, or a dedicated save-contact action; otherwise it falls back
+  // to the generated vCard download.
+  const addContactLink =
+    resolveEnabled(actions, "save-contact", allowHttp) ?? resolveEnabled(actions, "visit-us", allowHttp);
+  const addContactHref = addContactLink?.href ?? contactCardUrl;
+  const addContactMode: RestaurantPublicActionData["addContactMode"] = addContactLink
+    ? addContactLink.mode
+    : "download";
+
+  // "Directions" in the floating menu comes from the location's own map URL, so
+  // it stays independent of the visit-us action (which now drives Add Contact).
+  const directionsUrl = safeWebUrl(location?.mapUrl, { allowHttp });
+
+  // Admin-defined extra buttons → floating "+" menu items.
+  const custom: RestaurantPublicActionData["custom"] = actions
+    .filter((a) => a.enabled && a.type === "custom")
+    .map((a) => {
+      const resolved = resolveDestination(a.destinationType, a.destination, allowHttp);
+      if (!resolved) return null;
+      return {
+        key: a.id,
+        label: resolveText(a.label, locale)?.trim() || "Link",
+        icon: a.icon?.trim() || null,
+        href: resolved.href,
+        external: resolved.external,
+      };
+    })
+    .filter((c): c is NonNullable<typeof c> => c !== null);
 
   return {
     restaurantId: restaurant.id,
@@ -76,7 +173,7 @@ export function buildRestaurantPublicActions(
     primaryPhone: orderPhone,
     menuUrl: routes.restaurant.menu(slug),
     externalOrderingUrl,
-    contactCardUrl: hasContactData ? `/api/restaurants/${slug}/contact-card` : null,
+    contactCardUrl,
     hasContactData,
     whatsappUrl,
     directionsUrl,
@@ -93,6 +190,15 @@ export function buildRestaurantPublicActions(
       addContact:
         labelFor(actions, "save-contact", locale) ?? labelFor(actions, "visit-us", locale),
     },
+    iconOverrides: {
+      callOrder: iconFor(actions, "call-order"),
+      pickYourMeal: iconFor(actions, "pick-your-meal"),
+      externalOrder: iconFor(actions, "online-order"),
+      addContact: iconFor(actions, "save-contact") ?? iconFor(actions, "visit-us"),
+    },
+    addContactHref,
+    addContactMode,
+    custom,
   };
 }
 
@@ -102,6 +208,7 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
     {
       type: "CALL_ORDER",
       iconSrc: ACTION_ICONS.callOrder,
+      iconOverride: data.iconOverrides.callOrder,
       href: data.orderPhone ? `tel:${data.orderPhone}` : null,
       available: Boolean(data.orderPhone),
       label: data.labels.callOrder,
@@ -109,6 +216,7 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
     {
       type: "OPEN_MENU",
       iconSrc: ACTION_ICONS.pickYourMeal,
+      iconOverride: data.iconOverrides.pickYourMeal,
       href: data.menuUrl,
       available: true,
       label: data.labels.pickYourMeal,
@@ -116,6 +224,7 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
     {
       type: "EXTERNAL_ORDER",
       iconSrc: ACTION_ICONS.onlineOrderPay,
+      iconOverride: data.iconOverrides.externalOrder,
       href: data.externalOrderingUrl,
       available: Boolean(data.externalOrderingUrl),
       external: true,
@@ -124,8 +233,10 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
     {
       type: "ADD_CONTACT",
       iconSrc: ACTION_ICONS.addContact,
-      href: data.contactCardUrl,
-      available: data.hasContactData && Boolean(data.contactCardUrl),
+      iconOverride: data.iconOverrides.addContact,
+      href: data.addContactHref,
+      available: Boolean(data.addContactHref),
+      mode: data.addContactMode,
       label: data.labels.addContact,
     },
   ];
@@ -156,5 +267,9 @@ export function buildFloatingActions(data: RestaurantPublicActionData): Floating
       ? { key: "email", icon: "Mail", href: `mailto:${data.publicEmail}`, external: false, labelKey: "rb.email" }
       : null,
   ];
+  // Append admin-defined custom buttons after the built-in contact actions.
+  for (const c of data.custom) {
+    all.push({ key: c.key, icon: c.icon ?? "Link", href: c.href, external: c.external, label: c.label });
+  }
   return all.filter((a): a is FloatingContactAction => a !== null);
 }
