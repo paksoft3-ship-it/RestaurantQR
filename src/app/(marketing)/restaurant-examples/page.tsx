@@ -20,7 +20,9 @@ const directions = VISUAL_DIRECTIONS.map((id) => ({ id, label: titleCase(id) }))
 
 export default async function RestaurantExamplesPage() {
   const repos = getRepositories();
-  const { items } = await repos.restaurants.list({ pageSize: 50 });
+  // Only published restaurants are shown publicly as examples (drafts and
+  // in-progress restaurants stay hidden until an admin publishes them).
+  const { items } = await repos.restaurants.list({ pageSize: 50, publishingStatus: "published" });
   const brandings = await Promise.all(items.map((r) => repos.branding.get(r.id)));
 
   const restaurants: ExampleRestaurant[] = items.map((r, i) => ({

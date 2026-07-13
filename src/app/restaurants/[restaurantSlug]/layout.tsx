@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getRepositories } from "@/data/repositories";
+import { getCurrentAdminUser } from "@/lib/auth";
 import { ToastProvider } from "@/components/ui/toast";
 import { RestaurantPublicHeader } from "@/components/restaurant/restaurant-public-header";
 import { RestaurantFooter } from "@/components/restaurant/restaurant-footer";
@@ -26,6 +27,13 @@ export default async function RestaurantLayout({ children, params }: RestaurantL
   const repos = getRepositories();
   const restaurant = await repos.restaurants.getBySlug(restaurantSlug);
   if (!restaurant) notFound();
+
+  // Publishing gate: unpublished restaurants (draft / in-review / changes-pending
+  // / archived) are hidden from the public. A logged-in admin can still open the
+  // page to preview it before going live.
+  const isPublished = restaurant.publishingStatus === "published";
+  const adminPreview = isPublished ? false : Boolean(await getCurrentAdminUser());
+  if (!isPublished && !adminPreview) notFound();
 
   const [actions, locations, branding] = await Promise.all([
     repos.menus.customerActions(restaurant.id),
@@ -54,6 +62,12 @@ export default async function RestaurantLayout({ children, params }: RestaurantL
   return (
     <ToastProvider>
       <div className="restaurant-public-shell flex min-h-dvh flex-col bg-canvas" style={brandStyle}>
+        {adminPreview ? (
+          <div className="bg-warning/15 px-4 py-2 text-center text-xs font-semibold text-warning">
+            Admin preview — this restaurant is {restaurant.publishingStatus} and not visible to the
+            public yet. Publish it to make it live.
+          </div>
+        ) : null}
         <RestaurantPublicHeader restaurant={restaurant} logoUrl={branding?.logo} />
         <main className="flex-1">{children}</main>
         <RestaurantFooter restaurant={restaurant} />

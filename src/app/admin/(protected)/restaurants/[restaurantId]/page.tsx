@@ -22,7 +22,7 @@ import { Icon } from "@/components/shared/icon";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
 
-type ConfirmKind = "disable" | "archive" | null;
+type ConfirmKind = "disable" | "archive" | "publish" | "unpublish" | null;
 
 function setupProgress(restaurant: Restaurant): number {
   const idx = SETUP_STATUSES.indexOf(restaurant.setupStatus);
@@ -85,13 +85,25 @@ export default function RestaurantWorkspacePage() {
     const patch =
       confirm === "archive"
         ? { publishingStatus: "archived" as const }
-        : { operationalStatus: "disabled" as const };
+        : confirm === "disable"
+          ? { operationalStatus: "disabled" as const }
+          : confirm === "publish"
+            ? { publishingStatus: "published" as const }
+            : { publishingStatus: "draft" as const }; // unpublish
     demoStore.updateRestaurant(id, patch);
-    toast({
-      title: confirm === "archive" ? "Restaurant archived" : "Restaurant disabled",
-      description: "Updated. Nothing was published.",
-      intent: "success",
-    });
+    const titles: Record<Exclude<ConfirmKind, null>, string> = {
+      archive: "Restaurant archived",
+      disable: "Restaurant disabled",
+      publish: "Restaurant published",
+      unpublish: "Restaurant unpublished",
+    };
+    const descriptions: Record<Exclude<ConfirmKind, null>, string> = {
+      archive: "Updated. Nothing was published.",
+      disable: "Updated. Nothing was published.",
+      publish: "It is now live on its public page.",
+      unpublish: "It is hidden from the public again.",
+    };
+    toast({ title: titles[confirm], description: descriptions[confirm], intent: "success" });
     setConfirm(null);
   };
 
@@ -164,9 +176,41 @@ export default function RestaurantWorkspacePage() {
             <div className="flex flex-wrap items-center gap-3">
               <StatusBadge group="publishing" value={restaurant.publishingStatus} />
               <span className="text-small text-text-secondary">
-                Publishing is a separate, reviewed step. Editing here never auto-publishes.
+                {restaurant.publishingStatus === "published"
+                  ? "Live on its public page. Editing never changes the live page until you re-publish."
+                  : "Hidden from the public until you publish. Editing here never auto-publishes."}
               </span>
             </div>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {restaurant.publishingStatus === "published" ? (
+                <Button variant="outline" onClick={() => setConfirm("unpublish")}>
+                  <Icon name="EyeOff" className="size-4" aria-hidden />
+                  Unpublish
+                </Button>
+              ) : (
+                <Button
+                  disabled={restaurant.publishingStatus === "archived"}
+                  onClick={() => setConfirm("publish")}
+                >
+                  <Icon name="Globe" className="size-4" aria-hidden />
+                  Publish
+                </Button>
+              )}
+              <Button asChild variant="ghost">
+                <a
+                  href={routes.restaurant.home(restaurant.slug)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Icon name="ExternalLink" className="size-4" aria-hidden />
+                  View public page
+                </a>
+              </Button>
+            </div>
+            <p className="mt-2 text-xs text-text-tertiary">
+              You can preview the public page any time while logged in — visitors only see it once
+              it’s published.
+            </p>
           </AdminSection>
 
           {/* Info + contact */}
@@ -335,15 +379,43 @@ export default function RestaurantWorkspacePage() {
 
       <ConfirmationDialog
         open={confirm !== null}
-        title={confirm === "archive" ? "Archive restaurant?" : "Disable restaurant?"}
+        title={
+          confirm === "archive"
+            ? "Archive restaurant?"
+            : confirm === "disable"
+              ? "Disable restaurant?"
+              : confirm === "publish"
+                ? "Publish restaurant?"
+                : "Unpublish restaurant?"
+        }
         description={
           confirm === "archive"
             ? "It will be hidden from active lists. This is reversible and does not delete data."
-            : "It will be marked disabled. Public visibility is unaffected until you publish changes."
+            : confirm === "disable"
+              ? "It will be marked disabled. Public visibility is unaffected until you publish changes."
+              : confirm === "publish"
+                ? "This makes the restaurant’s public page live for everyone at its public URL."
+                : "This hides the restaurant’s public page from visitors again. You can re-publish anytime."
         }
-        confirmLabel={confirm === "archive" ? "Archive" : "Disable"}
-        intent="danger"
-        icon={confirm === "archive" ? "Archive" : "Ban"}
+        confirmLabel={
+          confirm === "archive"
+            ? "Archive"
+            : confirm === "disable"
+              ? "Disable"
+              : confirm === "publish"
+                ? "Publish"
+                : "Unpublish"
+        }
+        intent={confirm === "publish" ? "primary" : "danger"}
+        icon={
+          confirm === "archive"
+            ? "Archive"
+            : confirm === "disable"
+              ? "Ban"
+              : confirm === "publish"
+                ? "Globe"
+                : "EyeOff"
+        }
         onConfirm={handleConfirm}
         onCancel={() => setConfirm(null)}
       />

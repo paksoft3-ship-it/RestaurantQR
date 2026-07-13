@@ -236,7 +236,7 @@ export default function RestaurantsListPage() {
                 <Icon name="ArrowUpRight" className="size-4" aria-hidden />
               </Link>
             </Button>
-            {row.original.publishingStatus === "published" ? (
+            {row.original.publishingStatus !== "archived" ? (
               <Button
                 asChild
                 variant="ghost"

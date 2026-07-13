@@ -55,7 +55,7 @@ export function RestaurantContextHeader({
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {restaurant.publishingStatus === "published" ? (
+          {restaurant.publishingStatus !== "archived" ? (
             <Button asChild variant="outline" size="sm">
               <Link
                 href={routes.restaurant.home(restaurant.slug)}
@@ -63,7 +63,7 @@ export function RestaurantContextHeader({
                 rel="noreferrer"
               >
                 <Icon name="ExternalLink" className="size-4" aria-hidden />
-                Public preview
+                {restaurant.publishingStatus === "published" ? "Public preview" : "Preview page"}
               </Link>
             </Button>
           ) : null}
