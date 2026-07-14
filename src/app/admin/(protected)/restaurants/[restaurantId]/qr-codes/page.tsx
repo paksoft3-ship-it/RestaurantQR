@@ -13,6 +13,7 @@ import { PERMISSIONS } from "@/domain/permissions";
 import type { QRCodeRecord, Restaurant } from "@/domain/entities";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { getRestaurantAnalytics } from "@/data/analytics/actions";
+import { addViaMarker } from "@/lib/analytics/via";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -133,6 +134,8 @@ export default function RestaurantQRCodesPage() {
 
   const handleSave = (input: QRCodeInput) => {
     if (!editor) return;
+    // Auto-tag own-restaurant destinations so scans are attributed in Analytics.
+    const destination = addViaMarker(input.destination, "qr");
     if (editor.mode === "create") {
       const newId = createId("qr");
       const now = new Date().toISOString();
@@ -141,7 +144,7 @@ export default function RestaurantQRCodesPage() {
         restaurantId: id,
         displayIdentifier: input.displayIdentifier,
         placement: input.placement,
-        destination: input.destination,
+        destination,
         status: input.status,
         artworkStatus: input.artworkStatus,
         createdAt: now,
@@ -154,7 +157,7 @@ export default function RestaurantQRCodesPage() {
       demoStore.qr.update(editor.record.id, {
         displayIdentifier: input.displayIdentifier,
         placement: input.placement,
-        destination: input.destination,
+        destination,
         status: input.status,
         artworkStatus: input.artworkStatus,
         updatedAt: new Date().toISOString(),
@@ -359,9 +362,8 @@ export default function RestaurantQRCodesPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="ShieldCheck" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          QR records map physical codes to public destinations. Add{" "}
-          <code className="rounded bg-info/10 px-1">?via=qr</code> to a destination to attribute scans
-          in Analytics. Signing secrets and redirect keys are never shown here.
+          QR records map physical codes to public destinations. Scans of your own restaurant pages are
+          attributed automatically in Analytics. Signing secrets and redirect keys are never shown here.
         </span>
       </div>
 

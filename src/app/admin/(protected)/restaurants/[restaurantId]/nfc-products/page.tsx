@@ -17,6 +17,7 @@ import { PERMISSIONS } from "@/domain/permissions";
 import type { NFCProduct, Restaurant } from "@/domain/entities";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { getRestaurantAnalytics } from "@/data/analytics/actions";
+import { addViaMarker } from "@/lib/analytics/via";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -144,7 +145,9 @@ export default function RestaurantNFCProductsPage() {
 
   const handleSave = (input: NFCProductInput) => {
     if (!editor) return;
-    const destination = input.destination && input.destination.length > 0 ? input.destination : null;
+    // Auto-tag own-restaurant destinations so taps are attributed in Analytics.
+    const destination =
+      input.destination && input.destination.length > 0 ? addViaMarker(input.destination, "nfc") : null;
     if (editor.mode === "create") {
       const newId = createId("nfc");
       const created: NFCProduct = {
@@ -341,9 +344,9 @@ export default function RestaurantNFCProductsPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="ShieldCheck" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          NFC products link physical chips to public destinations. Add{" "}
-          <code className="rounded bg-info/10 px-1">?via=nfc</code> to a destination to attribute taps
-          in Analytics. Chip secrets, UIDs and programming keys are never shown here.
+          NFC products link physical chips to public destinations. Taps on your own restaurant pages
+          are attributed automatically in Analytics. Chip secrets, UIDs and programming keys are never
+          shown here.
         </span>
       </div>
 

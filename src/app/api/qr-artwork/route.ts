@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import QRCode from "qrcode";
 import { getCurrentAdminUser } from "@/lib/auth";
+import { addViaMarker } from "@/lib/analytics/via";
 
 export const runtime = "nodejs";
 
@@ -17,8 +18,11 @@ export async function GET(request: Request) {
   const name = (url.searchParams.get("name") || "qr-code").replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 64);
   if (!text) return new NextResponse("Missing text", { status: 400 });
 
+  // Ensure the encoded URL carries the QR attribution marker.
+  const encoded = addViaMarker(text, "qr");
+
   try {
-    const svg = await QRCode.toString(text, {
+    const svg = await QRCode.toString(encoded, {
       type: "svg",
       margin: 2,
       width: 512,
