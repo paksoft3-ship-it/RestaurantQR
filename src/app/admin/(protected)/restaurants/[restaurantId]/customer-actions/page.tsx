@@ -34,6 +34,20 @@ import { cn } from "@/lib/utils";
 
 const PRIMARY_TYPES: CustomerActionType[] = ["call-order", "pick-your-meal", "online-order", "visit-us"];
 
+/** Sensible default destination type for each fixed button when first created. */
+const DEFAULT_FIXED_DEST: Record<CustomerActionType, DestinationType> = {
+  "call-order": "phone",
+  "pick-your-meal": "internal",
+  "online-order": "external",
+  "visit-us": "external",
+  whatsapp: "whatsapp",
+  "save-contact": "external",
+  email: "email",
+  instagram: "external",
+  share: "external",
+  custom: "external",
+};
+
 const TYPE_LABELS: Record<CustomerActionType, string> = {
   "call-order": "Call Order",
   "pick-your-meal": "Pick Your Meal",
@@ -221,6 +235,25 @@ function toDraft(action: CustomerAction): DraftAction {
   };
 }
 
+/**
+ * Guarantee the four fixed bottom-bar buttons always exist as editable rows —
+ * even for a brand-new restaurant that has no saved customer actions yet. Any
+ * missing primary is added as a disabled placeholder in canonical order.
+ */
+function ensureFixedRows(rows: DraftAction[]): DraftAction[] {
+  const present = new Set(rows.map((r) => r.type));
+  const missing: DraftAction[] = PRIMARY_TYPES.filter((t) => !present.has(t)).map((type) => ({
+    id: createId("act"),
+    type,
+    labelEn: TYPE_LABELS[type],
+    destinationType: DEFAULT_FIXED_DEST[type],
+    destination: "",
+    icon: "",
+    enabled: false,
+  }));
+  return [...rows, ...missing];
+}
+
 /** Validate a single draft row against the schema + destination safety. */
 function rowError(row: DraftAction): string | null {
   const parsed = customerActionSchema.safeParse({
@@ -270,7 +303,7 @@ export default function CustomerActionsPage() {
       .where((a) => a.restaurantId === id)
       .sort((a, b) => a.sortOrder - b.sortOrder);
     setRestaurant(r);
-    setRows(actions.map(toDraft));
+    setRows(ensureFixedRows(actions.map(toDraft)));
     setReady(true);
     setDirty(false);
   }, [id]);
@@ -599,28 +632,31 @@ export default function CustomerActionsPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="Info" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          “Online Order with Pay” opens an <strong>external</strong> ordering site — never an internal
-          cart or checkout. Changes are saved as a draft and never auto-published.
+          This page controls the customer buttons on the public page. The{" "}
+          <strong>Fixed buttons</strong> are the four buttons pinned to the bottom bar; the{" "}
+          <strong>Floating buttons</strong> appear inside the round “+” menu. “Online Order with Pay”
+          always opens an <strong>external</strong> ordering site. Changes save as a draft and never
+          auto-publish.
         </span>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div className="flex min-w-0 flex-col gap-6">
           <AdminSection
-            title="Primary actions"
-            description="The four core actions. They can be reconfigured but not removed."
-            icon="MousePointerClick"
+            title="Fixed buttons (bottom bar)"
+            description="The four buttons pinned to the bottom of the public page — Call Order, Pick Your Meal, Online Order with Pay and Add Contact. Rename them, change their icon and link, enable/disable and reorder them. They can’t be removed."
+            icon="PanelBottom"
           >
             {primaryRows.length === 0 ? (
-              <p className="text-small text-text-secondary">No primary actions configured yet.</p>
+              <p className="text-small text-text-secondary">No fixed buttons configured yet.</p>
             ) : (
               <ol className="flex flex-col gap-3">{primaryRows.map((row, i) => renderRow(row, i))}</ol>
             )}
           </AdminSection>
 
           <AdminSection
-            title="Supporting & custom buttons"
-            description="Optional actions (WhatsApp, Email, Save Contact, Share, Social) plus any custom buttons — each with its own label, icon and link. These appear in the floating “+” menu."
+            title="Floating buttons (the “+” menu)"
+            description="Buttons shown inside the round “+” menu on the public page — WhatsApp, Email, Save Contact, Share, Social, plus any custom buttons you add. Each has its own label, icon and link."
             icon="Plus"
             actions={
               <PermissionGate user={user} permission={PERMISSIONS.RESTAURANT_EDIT}>
@@ -639,8 +675,8 @@ export default function CustomerActionsPage() {
           >
             {supportingRows.length === 0 ? (
               <EmptyState
-                title="No supporting actions"
-                description="Add optional actions like WhatsApp or Email, or a custom button with your own icon and link."
+                title="No floating buttons yet"
+                description="Add optional buttons like WhatsApp or Email, or a custom button with your own icon and link — they appear in the “+” menu."
                 icon="MousePointerClick"
               />
             ) : (
