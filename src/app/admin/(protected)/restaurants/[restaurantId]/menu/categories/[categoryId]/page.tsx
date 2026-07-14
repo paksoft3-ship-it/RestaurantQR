@@ -108,7 +108,7 @@ export default function MenuCategoryEditorPage() {
     } else {
       toast({
         title: "Image preview ready",
-        description: "Preview only — configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        description: "Use a JPG, PNG, WebP, GIF, SVG or AVIF image under 10MB (and check image storage is configured).",
         intent: "warning",
       });
     }
@@ -289,7 +289,7 @@ export default function MenuCategoryEditorPage() {
                   <span className="sr-only">Upload category image</span>
                   <input
                     type="file"
-                    accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                    accept="image/*"
                     onChange={handleImage}
                     className="block w-full text-small text-text-secondary file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-[12px] file:border file:border-input-border file:bg-canvas file:px-4 file:text-small file:font-semibold file:text-text-primary hover:file:bg-surface"
                   />

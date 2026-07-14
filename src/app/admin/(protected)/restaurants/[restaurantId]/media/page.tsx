@@ -159,11 +159,11 @@ export default function RestaurantMediaLibraryPage() {
 
       <RestaurantWorkspaceTabs restaurantId={id} />
 
-      <div className="flex items-start gap-2 rounded-[12px] border border-warning/30 bg-warning/5 p-3 text-small text-warning">
-        <Icon name="AlertTriangle" className="mt-0.5 size-4 shrink-0" aria-hidden />
+      <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
+        <Icon name="Info" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          Files upload to storage when Blob is configured (BLOB_READ_WRITE_TOKEN); otherwise a
-          placeholder image is stored. No restaurant-owner uploads.
+          Upload JPG, PNG, WebP, GIF, SVG or AVIF images (up to 10MB). Files are stored securely and
+          shown on the restaurant&apos;s public pages.
         </span>
       </div>
 
@@ -367,7 +367,7 @@ function MediaAssetDialog({
     } else {
       toast({
         title: "Upload preview ready",
-        description: "Preview only — configure Blob storage (BLOB_READ_WRITE_TOKEN) to save uploads.",
+        description: "Use a JPG, PNG, WebP, GIF, SVG or AVIF image under 10MB (and check image storage is configured).",
         intent: "warning",
       });
     }
@@ -457,7 +457,7 @@ function MediaAssetDialog({
               <input
                 id="media-upload"
                 type="file"
-                accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                accept="image/*"
                 onChange={handleFile}
                 className="block w-full text-small text-text-secondary file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-[12px] file:border file:border-input-border file:bg-canvas file:px-4 file:text-small file:font-semibold file:text-text-primary hover:file:bg-surface"
               />

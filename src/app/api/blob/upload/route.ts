@@ -21,14 +21,18 @@ export async function POST(request: NextRequest) {
         const user = await getCurrentAdminUser();
         if (!user) throw new Error("Unauthorized");
         return {
+          // All common web image formats (jpg == jpeg). Formats the browser /
+          // next-image can actually render, so nothing uploads-but-breaks.
           allowedContentTypes: [
             "image/jpeg",
+            "image/jpg",
             "image/png",
             "image/webp",
             "image/gif",
             "image/svg+xml",
+            "image/avif",
           ],
-          maximumSizeInBytes: 8 * 1024 * 1024,
+          maximumSizeInBytes: 10 * 1024 * 1024,
           addRandomSuffix: true,
         };
       },

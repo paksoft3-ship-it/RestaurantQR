@@ -48,8 +48,8 @@ export default function TemplatesPage() {
       toast({ title: "Image uploaded", description: "Save to apply it.", intent: "success" });
     } else {
       toast({
-        title: "Upload unavailable",
-        description: "Configure Blob storage (BLOB_READ_WRITE_TOKEN) to store images.",
+        title: "Upload failed",
+        description: "Use a JPG, PNG, WebP, GIF, SVG or AVIF image under 10MB (and check image storage is configured).",
         intent: "info",
       });
     }
