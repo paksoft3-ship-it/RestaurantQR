@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 import { settingsSchema, type SettingsInput } from "@/domain/schemas";
 import { LOCALES, LOCALE_META } from "@/lib/i18n/locales";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import { routes } from "@/lib/routes";
 import type { PlatformSettings } from "@/domain/entities";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -22,6 +23,9 @@ export default function PlatformSettingsPage() {
   const user = useAdminUser();
   const { toast } = useToast();
   const [settings, setSettings] = useState<PlatformSettings | null>(null);
+  const [socialImage, setSocialImage] = useState<string | null>(null);
+  const [uploadingSocial, setUploadingSocial] = useState(false);
+  const socialInputRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -45,6 +49,7 @@ export default function PlatformSettingsPage() {
   const load = useCallback(() => {
     const s = demoStore.getSettings();
     setSettings(s);
+    setSocialImage(s.socialImage ?? null);
     reset({
       siteName: s.siteName,
       defaultLocale: s.defaultLocale as SettingsInput["defaultLocale"],
@@ -95,6 +100,38 @@ export default function PlatformSettingsPage() {
     });
     load();
   });
+
+  const persistSocialImage = (value: string | null) => {
+    demoStore.updateSettings({ socialImage: value });
+    setSocialImage(value);
+    demoStore.recordActivity({
+      actorId: user?.id ?? "user_unknown",
+      actorRole: user?.role ?? "administrator",
+      action: "settings.updated",
+      resourceType: "platform-settings",
+      resourceId: "settings",
+      description: value ? "Updated default social sharing image" : "Removed default social sharing image",
+    });
+  };
+
+  const onSocialUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setUploadingSocial(true);
+    const url = await uploadImage(file, "social");
+    setUploadingSocial(false);
+    if (url) {
+      persistSocialImage(url);
+      toast({ title: "Social image saved", description: "Applied to public share previews.", intent: "success" });
+    } else {
+      toast({
+        title: "Upload unavailable",
+        description: "Configure Blob storage (BLOB_READ_WRITE_TOKEN) to store images.",
+        intent: "info",
+      });
+    }
+  };
 
   const titleTemplate = watch("seoTitleTemplate");
   const siteName = watch("siteName");
@@ -192,30 +229,46 @@ export default function PlatformSettingsPage() {
             <div className="flex flex-col gap-3">
               <Label htmlFor="socialImage">Default social sharing image</Label>
               <div className="flex flex-col items-start gap-3 rounded-[12px] border border-dashed border-border bg-surface p-5 text-center sm:flex-row sm:items-center sm:text-left">
-                <span className="flex size-12 items-center justify-center rounded-[12px] bg-surface-warm text-primary">
-                  <Icon name="ImagePlus" className="size-6" aria-hidden />
+                <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-[12px] bg-surface-warm text-primary">
+                  {socialImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={socialImage} alt="Social sharing preview" className="size-14 object-cover" />
+                  ) : (
+                    <Icon name="ImagePlus" className="size-6" aria-hidden />
+                  )}
                 </span>
                 <div className="flex-1">
-                  <p className="text-small font-medium text-text-primary">Upload placeholder</p>
+                  <p className="text-small font-medium text-text-primary">
+                    {socialImage ? "Current share image" : "No image set"}
+                  </p>
                   <p className="text-xs text-text-secondary">
-                    Image uploads are temporary in this demo and are not stored or applied publicly.
+                    Shown when a public page is shared on social media. Saved on upload.
                   </p>
                 </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() =>
-                    toast({
-                      title: "Upload simulated (demo)",
-                      description: "A real backend would store and apply this social image.",
-                      intent: "info",
-                    })
-                  }
-                >
-                  <Icon name="Upload" className="size-4" aria-hidden />
-                  Choose image
-                </Button>
+                <div className="flex items-center gap-2">
+                  <input
+                    ref={socialInputRef}
+                    id="socialImage"
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    onChange={onSocialUpload}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => socialInputRef.current?.click()}
+                  >
+                    <Icon name="Upload" className="size-4" aria-hidden />
+                    {uploadingSocial ? "Uploading…" : socialImage ? "Replace" : "Choose image"}
+                  </Button>
+                  {socialImage ? (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => persistSocialImage(null)}>
+                      Remove
+                    </Button>
+                  ) : null}
+                </div>
               </div>
             </div>
           </AdminSection>

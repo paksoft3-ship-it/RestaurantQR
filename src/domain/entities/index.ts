@@ -115,6 +115,8 @@ export interface Branding {
   readiness: number; // 0-100
   version: number;
   reviewStatus: ReviewStatus;
+  /** Internal-only notes for YourPlatform staff; never shown publicly. */
+  internalNotes?: string | null;
 }
 
 export interface MenuCategory {

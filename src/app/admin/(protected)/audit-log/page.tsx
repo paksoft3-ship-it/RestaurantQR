@@ -5,6 +5,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { formatDate, titleCase } from "@/lib/utils";
+import { downloadCsv } from "@/lib/export-csv";
 import { ROLE_LABELS } from "@/domain/permissions";
 import type { ActivityRecord } from "@/domain/entities";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
@@ -197,13 +198,26 @@ export default function AuditLogPage() {
         actions={
           <Button
             variant="secondary"
-            onClick={() =>
+            onClick={() => {
+              downloadCsv(
+                "audit-log.csv",
+                ["Timestamp", "Actor", "Role", "Action", "Resource type", "Resource ID", "Description"],
+                filtered.map((r) => [
+                  r.timestamp,
+                  r.actorId,
+                  r.actorRole,
+                  r.action,
+                  r.resourceType,
+                  r.resourceId,
+                  r.description,
+                ]),
+              );
               toast({
-                title: "Export started (demo)",
-                description: "An approved audit report would download here in production.",
-                intent: "info",
-              })
-            }
+                title: "Export ready",
+                description: `${filtered.length} audit record(s) exported to CSV.`,
+                intent: "success",
+              });
+            }}
           >
             <Icon name="Download" className="size-4" aria-hidden />
             Export

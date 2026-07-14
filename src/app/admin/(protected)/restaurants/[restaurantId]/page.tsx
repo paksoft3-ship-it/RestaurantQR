@@ -8,8 +8,8 @@ import { routes } from "@/lib/routes";
 import { formatDate, titleCase } from "@/lib/utils";
 import { resolveText } from "@/lib/i18n/locales";
 import { LOCALE_META } from "@/lib/i18n/locales";
-import type { Branding, Restaurant } from "@/domain/entities";
-import { SETUP_STATUSES } from "@/domain/enums";
+import type { ActivityRecord, Branding, OpeningHours, Restaurant } from "@/domain/entities";
+import { DAYS_OF_WEEK, SETUP_STATUSES } from "@/domain/enums";
 import { AdminSection } from "@/components/admin/admin-section";
 import { RestaurantContextHeader } from "@/components/admin/restaurant-context-header";
 import { RestaurantWorkspaceTabs } from "@/components/admin/restaurant-workspace-tabs";
@@ -38,10 +38,28 @@ export default function RestaurantWorkspacePage() {
   const [branding, setBranding] = useState<Branding | null>(null);
   const [ready, setReady] = useState(false);
   const [confirm, setConfirm] = useState<ConfirmKind>(null);
+  const [counts, setCounts] = useState({ products: 0, qr: 0, nfc: 0, campaigns: 0, media: 0, actions: 0 });
+  const [activity, setActivity] = useState<ActivityRecord[]>([]);
+  const [hours, setHours] = useState<OpeningHours[]>([]);
 
   const load = useCallback(() => {
     setRestaurant(demoStore.getRestaurant(id));
     setBranding(demoStore.getBranding(id));
+    setCounts({
+      products: demoStore.products.where((p) => p.restaurantId === id).length,
+      qr: demoStore.qr.where((q) => q.restaurantId === id).length,
+      nfc: demoStore.nfc.where((n) => n.restaurantId === id).length,
+      campaigns: demoStore.campaigns.where((c) => c.restaurantId === id).length,
+      media: demoStore.media.where((m) => m.restaurantId === id).length,
+      actions: demoStore.customerActions.where((a) => a.restaurantId === id && a.enabled).length,
+    });
+    setActivity(
+      demoStore.audit
+        .where((a) => a.resourceId === id)
+        .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
+        .slice(0, 6),
+    );
+    setHours(demoStore.getOpeningHours(id));
     setReady(true);
   }, [id]);
 
@@ -237,32 +255,62 @@ export default function RestaurantWorkspacePage() {
             </dl>
           </AdminSection>
 
-          {/* Illustrative demo summaries */}
+          {/* Live operational summaries (counts from this restaurant's data). */}
           <AdminSection
             title="Operational summaries"
-            description="Illustrative demo figures — wired to live data in Part 2."
+            description="Live counts from this restaurant's configured content."
             icon="LayoutGrid"
-            actions={<DemoTag />}
           >
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              <DemoStat label="Menu items" value="24" icon="BookOpen" />
-              <DemoStat label="QR codes" value="2" icon="QrCode" />
-              <DemoStat label="NFC products" value="2" icon="Nfc" />
-              <DemoStat label="Campaigns" value="1" icon="Megaphone" />
-              <DemoStat label="Scans (30d)" value="1,420" icon="ScanLine" />
-              <DemoStat label="Menu views (30d)" value="3,180" icon="Eye" />
+              <DemoStat label="Menu items" value={String(counts.products)} icon="BookOpen" />
+              <DemoStat label="QR codes" value={String(counts.qr)} icon="QrCode" />
+              <DemoStat label="NFC products" value={String(counts.nfc)} icon="Nfc" />
+              <DemoStat label="Campaigns" value={String(counts.campaigns)} icon="Megaphone" />
+              <DemoStat label="Enabled actions" value={String(counts.actions)} icon="MousePointerClick" />
+              <DemoStat label="Media assets" value={String(counts.media)} icon="Image" />
             </div>
           </AdminSection>
 
-          <AdminSection title="Opening hours" icon="Clock" actions={<DemoTag />}>
-            <p className="text-small text-text-secondary">
-              A weekly schedule appears here once configured. Drafts start with no public hours.
-            </p>
+          <AdminSection
+            title="Opening hours"
+            icon="Clock"
+            actions={
+              <Button asChild variant="ghost" size="sm">
+                <Link href={routes.admin.restaurantHours(id)}>Edit</Link>
+              </Button>
+            }
+          >
+            {hours.length === 0 ? (
+              <p className="text-small text-text-secondary">
+                No hours configured yet.{" "}
+                <Link href={routes.admin.restaurantHours(id)} className="font-semibold text-primary hover:underline">
+                  Set opening hours
+                </Link>
+                .
+              </p>
+            ) : (
+              <ul className="flex flex-col gap-1.5 text-small">
+                {DAYS_OF_WEEK.map((day) => {
+                  const entry = hours.find((h) => h.day === day);
+                  const open = entry?.status === "open" && entry.periods.length > 0;
+                  return (
+                    <li key={day} className="flex items-center justify-between gap-3">
+                      <span className="font-medium capitalize text-text-primary">{day}</span>
+                      <span className={open ? "text-text-secondary" : "text-text-tertiary"}>
+                        {open
+                          ? entry!.periods.map((p) => `${p.open}–${p.close}`).join(", ")
+                          : "Closed"}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </AdminSection>
 
           <AdminSection title="Recent activity" icon="ScrollText">
             <ActivityFeed
-              items={[]}
+              items={activity}
               emptyLabel="No activity recorded for this restaurant yet."
             />
           </AdminSection>
@@ -429,14 +477,6 @@ function Detail({ label, value, full }: { label: string; value: string; full?: b
       <dt className="text-xs font-medium text-text-secondary">{label}</dt>
       <dd className="mt-0.5 text-small text-text-primary">{value}</dd>
     </div>
-  );
-}
-
-function DemoTag() {
-  return (
-    <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-warning">
-      Demo Data
-    </span>
   );
 }
 

@@ -10,6 +10,7 @@ import { ENQUIRY_STATUSES } from "@/domain/enums";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { formatDate, titleCase } from "@/lib/utils";
+import { downloadCsv } from "@/lib/export-csv";
 import { teamSuggestions } from "@/components/admin/restaurant-form-options";
 import type { Enquiry } from "@/domain/entities";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -214,18 +215,47 @@ export default function EnquiriesPage() {
     <div className="flex flex-col gap-6">
       <AdminPageHeader
         title="Leads & Quote Requests"
-        description="Review, qualify and assign restaurant enquiries. These are demo leads — no automated email or calls are sent."
+        description="Review, qualify and assign restaurant enquiries submitted from the public site."
         breadcrumb={[{ label: "Admin", href: routes.admin.dashboard() }, { label: "Enquiries" }]}
         actions={
           <Button
             variant="secondary"
-            onClick={() =>
+            onClick={() => {
+              downloadCsv(
+                "enquiries.csv",
+                [
+                  "Created",
+                  "Restaurant",
+                  "Contact",
+                  "Email",
+                  "Phone",
+                  "City",
+                  "Country",
+                  "Type",
+                  "Status",
+                  "Assigned",
+                  "Message",
+                ],
+                filtered.map((e) => [
+                  e.createdAt,
+                  e.restaurantName,
+                  e.contactPerson,
+                  e.email,
+                  e.phone,
+                  e.city,
+                  e.country,
+                  e.enquiryType,
+                  e.status,
+                  e.assignedTeam,
+                  e.message,
+                ]),
+              );
               toast({
-                title: "Export started (demo)",
-                description: "A CSV of leads would download here in production.",
-                intent: "info",
-              })
-            }
+                title: "Export ready",
+                description: `${filtered.length} enquiry(ies) exported to CSV.`,
+                intent: "success",
+              });
+            }}
           >
             <Icon name="Download" className="size-4" aria-hidden />
             Export

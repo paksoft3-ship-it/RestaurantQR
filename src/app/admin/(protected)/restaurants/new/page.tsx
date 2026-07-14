@@ -13,7 +13,8 @@ import {
 import { demoStore } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { createId, slugify, titleCase } from "@/lib/utils";
-import type { Restaurant } from "@/domain/entities";
+import type { CustomerAction, Restaurant, RestaurantLocation } from "@/domain/entities";
+import type { CustomerActionType, DestinationType } from "@/domain/enums";
 import type { LocalizedText, Locale } from "@/lib/i18n/locales";
 import {
   restaurantTypeOptions,
@@ -204,6 +205,54 @@ export default function NewRestaurantPage() {
     };
   };
 
+  /**
+   * Persist the contact + location details captured on the create form so they
+   * aren't lost: a RestaurantLocation and matching customer-action rows.
+   */
+  const persistContactAndLocation = (restaurant: Restaurant, input: RestaurantCreateInput) => {
+    if (input.country || input.city || input.address) {
+      const location: RestaurantLocation = {
+        id: createId("loc"),
+        restaurantId: restaurant.id,
+        locationName: `${restaurant.displayName || restaurant.name} — Main`,
+        country: input.country || null,
+        city: input.city || null,
+        district: null,
+        address: input.address || null,
+        postalCode: null,
+        latitude: null,
+        longitude: null,
+        mapUrl: null,
+        timezone: null,
+        publicLabel: null,
+        internalNotes: null,
+      };
+      demoStore.locations.create(location);
+    }
+
+    const contactActions: { type: CustomerActionType; destinationType: DestinationType; value: string; label: string }[] = [
+      { type: "call-order", destinationType: "phone", value: input.publicPhone ?? "", label: "Call Order" },
+      { type: "email", destinationType: "email", value: input.publicEmail ?? "", label: "Email" },
+      { type: "whatsapp", destinationType: "whatsapp", value: input.whatsapp ?? "", label: "WhatsApp" },
+    ];
+    contactActions.forEach((a, index) => {
+      const value = a.value.trim();
+      if (!value) return;
+      const action: CustomerAction = {
+        id: createId("act"),
+        restaurantId: restaurant.id,
+        type: a.type,
+        label: { en: a.label },
+        destinationType: a.destinationType,
+        destination: value,
+        enabled: true,
+        status: "configured",
+        sortOrder: index + 1,
+      };
+      demoStore.customerActions.create(action);
+    });
+  };
+
   const onCreate = handleSubmit((input) => {
     if (slugStatus === "taken") {
       toast({ title: "Slug already in use", description: "Choose a different slug.", intent: "danger" });
@@ -213,6 +262,7 @@ export default function NewRestaurantPage() {
     setSubmitting(true);
     const restaurant = buildRestaurant(input, false);
     demoStore.createRestaurant(restaurant);
+    persistContactAndLocation(restaurant, input);
     submittedRef.current = true;
     toast({
       title: "Draft created",
@@ -226,6 +276,7 @@ export default function NewRestaurantPage() {
     setSubmitting(true);
     const restaurant = buildRestaurant(input, true);
     demoStore.createRestaurant(restaurant);
+    persistContactAndLocation(restaurant, input);
     submittedRef.current = true;
     toast({ title: "Draft saved", description: "Nothing published.", intent: "success" });
     router.push(routes.admin.restaurant(restaurant.id));

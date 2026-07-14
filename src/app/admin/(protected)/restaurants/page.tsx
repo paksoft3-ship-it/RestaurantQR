@@ -7,6 +7,7 @@ import type { ColumnDef, SortingState } from "@tanstack/react-table";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { formatDate, titleCase } from "@/lib/utils";
+import { downloadCsv } from "@/lib/export-csv";
 import {
   operationalStatusOptions,
   setupStatusOptions,
@@ -318,13 +319,26 @@ export default function RestaurantsListPage() {
           <>
             <Button
               variant="secondary"
-              onClick={() =>
+              onClick={() => {
+                downloadCsv(
+                  "restaurants.csv",
+                  ["Name", "Slug", "Internal ID", "Publishing", "Operational", "Setup", "Updated"],
+                  filtered.map((r) => [
+                    r.displayName,
+                    r.slug,
+                    r.internalId,
+                    r.publishingStatus,
+                    r.operationalStatus,
+                    r.setupStatus,
+                    r.updatedAt,
+                  ]),
+                );
                 toast({
-                  title: "Export started (demo)",
-                  description: "A CSV export would download here in production.",
-                  intent: "info",
-                })
-              }
+                  title: "Export ready",
+                  description: `${filtered.length} restaurant(s) exported to CSV.`,
+                  intent: "success",
+                });
+              }}
             >
               <Icon name="Download" className="size-4" aria-hidden />
               Export

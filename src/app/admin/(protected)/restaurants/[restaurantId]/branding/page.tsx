@@ -101,7 +101,7 @@ export default function BrandingEditPage() {
         cardStyle: b.cardStyle,
         iconStyle: b.iconStyle,
         rightsStatus: b.rightsStatus,
-        internalNotes: "",
+        internalNotes: b.internalNotes ?? "",
       });
     } else if (r) {
       reset({
@@ -181,6 +181,14 @@ export default function BrandingEditPage() {
   ];
 
   const persist = (input: BrandingEditInput, review?: "in-review" | "approved") => {
+    // Recompute readiness from the same checklist so the stored % reflects the save.
+    const readinessDone = [
+      !!input.colors?.primary && !!input.colors?.accent,
+      !!input.headingFont && !!input.bodyFont,
+      textContrast !== null && textContrast >= 4.5,
+      input.rightsStatus !== "unknown",
+    ].filter(Boolean).length;
+    const readiness = Math.round((readinessDone / 4) * 100);
     demoStore.updateBranding(id, {
       visualDirection: input.visualDirection,
       colors: input.colors,
@@ -189,6 +197,8 @@ export default function BrandingEditPage() {
       cardStyle: input.cardStyle,
       iconStyle: input.iconStyle,
       rightsStatus: input.rightsStatus,
+      internalNotes: input.internalNotes ?? "",
+      readiness,
       ...(logoPreview && logoPreview.startsWith("http") ? { logo: logoPreview } : {}),
       ...(coverPreview && coverPreview.startsWith("http") ? { coverImage: coverPreview } : {}),
       ...(review ? { reviewStatus: review } : {}),
