@@ -494,6 +494,56 @@ export default function CustomerActionsPage() {
   const supportingRows = rows.filter((r) => !PRIMARY_TYPES.includes(r.type));
   const previewActions = rows.filter((r) => r.enabled);
 
+  /** A row in the "Top cards" section — only text + icon; link + visibility come from the bottom bar. */
+  const renderTopCardRow = (row: DraftAction) => (
+    <li
+      key={row.id}
+      className={cn(
+        "rounded-[12px] border bg-surface p-4",
+        row.enabled ? "border-border" : "border-dashed border-border opacity-80",
+      )}
+    >
+      <div className="flex flex-wrap items-start gap-3">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-surface-warm text-primary">
+          <IconSwatch icon={row.topIcon || row.icon} defaultIcon={TYPE_ICONS[row.type]} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-semibold text-text-primary">{TYPE_LABELS[row.type]}</p>
+            <span
+              className={cn(
+                "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold",
+                row.enabled ? "bg-success/10 text-success" : "bg-surface-muted text-text-secondary",
+              )}
+            >
+              <Icon name={row.enabled ? "CheckCircle2" : "Circle"} className="size-3" aria-hidden />
+              {row.enabled ? "Shown" : "Hidden"}
+            </span>
+          </div>
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Field label="Card text" htmlFor={`toplabel-${row.id}`}>
+              <Input
+                id={`toplabel-${row.id}`}
+                value={row.topLabelEn}
+                placeholder={row.labelEn || TYPE_LABELS[row.type]}
+                onChange={(e) => patchRow(row.id, { topLabelEn: e.target.value })}
+              />
+            </Field>
+            <Field label="Card icon" htmlFor={`icon-upload-top-${row.id}`}>
+              <IconField
+                rowId={`top-${row.id}`}
+                value={row.topIcon}
+                defaultIcon={row.icon.trim() || TYPE_ICONS[row.type]}
+                onChange={(next) => patchRow(row.id, { topIcon: next })}
+                notify={toast}
+              />
+            </Field>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+
   const renderRow = (row: DraftAction, index: number) => {
     const error = errorsByRow.get(row.id);
     const isPrimary = PRIMARY_TYPES.includes(row.type);
@@ -592,36 +642,6 @@ export default function CustomerActionsPage() {
                   notify={toast}
                 />
               </Field>
-
-              {isPrimary ? (
-                <div className="sm:col-span-2 rounded-[10px] border border-dashed border-border bg-canvas/60 p-3">
-                  <p className="text-xs font-semibold text-text-primary">
-                    Top card — the big card under the banner image
-                  </p>
-                  <p className="mb-3 mt-0.5 text-xs text-text-secondary">
-                    Leave blank to match the bottom bar. Opens the same link.
-                  </p>
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <Field label="Top card text" htmlFor={`toplabel-${row.id}`}>
-                      <Input
-                        id={`toplabel-${row.id}`}
-                        value={row.topLabelEn}
-                        placeholder={row.labelEn || TYPE_LABELS[row.type]}
-                        onChange={(e) => patchRow(row.id, { topLabelEn: e.target.value })}
-                      />
-                    </Field>
-                    <Field label="Top card icon" htmlFor={`icon-upload-top-${row.id}`}>
-                      <IconField
-                        rowId={`top-${row.id}`}
-                        value={row.topIcon}
-                        defaultIcon={row.icon.trim() || TYPE_ICONS[row.type]}
-                        onChange={(next) => patchRow(row.id, { topIcon: next })}
-                        notify={toast}
-                      />
-                    </Field>
-                  </div>
-                </div>
-              ) : null}
             </div>
           </div>
 
@@ -680,16 +700,29 @@ export default function CustomerActionsPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="Info" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          This page controls the customer buttons on the public page. The{" "}
-          <strong>Fixed buttons</strong> are the four buttons pinned to the bottom bar; the{" "}
-          <strong>Floating buttons</strong> appear inside the round “+” menu. “Online Order with Pay”
-          always opens an <strong>external</strong> ordering site. Changes save as a draft and never
-          auto-publish.
+          This page controls the customer buttons on the public page, in three areas:{" "}
+          <strong>Top cards</strong> (the big cards under the banner), <strong>Fixed buttons</strong>{" "}
+          (pinned to the bottom bar) and <strong>Floating buttons</strong> (the round “+” menu). The
+          top cards and bottom bar are the same four actions and open the same links — only their
+          text and icon can differ. “Online Order with Pay” always opens an{" "}
+          <strong>external</strong> ordering site. Changes save as a draft and never auto-publish.
         </span>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div className="flex min-w-0 flex-col gap-6">
+          <AdminSection
+            title="Top cards (under the banner)"
+            description="The four big cards shown just under the banner image — Call Order, Pick Your Meal, Online Order with Pay and Add Contact. Give each its own text and icon here, or leave blank to match the bottom bar. They open the same link and appear when the matching bottom-bar button is enabled."
+            icon="LayoutGrid"
+          >
+            {primaryRows.length === 0 ? (
+              <p className="text-small text-text-secondary">No cards configured yet.</p>
+            ) : (
+              <ol className="flex flex-col gap-3">{primaryRows.map((row) => renderTopCardRow(row))}</ol>
+            )}
+          </AdminSection>
+
           <AdminSection
             title="Fixed buttons (bottom bar)"
             description="The four buttons pinned to the bottom of the public page — Call Order, Pick Your Meal, Online Order with Pay and Add Contact. Rename them, change their icon and link, enable/disable and reorder them. They can’t be removed."
