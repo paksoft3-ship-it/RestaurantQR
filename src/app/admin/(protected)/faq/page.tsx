@@ -265,15 +265,6 @@ export default function FaqPage() {
           </div>
         }
       />
-
-      <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
-        <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
-        <p className="text-small text-text-secondary">
-          Changes save to the database. The status workflow is draft → in review →
-          published; only Published entries appear on the public site.
-        </p>
-      </div>
-
       <section aria-label="FAQ metrics" className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <AdminMetricCard label="Questions" value={entries.length} icon="HelpCircle" />
         <AdminMetricCard label="Published" value={publishedCount} icon="Globe" intent="success" />

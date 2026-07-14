@@ -119,7 +119,6 @@ export default function LegalPagesPage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          Changes save to the database and appear on the public legal pages once set to Published.
           Unverified placeholders (e.g. “[Legal company name to be added]”) are preserved as-is until
           you replace them.
         </p>
