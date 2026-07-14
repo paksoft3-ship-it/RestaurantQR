@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     "Generic terms for promotional campaigns and reward mechanics operated for restaurants on YourPlatform.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function CampaignTermsPage() {
   const page = (await getRepositories().legal.get("campaign-terms")) ?? getLegalPage("campaign-terms");
   return (

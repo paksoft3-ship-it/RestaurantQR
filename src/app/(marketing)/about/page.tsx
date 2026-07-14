@@ -5,6 +5,7 @@ import { FeatureCard } from "@/components/marketing/feature-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { appConfig } from "@/lib/config/app-config";
 import { routes } from "@/lib/routes";
+import { loadWebsiteCopy } from "@/lib/website-content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -21,7 +22,11 @@ const pillars = [
   { icon: "ShieldCheck", title: "Honest by default", description: "We don't invent statistics or claims. Demo content is always labelled as such." },
 ];
 
-export default function AboutPage() {
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
+export default async function AboutPage() {
+  const copy = await loadWebsiteCopy();
   return (
     <>
       <section className="bg-surface py-16 md:py-20">
@@ -29,7 +34,7 @@ export default function AboutPage() {
           <SectionHeading
             as="h1"
             eyebrow={`About ${appConfig.appName}`}
-            title="We manage the technology so you can manage the food"
+            title={copy("about", "intro", "We manage the technology so you can manage the food")}
             description="YourPlatform creates and maintains branded restaurant experiences connected to QR codes and NFC products — delivered as a managed service, not a self-service tool."
           />
         </Container>

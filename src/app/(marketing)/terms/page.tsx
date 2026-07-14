@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     "The rules and guidelines for using the YourPlatform website, a fully managed QR/NFC restaurant service.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function TermsPage() {
   const page = (await getRepositories().legal.get("terms")) ?? getLegalPage("terms");
   return (

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     "How YourPlatform handles personal data across its managed QR/NFC restaurant platform and website.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function PrivacyPage() {
   const page = (await getRepositories().legal.get("privacy")) ?? getLegalPage("privacy");
   return (

@@ -22,6 +22,9 @@ const CATEGORY_LABELS: Record<string, string> = {
   updates: "Updates & support",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function FaqPage() {
   const entries = await getRepositories().content.faq();
   const items: FaqItem[] = entries.map((e) => ({

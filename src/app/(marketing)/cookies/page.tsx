@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     "How YourPlatform uses cookies, the categories involved, and how to manage your cookie preferences.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function CookiesPage() {
   const page = (await getRepositories().legal.get("cookies")) ?? getLegalPage("cookies");
   return (

@@ -8,6 +8,7 @@ import { PhonePreviewStack } from "@/components/marketing/phone-preview";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { routes } from "@/lib/routes";
 import { appConfig } from "@/lib/config/app-config";
+import { loadWebsiteCopy } from "@/lib/website-content";
 
 export const metadata: Metadata = {
   title: `${appConfig.appName} — Managed QR & NFC Restaurant Experiences`,
@@ -61,12 +62,20 @@ const phonePreviews = [
   { src: "/images/marketing/phone-visit.png", alt: "Visit us and directions preview" },
 ];
 
-export default function HomePage() {
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
+export default async function HomePage() {
+  const copy = await loadWebsiteCopy();
   return (
     <main>
       <Hero
         eyebrow="Managed Digital Experience"
-        title="Turn Every QR Scan and NFC Tap Into a Better Restaurant Experience"
+        title={copy(
+          "home",
+          "hero",
+          "Turn Every QR Scan and NFC Tap Into a Better Restaurant Experience",
+        )}
         description="We manage the technology so you can manage the food. A fully branded, high-speed digital menu and ordering experience built for modern restaurants."
         primaryCta={{
           label: "Request Your QR/NFC Package",
@@ -113,7 +122,7 @@ export default function HomePage() {
       </section>
 
       <CtaSection
-        title="Ready to upgrade your restaurant's digital experience?"
+        title={copy("home", "cta", "Ready to upgrade your restaurant's digital experience?")}
         description="Let our team handle the technical details while you run the floor."
         primary={{ label: "Request a Quote", href: routes.marketing.contact(), icon: "ArrowRight" }}
         secondary={{ label: "View Demo", href: routes.restaurant.home("pizza-house") }}

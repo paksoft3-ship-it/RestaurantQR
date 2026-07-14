@@ -155,8 +155,10 @@ export default function WebsitePage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          The status workflow is draft → in review → published, and every transition is explicit.
-          Saving a draft never changes what is live.
+          Published blocks drive the matching marketing-page copy (e.g. home hero &amp; CTA, about
+          intro, features lead). The workflow is draft → in review → published; saving a draft never
+          changes what is live — publishing does. Sections without a published block keep their
+          built-in copy.
         </p>
       </div>
 

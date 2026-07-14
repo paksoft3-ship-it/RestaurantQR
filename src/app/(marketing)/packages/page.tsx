@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Managed packages: Digital Starter, QR & NFC Business, Complete Restaurant Experience, and Multi-Location & Custom. Pricing is tailored — request a quote.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function PackagesPage() {
   const packages = await getRepositories().content.packages();
   return (

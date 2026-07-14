@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Five managed visual directions — Modern Fast Food, Warm Mediterranean, Premium Dining, Fresh & Healthy, and Café & Bakery — tailored to your brand by our team.",
 };
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function TemplatesPage() {
   const templates = await getRepositories().content.templates();
   return (

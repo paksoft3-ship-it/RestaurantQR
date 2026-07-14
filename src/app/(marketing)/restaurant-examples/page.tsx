@@ -18,6 +18,9 @@ export const metadata: Metadata = {
 
 const directions = VISUAL_DIRECTIONS.map((id) => ({ id, label: titleCase(id) }));
 
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
 export default async function RestaurantExamplesPage() {
   const repos = getRepositories();
   // Only published restaurants are shown publicly as examples (drafts and

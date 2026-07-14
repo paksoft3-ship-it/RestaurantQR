@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { FeatureCard } from "@/components/marketing/feature-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { routes } from "@/lib/routes";
+import { loadWebsiteCopy } from "@/lib/website-content";
 
 export const metadata: Metadata = {
   title: "Platform Features",
@@ -26,7 +27,11 @@ const features = [
   { icon: "ShieldCheck", title: "Reviewed publishing", description: "Nothing goes live without your review and approval." },
 ];
 
-export default function FeaturesPage() {
+// Reflect admin-published content without a rebuild.
+export const revalidate = 30;
+
+export default async function FeaturesPage() {
+  const copy = await loadWebsiteCopy();
   return (
     <>
       <section className="py-16 md:py-20">
@@ -34,7 +39,7 @@ export default function FeaturesPage() {
           <SectionHeading
             as="h1"
             eyebrow="Features"
-            title="Everything a modern restaurant experience needs"
+            title={copy("features", "lead", "Everything a modern restaurant experience needs")}
             description="A complete, managed toolkit — delivered for you, not another dashboard to learn."
           />
         </Container>
