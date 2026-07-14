@@ -11,7 +11,6 @@ import {
   type EnquiryType,
   type RestaurantType,
 } from "@/domain/enums";
-import { getFormTransport, type FormResult } from "@/lib/forms/transport";
 import { submitEnquiry } from "./enquiry-actions";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -53,8 +52,7 @@ const CONTACT_METHODS = ["email", "phone", "whatsapp"] as const;
 type SubmitState =
   | { kind: "idle" }
   | { kind: "submitting" }
-  | { kind: "success"; result: Extract<FormResult, { status: "demo" | "ok" }> }
-  | { kind: "info"; result: Extract<FormResult, { status: "not-configured" }> }
+  | { kind: "success"; reference: string; emailed: boolean }
   | { kind: "error"; message: string };
 
 export function EnquiryForm() {
@@ -99,19 +97,20 @@ export function EnquiryForm() {
     if (submitState.kind === "submitting") return; // duplicate-submission guard
     setSubmitState({ kind: "submitting" });
     try {
-      // Persist the enquiry so it reaches /admin/enquiries (best-effort; the
-      // transport below still drives the on-screen confirmation).
-      await submitEnquiry(values).catch(() => undefined);
-      const result = await getFormTransport().submit("enquiry", values);
-      if (result.status === "demo" || result.status === "ok") {
-        setSubmitState({ kind: "success", result });
-        toast({ title: "Enquiry received", description: result.message, intent: "success" });
-      } else if (result.status === "not-configured") {
-        setSubmitState({ kind: "info", result });
-        toast({ title: "Delivery not configured", description: result.message, intent: "warning" });
+      const res = await submitEnquiry(values);
+      if (res.ok) {
+        setSubmitState({ kind: "success", reference: res.id ?? "", emailed: Boolean(res.emailed) });
+        toast({
+          title: "Enquiry received",
+          description: "Thanks — our team has your enquiry and will be in touch.",
+          intent: "success",
+        });
       } else {
-        setSubmitState({ kind: "error", message: result.message });
-        toast({ title: "Something went wrong", description: result.message, intent: "danger" });
+        setSubmitState({
+          kind: "error",
+          message: "We couldn't submit your enquiry. Please check your details and try again.",
+        });
+        toast({ title: "Something went wrong", description: "Please try again.", intent: "danger" });
       }
     } catch {
       setSubmitState({
@@ -131,15 +130,15 @@ export function EnquiryForm() {
             <Icon name="CheckCircle2" className="size-7" aria-hidden />
           </span>
           <h2 className="font-heading text-h2 text-text-primary">Thanks — we&apos;ve got your enquiry</h2>
-          <p className="max-w-md text-body text-text-secondary">{submitState.result.message}</p>
-          <p className="rounded-[12px] bg-surface px-4 py-2 text-small text-text-secondary">
-            Reference:{" "}
-            <span className="font-semibold text-text-primary">{submitState.result.reference}</span>
+          <p className="max-w-md text-body text-text-secondary">
+            Our team will review your enquiry and get back to you shortly.
           </p>
-          <p className="max-w-md text-small text-text-tertiary">
-            This is a simulated demo submission — nothing was actually sent and your details were not
-            transmitted anywhere.
-          </p>
+          {submitState.reference ? (
+            <p className="rounded-[12px] bg-surface px-4 py-2 text-small text-text-secondary">
+              Reference:{" "}
+              <span className="font-semibold text-text-primary">{submitState.reference}</span>
+            </p>
+          ) : null}
           <Button type="button" variant="outline" onClick={() => setSubmitState({ kind: "idle" })}>
             Send another enquiry
           </Button>
@@ -148,12 +147,7 @@ export function EnquiryForm() {
     );
   }
 
-  const formError =
-    submitState.kind === "error"
-      ? submitState.message
-      : submitState.kind === "info"
-        ? submitState.result.message
-        : null;
+  const formError = submitState.kind === "error" ? submitState.message : null;
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
@@ -485,7 +479,7 @@ export function EnquiryForm() {
 
       <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
         <p className="text-small text-text-tertiary sm:mr-auto">
-          No account is created. Submission is simulated in this demo.
+          No account is created. Your enquiry goes straight to our team.
         </p>
         <Button
           type="submit"

@@ -16,6 +16,7 @@ import {
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
+import { sendTeamInvite } from "./invite-actions";
 import type { AdminUser } from "@/domain/entities";
 import { useAdminUser } from "@/components/admin/admin-user-context";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
@@ -119,7 +120,7 @@ export default function TeamPage() {
   const lockedCount = members.filter((m) => m.status === "locked").length;
   const inactiveCount = members.filter((m) => m.status === "inactive").length;
 
-  const onSubmit = form.handleSubmit((input) => {
+  const onSubmit = form.handleSubmit(async (input) => {
     if (dialogMode === "edit" && editing) {
       demoStore.team.update(editing.id, {
         displayName: input.displayName,
@@ -155,9 +156,16 @@ export default function TeamPage() {
         resourceId: id,
         description: `Invited team member ${input.displayName} (${ROLE_LABELS[input.role]})`,
       });
+      const invite = await sendTeamInvite({
+        email: input.email,
+        displayName: input.displayName,
+        role: ROLE_LABELS[input.role],
+      }).catch(() => ({ emailed: false }));
       toast({
         title: "Team member added",
-        description: "Invitation is simulated in this demo; no email was sent.",
+        description: invite.emailed
+          ? "An invitation email was sent. Share their password separately."
+          : "Saved. Configure email (RESEND_API_KEY) to send invitations automatically.",
         intent: "success",
       });
     }
