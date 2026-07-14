@@ -1,4 +1,5 @@
 import "server-only";
+import { computeSnapshot } from "@/data/analytics/compute";
 import type {
   ActivityRepository,
   AnalyticsRepository,
@@ -179,19 +180,14 @@ const enquiryRepo: EnquiryRepository = {
   },
 };
 
-function seededSeries(base: number): { label: string; value: number }[] {
-  return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label, i) => ({
-    label,
-    value: Math.round(base * (0.6 + ((i * 7) % 11) / 11)),
-  }));
-}
-
+// No database configured → no interaction events yet, so analytics are empty
+// (real numbers appear once the DB-backed events pipeline is receiving traffic).
 const analyticsRepo: AnalyticsRepository = {
   async restaurantSnapshot() {
-    return { totalScans: 1240, totalTaps: 860, menuViews: 3120, actionClicks: 940, series: seededSeries(180) };
+    return computeSnapshot([], Date.now());
   },
   async platformSnapshot() {
-    return { totalScans: 8420, totalTaps: 5210, menuViews: 21300, actionClicks: 6120, series: seededSeries(1200) };
+    return computeSnapshot([], Date.now());
   },
 };
 

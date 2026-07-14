@@ -5,6 +5,7 @@ import { ToastProvider } from "@/components/ui/toast";
 import { RestaurantPublicHeader } from "@/components/restaurant/restaurant-public-header";
 import { RestaurantFooter } from "@/components/restaurant/restaurant-footer";
 import { RestaurantPublicActionShell } from "@/components/restaurant/public/RestaurantPublicActionShell";
+import { PageViewTracker } from "@/components/restaurant/public/PageViewTracker";
 import { buildRestaurantPublicActions } from "@/lib/restaurant-actions/buildRestaurantActions";
 import { DEFAULT_LOCALE } from "@/lib/i18n/locales";
 
@@ -72,6 +73,7 @@ export default async function RestaurantLayout({ children, params }: RestaurantL
         <main className="flex-1">{children}</main>
         <RestaurantFooter restaurant={restaurant} />
         <RestaurantPublicActionShell actions={publicActions} />
+        {isPublished ? <PageViewTracker restaurantId={restaurant.id} slug={restaurant.slug} /> : null}
       </div>
     </ToastProvider>
   );

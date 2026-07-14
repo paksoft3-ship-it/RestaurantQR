@@ -1,5 +1,6 @@
 import "server-only";
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, gte } from "drizzle-orm";
+import { computeSnapshot, type EventRow } from "@/data/analytics/compute";
 import type {
   ActivityRepository,
   AnalyticsRepository,
@@ -268,19 +269,28 @@ const enquiryRepo: EnquiryRepository = {
   },
 };
 
-function seededSeries(base: number): { label: string; value: number }[] {
-  return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label, i) => ({
-    label,
-    value: Math.round(base * (0.6 + ((i * 7) % 11) / 11)),
-  }));
+/** Load raw interaction events (last ~31 days) for aggregation. */
+async function loadEventRows(restaurantId?: string): Promise<EventRow[]> {
+  const cutoff = new Date(Date.now() - 31 * 86_400_000).toISOString();
+  const cols = {
+    type: schema.events.type,
+    channel: schema.events.channel,
+    actionType: schema.events.actionType,
+    target: schema.events.target,
+    createdAt: schema.events.createdAt,
+  };
+  const where = restaurantId
+    ? and(eq(schema.events.restaurantId, restaurantId), gte(schema.events.createdAt, cutoff))
+    : gte(schema.events.createdAt, cutoff);
+  return getDb().select(cols).from(schema.events).where(where);
 }
 
 const analyticsRepo: AnalyticsRepository = {
-  async restaurantSnapshot() {
-    return { totalScans: 1240, totalTaps: 860, menuViews: 3120, actionClicks: 940, series: seededSeries(180) };
+  async restaurantSnapshot(restaurantId) {
+    return computeSnapshot(await loadEventRows(restaurantId), Date.now());
   },
   async platformSnapshot() {
-    return { totalScans: 8420, totalTaps: 5210, menuViews: 21300, actionClicks: 6120, series: seededSeries(1200) };
+    return computeSnapshot(await loadEventRows(), Date.now());
   },
 };
 

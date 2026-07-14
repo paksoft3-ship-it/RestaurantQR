@@ -1,5 +1,6 @@
 import {
   boolean,
+  index,
   integer,
   jsonb,
   pgTable,
@@ -224,3 +225,24 @@ export const menuPdfs = pgTable("menu_pdfs", {
   contentBase64: text("content_base64").notNull(),
   uploadedAt: text("uploaded_at").notNull(),
 });
+
+// Public interaction events — the real analytics pipeline. One row per tracked
+// interaction (page/menu/product view, action-button click), recorded from the
+// public site via POST /api/track. Analytics aggregates read from here.
+export const events = pgTable(
+  "events",
+  {
+    id: text("id").primaryKey(),
+    restaurantId: text("restaurant_id").notNull(),
+    // page_view | menu_view | product_view | action_click
+    type: text("type").notNull(),
+    // qr | nfc | direct | null (how the visitor arrived)
+    channel: text("channel"),
+    // for action_click: the customer-action type (call-order, visit-us, …)
+    actionType: text("action_type"),
+    // optional target, e.g. a product slug for product_view
+    target: text("target"),
+    createdAt: text("created_at").notNull(),
+  },
+  (t) => [index("events_restaurant_created_idx").on(t.restaurantId, t.createdAt)],
+);

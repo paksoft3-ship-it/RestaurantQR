@@ -66,9 +66,7 @@ export function InteractionAnalyticsChart({
           {title} — data table ({total.toLocaleString()} total interactions)
         </summary>
         <table className="mt-3 w-full text-left text-small">
-          <caption className="sr-only">
-            {title}: illustrative demo interaction values per period.
-          </caption>
+          <caption className="sr-only">{title}: interaction values per period.</caption>
           <thead>
             <tr className="border-b border-border">
               <th scope="col" className="py-2 pr-4 font-semibold text-text-secondary">

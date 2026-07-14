@@ -1,6 +1,17 @@
 "use client";
 
 import { loadConsent } from "@/lib/cookies/consent";
+import { trackEvent } from "@/lib/analytics/track";
+
+/** Events that represent a real button click (excludes menu open/close). */
+const CLICK_EVENTS = new Set<RestaurantActionEvent>([
+  "restaurant_fixed_action_clicked",
+  "restaurant_contact_action_clicked",
+  "restaurant_vcard_downloaded",
+  "restaurant_external_ordering_opened",
+  "restaurant_call_action_clicked",
+  "restaurant_menu_action_clicked",
+]);
 
 /** Event names for restaurant public-action interactions. */
 export type RestaurantActionEvent =
@@ -54,7 +65,11 @@ export function trackRestaurantAction(
       // eslint-disable-next-line no-console
       console.debug("[analytics]", event, payload);
     }
-    // Production: forward `event` + `payload` to the configured analytics provider here.
+
+    // Persist real interaction events to the analytics pipeline.
+    if (CLICK_EVENTS.has(event)) {
+      trackEvent({ restaurantId: props.restaurantId, type: "action_click", actionType: props.actionType });
+    }
   } catch {
     // Never let analytics break navigation.
   }

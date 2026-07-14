@@ -1,9 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
+import { demoStore } from "@/lib/storage/demo-store";
+import { getRestaurantAnalytics } from "@/data/analytics/actions";
+import type { AnalyticsView } from "@/data/analytics/compute";
 import { routes } from "@/lib/routes";
 import type { Restaurant } from "@/domain/entities";
 import { RestaurantContextHeader } from "@/components/admin/restaurant-context-header";
@@ -12,300 +14,205 @@ import { AdminSection } from "@/components/admin/admin-section";
 import { AdminMetricCard } from "@/components/admin/admin-metric-card";
 import { InteractionAnalyticsChart } from "@/components/charts/interaction-analytics-chart";
 import { EmptyState } from "@/components/shared/states";
-import { WidgetBoundary } from "@/components/shared/error-boundary";
 import { Icon } from "@/components/shared/icon";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-/** Deterministic hash so a restaurant always renders the same illustrative numbers. */
-function hashSeed(id: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < id.length; i += 1) {
-    h ^= id.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return Math.abs(h);
-}
+const RANGES = [
+  { days: 7, label: "7 days" },
+  { days: 30, label: "30 days" },
+  { days: 90, label: "90 days" },
+];
 
-interface DemoAnalytics {
-  scans: number;
-  taps: number;
-  menuViews: number;
-  actionClicks: number;
-  series: { label: string; value: number }[];
-  topProducts: { name: string; views: number }[];
-  actionBreakdown: { label: string; value: number }[];
-  qr: number;
-  nfc: number;
-}
-
-function buildDemoAnalytics(id: string): DemoAnalytics {
-  const seed = hashSeed(id);
-  const pick = (offset: number, min: number, span: number) =>
-    min + (Math.floor(seed / Math.pow(7, offset + 1)) % span);
-
-  const scans = 400 + pick(0, 0, 1800);
-  const taps = 120 + pick(1, 0, 900);
-  const menuViews = scans + taps + 300 + pick(2, 0, 1200);
-  const actionClicks = 80 + pick(3, 0, 700);
-
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const series = months.map((label, i) => ({
-    label,
-    value: 200 + pick(4 + i, 0, 1400),
-  }));
-
-  const productNames = [
-    "Margherita Pizza",
-    "Pepperoni Pizza",
-    "Garlic Bread",
-    "House Salad",
-    "Tiramisu",
-  ];
-  const topProducts = productNames
-    .map((name, i) => ({ name, views: 60 + pick(10 + i, 0, 700) }))
-    .sort((a, b) => b.views - a.views);
-
-  const actionBreakdown = [
-    { label: "Call Order", value: 30 + pick(20, 0, 300) },
-    { label: "Pick Your Meal", value: 30 + pick(21, 0, 300) },
-    { label: "Online Order", value: 30 + pick(22, 0, 300) },
-    { label: "Visit Us", value: 30 + pick(23, 0, 300) },
-  ];
-
-  return {
-    scans,
-    taps,
-    menuViews,
-    actionClicks,
-    series,
-    topProducts,
-    actionBreakdown,
-    qr: scans,
-    nfc: taps,
-  };
-}
-
-/** Contain widget failures so one error never blanks the analytics page. */
-function SafeWidget({ label, children }: { label: string; children: React.ReactNode }) {
-  return <WidgetBoundary label={label}>{children}</WidgetBoundary>;
-}
-
-const DemoTag = () => (
-  <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-warning">
-    Illustrative Demo Data
-  </span>
-);
+const ACTION_LABELS: Record<string, string> = {
+  "call-order": "Call Order",
+  "pick-your-meal": "Pick Your Meal",
+  "online-order": "Online Order",
+  "visit-us": "Add Contact",
+  "add-contact": "Add Contact",
+  whatsapp: "WhatsApp",
+  email: "Email",
+  instagram: "Instagram",
+  "save-contact": "Save Contact",
+  share: "Share",
+  custom: "Custom button",
+};
 
 export default function RestaurantAnalyticsPage() {
   const params = useParams<{ restaurantId: string }>();
   const id = params.restaurantId;
 
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
-  const [ready, setReady] = useState(false);
-
-  const load = useCallback(() => {
-    setRestaurant(demoStore.getRestaurant(id));
-    setReady(true);
-  }, [id]);
+  const [view, setView] = useState<AnalyticsView | null>(null);
+  const [days, setDays] = useState(30);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    load();
-    window.addEventListener(DEMO_STORE_EVENT, load);
-    return () => window.removeEventListener(DEMO_STORE_EVENT, load);
-  }, [load]);
+    setRestaurant(demoStore.getRestaurant(id));
+  }, [id]);
 
-  const analytics = useMemo(() => buildDemoAnalytics(id), [id]);
+  const refresh = useCallback(() => {
+    setLoading(true);
+    getRestaurantAnalytics(id, days)
+      .then((data) => setView(data))
+      .catch(() => setView(null))
+      .finally(() => setLoading(false));
+  }, [id, days]);
 
-  const actionTotal = analytics.actionBreakdown.reduce((s, a) => s + a.value, 0);
-  const channelTotal = analytics.qr + analytics.nfc;
-  const qrPct = channelTotal ? Math.round((analytics.qr / channelTotal) * 100) : 0;
-  const nfcPct = 100 - qrPct;
-
-  if (ready && !restaurant) {
-    return (
-      <EmptyState
-        title="Restaurant not found"
-        description="This restaurant may have been removed."
-        icon="Store"
-      >
-        <Button asChild variant="secondary" size="sm">
-          <Link href={routes.admin.restaurants()}>Back to restaurants</Link>
-        </Button>
-      </EmptyState>
-    );
-  }
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   if (!restaurant) {
     return (
       <div className="rounded-[16px] border border-border bg-canvas p-8 text-center text-small text-text-secondary">
-        Loading analytics…
+        Loading…
       </div>
     );
   }
 
+  const breadcrumb = [
+    { label: "Admin", href: routes.admin.dashboard() },
+    { label: "Restaurants", href: routes.admin.restaurants() },
+    { label: restaurant.displayName, href: routes.admin.restaurant(id) },
+    { label: "Analytics" },
+  ];
+
+  const hasData = (view?.totalEvents ?? 0) > 0;
+  const actionTotal = view?.actionBreakdown.reduce((s, a) => s + a.value, 0) ?? 0;
+  const channelTotal = view ? view.channelSplit.qr + view.channelSplit.nfc + view.channelSplit.direct : 0;
+
   return (
     <div className="flex flex-col gap-6">
-      <RestaurantContextHeader restaurant={restaurant} />
+      <RestaurantContextHeader restaurant={restaurant} breadcrumb={breadcrumb} />
       <RestaurantWorkspaceTabs restaurantId={id} />
 
-      <div className="flex items-start gap-3 rounded-[16px] border border-accent/40 bg-accent/10 p-4">
-        <Icon name="FlaskConical" className="mt-0.5 size-5 shrink-0 text-warning" aria-hidden />
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-small text-text-secondary">
-          Every figure on this page is <strong>Illustrative Demo Data</strong>, derived
-          deterministically from the restaurant ID. It reflects aggregated, privacy-aware
-          interactions only — no customer identities, confirmed orders or revenue.
+          Real interaction analytics from QR/NFC visits and button taps.
         </p>
+        <div className="flex items-center gap-1 rounded-full border border-border bg-canvas p-1">
+          {RANGES.map((r) => (
+            <button
+              key={r.days}
+              type="button"
+              onClick={() => setDays(r.days)}
+              className={cn(
+                "rounded-full px-3 py-1 text-xs font-semibold",
+                days === r.days ? "bg-primary text-white" : "text-text-secondary hover:text-text-primary",
+              )}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <section
-        aria-label="Key interaction metrics"
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
-      >
-        <AdminMetricCard label="QR scans" value={analytics.scans.toLocaleString()} icon="QrCode" demo />
-        <AdminMetricCard label="NFC taps" value={analytics.taps.toLocaleString()} icon="Nfc" demo />
-        <AdminMetricCard
-          label="Menu views"
-          value={analytics.menuViews.toLocaleString()}
-          icon="BookOpen"
-          intent="primary"
-          demo
-        />
-        <AdminMetricCard
-          label="Action clicks"
-          value={analytics.actionClicks.toLocaleString()}
-          icon="MousePointerClick"
-          intent="success"
-          demo
-        />
+      <section aria-label="Interaction metrics" className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+        <AdminMetricCard label="QR scans" value={view?.totalScans ?? 0} icon="QrCode" />
+        <AdminMetricCard label="NFC taps" value={view?.totalTaps ?? 0} icon="Nfc" />
+        <AdminMetricCard label="Menu views" value={view?.menuViews ?? 0} icon="BookOpen" />
+        <AdminMetricCard label="Action taps" value={view?.actionClicks ?? 0} icon="MousePointerClick" />
+        <AdminMetricCard label="Page views" value={view?.pageViews ?? 0} icon="Eye" />
       </section>
 
-      <AdminSection
-        title="Engagement trend"
-        icon="BarChart3"
-        description="Illustrative monthly interaction volume."
-        actions={<DemoTag />}
-      >
-        <SafeWidget label="the trend chart">
-          <InteractionAnalyticsChart series={analytics.series} title="Monthly interactions" />
-        </SafeWidget>
-      </AdminSection>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <AdminSection
-          title="Top products"
-          icon="Flame"
-          description="Most-viewed menu items."
-          actions={<DemoTag />}
-        >
-          <SafeWidget label="top products">
-            <table className="w-full text-left text-small">
-              <caption className="sr-only">Illustrative most-viewed products.</caption>
-              <thead>
-                <tr className="border-b border-border">
-                  <th scope="col" className="py-2 pr-4 font-semibold text-text-secondary">
-                    Product
-                  </th>
-                  <th scope="col" className="py-2 font-semibold text-text-secondary">
-                    Views
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {analytics.topProducts.map((p) => (
-                  <tr key={p.name} className="border-b border-border last:border-0">
-                    <th scope="row" className="py-2 pr-4 font-normal text-text-primary">
-                      {p.name}
-                    </th>
-                    <td className="py-2 text-text-primary">{p.views.toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </SafeWidget>
+      {!hasData ? (
+        <AdminSection title="Engagement" icon="ChartColumn">
+          <EmptyState
+            title={loading ? "Loading analytics…" : "No interactions recorded yet"}
+            description={
+              loading
+                ? "Fetching real event data."
+                : "Analytics appear here once visitors open this restaurant's public page or tap its buttons. Publish the restaurant and share its QR/link to start collecting data."
+            }
+            icon="ChartColumn"
+          />
         </AdminSection>
+      ) : (
+        <>
+          <AdminSection title="Engagement trend" description={`Daily interactions (last ${days} days)`} icon="ChartColumn">
+            <InteractionAnalyticsChart series={view!.series} />
+          </AdminSection>
 
-        <AdminSection
-          title="Customer action breakdown"
-          icon="MousePointerClick"
-          description="Clicks across the four primary actions."
-          actions={<DemoTag />}
-        >
-          <SafeWidget label="action breakdown">
-            <ul className="flex flex-col gap-3">
-              {analytics.actionBreakdown.map((a) => {
-                const pct = actionTotal ? Math.round((a.value / actionTotal) * 100) : 0;
-                return (
-                  <li key={a.label}>
-                    <div className="flex items-center justify-between gap-2 text-small">
-                      <span className="text-text-primary">{a.label}</span>
-                      <span className="text-text-secondary">
-                        {a.value.toLocaleString()} ({pct}%)
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <AdminSection title="Button taps" icon="MousePointerClick">
+              {view!.actionBreakdown.length === 0 ? (
+                <p className="text-small text-text-secondary">No button taps yet.</p>
+              ) : (
+                <ul className="flex flex-col gap-2">
+                  {view!.actionBreakdown.map((a) => {
+                    const pct = actionTotal ? Math.round((a.value / actionTotal) * 100) : 0;
+                    return (
+                      <li key={a.label} className="flex flex-col gap-1">
+                        <div className="flex items-center justify-between text-small">
+                          <span className="font-medium text-text-primary">{ACTION_LABELS[a.label] ?? a.label}</span>
+                          <span className="text-text-secondary">
+                            {a.value} · {pct}%
+                          </span>
+                        </div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
+                          <div className="h-full bg-primary" style={{ width: `${pct}%` }} />
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </AdminSection>
+
+            <AdminSection title="Arrival channel" icon="Radio">
+              <ul className="flex flex-col gap-2 text-small">
+                {[
+                  { label: "QR code", value: view!.channelSplit.qr, icon: "QrCode" },
+                  { label: "NFC", value: view!.channelSplit.nfc, icon: "Nfc" },
+                  { label: "Direct link", value: view!.channelSplit.direct, icon: "Link" },
+                ].map((c) => {
+                  const pct = channelTotal ? Math.round((c.value / channelTotal) * 100) : 0;
+                  return (
+                    <li key={c.label} className="flex items-center justify-between gap-3">
+                      <span className="flex items-center gap-2 font-medium text-text-primary">
+                        <Icon name={c.icon} className="size-4 text-primary" aria-hidden />
+                        {c.label}
                       </span>
-                    </div>
-                    <div
-                      className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-surface-muted"
-                      role="presentation"
-                    >
-                      <div
-                        className="h-full rounded-full bg-primary"
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
+                      <span className="text-text-secondary">
+                        {c.value} · {pct}%
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </AdminSection>
+          </div>
+
+          {view!.topTargets.length > 0 ? (
+            <AdminSection title="Most viewed products" icon="TrendingUp">
+              <ul className="flex flex-col gap-2 text-small">
+                {view!.topTargets.map((t) => (
+                  <li key={t.label} className="flex items-center justify-between gap-3">
+                    <span className="font-medium text-text-primary">{t.label}</span>
+                    <span className="text-text-secondary">{t.value} views</span>
                   </li>
-                );
-              })}
-            </ul>
-            <p className="mt-3 text-xs text-text-tertiary">
-              Click counts reflect taps on actions, not confirmed calls, visits or orders.
-            </p>
-          </SafeWidget>
-        </AdminSection>
+                ))}
+              </ul>
+            </AdminSection>
+          ) : null}
+        </>
+      )}
+
+      <div className="flex items-center gap-2 rounded-[12px] border border-border bg-canvas p-3 text-xs text-text-tertiary">
+        <Icon name="Info" className="size-4 shrink-0" aria-hidden />
+        <span>
+          Counts respect visitor cookie consent. Share this restaurant&apos;s QR/link with{" "}
+          <code className="rounded bg-surface-muted px-1">?via=qr</code> or{" "}
+          <code className="rounded bg-surface-muted px-1">?via=nfc</code> to attribute the arrival channel.
+        </span>
       </div>
 
-      <AdminSection
-        title="QR vs NFC split"
-        icon="Split"
-        description="Share of interactions by entry channel."
-        actions={<DemoTag />}
-      >
-        <SafeWidget label="the channel split">
-          <div className="flex flex-col gap-4">
-            <div
-              className="flex h-3 w-full overflow-hidden rounded-full bg-surface-muted"
-              role="img"
-              aria-label={`QR ${qrPct} percent, NFC ${nfcPct} percent of interactions.`}
-            >
-              <div className="h-full bg-primary" style={{ width: `${qrPct}%` }} />
-              <div className="h-full bg-accent" style={{ width: `${nfcPct}%` }} />
-            </div>
-            <dl className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-2">
-                <span className="size-3 rounded-full bg-primary" aria-hidden />
-                <div>
-                  <dt className="text-small text-text-secondary">QR scans</dt>
-                  <dd className="font-display text-h3 text-text-primary">
-                    {analytics.qr.toLocaleString()} <span className="text-small text-text-secondary">({qrPct}%)</span>
-                  </dd>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="size-3 rounded-full bg-accent" aria-hidden />
-                <div>
-                  <dt className="text-small text-text-secondary">NFC taps</dt>
-                  <dd className="font-display text-h3 text-text-primary">
-                    {analytics.nfc.toLocaleString()} <span className="text-small text-text-secondary">({nfcPct}%)</span>
-                  </dd>
-                </div>
-              </div>
-            </dl>
-          </div>
-        </SafeWidget>
-      </AdminSection>
-
-      <p className="text-center text-xs text-text-tertiary">
-        All analytics on this page are illustrative demo data and are not connected to a live data
-        source.
-      </p>
+      <div>
+        <Button asChild variant="ghost" size="sm">
+          <Link href={routes.admin.restaurant(id)}>Back to overview</Link>
+        </Button>
+      </div>
     </div>
   );
 }
