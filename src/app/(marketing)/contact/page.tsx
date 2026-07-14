@@ -26,7 +26,12 @@ const STEPS = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ design?: string }>;
+}) {
+  const { design } = await searchParams;
   return (
     <div className="bg-surface pb-20">
       {/* Hero */}
@@ -52,7 +57,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Form */}
           <div className="lg:col-span-2">
-            <EnquiryForm />
+            <EnquiryForm presetDesign={design} />
           </div>
 
           {/* Sidebar */}

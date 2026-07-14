@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { TemplateCard } from "@/components/marketing/template-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { routes } from "@/lib/routes";
+import { slugify } from "@/lib/utils";
 import { getRepositories } from "@/data/repositories";
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default async function TemplatesPage() {
                 description={t.description}
                 bestFor={t.bestFor}
                 image={t.image}
+                href={`/templates/${slugify(t.name)}`}
               />
             ))}
           </div>

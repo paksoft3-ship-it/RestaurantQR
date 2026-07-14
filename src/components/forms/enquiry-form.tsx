@@ -55,7 +55,7 @@ type SubmitState =
   | { kind: "success"; reference: string; emailed: boolean }
   | { kind: "error"; message: string };
 
-export function EnquiryForm() {
+export function EnquiryForm({ presetDesign }: { presetDesign?: string } = {}) {
   const { toast } = useToast();
   const [submitState, setSubmitState] = useState<SubmitState>({ kind: "idle" });
 
@@ -80,7 +80,8 @@ export function EnquiryForm() {
       featureInterest: [],
       productInterest: [],
       preferredContactMethod: "email",
-      message: "",
+      // Pre-filled when arriving from a template's "Request this design" button.
+      message: presetDesign ? `I'm interested in the "${presetDesign}" design direction.` : "",
       company: "",
       consent: false,
     },
