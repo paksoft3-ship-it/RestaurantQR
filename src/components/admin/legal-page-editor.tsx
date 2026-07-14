@@ -245,7 +245,7 @@ export function LegalPageEditor({ page, canEdit, onBack, onSave }: LegalPageEdit
 
       {canEdit ? (
         <StickyActionBar
-          info="Edits here are demo-only and persist in your browser — nothing is published to the live site."
+          info="Changes save to the database and appear on the public legal page once set to Published."
         >
           <Button type="button" variant="ghost" onClick={onBack}>
             Cancel

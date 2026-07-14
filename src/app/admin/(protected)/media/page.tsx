@@ -228,8 +228,9 @@ export default function MediaPage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          This is a demo library. Any uploads are temporary, stored only in your browser, and are
-          not published or shared.
+          A read-only overview of every media asset across all restaurants. Assets are added and
+          edited on each restaurant&apos;s Media tab and persist to the database (images are stored in
+          Blob storage when configured).
         </p>
       </div>
 

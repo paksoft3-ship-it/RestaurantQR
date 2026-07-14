@@ -113,7 +113,7 @@ export default function EnquiriesPage() {
     });
     toast({
       title: "Enquiry updated",
-      description: `${active.restaurantName} is now ${titleCase(input.status)}. This is a demo lead; no email was sent.`,
+      description: `${active.restaurantName} is now ${titleCase(input.status)}.`,
       intent: "success",
     });
     setActive(null);
