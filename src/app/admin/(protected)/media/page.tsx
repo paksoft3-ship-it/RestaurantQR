@@ -221,18 +221,9 @@ export default function MediaPage() {
     <div className="flex flex-col gap-6">
       <AdminPageHeader
         title="Media Library"
-        description="Every media asset across all managed restaurants, with rights and processing status."
+        description="A read-only overview of every media asset across all restaurants — edit assets on each restaurant's Media tab."
         breadcrumb={[{ label: "Admin", href: routes.admin.dashboard() }, { label: "Media Library" }]}
       />
-
-      <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
-        <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
-        <p className="text-small text-text-secondary">
-          A read-only overview of every media asset across all restaurants. Assets are added and
-          edited on each restaurant&apos;s Media tab and persist to the database (images are stored in
-          Blob storage when configured).
-        </p>
-      </div>
 
       <section aria-label="Media summary" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <AdminMetricCard label="Total assets" value={total} icon="Image" />
