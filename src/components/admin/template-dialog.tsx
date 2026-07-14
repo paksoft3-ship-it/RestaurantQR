@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, type ChangeEvent } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import type { z } from "zod";
 import type { templateSchema } from "@/domain/schemas";
@@ -14,14 +14,35 @@ interface TemplateDialogProps {
   open: boolean;
   mode: "create" | "edit";
   form: UseFormReturn<z.input<typeof templateSchema>, unknown, z.output<typeof templateSchema>>;
+  imageUrl: string | null;
+  uploading: boolean;
+  onPickImage: (file: File) => void;
+  onRemoveImage: () => void;
   onClose: () => void;
   onSubmit: () => void;
 }
 
 /** Accessible add/edit dialog for a visual-direction template. */
-export function TemplateDialog({ open, mode, form, onClose, onSubmit }: TemplateDialogProps) {
+export function TemplateDialog({
+  open,
+  mode,
+  form,
+  imageUrl,
+  uploading,
+  onPickImage,
+  onRemoveImage,
+  onClose,
+  onSubmit,
+}: TemplateDialogProps) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (file) onPickImage(file);
+  };
 
   const {
     register,
@@ -102,6 +123,35 @@ export function TemplateDialog({ open, mode, form, onClose, onSubmit }: Template
             required
           >
             <Input id="tpl-bestFor" {...register("bestFor")} />
+          </Field>
+          <Field label="Preview image" htmlFor="tpl-image">
+            <div className="flex items-center gap-3">
+              <span className="flex h-16 w-24 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border border-border bg-surface">
+                {imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imageUrl} alt="Template preview" className="h-full w-full object-cover" />
+                ) : (
+                  <Icon name="Image" className="size-5 text-text-tertiary" aria-hidden />
+                )}
+              </span>
+              <input
+                ref={fileRef}
+                id="tpl-image"
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={handleFile}
+              />
+              <Button type="button" variant="outline" size="sm" onClick={() => fileRef.current?.click()}>
+                <Icon name="Upload" className="size-4" aria-hidden />
+                {uploading ? "Uploading…" : imageUrl ? "Replace" : "Upload"}
+              </Button>
+              {imageUrl ? (
+                <Button type="button" variant="ghost" size="sm" onClick={onRemoveImage}>
+                  Remove
+                </Button>
+              ) : null}
+            </div>
           </Field>
           <Field
             label="Status"

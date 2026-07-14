@@ -269,8 +269,8 @@ export default function FaqPage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          Edits here are demo-only and persist in your browser. The status workflow is draft → in
-          review → published, and no change is pushed to the live site.
+          Changes save to the database. The status workflow is draft → in review →
+          published; only Published entries appear on the public site.
         </p>
       </div>
 

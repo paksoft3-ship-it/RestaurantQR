@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 import { templateSchema } from "@/domain/schemas";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
+import { uploadImage } from "@/lib/uploads/upload-image";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { PERMISSIONS } from "@/domain/permissions";
@@ -35,6 +36,24 @@ export default function TemplatesPage() {
   const [dialogMode, setDialogMode] = useState<"create" | "edit" | null>(null);
   const [editing, setEditing] = useState<Template | null>(null);
   const [archiving, setArchiving] = useState<Template | null>(null);
+  const [image, setImage] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleImageUpload = async (file: File) => {
+    setUploadingImage(true);
+    const url = await uploadImage(file, "templates");
+    setUploadingImage(false);
+    if (url) {
+      setImage(url);
+      toast({ title: "Image uploaded", description: "Save to apply it.", intent: "success" });
+    } else {
+      toast({
+        title: "Upload unavailable",
+        description: "Configure Blob storage (BLOB_READ_WRITE_TOKEN) to store images.",
+        intent: "info",
+      });
+    }
+  };
 
   const form = useForm<z.input<typeof templateSchema>, unknown, z.output<typeof templateSchema>>({
     resolver: zodResolver(templateSchema),
@@ -67,6 +86,7 @@ export default function TemplatesPage() {
   const openCreate = () => {
     setEditing(null);
     setDialogMode("create");
+    setImage(null);
     form.reset({
       name: "",
       direction: "modern-fast-food",
@@ -79,6 +99,7 @@ export default function TemplatesPage() {
   const openEdit = (template: Template) => {
     setEditing(template);
     setDialogMode("edit");
+    setImage(template.image ?? null);
     form.reset({
       name: template.name,
       direction: template.direction,
@@ -117,6 +138,7 @@ export default function TemplatesPage() {
         direction: input.direction,
         description: input.description,
         bestFor: input.bestFor,
+        image,
         status: input.status,
       });
       demoStore.recordActivity({
@@ -137,7 +159,7 @@ export default function TemplatesPage() {
         direction: input.direction,
         description: input.description,
         bestFor: input.bestFor,
-        image: null,
+        image,
         status: input.status,
         sortOrder: maxSort + 1,
       });
@@ -201,8 +223,8 @@ export default function TemplatesPage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          Edits here are demo-only and persist in your browser. The status workflow is draft → in
-          review → published, and no change is pushed to the live site.
+          Changes save to the database. The status workflow is draft → in review →
+          published; only Published entries appear on the public site.
         </p>
       </div>
 
@@ -310,6 +332,10 @@ export default function TemplatesPage() {
         open={dialogMode !== null}
         mode={dialogMode ?? "create"}
         form={form}
+        imageUrl={image}
+        uploading={uploadingImage}
+        onPickImage={handleImageUpload}
+        onRemoveImage={() => setImage(null)}
         onClose={() => {
           setDialogMode(null);
           setEditing(null);

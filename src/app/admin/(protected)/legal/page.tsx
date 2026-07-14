@@ -99,7 +99,7 @@ export default function LegalPagesPage() {
     });
     toast({
       title: "Legal page saved",
-      description: "Changes persist in your browser. Nothing was published to the live site.",
+      description: "Saved. Set the page to Published to show it on the public site.",
       intent: "success",
     });
     setEditingId(null);
@@ -119,9 +119,9 @@ export default function LegalPagesPage() {
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">
         <Icon name="Info" className="mt-0.5 size-5 shrink-0 text-info" aria-hidden />
         <p className="text-small text-text-secondary">
-          Edits here are demo-only and persist in your browser. Unverified placeholders (e.g.
-          “[Legal company name to be added]”) are preserved as-is and no change is pushed to the
-          live site.
+          Changes save to the database and appear on the public legal pages once set to Published.
+          Unverified placeholders (e.g. “[Legal company name to be added]”) are preserved as-is until
+          you replace them.
         </p>
       </div>
 
