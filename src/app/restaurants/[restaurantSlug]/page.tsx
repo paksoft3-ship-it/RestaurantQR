@@ -7,6 +7,7 @@ import { resolveText } from "@/lib/i18n/locales";
 import { Icon } from "@/components/shared/icon";
 import { RestaurantHero } from "@/components/restaurant/restaurant-hero";
 import { RestaurantActionGrid } from "@/components/restaurant/restaurant-action-grid";
+import { ShareButton } from "@/components/restaurant/public/ShareButton";
 import { MenuProductCard } from "@/components/restaurant/menu-product-card";
 import { CampaignCard } from "@/components/restaurant/campaign-card";
 import { OpeningHoursCard } from "@/components/restaurant/opening-hours-card";
@@ -81,6 +82,9 @@ export default async function RestaurantHomePage({ params }: PageProps) {
         return (
           <section key={key} className="relative z-10 -mt-8 px-5">
             <RestaurantActionGrid actions={actions} />
+            <div className="mt-4 flex justify-center">
+              <ShareButton slug={restaurant.slug} name={restaurant.displayName || restaurant.name} />
+            </div>
           </section>
         );
       case "featured-menu":
