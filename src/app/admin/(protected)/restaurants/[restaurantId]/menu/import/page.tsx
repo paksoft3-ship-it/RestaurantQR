@@ -349,7 +349,7 @@ export default function MenuImportLandingPage() {
                     <DetectedStat label="Validation" value="Passed" />
                   </dl>
                   <p className="text-xs italic text-text-secondary">
-                    Estimated (demo) — page count, type and languages are inferred locally, not from a
+                    Estimated — page count, type and languages are inferred locally, not from a
                     real PDF parse.
                   </p>
                 </div>

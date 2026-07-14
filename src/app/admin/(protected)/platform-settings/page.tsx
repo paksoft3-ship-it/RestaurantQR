@@ -95,7 +95,7 @@ export default function PlatformSettingsPage() {
     });
     toast({
       title: "Settings saved",
-      description: "Saved to the demo store. In production these feed site metadata after review.",
+      description: "Platform settings saved.",
       intent: "success",
     });
     load();

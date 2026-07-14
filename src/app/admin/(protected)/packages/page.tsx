@@ -109,7 +109,7 @@ export default function PackagesPage() {
       resourceId: plan.id,
       description: `Reordered package “${plan.name}”`,
     });
-    toast({ title: "Order updated (demo)", intent: "success" });
+    toast({ title: "Order updated", intent: "success" });
   };
 
   const onSubmit = form.handleSubmit((input) => {
@@ -132,7 +132,7 @@ export default function PackagesPage() {
         resourceId: editing.id,
         description: `Updated package “${input.name}” → ${titleCase(input.status)}`,
       });
-      toast({ title: "Package updated (demo)", intent: "success" });
+      toast({ title: "Package updated", intent: "success" });
     } else {
       const id = createId("pkg");
       const maxSort = packages.reduce((max, p) => Math.max(max, p.sortOrder), 0);
@@ -155,7 +155,7 @@ export default function PackagesPage() {
         description: `Created package “${input.name}”`,
       });
       toast({
-        title: "Package created (demo)",
+        title: "Package created",
         description: "Saved as a draft. Publishing remains an explicit step.",
         intent: "success",
       });
@@ -175,7 +175,7 @@ export default function PackagesPage() {
       resourceId: archiving.id,
       description: `Archived package “${archiving.name}”`,
     });
-    toast({ title: "Package archived (demo)", intent: "success" });
+    toast({ title: "Package archived", intent: "success" });
     setArchiving(null);
   };
 

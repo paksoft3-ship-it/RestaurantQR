@@ -98,7 +98,7 @@ export default function LegalPagesPage() {
       description: `Updated ${titleCase(page.type)} legal page (v${input.version}) → ${titleCase(input.status)}`,
     });
     toast({
-      title: "Legal page saved (demo)",
+      title: "Legal page saved",
       description: "Changes persist in your browser. Nothing was published to the live site.",
       intent: "success",
     });

@@ -107,7 +107,7 @@ export default function TemplatesPage() {
       resourceId: template.id,
       description: `Reordered template “${template.name}”`,
     });
-    toast({ title: "Order updated (demo)", intent: "success" });
+    toast({ title: "Order updated", intent: "success" });
   };
 
   const onSubmit = form.handleSubmit((input) => {
@@ -127,7 +127,7 @@ export default function TemplatesPage() {
         resourceId: editing.id,
         description: `Updated template “${input.name}” → ${titleCase(input.status)}`,
       });
-      toast({ title: "Template updated (demo)", intent: "success" });
+      toast({ title: "Template updated", intent: "success" });
     } else {
       const id = createId("tpl");
       const maxSort = templates.reduce((max, t) => Math.max(max, t.sortOrder), 0);
@@ -150,7 +150,7 @@ export default function TemplatesPage() {
         description: `Created template “${input.name}”`,
       });
       toast({
-        title: "Template created (demo)",
+        title: "Template created",
         description: "Saved as a draft. Publishing remains an explicit step.",
         intent: "success",
       });
@@ -170,7 +170,7 @@ export default function TemplatesPage() {
       resourceId: archiving.id,
       description: `Archived template “${archiving.name}”`,
     });
-    toast({ title: "Template archived (demo)", intent: "success" });
+    toast({ title: "Template archived", intent: "success" });
     setArchiving(null);
   };
 

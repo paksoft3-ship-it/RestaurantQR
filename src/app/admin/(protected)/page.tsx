@@ -185,12 +185,15 @@ export default async function AdminDashboardPage() {
           <PermissionGate user={user} permission={PERMISSIONS.ANALYTICS_VIEW}>
             <AdminSection
               title="Interaction analytics"
-              description="Illustrative Admin Data — scans, taps and menu views across managed restaurants."
+              description="Daily interactions across all restaurants (last 14 days)."
               icon="BarChart3"
               actions={
-                <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-warning">
-                  Demo Data
-                </span>
+                <Link
+                  href={routes.admin.analytics()}
+                  className="text-xs font-semibold text-primary hover:underline"
+                >
+                  View analytics
+                </Link>
               }
             >
               {snapshotR.ok ? (
@@ -327,7 +330,7 @@ export default async function AdminDashboardPage() {
 
       {isDemoMode ? (
         <p className="text-center text-xs text-text-tertiary">
-          All figures on this dashboard are illustrative demo data.
+          Demo mode — showing seed data. Set NEXT_PUBLIC_DEMO_MODE=false in production.
         </p>
       ) : null}
     </div>

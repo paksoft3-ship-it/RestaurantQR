@@ -127,7 +127,7 @@ export default function FaqPage() {
         resourceId: editing.id,
         description: `Updated FAQ “${input.question}” → ${titleCase(input.status)}`,
       });
-      toast({ title: "FAQ updated (demo)", intent: "success" });
+      toast({ title: "FAQ updated", intent: "success" });
     } else {
       const id = createId("faq");
       const maxSort = entries.reduce((max, e) => Math.max(max, e.sortOrder), 0);
@@ -148,7 +148,7 @@ export default function FaqPage() {
         description: `Created FAQ “${input.question}”`,
       });
       toast({
-        title: "FAQ created (demo)",
+        title: "FAQ created",
         description: "Saved as a draft. Publishing remains an explicit step.",
         intent: "success",
       });
@@ -168,7 +168,7 @@ export default function FaqPage() {
       resourceId: deleting.id,
       description: `Deleted FAQ “${deleting.question}”`,
     });
-    toast({ title: "FAQ deleted (demo)", intent: "success" });
+    toast({ title: "FAQ deleted", intent: "success" });
     setDeleting(null);
   };
 
@@ -340,7 +340,7 @@ export default function FaqPage() {
         title="Delete this question?"
         description={
           deleting
-            ? `“${deleting.question}” will be permanently removed from this demo store.`
+            ? `“${deleting.question}” will be permanently removed.`
             : undefined
         }
         confirmLabel="Delete question"

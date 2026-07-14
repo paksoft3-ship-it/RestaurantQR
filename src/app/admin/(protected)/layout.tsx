@@ -56,7 +56,7 @@ export default async function ProtectedAdminLayout({
           {isDemoMode ? (
             <div className="flex items-center justify-center gap-2 border-b border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-medium text-warning">
               <Icon name="FlaskConical" className="size-3.5" aria-hidden />
-              Demo Mode — data is illustrative and form submissions are simulated.
+              Demo Mode — showing seed data. Set NEXT_PUBLIC_DEMO_MODE=false in production.
             </div>
           ) : null}
           <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8">
