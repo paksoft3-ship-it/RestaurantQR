@@ -57,6 +57,24 @@ export function PublicFooter() {
           </div>
         </div>
       </div>
+
+      {/* Developed-by badge — theme colours (primary → accent on hover). */}
+      <div className="border-t border-white/10 py-4">
+        <a
+          href="https://paksoft.com.tr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mx-auto flex w-fit items-center gap-2 text-sm"
+        >
+          <span className="text-white/50 transition-colors group-hover:text-white">Developed by</span>
+          <span className="flex items-center gap-1 text-primary transition-colors group-hover:text-accent">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-5 -rotate-12">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.85 0 3.58-.5 5.08-1.38-.7.13-1.42.21-2.16.21-5.52 0-10-4.48-10-10S9.42 2.83 14.92 2.83c.74 0 1.46.08 2.16.21C15.58 2.5 13.85 2 12 2z" />
+            </svg>
+            <span className="text-base font-bold tracking-wide">PakSoft</span>
+          </span>
+        </a>
+      </div>
     </footer>
   );
 }
