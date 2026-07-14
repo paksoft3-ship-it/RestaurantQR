@@ -326,11 +326,21 @@ const publishingEnum = z.enum([
 ]);
 
 /** Template (visual direction) editor. */
+export const templatePresetSchema = z.object({
+  colors: brandColorsSchema,
+  headingFont: z.string().min(1),
+  bodyFont: z.string().min(1),
+  buttonStyle: z.enum(["rounded", "pill", "square"]),
+  cardStyle: z.enum(["soft", "bordered", "elevated"]),
+  iconStyle: z.enum(["line", "filled"]),
+});
+
 export const templateSchema = z.object({
   name: z.string().min(1, "Name is required"),
   direction: z.enum(VISUAL_DIRECTIONS),
   description: z.string().min(1, "Description is required").max(600),
   bestFor: z.string().min(1, "Add who it's best for").max(300),
+  preset: templatePresetSchema,
   status: publishingEnum,
 });
 export type TemplateInput = z.infer<typeof templateSchema>;

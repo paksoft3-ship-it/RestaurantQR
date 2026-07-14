@@ -9,6 +9,7 @@ import type { z } from "zod";
 import { templateSchema } from "@/domain/schemas";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { uploadImage } from "@/lib/uploads/upload-image";
+import { DIRECTION_PRESETS, presetForTemplate } from "@/lib/template-presets";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { PERMISSIONS } from "@/domain/permissions";
@@ -62,6 +63,7 @@ export default function TemplatesPage() {
       direction: "modern-fast-food",
       description: "",
       bestFor: "",
+      preset: DIRECTION_PRESETS["modern-fast-food"],
       status: "draft",
     },
   });
@@ -92,6 +94,7 @@ export default function TemplatesPage() {
       direction: "modern-fast-food",
       description: "",
       bestFor: "",
+      preset: DIRECTION_PRESETS["modern-fast-food"],
       status: "draft",
     });
   };
@@ -105,6 +108,7 @@ export default function TemplatesPage() {
       direction: template.direction,
       description: template.description,
       bestFor: template.bestFor,
+      preset: presetForTemplate(template),
       status: template.status,
     });
   };
@@ -139,6 +143,7 @@ export default function TemplatesPage() {
         description: input.description,
         bestFor: input.bestFor,
         image,
+        preset: input.preset,
         status: input.status,
       });
       demoStore.recordActivity({
@@ -160,6 +165,7 @@ export default function TemplatesPage() {
         description: input.description,
         bestFor: input.bestFor,
         image,
+        preset: input.preset,
         status: input.status,
         sortOrder: maxSort + 1,
       });

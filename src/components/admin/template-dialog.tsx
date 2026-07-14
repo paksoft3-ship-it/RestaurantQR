@@ -1,14 +1,27 @@
 "use client";
 
 import { useEffect, useId, useRef, type ChangeEvent } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import { Controller, type UseFormReturn } from "react-hook-form";
 import type { z } from "zod";
 import type { templateSchema } from "@/domain/schemas";
 import { VISUAL_DIRECTIONS, PUBLISHING_STATUSES } from "@/domain/enums";
 import { titleCase } from "@/lib/utils";
+import { DIRECTION_PRESETS } from "@/lib/template-presets";
 import { Field, Input, Textarea, Select } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/shared/icon";
+
+const PRESET_COLORS = [
+  { key: "primary", label: "Primary" },
+  { key: "primaryDark", label: "Primary Dark" },
+  { key: "accent", label: "Accent" },
+  { key: "surface", label: "Surface" },
+  { key: "text", label: "Text" },
+] as const;
+const FONT_OPTIONS = ["Manrope", "Inter", "Poppins", "Playfair Display", "Nunito", "Roboto"];
+const BUTTON_STYLES = ["rounded", "pill", "square"] as const;
+const CARD_STYLES = ["soft", "bordered", "elevated"] as const;
+const ICON_STYLES = ["line", "filled"] as const;
 
 interface TemplateDialogProps {
   open: boolean;
@@ -46,8 +59,17 @@ export function TemplateDialog({
 
   const {
     register,
+    control,
+    setValue,
+    watch,
     formState: { errors },
   } = form;
+
+  const direction = watch("direction");
+  const applyDirectionDefaults = () => {
+    const preset = DIRECTION_PRESETS[direction];
+    setValue("preset", preset, { shouldDirty: true, shouldValidate: true });
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -153,6 +175,104 @@ export function TemplateDialog({
               ) : null}
             </div>
           </Field>
+
+          {/* Design preset — applied to a restaurant's branding on "Apply template". */}
+          <div className="rounded-[12px] border border-dashed border-border bg-surface/50 p-4">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <p className="text-small font-semibold text-text-primary">Design preset</p>
+                <p className="text-xs text-text-secondary">
+                  The colours, fonts and styles staff apply to a restaurant from this template.
+                </p>
+              </div>
+              <Button type="button" variant="ghost" size="sm" onClick={applyDirectionDefaults}>
+                <Icon name="RotateCcw" className="size-4" aria-hidden />
+                Use {titleCase(direction)} defaults
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {PRESET_COLORS.map((c) => (
+                <Field key={c.key} label={c.label} htmlFor={`preset-${c.key}`}>
+                  <div className="flex items-center gap-2">
+                    <Controller
+                      control={control}
+                      name={`preset.colors.${c.key}` as const}
+                      render={({ field }) => (
+                        <>
+                          <input
+                            type="color"
+                            aria-label={`${c.label} colour`}
+                            value={field.value ?? "#000000"}
+                            onChange={field.onChange}
+                            className="size-10 shrink-0 cursor-pointer rounded-[10px] border border-input-border"
+                          />
+                          <Input
+                            id={`preset-${c.key}`}
+                            value={field.value ?? ""}
+                            onChange={field.onChange}
+                            className="font-mono"
+                          />
+                        </>
+                      )}
+                    />
+                  </div>
+                </Field>
+              ))}
+            </div>
+
+            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <Field label="Heading font" htmlFor="preset-headingFont">
+                <Select id="preset-headingFont" {...register("preset.headingFont")}>
+                  {FONT_OPTIONS.map((f) => (
+                    <option key={f} value={f}>
+                      {f}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+              <Field label="Body font" htmlFor="preset-bodyFont">
+                <Select id="preset-bodyFont" {...register("preset.bodyFont")}>
+                  {FONT_OPTIONS.map((f) => (
+                    <option key={f} value={f}>
+                      {f}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            </div>
+
+            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <Field label="Button style" htmlFor="preset-buttonStyle">
+                <Select id="preset-buttonStyle" {...register("preset.buttonStyle")}>
+                  {BUTTON_STYLES.map((s) => (
+                    <option key={s} value={s}>
+                      {titleCase(s)}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+              <Field label="Card style" htmlFor="preset-cardStyle">
+                <Select id="preset-cardStyle" {...register("preset.cardStyle")}>
+                  {CARD_STYLES.map((s) => (
+                    <option key={s} value={s}>
+                      {titleCase(s)}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+              <Field label="Icon style" htmlFor="preset-iconStyle">
+                <Select id="preset-iconStyle" {...register("preset.iconStyle")}>
+                  {ICON_STYLES.map((s) => (
+                    <option key={s} value={s}>
+                      {titleCase(s)}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            </div>
+          </div>
+
           <Field
             label="Status"
             htmlFor="tpl-status"
