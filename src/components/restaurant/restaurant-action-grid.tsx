@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { CustomerAction } from "@/domain/entities";
 import type { CustomerActionType } from "@/domain/enums";
 import { resolveText } from "@/lib/i18n/locales";
-import { Icon } from "@/components/shared/icon";
 import { cn } from "@/lib/utils";
+import { ActionIcon } from "@/components/restaurant/public/ActionIcon";
 import { ACTION_ICON, primaryActions, resolveActionLink } from "./action-link";
 
 interface RestaurantActionGridProps {
@@ -42,14 +42,22 @@ export function RestaurantActionGrid({ actions }: RestaurantActionGridProps) {
   return (
     <nav aria-label="Primary actions" className="grid grid-cols-2 gap-3">
       {items.map((action) => {
-        const label = resolveText(action.label, "en");
+        // Top cards use their own label/icon when set, else fall back to the
+        // shared (bottom-bar) values. The link is always shared.
+        const label = resolveText(action.topLabel ?? action.label, "en");
+        const iconOverride = action.topIcon?.trim() || action.icon?.trim() || "";
         const { href, external } = resolveActionLink(action);
         const variant = FILLED[action.type];
-        const iconName = ACTION_ICON[action.type];
 
         const inner = (
           <>
-            <Icon name={iconName} className="size-8" aria-hidden />
+            <ActionIcon
+              icon={iconOverride}
+              fallbackIcon={ACTION_ICON[action.type]}
+              size={32}
+              className="size-8"
+              imgClassName="size-8"
+            />
             <span className="text-button font-bold">{label}</span>
           </>
         );

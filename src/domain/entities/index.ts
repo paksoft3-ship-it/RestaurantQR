@@ -162,8 +162,17 @@ export interface CustomerAction {
    * Optional admin-chosen icon override. Either a lucide icon name (e.g.
    * "MapPin") or an uploaded image URL ("https://…" / "/…"). When null/absent
    * the public UI falls back to the built-in icon for the action type.
+   * Drives the bottom bar + floating "+" menu.
    */
   icon?: string | null;
+  /**
+   * Per-placement overrides for the four primary actions' big cards shown under
+   * the hero (RestaurantActionGrid). When null/absent the top card reuses the
+   * shared `label` / `icon` (i.e. matches the bottom bar). The link is always
+   * shared with the bottom bar.
+   */
+  topLabel?: LocalizedText | null;
+  topIcon?: string | null;
   enabled: boolean;
   status: "configured" | "needs-config";
   sortOrder: number;

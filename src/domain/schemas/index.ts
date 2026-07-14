@@ -201,6 +201,8 @@ export const customerActionSchema = z.object({
   destinationType: z.enum(DESTINATION_TYPES),
   destination: z.string().max(400).optional().or(z.literal("")),
   icon: z.string().max(400).optional().or(z.literal("")),
+  topLabelEn: z.string().max(200).optional().or(z.literal("")),
+  topIcon: z.string().max(400).optional().or(z.literal("")),
   enabled: z.boolean().default(true),
 });
 export type CustomerActionInput = z.infer<typeof customerActionSchema>;

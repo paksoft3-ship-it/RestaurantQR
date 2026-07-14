@@ -124,6 +124,9 @@ interface DraftAction {
   destination: string;
   /** Lucide icon name or uploaded image URL; "" = built-in default. */
   icon: string;
+  /** Top-card (under-banner) overrides for primary actions; "" = match bottom bar. */
+  topLabelEn: string;
+  topIcon: string;
   enabled: boolean;
 }
 
@@ -231,6 +234,8 @@ function toDraft(action: CustomerAction): DraftAction {
     destinationType: action.destinationType,
     destination: action.destination ?? "",
     icon: action.icon ?? "",
+    topLabelEn: action.topLabel ? resolveText(action.topLabel) : "",
+    topIcon: action.topIcon ?? "",
     enabled: action.enabled,
   };
 }
@@ -249,6 +254,8 @@ function ensureFixedRows(rows: DraftAction[]): DraftAction[] {
     destinationType: DEFAULT_FIXED_DEST[type],
     destination: "",
     icon: "",
+    topLabelEn: "",
+    topIcon: "",
     enabled: false,
   }));
   return [...rows, ...missing];
@@ -355,6 +362,8 @@ export default function CustomerActionsPage() {
         destinationType: "external",
         destination: "",
         icon: "",
+        topLabelEn: "",
+        topIcon: "",
         enabled: false,
       },
     ]);
@@ -372,6 +381,8 @@ export default function CustomerActionsPage() {
         destinationType: "external",
         destination: "",
         icon: "",
+        topLabelEn: "",
+        topIcon: "",
         enabled: false,
       },
     ]);
@@ -421,6 +432,8 @@ export default function CustomerActionsPage() {
         destinationType: row.destinationType,
         destination: value || null,
         icon: row.icon.trim() || null,
+        topLabel: row.topLabelEn.trim() ? { en: row.topLabelEn.trim() } : null,
+        topIcon: row.topIcon.trim() || null,
         enabled: row.enabled,
         status: (value ? "configured" : "needs-config") as CustomerAction["status"],
         sortOrder: index + 1,
@@ -523,7 +536,7 @@ export default function CustomerActionsPage() {
             </div>
 
             <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <Field label="Public label" htmlFor={`label-${row.id}`}>
+              <Field label={isPrimary ? "Bottom bar text" : "Button text"} htmlFor={`label-${row.id}`}>
                 <Input
                   id={`label-${row.id}`}
                   value={row.labelEn}
@@ -547,6 +560,7 @@ export default function CustomerActionsPage() {
                 label="Destination"
                 htmlFor={`dest-${row.id}`}
                 error={error ?? undefined}
+                hint={isPrimary ? "Shared — the top card and the bottom bar open this same link." : undefined}
                 className="sm:col-span-2"
               >
                 <Input
@@ -565,7 +579,11 @@ export default function CustomerActionsPage() {
                   onChange={(e) => patchRow(row.id, { destination: e.target.value })}
                 />
               </Field>
-              <Field label="Button icon" htmlFor={`icon-upload-${row.id}`} className="sm:col-span-2">
+              <Field
+                label={isPrimary ? "Bottom bar icon" : "Button icon"}
+                htmlFor={`icon-upload-${row.id}`}
+                className="sm:col-span-2"
+              >
                 <IconField
                   rowId={row.id}
                   value={row.icon}
@@ -574,6 +592,36 @@ export default function CustomerActionsPage() {
                   notify={toast}
                 />
               </Field>
+
+              {isPrimary ? (
+                <div className="sm:col-span-2 rounded-[10px] border border-dashed border-border bg-canvas/60 p-3">
+                  <p className="text-xs font-semibold text-text-primary">
+                    Top card — the big card under the banner image
+                  </p>
+                  <p className="mb-3 mt-0.5 text-xs text-text-secondary">
+                    Leave blank to match the bottom bar. Opens the same link.
+                  </p>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <Field label="Top card text" htmlFor={`toplabel-${row.id}`}>
+                      <Input
+                        id={`toplabel-${row.id}`}
+                        value={row.topLabelEn}
+                        placeholder={row.labelEn || TYPE_LABELS[row.type]}
+                        onChange={(e) => patchRow(row.id, { topLabelEn: e.target.value })}
+                      />
+                    </Field>
+                    <Field label="Top card icon" htmlFor={`icon-upload-top-${row.id}`}>
+                      <IconField
+                        rowId={`top-${row.id}`}
+                        value={row.topIcon}
+                        defaultIcon={row.icon.trim() || TYPE_ICONS[row.type]}
+                        onChange={(next) => patchRow(row.id, { topIcon: next })}
+                        notify={toast}
+                      />
+                    </Field>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
 
