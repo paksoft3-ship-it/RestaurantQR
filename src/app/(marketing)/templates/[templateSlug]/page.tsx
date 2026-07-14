@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getRepositories } from "@/data/repositories";
 import { routes } from "@/lib/routes";
 import { slugify, titleCase } from "@/lib/utils";
+import { presetForTemplate } from "@/lib/template-presets";
 import type { Template } from "@/domain/entities";
 
 interface PageProps {
@@ -96,6 +97,23 @@ export default async function TemplateDetailPage({ params }: PageProps) {
                 <Icon name="Sparkles" className="size-4" aria-hidden />
                 Best for: {template.bestFor}
               </p>
+
+              {/* Palette preview from the direction's branding preset. */}
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold uppercase tracking-wide text-text-tertiary">
+                  Palette
+                </span>
+                <div className="flex gap-1.5">
+                  {Object.values(presetForTemplate(template).colors).map((c) => (
+                    <span
+                      key={c}
+                      className="size-6 rounded-full border border-border"
+                      style={{ backgroundColor: c }}
+                      title={c}
+                    />
+                  ))}
+                </div>
+              </div>
 
               <div className="mt-2 flex flex-wrap gap-3">
                 <Button asChild size="lg">

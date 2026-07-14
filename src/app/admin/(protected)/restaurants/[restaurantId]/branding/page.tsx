@@ -11,7 +11,8 @@ import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
 import { routes } from "@/lib/routes";
 import { titleCase } from "@/lib/utils";
 import { uploadImage } from "@/lib/uploads/upload-image";
-import type { Branding, Restaurant } from "@/domain/entities";
+import type { Branding, Restaurant, Template } from "@/domain/entities";
+import { presetForTemplate } from "@/lib/template-presets";
 import { RIGHTS_STATUSES } from "@/domain/enums";
 import { PERMISSIONS } from "@/domain/permissions";
 import { visualDirectionOptions } from "@/components/admin/restaurant-form-options";
@@ -78,12 +79,48 @@ export default function BrandingEditPage() {
     handleSubmit,
     control,
     reset,
+    setValue,
     watch,
     formState: { errors, isDirty },
   } = useForm<z.input<typeof brandingEditSchema>, unknown, BrandingEditInput>({
     resolver: zodResolver(brandingEditSchema),
     mode: "onBlur",
   });
+
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const [templateId, setTemplateId] = useState("");
+
+  useEffect(() => {
+    const read = () =>
+      setTemplates(
+        demoStore.templates
+          .all()
+          .filter((t) => t.status === "published")
+          .sort((a, b) => a.sortOrder - b.sortOrder),
+      );
+    read();
+    window.addEventListener(DEMO_STORE_EVENT, read);
+    return () => window.removeEventListener(DEMO_STORE_EVENT, read);
+  }, []);
+
+  const applyTemplate = () => {
+    const template = templates.find((t) => t.id === templateId);
+    if (!template) return;
+    const preset = presetForTemplate(template);
+    const opts = { shouldDirty: true, shouldValidate: true } as const;
+    setValue("visualDirection", template.direction, opts);
+    setValue("colors", preset.colors, opts);
+    setValue("headingFont", preset.headingFont, opts);
+    setValue("bodyFont", preset.bodyFont, opts);
+    setValue("buttonStyle", preset.buttonStyle, opts);
+    setValue("cardStyle", preset.cardStyle, opts);
+    setValue("iconStyle", preset.iconStyle, opts);
+    toast({
+      title: `Applied “${template.name}”`,
+      description: "Colours, fonts and styles were filled in. Tweak, then save the draft.",
+      intent: "success",
+    });
+  };
 
   const load = useCallback(() => {
     const r = demoStore.getRestaurant(id);
@@ -277,6 +314,34 @@ export default function BrandingEditPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div className="flex min-w-0 flex-col gap-6">
+          <AdminSection
+            title="Start from a template"
+            description="Apply a managed design direction to fill colours, fonts and styles — then tailor from there."
+            icon="LayoutTemplate"
+          >
+            <div className="flex flex-wrap items-end gap-3">
+              <Field label="Template" htmlFor="apply-template" className="min-w-[220px] flex-1">
+                <Select id="apply-template" value={templateId} onChange={(e) => setTemplateId(e.target.value)}>
+                  <option value="">Choose a template…</option>
+                  {templates.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.name}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+              <Button type="button" variant="secondary" disabled={!templateId} onClick={applyTemplate}>
+                <Icon name="Sparkles" className="size-4" aria-hidden />
+                Apply template
+              </Button>
+            </div>
+            {templates.length === 0 ? (
+              <p className="mt-2 text-xs text-text-tertiary">
+                No published templates yet. Add one under Admin → Templates.
+              </p>
+            ) : null}
+          </AdminSection>
+
           <AdminSection title="Visual direction" icon="Palette">
             <Field label="Visual direction" htmlFor="visualDirection" error={errors.visualDirection?.message}>
               <Select id="visualDirection" {...register("visualDirection")}>

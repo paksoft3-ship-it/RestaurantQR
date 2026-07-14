@@ -23,6 +23,7 @@ import type {
 import { DAYS_OF_WEEK } from "@/domain/enums";
 import { PERMISSIONS } from "@/domain/permissions";
 import { legalContent } from "@/content/legal";
+import { DIRECTION_PRESETS } from "@/lib/template-presets";
 
 /**
  * Illustrative demo data. None of these restaurants are real, verified clients.
@@ -552,11 +553,11 @@ export const seedWebsiteContent: WebsiteContentBlock[] = [
 ];
 
 export const seedTemplates: Template[] = [
-  { id: "tpl_modern_fast_food", name: "Modern Fast Food", direction: "modern-fast-food", description: "Bold, energetic and conversion-focused for pizza, burgers and casual dining.", bestFor: "Pizzerias, burger bars, fried chicken, street food", image: "/images/templates/modern-fast-food.jpg", status: "published", sortOrder: 1 },
-  { id: "tpl_warm_med", name: "Warm Mediterranean", direction: "warm-mediterranean", description: "Inviting, earthy tones for grills, mezze and Mediterranean kitchens.", bestFor: "Grills, kebab houses, mezze restaurants", image: null, status: "published", sortOrder: 2 },
-  { id: "tpl_premium", name: "Premium Dining", direction: "premium-dining", description: "Refined and elegant for fine dining and signature restaurants.", bestFor: "Fine dining, seafood, steakhouses", image: null, status: "published", sortOrder: 3 },
-  { id: "tpl_fresh", name: "Fresh & Healthy", direction: "fresh-healthy", description: "Clean, bright and vibrant for bowls, salads and juices.", bestFor: "Healthy fast-casual, juice bars, vegan", image: null, status: "published", sortOrder: 4 },
-  { id: "tpl_cafe", name: "Café & Bakery", direction: "cafe-bakery", description: "Cosy and crafted for cafés, bakeries and brunch spots.", bestFor: "Cafés, bakeries, brunch, patisseries", image: null, status: "published", sortOrder: 5 },
+  { id: "tpl_modern_fast_food", name: "Modern Fast Food", direction: "modern-fast-food", description: "Bold, energetic and conversion-focused for pizza, burgers and casual dining.", bestFor: "Pizzerias, burger bars, fried chicken, street food", image: "/images/templates/modern-fast-food.jpg", preset: DIRECTION_PRESETS["modern-fast-food"], status: "published", sortOrder: 1 },
+  { id: "tpl_warm_med", name: "Warm Mediterranean", direction: "warm-mediterranean", description: "Inviting, earthy tones for grills, mezze and Mediterranean kitchens.", bestFor: "Grills, kebab houses, mezze restaurants", image: null, preset: DIRECTION_PRESETS["warm-mediterranean"], status: "published", sortOrder: 2 },
+  { id: "tpl_premium", name: "Premium Dining", direction: "premium-dining", description: "Refined and elegant for fine dining and signature restaurants.", bestFor: "Fine dining, seafood, steakhouses", image: null, preset: DIRECTION_PRESETS["premium-dining"], status: "published", sortOrder: 3 },
+  { id: "tpl_fresh", name: "Fresh & Healthy", direction: "fresh-healthy", description: "Clean, bright and vibrant for bowls, salads and juices.", bestFor: "Healthy fast-casual, juice bars, vegan", image: null, preset: DIRECTION_PRESETS["fresh-healthy"], status: "published", sortOrder: 4 },
+  { id: "tpl_cafe", name: "Café & Bakery", direction: "cafe-bakery", description: "Cosy and crafted for cafés, bakeries and brunch spots.", bestFor: "Cafés, bakeries, brunch, patisseries", image: null, preset: DIRECTION_PRESETS["cafe-bakery"], status: "published", sortOrder: 5 },
 ];
 
 export const seedPackages: PackagePlan[] = [

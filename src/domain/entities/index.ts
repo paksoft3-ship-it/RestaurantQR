@@ -317,6 +317,16 @@ export interface WebsiteContentBlock {
 }
 
 /** A managed visual-direction template shown in the public templates gallery. */
+/** A reusable branding starting point carried by a template. */
+export interface TemplatePreset {
+  colors: BrandColors;
+  headingFont: string;
+  bodyFont: string;
+  buttonStyle: "rounded" | "pill" | "square";
+  cardStyle: "soft" | "bordered" | "elevated";
+  iconStyle: "line" | "filled";
+}
+
 export interface Template {
   id: string;
   name: string;
@@ -324,6 +334,8 @@ export interface Template {
   description: string;
   bestFor: string;
   image: string | null;
+  /** Branding preset applied when staff pick this template on a restaurant. */
+  preset?: TemplatePreset | null;
   status: PublishingStatus;
   sortOrder: number;
 }
