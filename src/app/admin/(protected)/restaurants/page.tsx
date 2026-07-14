@@ -101,6 +101,16 @@ export default function RestaurantsListPage() {
     [selected],
   );
 
+  const applyBulk = (patch: Partial<Restaurant>, label: string) => {
+    selectedIds.forEach((id) => demoStore.updateRestaurant(id, patch));
+    toast({
+      title: `${selectedIds.length} restaurant(s) ${label}`,
+      description: "Updated as a draft change. Nothing else was published.",
+      intent: "success",
+    });
+    setSelected({});
+  };
+
   const visibleRestaurants = restaurants.filter((r) => r.publishingStatus !== "archived");
   const archivedCount = restaurants.length - visibleRestaurants.length;
 
@@ -399,21 +409,22 @@ export default function RestaurantsListPage() {
           <p className="text-small font-medium text-text-primary">
             {selectedIds.length} selected
           </p>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                toast({
-                  title: "Bulk action queued (demo)",
-                  description: `${selectedIds.length} restaurants would be updated.`,
-                  intent: "info",
-                });
-                setSelected({});
-              }}
-            >
-              <Icon name="ListChecks" className="size-4" aria-hidden />
-              Bulk action
+          <div className="flex flex-wrap items-center gap-2">
+            <Button variant="secondary" size="sm" onClick={() => applyBulk({ publishingStatus: "published" }, "published")}>
+              <Icon name="Globe" className="size-4" aria-hidden />
+              Publish
+            </Button>
+            <Button variant="secondary" size="sm" onClick={() => applyBulk({ publishingStatus: "draft" }, "unpublished")}>
+              <Icon name="EyeOff" className="size-4" aria-hidden />
+              Unpublish
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => applyBulk({ operationalStatus: "disabled" }, "disabled")}>
+              <Icon name="Ban" className="size-4" aria-hidden />
+              Disable
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => applyBulk({ publishingStatus: "archived" }, "archived")}>
+              <Icon name="Archive" className="size-4" aria-hidden />
+              Archive
             </Button>
             <Button variant="ghost" size="sm" onClick={() => setSelected({})}>
               Clear

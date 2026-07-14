@@ -281,8 +281,8 @@ export default function PlatformSettingsPage() {
                   Maintenance mode
                 </span>
                 <span className="block text-xs text-text-secondary">
-                  When enabled, a real backend would show a maintenance page to the public. This is a
-                  high-impact change and is never applied automatically on save.
+                  When enabled and saved, public visitors see a maintenance page while logged-in
+                  admins keep full access. High-impact — applied as soon as you save.
                 </span>
               </span>
             </label>

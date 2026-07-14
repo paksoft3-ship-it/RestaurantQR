@@ -16,6 +16,7 @@ import {
 import { PERMISSIONS } from "@/domain/permissions";
 import type { NFCProduct, Restaurant } from "@/domain/entities";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
+import { getRestaurantAnalytics } from "@/data/analytics/actions";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -54,13 +55,6 @@ const OPERATIONAL_LABELS: Record<(typeof OPERATIONAL_STATUSES)[number], string> 
   disabled: "Disabled",
 };
 
-// Illustrative Demo Data — deterministic per record, never a real tap count.
-function demoTaps(record: NFCProduct): number {
-  let hash = 0;
-  for (let i = 0; i < record.id.length; i += 1) hash = (hash * 37 + record.id.charCodeAt(i)) % 9973;
-  return record.operationalStatus === "active" ? 30 + (hash % 720) : hash % 30;
-}
-
 interface EditorState {
   mode: "create" | "edit";
   record: NFCProduct | null;
@@ -76,6 +70,13 @@ export default function RestaurantNFCProductsPage() {
   const [assigned, setAssigned] = useState<NFCProduct[]>([]);
   const [unassigned, setUnassigned] = useState<NFCProduct[]>([]);
   const [ready, setReady] = useState(false);
+  const [realTaps, setRealTaps] = useState<number | null>(null);
+
+  useEffect(() => {
+    getRestaurantAnalytics(id, 30)
+      .then((a) => setRealTaps(a.totalTaps))
+      .catch(() => setRealTaps(null));
+  }, [id]);
 
   const [search, setSearch] = useState("");
   const [assignmentFilter, setAssignmentFilter] = useState("all");
@@ -119,7 +120,6 @@ export default function RestaurantNFCProductsPage() {
       active: assigned.filter((r) => r.operationalStatus === "active").length,
       reassign: assigned.filter((r) => r.assignmentStatus === "reassign-pending").length,
       unassigned: unassigned.length,
-      taps: assigned.reduce((sum, r) => sum + demoTaps(r), 0),
     }),
     [assigned, unassigned],
   );
@@ -237,17 +237,6 @@ export default function RestaurantNFCProductsPage() {
         ),
       },
       {
-        id: "taps",
-        header: "Taps",
-        enableSorting: false,
-        cell: ({ row }) => (
-          <span className="whitespace-nowrap text-small text-text-secondary" title="Illustrative demo data">
-            {demoTaps(row.original).toLocaleString()}
-            <span className="ml-1 text-xs text-text-tertiary">demo</span>
-          </span>
-        ),
-      },
-      {
         id: "actions",
         header: "Actions",
         enableSorting: false,
@@ -352,8 +341,9 @@ export default function RestaurantNFCProductsPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="ShieldCheck" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          NFC products link physical chips to public destinations. Chip secrets, UIDs and programming keys are never
-          shown here. Tap totals are illustrative demo data.
+          NFC products link physical chips to public destinations. Add{" "}
+          <code className="rounded bg-info/10 px-1">?via=nfc</code> to a destination to attribute taps
+          in Analytics. Chip secrets, UIDs and programming keys are never shown here.
         </span>
       </div>
 
@@ -362,7 +352,7 @@ export default function RestaurantNFCProductsPage() {
         <AdminMetricCard label="Active" value={metrics.active} icon="CheckCircle2" intent="success" />
         <AdminMetricCard label="Reassign pending" value={metrics.reassign} icon="Repeat" intent="warning" />
         <AdminMetricCard label="Unassigned pool" value={metrics.unassigned} icon="Inbox" />
-        <AdminMetricCard label="Taps (demo)" value={metrics.taps} icon="Activity" />
+        <AdminMetricCard label="NFC taps (30d)" value={realTaps ?? 0} icon="Activity" />
       </section>
 
       <AdminFilterBar

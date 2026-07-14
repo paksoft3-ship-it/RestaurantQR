@@ -138,6 +138,19 @@ export default function PageBuilderPage() {
   const load = useCallback(() => {
     const r = demoStore.getRestaurant(id);
     setRestaurant(r);
+    // Restore the saved section layout, reconciled with the current library so
+    // newly-added sections still appear.
+    const stored = r?.pageLayout;
+    if (stored && stored.length > 0) {
+      const known = new Set(DEFAULT_ORDER.map((s) => s.key));
+      const ordered = stored
+        .filter((s): s is { key: SectionKey; enabled: boolean } => known.has(s.key as SectionKey))
+        .map((s) => ({ key: s.key as SectionKey, enabled: s.enabled }));
+      const present = new Set(ordered.map((s) => s.key));
+      setSections([...ordered, ...DEFAULT_ORDER.filter((s) => !present.has(s.key))]);
+    } else {
+      setSections(DEFAULT_ORDER);
+    }
     setAvailability(sourceAvailability(id));
     setReady(true);
   }, [id]);
@@ -174,21 +187,23 @@ export default function PageBuilderPage() {
   }, [enabledSections, availability]);
 
   const saveDraft = () => {
-    // No dedicated entity for section config — this is a simulated draft.
+    demoStore.updateRestaurant(id, {
+      pageLayout: sections.map((s) => ({ key: s.key, enabled: s.enabled })),
+    });
     demoStore.recordActivity({
       actorId: user?.id ?? "unknown",
       actorRole: user?.role ?? "support-team",
       action: "page-builder.save-draft",
       resourceType: "restaurant-page",
       resourceId: id,
-      description: `Saved homepage section draft (${enabledSections.length} sections) for ${
+      description: `Saved homepage section layout (${enabledSections.length} sections) for ${
         restaurant?.displayName ?? id
       }.`,
       metadata: { order: sections.map((s) => `${s.key}:${s.enabled ? "on" : "off"}`).join(",") },
     });
     toast({
-      title: "Section layout draft saved",
-      description: "Simulated draft only — sections are not published and nothing went live.",
+      title: "Section layout saved",
+      description: "The public homepage now uses this section order and visibility.",
       intent: "success",
     });
     setDirty(false);
@@ -228,7 +243,8 @@ export default function PageBuilderPage() {
         <Icon name="Info" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           Managed section configurator — arrange approved homepage sections only. No raw HTML, code or
-          freeform layout. This is a <strong>simulated draft</strong>; it never auto-publishes.
+          freeform layout. <strong>Saving updates the public homepage</strong> section order and
+          visibility.
         </span>
       </div>
 

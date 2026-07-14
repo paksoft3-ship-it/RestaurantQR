@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { getRepositories } from "@/data/repositories";
 import { getCurrentAdminUser } from "@/lib/auth";
+import { maintenanceActive } from "@/lib/maintenance";
+import { MaintenanceScreen } from "@/components/shared/maintenance-screen";
 import { ToastProvider } from "@/components/ui/toast";
 import { RestaurantPublicHeader } from "@/components/restaurant/restaurant-public-header";
 import { RestaurantFooter } from "@/components/restaurant/restaurant-footer";
@@ -25,6 +27,7 @@ interface RestaurantLayoutProps {
  */
 export default async function RestaurantLayout({ children, params }: RestaurantLayoutProps) {
   const { restaurantSlug } = await params;
+  if (await maintenanceActive()) return <MaintenanceScreen />;
   const repos = getRepositories();
   const restaurant = await repos.restaurants.getBySlug(restaurantSlug);
   if (!restaurant) notFound();

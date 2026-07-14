@@ -66,6 +66,78 @@ export default async function RestaurantHomePage({ params }: PageProps) {
         }
       : null;
 
+  // Homepage section order + visibility comes from the page builder (falls back
+  // to the default order). Hero is always first; "social" has no home section.
+  const DEFAULT_LAYOUT = ["four-actions", "featured-menu", "campaign-banner", "opening-hours", "location"];
+  const layoutKeys = (
+    restaurant.pageLayout && restaurant.pageLayout.length > 0
+      ? restaurant.pageLayout.filter((s) => s.enabled).map((s) => s.key)
+      : DEFAULT_LAYOUT
+  ).filter((k) => k !== "hero" && k !== "social");
+
+  const renderSection = (key: string) => {
+    switch (key) {
+      case "four-actions":
+        return (
+          <section key={key} className="relative z-10 -mt-8 px-5">
+            <RestaurantActionGrid actions={actions} />
+          </section>
+        );
+      case "featured-menu":
+        return popular.length > 0 ? (
+          <section key={key} className="mt-10 px-5">
+            <div className="mb-4 flex items-end justify-between">
+              <h2 className="font-heading text-h3 font-bold text-text-primary">Popular choices</h2>
+              <Link
+                href={routes.restaurant.menu(restaurant.slug)}
+                className="text-small font-bold text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                View full menu
+              </Link>
+            </div>
+            <div className="flex flex-col gap-3">
+              {popular.map((product) => (
+                <MenuProductCard key={product.id} restaurantSlug={restaurant.slug} product={product} />
+              ))}
+            </div>
+          </section>
+        ) : null;
+      case "campaign-banner":
+        return liveCampaign ? (
+          <section key={key} className="mt-10 px-5">
+            <CampaignCard restaurantSlug={restaurant.slug} campaign={liveCampaign} />
+          </section>
+        ) : null;
+      case "opening-hours":
+        return (
+          <section key={key} className="mt-10 px-5">
+            <h2 className="mb-4 font-heading text-h3 font-bold text-text-primary">Opening hours</h2>
+            <OpeningHoursCard hours={hours} />
+          </section>
+        );
+      case "location":
+        return (
+          <section key={key} className="mt-10 px-5">
+            <h2 className="mb-4 font-heading text-h3 font-bold text-text-primary">
+              Visit {restaurant.displayName || restaurant.name}
+            </h2>
+            <LocationCard location={location} mapActionUrl={mapActionUrl} />
+            <Link
+              href={routes.restaurant.contact(restaurant.slug)}
+              className="mt-4 inline-flex items-center gap-1.5 text-button font-bold text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Contact &amp; full details
+              <Icon name="ArrowRight" className="size-4" aria-hidden />
+            </Link>
+          </section>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const managedSections = layoutKeys.map((k) => renderSection(k)).filter(Boolean);
+
   return (
     <div className="mx-auto w-full max-w-shell">
       {jsonLd ? (
@@ -82,66 +154,16 @@ export default async function RestaurantHomePage({ params }: PageProps) {
         coverImage={branding?.coverImage}
       />
 
-      <section className="relative z-10 -mt-8 px-5">
-        <RestaurantActionGrid actions={actions} />
-      </section>
-
-      {popular.length > 0 ? (
-        <section className="mt-10 px-5">
-          <div className="mb-4 flex items-end justify-between">
-            <h2 className="font-heading text-h3 font-bold text-text-primary">Popular choices</h2>
-            <Link
-              href={routes.restaurant.menu(restaurant.slug)}
-              className="text-small font-bold text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              View full menu
-            </Link>
-          </div>
-          <div className="flex flex-col gap-3">
-            {popular.map((product) => (
-              <MenuProductCard
-                key={product.id}
-                restaurantSlug={restaurant.slug}
-                product={product}
-              />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {liveCampaign ? (
-        <section className="mt-10 px-5">
-          <CampaignCard restaurantSlug={restaurant.slug} campaign={liveCampaign} />
-        </section>
-      ) : null}
+      {managedSections}
 
       {description ? (
-        <section className="mt-10 px-5">
+        <section className="mb-12 mt-10 px-5">
           <div className="rounded-[20px] border border-outline-variant/40 bg-surface-warm p-6">
             <h2 className="font-heading text-h3 font-bold text-primary">Made fresh. Served fast.</h2>
             <p className="mt-2 text-small leading-relaxed text-text-secondary">{description}</p>
           </div>
         </section>
       ) : null}
-
-      <section className="mt-10 px-5">
-        <h2 className="mb-4 font-heading text-h3 font-bold text-text-primary">Opening hours</h2>
-        <OpeningHoursCard hours={hours} />
-      </section>
-
-      <section className="mb-12 mt-10 px-5">
-        <h2 className="mb-4 font-heading text-h3 font-bold text-text-primary">
-          Visit {restaurant.displayName || restaurant.name}
-        </h2>
-        <LocationCard location={location} mapActionUrl={mapActionUrl} />
-        <Link
-          href={routes.restaurant.contact(restaurant.slug)}
-          className="mt-4 inline-flex items-center gap-1.5 text-button font-bold text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          Contact &amp; full details
-          <Icon name="ArrowRight" className="size-4" aria-hidden />
-        </Link>
-      </section>
     </div>
   );
 }

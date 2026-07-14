@@ -12,6 +12,7 @@ import { QR_STATUSES, ARTWORK_STATUSES } from "@/domain/enums";
 import { PERMISSIONS } from "@/domain/permissions";
 import type { QRCodeRecord, Restaurant } from "@/domain/entities";
 import { demoStore, DEMO_STORE_EVENT } from "@/lib/storage/demo-store";
+import { getRestaurantAnalytics } from "@/data/analytics/actions";
 import { routes } from "@/lib/routes";
 import { createId, titleCase } from "@/lib/utils";
 import { useAdminUser } from "@/components/admin/admin-user-context";
@@ -44,13 +45,6 @@ const ARTWORK_INTENT: Record<(typeof ARTWORK_STATUSES)[number], string> = {
   printed: "bg-success/10 text-success",
 };
 
-// Illustrative Demo Data — deterministic per record, never a real scan count.
-function demoScans(record: QRCodeRecord): number {
-  let hash = 0;
-  for (let i = 0; i < record.id.length; i += 1) hash = (hash * 31 + record.id.charCodeAt(i)) % 9973;
-  return record.status === "active" ? 40 + (hash % 960) : hash % 40;
-}
-
 interface EditorState {
   mode: "create" | "edit";
   record: QRCodeRecord | null;
@@ -65,6 +59,13 @@ export default function RestaurantQRCodesPage() {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [records, setRecords] = useState<QRCodeRecord[]>([]);
   const [ready, setReady] = useState(false);
+  const [realScans, setRealScans] = useState<number | null>(null);
+
+  useEffect(() => {
+    getRestaurantAnalytics(id, 30)
+      .then((a) => setRealScans(a.totalScans))
+      .catch(() => setRealScans(null));
+  }, [id]);
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -108,7 +109,6 @@ export default function RestaurantQRCodesPage() {
       draft: records.filter((r) => r.status === "draft").length,
       attention: records.filter((r) => r.artworkStatus === "not-started" || r.artworkStatus === "in-progress")
         .length,
-      scans: records.reduce((sum, r) => sum + demoScans(r), 0),
     }),
     [records],
   );
@@ -236,35 +236,22 @@ export default function RestaurantQRCodesPage() {
         ),
       },
       {
-        id: "scans",
-        header: "Scans",
-        enableSorting: false,
-        cell: ({ row }) => (
-          <span className="whitespace-nowrap text-small text-text-secondary" title="Illustrative demo data">
-            {demoScans(row.original).toLocaleString()}
-            <span className="ml-1 text-xs text-text-tertiary">demo</span>
-          </span>
-        ),
-      },
-      {
         id: "actions",
         header: "Actions",
         enableSorting: false,
         cell: ({ row }) => (
           <div className="flex items-center gap-1">
             <Button
+              asChild
               variant="ghost"
               size="icon"
-              aria-label={`Download artwork for ${row.original.displayIdentifier}`}
-              onClick={() =>
-                toast({
-                  title: "Artwork download (demo)",
-                  description: "A print-ready artwork file would download here in production.",
-                  intent: "info",
-                })
-              }
+              aria-label={`Download QR artwork for ${row.original.displayIdentifier}`}
             >
-              <Icon name="Download" className="size-4" aria-hidden />
+              <a
+                href={`/api/qr-artwork?text=${encodeURIComponent(row.original.destination)}&name=${encodeURIComponent(row.original.displayIdentifier)}`}
+              >
+                <Icon name="Download" className="size-4" aria-hidden />
+              </a>
             </Button>
             {canManage ? (
               <>
@@ -372,8 +359,9 @@ export default function RestaurantQRCodesPage() {
       <div className="flex items-start gap-2 rounded-[12px] border border-info/30 bg-info/5 p-3 text-small text-info">
         <Icon name="ShieldCheck" className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          QR records map physical codes to public destinations. Signing secrets and redirect keys are never shown here.
-          Scan totals are illustrative demo data.
+          QR records map physical codes to public destinations. Add{" "}
+          <code className="rounded bg-info/10 px-1">?via=qr</code> to a destination to attribute scans
+          in Analytics. Signing secrets and redirect keys are never shown here.
         </span>
       </div>
 
@@ -382,7 +370,7 @@ export default function RestaurantQRCodesPage() {
         <AdminMetricCard label="Active" value={metrics.active} icon="CheckCircle2" intent="success" />
         <AdminMetricCard label="Draft" value={metrics.draft} icon="FileEdit" />
         <AdminMetricCard label="Needs artwork" value={metrics.attention} icon="AlertTriangle" intent="warning" />
-        <AdminMetricCard label="Scans (demo)" value={metrics.scans} icon="Activity" />
+        <AdminMetricCard label="QR scans (30d)" value={realScans ?? 0} icon="Activity" />
       </section>
 
       <AdminFilterBar

@@ -60,6 +60,12 @@ export interface Restaurant {
   assignedTeams: string[];
   tags: string[];
   internalNotes: string | null;
+  /**
+   * Public homepage section order + visibility, set in the page builder. When
+   * absent the default section order is used. Keys match the page-builder's
+   * SectionKey values.
+   */
+  pageLayout?: { key: string; enabled: boolean }[];
   createdAt: string;
   updatedAt: string;
 }
