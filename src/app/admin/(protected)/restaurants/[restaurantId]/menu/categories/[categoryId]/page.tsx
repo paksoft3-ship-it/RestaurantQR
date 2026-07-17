@@ -145,6 +145,10 @@ export default function MenuCategoryEditorPage() {
         localizedDescription,
         sortOrder: input.sortOrder,
         status: input.status,
+        image:
+          imagePreview && (imagePreview.startsWith("/") || imagePreview.startsWith("http"))
+            ? imagePreview
+            : null,
       });
       demoStore.recordActivity({
         actorId: user?.id ?? "demo",

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { MenuCategory, MenuProduct } from "@/domain/entities";
 import { resolveText } from "@/lib/i18n/locales";
@@ -86,7 +87,20 @@ export function MenuBrowser({ restaurantSlug, categories, products }: MenuBrowse
         ) : (
           grouped.map((group) => (
             <section key={group.category.id}>
-              <h2 className="mb-3 font-heading text-h3 font-bold text-text-primary">
+              <h2 className="mb-3 flex items-center gap-2.5 font-heading text-h3 font-bold text-text-primary">
+                {group.category.image &&
+                (group.category.image.startsWith("/") ||
+                  group.category.image.startsWith("http")) ? (
+                  <span className="relative size-9 shrink-0 overflow-hidden rounded-[10px] bg-surface-container">
+                    <Image
+                      src={group.category.image}
+                      alt=""
+                      fill
+                      sizes="36px"
+                      className="object-cover"
+                    />
+                  </span>
+                ) : null}
                 {resolveText(group.category.localizedName, "en")}
               </h2>
               <div className="flex flex-col gap-3">
