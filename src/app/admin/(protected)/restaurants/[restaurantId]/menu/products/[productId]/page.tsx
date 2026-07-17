@@ -229,6 +229,10 @@ function ProductEditor() {
         localizedDescription,
         price: input.price,
         currency: input.currency,
+        image:
+          imagePreview && (imagePreview.startsWith("/") || imagePreview.startsWith("http"))
+            ? imagePreview
+            : null,
         availability: input.availability,
         variants,
         dietaryLabels: input.dietaryLabels,

@@ -25,6 +25,10 @@ export function MenuProductCard({
 }: MenuProductCardProps) {
   const name = resolveText(product.localizedName, "en");
   const description = resolveText(product.localizedDescription, "en");
+  const imageSrc =
+    product.image && (product.image.startsWith("/") || product.image.startsWith("http"))
+      ? product.image
+      : "/placeholders/food.svg";
 
   return (
     <Link
@@ -33,7 +37,7 @@ export function MenuProductCard({
     >
       <div className="relative size-24 shrink-0 overflow-hidden rounded-[12px] bg-surface-container">
         <Image
-          src="/placeholders/food.svg"
+          src={imageSrc}
           alt={name}
           width={96}
           height={96}

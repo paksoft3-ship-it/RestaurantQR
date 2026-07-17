@@ -23,6 +23,10 @@ interface ProductDetailProps {
 export function ProductDetail({ restaurantSlug, product, actions }: ProductDetailProps) {
   const name = resolveText(product.localizedName, "en");
   const description = resolveText(product.localizedDescription, "en");
+  const imageSrc =
+    product.image && (product.image.startsWith("/") || product.image.startsWith("http"))
+      ? product.image
+      : "/placeholders/food.svg";
 
   const callAction = actions.find((a) => a.enabled && a.type === "call-order");
   const onlineAction = actions.find((a) => a.enabled && a.type === "online-order");
@@ -41,7 +45,7 @@ export function ProductDetail({ restaurantSlug, product, actions }: ProductDetai
 
       <div className="relative h-[260px] w-full overflow-hidden rounded-[16px] border border-border bg-surface-container">
         <Image
-          src="/placeholders/food.svg"
+          src={imageSrc}
           alt={name}
           width={640}
           height={260}
