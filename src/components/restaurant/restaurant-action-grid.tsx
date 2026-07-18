@@ -8,6 +8,12 @@ import { ACTION_ICON, primaryActions, resolveActionLink } from "./action-link";
 
 interface RestaurantActionGridProps {
   actions: CustomerAction[];
+  /**
+   * Where "Pick Your Meal" points when the admin hasn't set a custom link on
+   * that action — the internal digital-menu page. Keeps the top card and the
+   * bottom-bar button pointing at the same destination.
+   */
+  menuFallbackUrl: string;
 }
 
 /** Visual emphasis: the lead actions are filled, the rest outlined. */
@@ -35,7 +41,7 @@ const TILE_STYLE = {
  * (≥44px) touch target with an icon and a clear text label. "Online Order with
  * Pay" opens externally; "Visit Us" opens a map; "Call Order" dials.
  */
-export function RestaurantActionGrid({ actions }: RestaurantActionGridProps) {
+export function RestaurantActionGrid({ actions, menuFallbackUrl }: RestaurantActionGridProps) {
   const items = primaryActions(actions);
   if (items.length === 0) return null;
 
@@ -46,7 +52,12 @@ export function RestaurantActionGrid({ actions }: RestaurantActionGridProps) {
         // shared (bottom-bar) values. The link is always shared.
         const label = resolveText(action.topLabel ?? action.label, "en");
         const iconOverride = action.topIcon?.trim() || action.icon?.trim() || "";
-        const { href, external } = resolveActionLink(action);
+        const resolved = resolveActionLink(action);
+        // "Pick Your Meal" with no admin link falls back to the internal menu,
+        // matching the bottom-bar button.
+        const href =
+          resolved.href ?? (action.type === "pick-your-meal" ? menuFallbackUrl : null);
+        const external = resolved.href ? resolved.external : false;
         const variant = FILLED[action.type];
 
         const inner = (

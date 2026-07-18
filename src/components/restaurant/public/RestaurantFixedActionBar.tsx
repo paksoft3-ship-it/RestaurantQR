@@ -63,10 +63,17 @@ export function RestaurantFixedActionBar({ actions }: { actions: RestaurantPubli
                   iconSrc={action.iconSrc}
                   iconOverride={action.iconOverride}
                   label={label}
-                  mode="internal"
+                  mode={action.external ? "external" : "internal"}
                   href={action.href}
-                  active={menuActive}
-                  onActivate={() => track("pick-your-meal", "restaurant_menu_action_clicked", "internal")}
+                  active={action.external ? false : menuActive}
+                  srHint={action.external ? t("rb.opensExternal") : undefined}
+                  onActivate={() =>
+                    track(
+                      "pick-your-meal",
+                      "restaurant_menu_action_clicked",
+                      action.external ? "external" : "internal",
+                    )
+                  }
                 />
               );
             case "EXTERNAL_ORDER":

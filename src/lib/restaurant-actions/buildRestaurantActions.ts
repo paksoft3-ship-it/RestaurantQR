@@ -83,8 +83,12 @@ function resolveDestination(
       return web ? { href: web, mode: "external", external: true } : null;
     }
     case "internal": {
-      // Only same-origin app paths are treated as internal links.
-      return value.startsWith("/") ? { href: value, mode: "internal", external: false } : null;
+      // Same-origin app paths ("/...") are internal links.
+      if (value.startsWith("/")) return { href: value, mode: "internal", external: false };
+      // An admin may paste a full URL into an "internal" action (e.g. a hosted
+      // flipbook menu). Treat a safe absolute URL as external (opens a new tab).
+      const web = safeWebUrl(value, { allowHttp });
+      return web ? { href: web, mode: "external", external: true } : null;
     }
     default:
       return null;
@@ -127,6 +131,14 @@ export function buildRestaurantPublicActions(
 
   const orderPhone = normalizePhone(destinationFor(actions, "call-order"));
   const externalOrderingUrl = safeWebUrl(destinationFor(actions, "online-order"), { allowHttp });
+
+  // "Pick Your Meal" opens the admin-set link when one is configured, otherwise
+  // the internal digital-menu page. The top card and the bottom-bar button both
+  // read this, so they always point at the same destination.
+  const menuUrl = routes.restaurant.menu(slug);
+  const pickYourMealLink = resolveEnabled(actions, "pick-your-meal", allowHttp);
+  const pickYourMealUrl = pickYourMealLink?.href ?? menuUrl;
+  const pickYourMealExternal = pickYourMealLink?.external ?? false;
   const whatsappUrl = buildWhatsappUrl(destinationFor(actions, "whatsapp"));
   const instagramUrl = safeWebUrl(destinationFor(actions, "instagram"), { allowHttp });
   const publicEmail = destinationFor(actions, "email");
@@ -171,7 +183,9 @@ export function buildRestaurantPublicActions(
     locale,
     orderPhone,
     primaryPhone: orderPhone,
-    menuUrl: routes.restaurant.menu(slug),
+    menuUrl,
+    pickYourMealUrl,
+    pickYourMealExternal,
     externalOrderingUrl,
     contactCardUrl,
     hasContactData,
@@ -217,8 +231,9 @@ export function buildFixedActions(data: RestaurantPublicActionData): FixedRestau
       type: "OPEN_MENU",
       iconSrc: ACTION_ICONS.pickYourMeal,
       iconOverride: data.iconOverrides.pickYourMeal,
-      href: data.menuUrl,
+      href: data.pickYourMealUrl,
       available: true,
+      external: data.pickYourMealExternal,
       label: data.labels.pickYourMeal,
     },
     {

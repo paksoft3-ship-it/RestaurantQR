@@ -49,7 +49,9 @@ export function resolveActionLink(action: {
     case "external":
       return { href: dest, external: true };
     case "internal":
-      return { href: dest, external: false };
+      // App paths ("/...") stay internal; a full URL pasted into an internal
+      // action (e.g. a hosted flipbook menu) opens externally in a new tab.
+      return { href: dest, external: /^https?:\/\//i.test(dest) };
     default:
       return { href: null, external: false };
   }

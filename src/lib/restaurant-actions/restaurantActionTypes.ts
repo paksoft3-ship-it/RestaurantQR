@@ -11,6 +11,14 @@ export interface RestaurantPublicActionData {
   primaryPhone: string | null;
 
   menuUrl: string;
+  /**
+   * Where "Pick Your Meal" points. Uses the admin-set link on the
+   * pick-your-meal action when present, otherwise the internal menu page.
+   * Both the top card and the bottom-bar button use this same value so they
+   * always open the same destination.
+   */
+  pickYourMealUrl: string;
+  pickYourMealExternal: boolean;
   externalOrderingUrl: string | null;
   contactCardUrl: string | null;
   hasContactData: boolean;
@@ -70,7 +78,7 @@ export type FixedActionMode = "internal" | "tel" | "external" | "download";
 /** The four fixed bottom-bar actions, as a discriminated union. */
 export type FixedRestaurantAction =
   | { type: "CALL_ORDER"; iconSrc: string; iconOverride: string | null; href: string | null; available: boolean; label: string | null }
-  | { type: "OPEN_MENU"; iconSrc: string; iconOverride: string | null; href: string; available: true; label: string | null }
+  | { type: "OPEN_MENU"; iconSrc: string; iconOverride: string | null; href: string; available: true; external: boolean; label: string | null }
   | { type: "EXTERNAL_ORDER"; iconSrc: string; iconOverride: string | null; href: string | null; available: boolean; external: true; label: string | null }
   | { type: "ADD_CONTACT"; iconSrc: string; iconOverride: string | null; href: string | null; available: boolean; mode: FixedActionMode; label: string | null };
 

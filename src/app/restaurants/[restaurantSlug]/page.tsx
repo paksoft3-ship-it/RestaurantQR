@@ -85,7 +85,10 @@ export default async function RestaurantHomePage({ params }: PageProps) {
       case "four-actions":
         return (
           <section key={key} className="relative z-10 -mt-8 px-5">
-            <RestaurantActionGrid actions={actions} />
+            <RestaurantActionGrid
+              actions={actions}
+              menuFallbackUrl={routes.restaurant.menu(restaurant.slug)}
+            />
             {showShare ? (
               <div className="mt-4 flex justify-center">
                 <ShareButton slug={restaurant.slug} name={restaurant.displayName || restaurant.name} />
