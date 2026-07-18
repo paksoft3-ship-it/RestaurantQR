@@ -27,10 +27,6 @@ export function RestaurantHero({ restaurant, hours, location, coverImage }: Rest
         priority
         className="absolute inset-0 size-full object-cover"
       />
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent"
-        aria-hidden
-      />
       {/* Extra bottom padding keeps the identity text clear of the action grid,
           which overlaps the hero from below. */}
       <div className="absolute inset-x-0 bottom-0 px-5 pb-14 pt-5 text-white">
