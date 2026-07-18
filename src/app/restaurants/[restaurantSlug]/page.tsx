@@ -48,6 +48,10 @@ export default async function RestaurantHomePage({ params }: PageProps) {
   const liveCampaign = campaigns.find((c) => c.status === "active") ?? null;
   const visitAction = actions.find((a) => a.enabled && a.type === "visit-us");
   const mapActionUrl = visitAction ? resolveActionLink(visitAction).href : null;
+  // "Share this page" button is on unless an admin has explicitly turned it off
+  // (a disabled `share` action). Legacy restaurants with no share action stay on.
+  const shareAction = actions.find((a) => a.type === "share");
+  const showShare = shareAction ? shareAction.enabled : true;
 
   // JSON-LD only when essential fields are present (name + address).
   const jsonLd =
@@ -82,9 +86,11 @@ export default async function RestaurantHomePage({ params }: PageProps) {
         return (
           <section key={key} className="relative z-10 -mt-8 px-5">
             <RestaurantActionGrid actions={actions} />
-            <div className="mt-4 flex justify-center">
-              <ShareButton slug={restaurant.slug} name={restaurant.displayName || restaurant.name} />
-            </div>
+            {showShare ? (
+              <div className="mt-4 flex justify-center">
+                <ShareButton slug={restaurant.slug} name={restaurant.displayName || restaurant.name} />
+              </div>
+            ) : null}
           </section>
         );
       case "featured-menu":

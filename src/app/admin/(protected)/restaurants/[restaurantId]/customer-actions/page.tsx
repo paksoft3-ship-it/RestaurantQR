@@ -295,6 +295,11 @@ export default function CustomerActionsPage() {
   const [ready, setReady] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [removeTarget, setRemoveTarget] = useState<DraftAction | null>(null);
+  // "Share this page" button visibility — stored as a dedicated `share` action
+  // (no destination), kept out of the destination-validated rows. Defaults to
+  // shown when a restaurant has no explicit share action yet.
+  const [shareEnabled, setShareEnabled] = useState(true);
+  const shareActionIdRef = useRef<string | null>(null);
 
   // Mirror `dirty` into a ref so the store-change handler can read the latest
   // value without being a dependency of the mount effect (otherwise the effect
@@ -310,7 +315,12 @@ export default function CustomerActionsPage() {
       .where((a) => a.restaurantId === id)
       .sort((a, b) => a.sortOrder - b.sortOrder);
     setRestaurant(r);
-    setRows(ensureFixedRows(actions.map(toDraft)));
+    // The `share` action drives the standalone "Share this page" toggle, not a
+    // bottom/floating button — keep it out of the editable rows.
+    const shareAction = actions.find((a) => a.type === "share");
+    shareActionIdRef.current = shareAction?.id ?? null;
+    setShareEnabled(shareAction ? shareAction.enabled : true);
+    setRows(ensureFixedRows(actions.filter((a) => a.type !== "share").map(toDraft)));
     setReady(true);
     setDirty(false);
   }, [id]);
@@ -350,9 +360,9 @@ export default function CustomerActionsPage() {
   const addSupporting = () => {
     const used = new Set(rows.map((r) => r.type));
     const available = CUSTOMER_ACTION_TYPES.find(
-      (t) => !PRIMARY_TYPES.includes(t) && t !== "custom" && !used.has(t),
+      (t) => !PRIMARY_TYPES.includes(t) && t !== "custom" && t !== "share" && !used.has(t),
     );
-    const type = available ?? "share";
+    const type = available ?? "custom";
     setRows((prev) => [
       ...prev,
       {
@@ -416,6 +426,7 @@ export default function CustomerActionsPage() {
 
     const existing = demoStore.customerActions.where((a) => a.restaurantId === id);
     const keptIds = new Set(rows.map((r) => r.id));
+    if (shareActionIdRef.current) keptIds.add(shareActionIdRef.current);
 
     // Remove rows the user deleted.
     existing.forEach((a) => {
@@ -445,6 +456,30 @@ export default function CustomerActionsPage() {
         demoStore.customerActions.create({ id: row.id, ...payload });
       }
     });
+
+    // Upsert the standalone "Share this page" toggle as a `share` action
+    // (no destination — visibility is driven purely by `enabled`).
+    const sharePayload = {
+      restaurantId: id,
+      type: "share" as const,
+      label: { en: "Share this page" },
+      destinationType: "external" as const,
+      destination: null,
+      icon: null,
+      topLabel: null,
+      topIcon: null,
+      enabled: shareEnabled,
+      status: "configured" as CustomerAction["status"],
+      sortOrder: rows.length + 1,
+    };
+    const shareId = shareActionIdRef.current;
+    if (shareId && existing.some((a) => a.id === shareId)) {
+      demoStore.customerActions.update(shareId, sharePayload);
+    } else {
+      const newShareId = createId("act");
+      shareActionIdRef.current = newShareId;
+      demoStore.customerActions.create({ id: newShareId, ...sharePayload });
+    }
 
     demoStore.recordActivity({
       actorId: user?.id ?? "unknown",
@@ -736,8 +771,50 @@ export default function CustomerActionsPage() {
           </AdminSection>
 
           <AdminSection
+            title="Share this page"
+            description="A “Share this page” button shown under the top cards on the public page. Visitors can share the restaurant's link via their phone's share sheet, or copy it. Turn it off to hide the button."
+            icon="Share2"
+          >
+            <div className="flex items-center justify-between gap-4 rounded-[12px] border border-border bg-canvas p-4">
+              <div className="flex items-center gap-3">
+                <span
+                  className={cn(
+                    "flex size-9 shrink-0 items-center justify-center rounded-[10px]",
+                    shareEnabled ? "bg-success/10 text-success" : "bg-surface-muted text-text-secondary",
+                  )}
+                >
+                  <Icon name="Share2" className="size-5" aria-hidden />
+                </span>
+                <div>
+                  <p className="text-small font-semibold text-text-primary">
+                    Show “Share this page” button
+                  </p>
+                  <p className="text-xs text-text-secondary">
+                    {shareEnabled ? "Shown on the public page." : "Hidden from the public page."}
+                  </p>
+                </div>
+              </div>
+              <PermissionGate user={user} permission={PERMISSIONS.RESTAURANT_EDIT}>
+                <Button
+                  type="button"
+                  variant={shareEnabled ? "outline" : "primary"}
+                  size="sm"
+                  role="switch"
+                  aria-checked={shareEnabled}
+                  onClick={() => {
+                    setShareEnabled((v) => !v);
+                    setDirty(true);
+                  }}
+                >
+                  {shareEnabled ? "Hide" : "Show"}
+                </Button>
+              </PermissionGate>
+            </div>
+          </AdminSection>
+
+          <AdminSection
             title="Floating buttons (the “+” menu)"
-            description="Buttons shown inside the round “+” menu on the public page — WhatsApp, Email, Save Contact, Share, Social, plus any custom buttons you add. Each has its own label, icon and link."
+            description="Buttons shown inside the round “+” menu on the public page — WhatsApp, Email, Save Contact, Social, plus any custom buttons you add. Each has its own label, icon and link."
             icon="Plus"
             actions={
               <PermissionGate user={user} permission={PERMISSIONS.RESTAURANT_EDIT}>
