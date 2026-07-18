@@ -301,7 +301,7 @@ export const websiteContentSchema = z.object({
   section: z.string().min(1),
   title: z.string().min(1, "Title is required"),
   body: z.string().min(1, "Body is required"),
-  status: z.enum(["draft", "in-review", "changes-pending", "published", "archived"]),
+  status: z.enum(["draft", "published", "archived"]),
 });
 export type WebsiteContentInput = z.infer<typeof websiteContentSchema>;
 
@@ -317,13 +317,7 @@ export const settingsSchema = z.object({
 });
 export type SettingsInput = z.infer<typeof settingsSchema>;
 
-const publishingEnum = z.enum([
-  "draft",
-  "in-review",
-  "changes-pending",
-  "published",
-  "archived",
-]);
+const publishingEnum = z.enum(["draft", "published", "archived"]);
 
 /** Template (visual direction) editor. */
 export const templatePresetSchema = z.object({

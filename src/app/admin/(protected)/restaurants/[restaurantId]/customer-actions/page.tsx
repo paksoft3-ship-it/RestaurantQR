@@ -458,8 +458,8 @@ export default function CustomerActionsPage() {
     });
 
     toast({
-      title: "Customer actions draft saved",
-      description: "Stored as a draft. Nothing was published.",
+      title: "Customer actions saved",
+      description: "Live now if this restaurant is published.",
       intent: "success",
     });
     load();
@@ -705,7 +705,7 @@ export default function CustomerActionsPage() {
           (pinned to the bottom bar) and <strong>Floating buttons</strong> (the round “+” menu). The
           top cards and bottom bar are the same four actions and open the same links — only their
           text and icon can differ. “Online Order with Pay” always opens an{" "}
-          <strong>external</strong> ordering site. Changes save as a draft and never auto-publish.
+          <strong>external</strong> ordering site. Changes are live once this restaurant is published.
         </span>
       </div>
 

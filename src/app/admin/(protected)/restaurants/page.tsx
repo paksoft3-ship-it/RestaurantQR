@@ -375,13 +375,9 @@ export default function RestaurantsListPage() {
           intent="success"
         />
         <AdminMetricCard
-          label="In review"
-          value={
-            visibleRestaurants.filter(
-              (r) => r.publishingStatus === "in-review" || r.publishingStatus === "changes-pending",
-            ).length
-          }
-          icon="Eye"
+          label="Draft"
+          value={visibleRestaurants.filter((r) => r.publishingStatus === "draft").length}
+          icon="FileEdit"
           intent="warning"
         />
         <AdminMetricCard label="Archived" value={archivedCount} icon="Archive" />

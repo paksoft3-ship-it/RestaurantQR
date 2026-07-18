@@ -204,7 +204,7 @@ export default function OpeningHoursPage() {
     });
 
     toast({
-      title: "Opening hours draft saved",
+      title: "Opening hours saved",
       description: "Stored as a draft. Public hours are unchanged until published.",
       intent: "success",
     });

@@ -18,7 +18,6 @@ import type {
   PublishingStatus,
   QRStatus,
   RestaurantType,
-  ReviewStatus,
   RightsStatus,
   ServiceModel,
   SetupStatus,
@@ -120,7 +119,6 @@ export interface Branding {
   rightsStatus: RightsStatus;
   readiness: number; // 0-100
   version: number;
-  reviewStatus: ReviewStatus;
   /** Internal-only notes for YourPlatform staff; never shown publicly. */
   internalNotes?: string | null;
 }

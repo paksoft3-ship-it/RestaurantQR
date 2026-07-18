@@ -90,7 +90,7 @@ export const seedRestaurants: Restaurant[] = [
     operationalStatus: "active",
     setupStatus: "menu-prep",
     projectStatus: "onboarding",
-    publishingStatus: "changes-pending",
+    publishingStatus: "published",
     assignedTeams: ["Setup"],
     tags: ["demo"],
     internalNotes: null,
@@ -180,7 +180,7 @@ export const seedRestaurants: Restaurant[] = [
     operationalStatus: "active",
     setupStatus: "review",
     projectStatus: "onboarding",
-    publishingStatus: "in-review",
+    publishingStatus: "draft",
     assignedTeams: ["Setup", "Design", "Menu"],
     tags: ["demo", "multi-location"],
     internalNotes: null,
@@ -244,7 +244,6 @@ export const seedBranding: Branding[] = [
     rightsStatus: "needs-review",
     readiness: 80,
     version: 3,
-    reviewStatus: "approved",
   },
   {
     restaurantId: "rest_anatolia_grill",
@@ -272,7 +271,6 @@ export const seedBranding: Branding[] = [
     rightsStatus: "needs-review",
     readiness: 80,
     version: 1,
-    reviewStatus: "approved",
   },
   {
     restaurantId: "rest_green_bowl",
@@ -300,7 +298,6 @@ export const seedBranding: Branding[] = [
     rightsStatus: "needs-review",
     readiness: 80,
     version: 1,
-    reviewStatus: "approved",
   },
   {
     restaurantId: "rest_cafe_mimoza",
@@ -328,7 +325,6 @@ export const seedBranding: Branding[] = [
     rightsStatus: "needs-review",
     readiness: 80,
     version: 1,
-    reviewStatus: "approved",
   },
   {
     restaurantId: "rest_bosphorus_kitchen",
@@ -356,7 +352,6 @@ export const seedBranding: Branding[] = [
     rightsStatus: "needs-review",
     readiness: 80,
     version: 1,
-    reviewStatus: "approved",
   },
 ];
 
@@ -548,7 +543,7 @@ export const seedTeam: AdminUser[] = [
 export const seedWebsiteContent: WebsiteContentBlock[] = [
   { id: "wc_home_hero", page: "home", section: "hero", title: "Homepage hero", body: "Turn Every QR Scan and NFC Tap Into a Better Restaurant Experience", status: "published", updatedAt: now },
   { id: "wc_home_cta", page: "home", section: "cta", title: "Homepage CTA", body: "Ready to upgrade your restaurant's digital experience?", status: "published", updatedAt: now },
-  { id: "wc_about_intro", page: "about", section: "intro", title: "About intro", body: "We manage the technology so you can manage the food.", status: "changes-pending", updatedAt: now },
+  { id: "wc_about_intro", page: "about", section: "intro", title: "About intro", body: "We manage the technology so you can manage the food.", status: "published", updatedAt: now },
   { id: "wc_features_lead", page: "features", section: "lead", title: "Features lead", body: "Everything a modern restaurant experience needs.", status: "published", updatedAt: now },
 ];
 

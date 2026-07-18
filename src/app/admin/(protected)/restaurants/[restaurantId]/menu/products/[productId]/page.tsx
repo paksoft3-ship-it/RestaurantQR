@@ -250,7 +250,7 @@ function ProductEditor() {
     }
     toast({
       title: isNew ? "Product created" : "Product saved",
-      description: "Draft saved — nothing was published.",
+      description: "Saved — live now if this restaurant is published.",
       intent: "success",
     });
     router.push(routes.admin.restaurantMenu(id));

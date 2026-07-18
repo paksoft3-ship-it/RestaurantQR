@@ -32,8 +32,8 @@ export default async function RestaurantLayout({ children, params }: RestaurantL
   const restaurant = await repos.restaurants.getBySlug(restaurantSlug);
   if (!restaurant) notFound();
 
-  // Publishing gate: unpublished restaurants (draft / in-review / changes-pending
-  // / archived) are hidden from the public. A logged-in admin can still open the
+  // Publishing gate: unpublished restaurants (draft / archived) are hidden from
+  // the public. A logged-in admin can still open the
   // page to preview it before going live.
   const isPublished = restaurant.publishingStatus === "published";
   const adminPreview = isPublished ? false : Boolean(await getCurrentAdminUser());

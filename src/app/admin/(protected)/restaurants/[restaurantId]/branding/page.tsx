@@ -14,7 +14,6 @@ import { uploadImage } from "@/lib/uploads/upload-image";
 import type { Branding, Restaurant, Template } from "@/domain/entities";
 import { presetForTemplate } from "@/lib/template-presets";
 import { RIGHTS_STATUSES } from "@/domain/enums";
-import { PERMISSIONS } from "@/domain/permissions";
 import { visualDirectionOptions } from "@/components/admin/restaurant-form-options";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminSection } from "@/components/admin/admin-section";
@@ -24,8 +23,6 @@ import { useAdminUser } from "@/components/admin/admin-user-context";
 import { Field, Input, Textarea, Select } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/shared/icon";
-import { StatusBadge } from "@/components/shared/status-badge";
-import { PermissionGate } from "@/components/shared/permission-gate";
 import { EmptyState } from "@/components/shared/states";
 import { useToast } from "@/components/ui/toast";
 
@@ -217,7 +214,7 @@ export default function BrandingEditPage() {
     { label: "Image rights reviewed", done: rightsStatus !== "unknown" },
   ];
 
-  const persist = (input: BrandingEditInput, review?: "in-review" | "approved") => {
+  const persist = (input: BrandingEditInput) => {
     // Recompute readiness from the same checklist so the stored % reflects the save.
     const readinessDone = [
       !!input.colors?.primary && !!input.colors?.accent,
@@ -238,8 +235,6 @@ export default function BrandingEditPage() {
       readiness,
       ...(logoPreview && logoPreview.startsWith("http") ? { logo: logoPreview } : {}),
       ...(coverPreview && coverPreview.startsWith("http") ? { coverImage: coverPreview } : {}),
-      ...(review ? { reviewStatus: review } : {}),
-      // Branding edits NEVER publish the restaurant.
     });
     savedRef.current = true;
     load();
@@ -248,17 +243,11 @@ export default function BrandingEditPage() {
 
   const onSaveDraft = handleSubmit((input) => {
     persist(input);
-    toast({ title: "Branding draft saved", description: "Nothing was published.", intent: "success" });
-  });
-
-  const onSubmitReview = handleSubmit((input) => {
-    persist(input, "in-review");
-    toast({ title: "Submitted for review", intent: "info" });
-  });
-
-  const onApprove = handleSubmit((input) => {
-    persist(input, "approved");
-    toast({ title: "Branding approved", intent: "success" });
+    toast({
+      title: "Branding saved",
+      description: "Live now if the restaurant is published.",
+      intent: "success",
+    });
   });
 
   const handleUpload = async (
@@ -584,15 +573,7 @@ export default function BrandingEditPage() {
             </PreviewPanel>
 
             <div className="rounded-[16px] border border-border bg-canvas p-4 shadow-card">
-              <div className="flex items-center justify-between">
-                <p className="text-small font-semibold text-text-primary">Review status</p>
-                {branding ? (
-                  <StatusBadge group="review" value={branding.reviewStatus} />
-                ) : (
-                  <StatusBadge group="review" value="not-submitted" />
-                )}
-              </div>
-              <p className="mt-3 text-small font-semibold text-text-primary">Readiness checklist</p>
+              <p className="text-small font-semibold text-text-primary">Readiness checklist</p>
               <ul className="mt-2 flex flex-col gap-1.5 text-small">
                 {readinessChecklist.map((item) => (
                   <li key={item.label} className="flex items-center gap-2">
@@ -609,8 +590,8 @@ export default function BrandingEditPage() {
               </ul>
               {branding ? (
                 <p className="mt-3 text-xs text-text-secondary">
-                  Current saved version: v{branding.version} ({branding.readiness}% ready). Your
-                  draft updates the live preview but does not publish.
+                  Current saved version: v{branding.version} ({branding.readiness}% ready). Saving
+                  updates the public page immediately if this restaurant is published.
                 </p>
               ) : null}
             </div>
@@ -626,22 +607,14 @@ export default function BrandingEditPage() {
               Unsaved branding changes
             </span>
           ) : (
-            <span>Branding saved. Saving never publishes.</span>
+            <span>Branding saved. Live now if the restaurant is published.</span>
           )
         }
       >
-        <Button type="submit" variant="outline">
-          Save Branding Draft
+        <Button type="submit">
+          <Icon name="Check" className="size-4" aria-hidden />
+          Save Branding
         </Button>
-        <Button type="button" variant="secondary" onClick={onSubmitReview}>
-          Submit for Review
-        </Button>
-        <PermissionGate user={user} permission={PERMISSIONS.BRANDING_APPROVE}>
-          <Button type="button" onClick={onApprove}>
-            <Icon name="CheckCircle2" className="size-4" aria-hidden />
-            Approve Branding
-          </Button>
-        </PermissionGate>
       </StickyActionBar>
     </form>
   );

@@ -79,9 +79,6 @@ export default function WebsitePage() {
 
   const publishedCount = blocks.filter((b) => b.status === "published").length;
   const draftCount = blocks.filter((b) => b.status === "draft").length;
-  const reviewCount = blocks.filter(
-    (b) => b.status === "in-review" || b.status === "changes-pending",
-  ).length;
 
   const onSubmit = form.handleSubmit((input) => {
     if (dialogMode === "edit" && editing) {
@@ -148,8 +145,7 @@ export default function WebsitePage() {
       <section aria-label="Website metrics" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <AdminMetricCard label="Content blocks" value={blocks.length} icon="LayoutTemplate" />
         <AdminMetricCard label="Published" value={publishedCount} icon="Globe" intent="success" />
-        <AdminMetricCard label="In review" value={reviewCount} icon="Eye" intent="warning" />
-        <AdminMetricCard label="Drafts" value={draftCount} icon="FileEdit" />
+        <AdminMetricCard label="Drafts" value={draftCount} icon="FileEdit" intent="warning" />
       </section>
 
       <div className="flex items-start gap-3 rounded-[16px] border border-info/30 bg-info/5 p-4">

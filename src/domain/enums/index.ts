@@ -50,13 +50,10 @@ export type SetupStatus = (typeof SETUP_STATUSES)[number];
 export const PROJECT_STATUSES = ["lead", "onboarding", "live", "maintenance", "offboarding"] as const;
 export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
 
-export const PUBLISHING_STATUSES = [
-  "draft",
-  "in-review",
-  "changes-pending",
-  "published",
-  "archived",
-] as const;
+// Simple publish model: a draft is private, published is live, archived is
+// soft-deleted. No intermediate review/changes-pending states — editing a
+// published item keeps it published, so edits go live immediately.
+export const PUBLISHING_STATUSES = ["draft", "published", "archived"] as const;
 export type PublishingStatus = (typeof PUBLISHING_STATUSES)[number];
 
 export const MENU_STATUSES = ["draft", "active", "hidden"] as const;
@@ -107,9 +104,6 @@ export const ENQUIRY_TYPES = [
   "general",
 ] as const;
 export type EnquiryType = (typeof ENQUIRY_TYPES)[number];
-
-export const REVIEW_STATUSES = ["not-submitted", "in-review", "approved", "changes-requested"] as const;
-export type ReviewStatus = (typeof REVIEW_STATUSES)[number];
 
 export const RIGHTS_STATUSES = ["unknown", "licensed", "owned", "needs-review"] as const;
 export type RightsStatus = (typeof RIGHTS_STATUSES)[number];

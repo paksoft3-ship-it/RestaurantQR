@@ -176,8 +176,8 @@ export default function ContactLocationPage() {
     });
 
     toast({
-      title: "Contact & location draft saved",
-      description: "Changes are stored as a draft. Nothing was published.",
+      title: "Contact & location saved",
+      description: "Live now if this restaurant is published.",
       intent: "success",
     });
     load();

@@ -24,7 +24,6 @@ export type StatusGroup =
   | "nfc"
   | "campaign"
   | "enquiry"
-  | "review"
   | "asset"
   | "project";
 
@@ -49,8 +48,6 @@ export const STATUS_REGISTRY: Record<StatusGroup, Record<string, StatusDef>> = {
   },
   publishing: {
     draft: def("draft", "Draft", "neutral", "FileEdit", "Not yet visible to the public."),
-    "in-review": def("in-review", "In Review", "warning", "Eye", "Pending review before publish."),
-    "changes-pending": def("changes-pending", "Changes Pending", "warning", "GitPullRequest", "Unpublished changes exist."),
     published: def("published", "Published", "success", "Globe", "Live and public."),
     archived: def("archived", "Archived", "neutral", "Archive", "Archived and hidden."),
   },
@@ -94,12 +91,6 @@ export const STATUS_REGISTRY: Record<StatusGroup, Record<string, StatusDef>> = {
     contacted: def("contacted", "Contacted", "primary", "PhoneCall", "Contact made."),
     qualified: def("qualified", "Qualified", "success", "CheckCircle2", "Qualified lead."),
     closed: def("closed", "Closed", "neutral", "Archive", "Closed."),
-  },
-  review: {
-    "not-submitted": def("not-submitted", "Not Submitted", "neutral", "Circle", "Not submitted for review."),
-    "in-review": def("in-review", "In Review", "warning", "Eye", "Under review."),
-    approved: def("approved", "Approved", "success", "CheckCircle2", "Approved."),
-    "changes-requested": def("changes-requested", "Changes Requested", "danger", "AlertTriangle", "Changes requested."),
   },
   asset: {
     pending: def("pending", "Pending", "warning", "Clock", "Pending processing."),

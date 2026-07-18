@@ -94,8 +94,7 @@ export default function RestaurantWorkspacePage() {
   const progress = setupProgress(restaurant);
   const attention: string[] = [];
   if (restaurant.setupStatus === "not-started") attention.push("Setup has not started.");
-  if (restaurant.publishingStatus === "in-review") attention.push("Publishing is awaiting review.");
-  if (restaurant.publishingStatus === "changes-pending") attention.push("Unpublished changes exist.");
+  if (restaurant.publishingStatus === "draft") attention.push("Draft — not yet published.");
   if ((branding?.readiness ?? 0) < 80) attention.push("Branding is not yet ready.");
 
   const handleConfirm = () => {
@@ -189,14 +188,14 @@ export default function RestaurantWorkspacePage() {
             </AdminSection>
           ) : null}
 
-          {/* Publishing workflow */}
-          <AdminSection title="Publishing workflow" icon="GitPullRequest">
+          {/* Publishing */}
+          <AdminSection title="Publishing" icon="Globe">
             <div className="flex flex-wrap items-center gap-3">
               <StatusBadge group="publishing" value={restaurant.publishingStatus} />
               <span className="text-small text-text-secondary">
                 {restaurant.publishingStatus === "published"
-                  ? "Live on its public page. Editing never changes the live page until you re-publish."
-                  : "Hidden from the public until you publish. Editing here never auto-publishes."}
+                  ? "Live on its public page. Any edit you make goes live immediately."
+                  : "Hidden from the public. Preview it here, then Publish to go live."}
               </span>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -227,7 +226,7 @@ export default function RestaurantWorkspacePage() {
             </div>
             <p className="mt-2 text-xs text-text-tertiary">
               You can preview the public page any time while logged in — visitors only see it once
-              it’s published.
+              it’s published. Once published, further edits are live right away.
             </p>
           </AdminSection>
 

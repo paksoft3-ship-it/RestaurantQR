@@ -50,9 +50,6 @@ export default async function AdminDashboardPage() {
   const restaurants: Restaurant[] = restaurantsR.ok ? restaurantsR.data.items : [];
 
   const published = restaurants.filter((r) => r.publishingStatus === "published").length;
-  const inReview = restaurants.filter(
-    (r) => r.publishingStatus === "in-review" || r.publishingStatus === "changes-pending",
-  );
   const drafts = restaurants.filter((r) => r.publishingStatus === "draft");
   const setupInProgress = restaurants.filter(
     (r) => r.setupStatus !== "ready" && r.setupStatus !== "not-started",
@@ -61,12 +58,12 @@ export default async function AdminDashboardPage() {
   const newEnquiries = enquiriesR.ok ? enquiriesR.data.filter((e) => e.status === "new") : [];
 
   const attention: { label: string; href: string; badge: string; icon: string }[] = [];
-  inReview.slice(0, 4).forEach((r) =>
+  drafts.slice(0, 4).forEach((r) =>
     attention.push({
-      label: `${r.displayName} is awaiting review`,
+      label: `${r.displayName} is a draft — not yet published`,
       href: routes.admin.restaurant(r.id),
       badge: titleCase(r.publishingStatus),
-      icon: "Eye",
+      icon: "FileEdit",
     }),
   );
   needsSetup.slice(0, 3).forEach((r) =>
@@ -132,11 +129,11 @@ export default async function AdminDashboardPage() {
           hint={`${published} published`}
         />
         <AdminMetricCard
-          label="Pending review"
-          value={inReview.length}
-          icon="Eye"
+          label="Drafts"
+          value={drafts.length}
+          icon="FileEdit"
           intent="warning"
-          hint="Publishing workflow"
+          hint="Not yet published"
         />
         <AdminMetricCard
           label="In setup"
@@ -205,22 +202,10 @@ export default async function AdminDashboardPage() {
           </PermissionGate>
 
           {/* Publishing workflow */}
-          <AdminSection title="Publishing workflow" icon="GitPullRequest">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <AdminSection title="Publishing" icon="Globe">
+            <div className="grid grid-cols-2 gap-3">
               {[
                 { label: "Draft", value: drafts.length, group: "publishing" as const, key: "draft" },
-                {
-                  label: "In review",
-                  value: restaurants.filter((r) => r.publishingStatus === "in-review").length,
-                  group: "publishing" as const,
-                  key: "in-review",
-                },
-                {
-                  label: "Changes pending",
-                  value: restaurants.filter((r) => r.publishingStatus === "changes-pending").length,
-                  group: "publishing" as const,
-                  key: "changes-pending",
-                },
                 { label: "Published", value: published, group: "publishing" as const, key: "published" },
               ].map((stage) => (
                 <div

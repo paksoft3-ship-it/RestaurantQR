@@ -179,8 +179,10 @@ export default function RestaurantEditPage() {
     });
     savedRef.current = true;
     toast({
-      title: isDraft ? "Draft saved" : "Changes saved",
-      description: "Nothing was published.",
+      title: "Changes saved",
+      description: isDraft
+        ? "This restaurant is a draft — publish it to go live."
+        : "Live now — edits to a published restaurant apply immediately.",
       intent: "success",
     });
     // Reset dirty baseline.
