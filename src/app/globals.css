@@ -133,6 +133,11 @@
   */
   .restaurant-public-shell {
     --restaurant-action-bar-height: 76px;
+  }
+  /* Reserve the fixed action-bar space on the footer itself so the footer's
+     dark background fills it — the bar then sits flush beneath the footer with
+     no gap of page background showing between them. */
+  .restaurant-public-shell > footer {
     padding-bottom: calc(
       var(--restaurant-action-bar-height) + env(safe-area-inset-bottom) + 16px
     );

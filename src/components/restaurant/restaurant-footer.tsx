@@ -11,7 +11,7 @@ export function RestaurantFooter({ restaurant }: RestaurantFooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy px-5 py-10 text-center text-white">
+    <footer className="bg-navy px-5 pt-10 text-center text-white">
       <p className="font-display text-h2 font-bold">{name}</p>
       <p className="mt-2 text-xs text-white/60">
         © {year} {name}. All rights reserved.
