@@ -770,11 +770,7 @@ export default function CustomerActionsPage() {
             )}
           </AdminSection>
 
-          <AdminSection
-            title="Share this page"
-            description="A “Share this page” button shown under the top cards on the public page. Visitors can share the restaurant's link via their phone's share sheet, or copy it. Turn it off to hide the button."
-            icon="Share2"
-          >
+          <AdminSection title="Share this page" icon="Share2">
             <div className="flex items-center justify-between gap-4 rounded-[12px] border border-border bg-canvas p-4">
               <div className="flex items-center gap-3">
                 <span
