@@ -18,14 +18,15 @@ export function RestaurantHero({ restaurant, hours, location, coverImage }: Rest
   const place = [location?.district, location?.city].filter(Boolean).join(", ");
 
   return (
-    <section className="relative h-[360px] w-full overflow-hidden md:rounded-b-[20px]">
+    <section className="relative h-[220px] w-full overflow-hidden sm:h-[300px] md:h-[360px] md:rounded-b-[20px]">
       <Image
         src={coverImage || "/placeholders/cover.svg"}
         alt={`${name} cover photo`}
         width={640}
         height={360}
         priority
-        className="absolute inset-0 size-full object-cover"
+        sizes="100vw"
+        className="absolute inset-0 size-full object-cover object-center"
       />
       {/* Extra bottom padding keeps the identity text clear of the action grid,
           which overlaps the hero from below. */}
